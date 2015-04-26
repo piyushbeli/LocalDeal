@@ -1,0 +1,25 @@
+<form role="form" ng-submit="updatePost()">
+  <div class="form-group">
+    <label class="control-label" for="title">Title</label>
+    <input class="form-control" ng-model="post.title">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="title">Link</label>
+    <input class="form-control" ng-model="post.link">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="title">Posted by</label>
+    <p>{{post.user.uid}}</p>
+  </div>
+  <button class="btn btn-primary" type="submit">Update</button>
+</form>
+
+<label class="control-label" for="title">Comments</label>
+<p ng-repeat="comment in post.comments"> {{comment.body}}
+  <a class="button" ng-click="upvoteComment()" href="javascript:void(0)">Upvote</a>
+</p>
+
+<form role="form" ng-submit="postComment()">
+  <input type="text" ng-model="newComment">
+  <button class="button" type="submit" href="javascript:void(0)">Post</button>
+</form>

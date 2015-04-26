@@ -1,0 +1,9 @@
+//= require angular
+//= require angular-route
+//= require ui-router
+//= require angular-bootstrap
+//= require angular-rails-templates
+//= require_tree ../templates
+//= require_tree .
+//= require ng-token-auth
+//= require angular-cookie

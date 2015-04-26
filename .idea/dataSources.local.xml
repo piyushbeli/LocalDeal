@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails RoR: development" uuid="fca5f6df-a87c-41b7-bf20-375a1837434e">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>ror_development.*</schema-pattern>
+      <default-schemas>ror_development.*</default-schemas>
+    </data-source>
+    <data-source name="Rails RoR: test" uuid="74f54690-d1fa-4a4c-8e06-e56af91c00b1">
+      <user-name>root</user-name>
+      <user-password>dfd8dfc5dfc5dfde</user-password>
+      <schema-pattern>ror_test.*</schema-pattern>
+      <default-schemas>ror_test.*</default-schemas>
+    </data-source>
+    <data-source name="Rails RoR: production" uuid="8b9fd1e9-918a-43f0-ba7b-df4f546c6724">
+      <user-name>root</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddff8dfe5dff8dff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
+      <schema-pattern>ror_development.*</schema-pattern>
+      <default-schemas>ror_development.*</default-schemas>
+    </data-source>
+  </component>
+</project>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Rails RoR: development" uuid="fca5f6df-a87c-41b7-bf20-375a1837434e">
+    <database-info product="MySQL" version="5.5.20-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="ror_development"/>
+    <table name="comments" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="body" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="post_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_7673152ff4" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_b254a176a6" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_comments_on_post_id" unique="false" columns="post_id"/>
+      <index name="index_comments_on_user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="posts" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="link" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_338b89fe25" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_b254a176a6" table="comments" schema="" catalog="ror_development" columns="post_id"/>
+      <index name="index_posts_on_user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="schema_migrations" schema="" catalog="ror_development" type="TABLE">
+      <column name="version" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <index name="unique_schema_migrations" unique="true" columns="version"/>
+    </table>
+    <table name="users" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="provider" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="uid" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="encrypted_password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="reset_password_token" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="reset_password_sent_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="remember_created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="sign_in_count" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="current_sign_in_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="last_sign_in_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="current_sign_in_ip" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_sign_in_ip" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="confirmation_token" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="confirmed_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="confirmation_sent_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="unconfirmed_email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nickname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_7673152ff4" table="comments" schema="" catalog="ror_development" columns="user_id"/>
+      <exported-key name="fk_rails_338b89fe25" table="posts" schema="" catalog="ror_development" columns="user_id"/>
+      <index name="index_users_on_reset_password_token" unique="true" columns="reset_password_token"/>
+      <index name="index_users_on_uid_and_provider" unique="true" columns="uid,provider"/>
+      <index name="index_users_on_email" unique="false" columns="email"/>
+    </table>
+  </data-source>
+  <data-source name="Rails RoR: test" uuid="74f54690-d1fa-4a4c-8e06-e56af91c00b1">
+    <database-info product="MySQL" version="5.5.20-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="ror_test"/>
+    <table name="comments" schema="" catalog="ror_test" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="body" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="post_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_b2add2f569" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="ror_test" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_comments_on_post_id" unique="false" columns="post_id"/>
+    </table>
+    <table name="posts" schema="" catalog="ror_test" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="link" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_b2add2f569" table="comments" schema="" catalog="ror_test" columns="post_id"/>
+    </table>
+    <table name="schema_migrations" schema="" catalog="ror_test" type="TABLE">
+      <column name="version" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <index name="unique_schema_migrations" unique="true" columns="version"/>
+    </table>
+  </data-source>
+  <data-source name="Rails RoR: production" uuid="8b9fd1e9-918a-43f0-ba7b-df4f546c6724">
+    <database-info product="MySQL" version="5.5.20-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="ror_development"/>
+    <table name="comments" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="body" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="post_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_7673152ff4" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_b254a176a6" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_comments_on_post_id" unique="false" columns="post_id"/>
+      <index name="index_comments_on_user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="posts" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="link" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_338b89fe25" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_b254a176a6" table="comments" schema="" catalog="ror_development" columns="post_id"/>
+      <index name="index_posts_on_user_id" unique="false" columns="user_id"/>
+    </table>
+    <table name="schema_migrations" schema="" catalog="ror_development" type="TABLE">
+      <column name="version" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <index name="unique_schema_migrations" unique="true" columns="version"/>
+    </table>
+    <table name="users" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="provider" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="uid" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="encrypted_password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="reset_password_token" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="reset_password_sent_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="remember_created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="sign_in_count" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="current_sign_in_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="last_sign_in_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="current_sign_in_ip" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_sign_in_ip" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="confirmation_token" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="confirmed_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="confirmation_sent_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="unconfirmed_email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nickname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_7673152ff4" table="comments" schema="" catalog="ror_development" columns="user_id"/>
+      <exported-key name="fk_rails_338b89fe25" table="posts" schema="" catalog="ror_development" columns="user_id"/>
+      <index name="index_users_on_reset_password_token" unique="true" columns="reset_password_token"/>
+      <index name="index_users_on_uid_and_provider" unique="true" columns="uid,provider"/>
+      <index name="index_users_on_email" unique="false" columns="email"/>
+    </table>
+  </data-source>
+</component>

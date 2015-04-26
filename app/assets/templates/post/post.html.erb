@@ -1,0 +1,17 @@
+<form role="form" ng-submit="createPost()">
+  <input type="text" name="title" ng-model="title">
+  <input type="text" name="link" ng-model="link">
+
+  <button class="button" type="submit">Create post</button>
+</form>
+<div>
+  <div class="row" ng-repeat="post in posts">
+    <div class="col-md-2">{{post.title}}</div>
+    <div class="col col-md-2">{{post.link}}</div>
+    <div class="col-md-2">{{post.upvotes}}</div>
+    <a class="col-md-2" ng-click="upVotePost(post)" href="javascript:void(0)">upvote</a>
+    <p class="col-md-2">{{post.user.uid}}</p>
+    <a class="col-md-1" ui-sref="app.postDetail({id: post.id})">Detail</a>
+  </div>
+</div>
+
