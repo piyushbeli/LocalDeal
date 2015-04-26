@@ -33,7 +33,8 @@ app.controller("LoginController", function ($scope, $rootScope, $modalInstance, 
         var postData = {
             email: $scope.user.userName,
             password: $scope.user.password,
-            password_confirmation: $scope.user.confirmPassword
+            password_confirmation: $scope.user.confirmPassword,
+            name: $scope.user.name
         }
         $auth.submitRegistration(postData)
             .then(function (response) {
@@ -47,7 +48,8 @@ app.controller("LoginController", function ($scope, $rootScope, $modalInstance, 
     $scope.loginWithFB = function () {
         $auth.authenticate('facebook')
             .then(function (response) {
-                $log.log(JSON.stringify(response))
+                $log.log(JSON.stringify(response));
+                window.location.reload();
             })
             .catch(function (response) {
                 $log.log(JSON.stringify(response))
@@ -57,7 +59,8 @@ app.controller("LoginController", function ($scope, $rootScope, $modalInstance, 
     $scope.loginWithGoogle = function () {
         $auth.authenticate('google')
             .then(function (response) {
-                $log.log(JSON.stringify(response))
+                $log.log(JSON.stringify(response));
+                window.location.reload();
             })
             .catch(function (response) {
                 $log.log(JSON.stringify(response))

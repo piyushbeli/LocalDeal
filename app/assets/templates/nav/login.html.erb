@@ -47,6 +47,10 @@
                  tooltip-trigger="focus" tooltip-placement="right" class="form-control" placeholder="Reenter password"/>
         </div>
         <div class="form-group">
+          <input type="text"  tooltip="name" ng-model="user.name"
+                 tooltip-trigger="focus" tooltip-placement="right" class="form-control" placeholder="e.g Piyush Beli"/>
+        </div>
+        <div class="form-group">
           <button class="btn btn-primary" type="submit">Register</button>
         </div>
         <div class="form-group" ng-if="registrationSuccessful">
