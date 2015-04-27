@@ -1,5 +1,23 @@
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
+  as :user do
+    resources :posts, only: [:show, :create, :index, :update] do
+      resources :comments, only: [:show, :create, :index] do
+        member do
+          put '/upvote' => 'comment#upvote'
+        end
+      end
+
+      member do
+        put '/upvote' => 'posts#upvote'
+      end
+    end
+  end
+
+  mount_devise_token_auth_for 'Vendor', at: 'auth_vendor'
+  as :vendor do
+
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -57,17 +75,4 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-
-  resources :posts, only: [:show, :create, :index, :update] do
-    resources :comments, only: [:show, :create, :index] do
-      member do
-        put '/upvote' => 'comment#upvote'
-      end
-    end
-
-    member do
-      put '/upvote' => 'posts#upvote'
-    end
-  end
 end

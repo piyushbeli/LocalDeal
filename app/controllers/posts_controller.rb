@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 
   def verify_ownership
     if current_user.id != @post.user.id
-      render json: {error: "Not authorized"}, status: 401
+      render json: {success: false, errors: ["Not authorized"]}, status: 401
     end
   end
 
