@@ -3,7 +3,6 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :update]
   before_action :verify_ownership, only: [:update]
 
-
   def index
     respond_with Post.all
   end
@@ -38,7 +37,6 @@ class PostsController < ApplicationController
 
   def verify_ownership
     if current_user.id != @post.user.id
-      flash[:error] = "Not authorized"
       render json: {error: "Not authorized"}, status: 401
     end
   end

@@ -22,7 +22,7 @@ app.controller("PostController", function ($scope, $rootScope, PostService, $aut
     };
 
     $scope.upVotePost = function (post) {
-        if ($rootScope.isLoggedIn) {
+        if ($rootScope.isLoggedIn()) {
             PostService.upVotePost(post)
                 .then(function (response) {
                     post = response;

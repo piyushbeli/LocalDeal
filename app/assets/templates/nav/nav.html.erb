@@ -3,9 +3,9 @@
     <div class="collapse navbar-collapse pull-right" ng-controller="NavController">
       <ul class="nav navbar-nav">
         <li><a ui-sref="posts">Home</a></li>
-        <li ng-hide="isLoggedIn"><a class="btn" ng-click="openSignInModal()">Login/Signup</a></li>
-        <li ng-show="isLoggedIn"><a ui-sref="profile">{{ user.uid }}</a></li>
-        <li ng-show="isLoggedIn"><a class="btn" ng-click="doLogout()">Log Out</a></li>
+        <li ng-hide="isLoggedIn()"><a class="btn" ng-click="openSignInModal()">Login/Signup</a></li>
+        <li ng-show="isLoggedIn()"><a ui-sref="profile">{{ user.uid }}</a></li>
+        <li ng-show="isLoggedIn()"><a class="btn" ng-click="doLogout()">Log Out</a></li>
       </ul>
     </div>
   </div>

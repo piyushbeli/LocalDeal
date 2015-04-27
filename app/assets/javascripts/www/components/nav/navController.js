@@ -8,15 +8,17 @@ app.controller("NavController", function ($scope, $auth, $rootScope, $modal, $st
         }
     });
     $rootScope.$on('auth:logout-success', function (e) {
-        $scope.isLoggedIn = false;
+        $rootScope.user = null
     });
     $rootScope.$on('auth:invalid', function (e) {
-        $scope.isLoggedIn = false;
+        $rootScope.user = e.currentScope.user;
     });
     $rootScope.$on('auth:validation-success', function (e) {
-        $scope.user = e.currentScope.user;
-        $scope.isLoggedIn = true;
+        $rootScope.user = e.currentScope.user;
     });
+    $rootScope.isLoggedIn = function() {
+        return $rootScope.user && $rootScope.user.signedIn;
+    }
 
     $scope.openSignInModal = function () {
         $scope.registerModal = $modal.open({
