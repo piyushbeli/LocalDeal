@@ -1,23 +1,21 @@
 var app = angular
-    .module('LocalDeal_User', [
+    .module('LocalDeal_Vendor', [
         'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap'
     ]);
 
 app.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider) {
     $stateProvider
-        .state('user', {
-            url: '/user',
+        .state('vendor', {
+            url: '/vendor',
+            abstract: true,
             views: {
                 'navContent': {
                     templateUrl: 'nav/nav.html',
                     controller: 'NavController'
                 }
-                /*'mainContent': {
-                    templateUrl: 'home/home.html'
-                }*/
             }
         })
-        .state('user.posts', {
+        .state('vendor.posts', {
             url: '/posts',
             views: {
                 'mainContent': {
@@ -26,7 +24,7 @@ app.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authPr
                 }
             }
         })
-        .state('user.postDetail', {
+        .state('vendor.postDetail', {
             url: '/posts/:id',
             views: {
                 'mainContent': {
@@ -41,7 +39,7 @@ app.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authPr
                 }
             }
         })
-    $urlRouterProvider.otherwise('user/posts');
+    $urlRouterProvider.otherwise('vendor/posts');
     //$locationProvider.html5Mode(true);
 
     $authProvider.configure({

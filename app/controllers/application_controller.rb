@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def vendor
+
+  end
+
   protected
 
   def devise_parameter_sanitizer
