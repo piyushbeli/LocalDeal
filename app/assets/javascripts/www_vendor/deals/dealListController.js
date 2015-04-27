@@ -1,0 +1,3 @@
+appVendor.controller("DealListController", function() {
+
+})

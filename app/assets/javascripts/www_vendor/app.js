@@ -1,53 +1,21 @@
-var app = angular
+var appVendor = angular
     .module('LocalDeal_Vendor', [
         'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap'
     ]);
 
-app.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider) {
+appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, Routes) {
     $stateProvider
-        .state('vendor', {
-            url: '/vendor',
-            abstract: true,
-            views: {
-                'navContent': {
-                    templateUrl: 'nav/nav.html',
-                    controller: 'NavController'
-                }
-            }
-        })
-        .state('vendor.posts', {
-            url: '/posts',
-            views: {
-                'mainContent': {
-                    templateUrl: 'post/post.html',
-                    controller: 'PostController'
-                }
-            }
-        })
-        .state('vendor.postDetail', {
-            url: '/posts/:id',
-            views: {
-                'mainContent': {
-                    templateUrl: 'post/postDetail.html',
-                    controller: 'PostDetailController'
-                }
-            },
-            resolve: {
-                PostService: 'PostService',
-                post: function (PostService, $stateParams, $state) {
-                    return PostService.fetchPost($stateParams['id']);
-                }
-            }
-        })
-    $urlRouterProvider.otherwise('vendor/posts');
+        .state('verifyLogin', Routes.verifyLogin)
+        .state('login', Routes.login)
+        .state('app', Routes.root)
+        .state('app.deals', Routes.deals)
+        .state('app.dealDetail', Routes.dealDetail)
+        .state('app.addresses', Routes.addresses)
+
+    $urlRouterProvider.otherwise('verifyLogin');
     //$locationProvider.html5Mode(true);
 
     $authProvider.configure({
-        apiUrl: '',
-        authProviderPaths: {
-            github:   '/auth/github',
-            facebook: '/auth/facebook',
-            google:   '/auth/google_oauth2'
-        }
+        apiUrl: 'vendor_auth'
     })
 });
