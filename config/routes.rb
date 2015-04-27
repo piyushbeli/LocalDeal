@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  mount_devise_token_auth_for 'Vendor', at: 'auth_vendor'
+  mount_devise_token_auth_for 'Vendor', at: 'auth_vendor', skip: [:omniauth_callbacks]
   as :vendor do
 
   end
