@@ -1,60 +1,41 @@
-<div class="modal-header">
-  <div ng-if="showLoginForm">
-    <span class="modal-title">New to LocalDeal?</span>
-    <a href="javascript:void(0);" ng-click="trySignUp()">Create new account</a>
-  </div>
-  <div ng-if="showSignUpForm">
-    <span class="modal-title">Already have an account?</span>
-    <a href="javascript:void(0);" ng-click="tryLogin()">login</a>
-  </div>
-</div>
-<div class="modal-body">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <button class="facebook btn btn-primary" ng-click="loginWithFB()">Connect with Facebook</button>
-      </div>
-      <div class="form-group">
-        <button class="facebook btn btn-danger" ng-click="loginWithGoogle()">Connect with Google</button>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <form ng-if="showLoginForm" role="form" id="signInForm" ng-submit="doLogin()">
-        <div class="form-group">
-          <input type="text"  tooltip="user id or registered email" ng-model="user.userName"
-                 tooltip-trigger="focus" tooltip-placement="right" class="form-control" placeholder="username"/>
+    <div class="col-md-8">
 
+    </div>
+    <div class="col-md-4">
+      <div class="form-group" ng-show="!showLoginForm">
+        Already a member of LocalDeal ? <a ng-click="showLoginForm = true" href="javascript:void(0)">Sign in</a>
+      </div>
+      <div class="form-group" ng-show="showLoginForm">
+        New to LocalDeal ? <a ng-click="showLoginForm = false" href="javascript:void(0)">Sign up</a>
+      </div>
+      <form ng-show="showLoginForm" role="form" ng-submit="doLogin()">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="username" ng-model="vendor.email" required>
         </div>
         <div class="form-group">
-          <input type="password"  tooltip="password" ng-model="user.password"
-                 tooltip-trigger="focus" tooltip-placement="right" class="form-control" placeholder="password"/>
+          <input type="password" class="form-control" placeholder="password" ng-model="vendor.password" required>
         </div>
         <div class="form-group">
           <button class="btn btn-primary" type="submit">Login</button>
         </div>
       </form>
-      <form ng-if="showSignUpForm" role="form" id="signUpForm" ng-submit="doRegister()">
+      <form ng-show="!showLoginForm" role="form" ng-submit="doRegister()">
         <div class="form-group">
-          <input type="text"  tooltip="e.g. piyush.beligmail.com" ng-model="user.userName"
-                 tooltip-trigger="focus" tooltip-placement="right" class="form-control" placeholder="Enter email address"/>
+          <input type="text" class="form-control" placeholder="e.g Macdonalds" ng-model="vendor.name" required>
         </div>
         <div class="form-group">
-          <input type="password"  tooltip="password" ng-model="user.password"
-                 tooltip-trigger="focus" tooltip-placement="right" class="form-control" placeholder="Enter password"/>
+          <input type="text" class="form-control" placeholder="e.g piyush.beli@gmail.com" ng-model="vendor.email" required>
         </div>
         <div class="form-group">
-          <input type="password"  tooltip="retype your password" ng-model="user.confirmPassword"
-                 tooltip-trigger="focus" tooltip-placement="right" class="form-control" placeholder="Reenter password"/>
+          <input type="password" class="form-control" placeholder="password" ng-model="vendor.password" required>
         </div>
         <div class="form-group">
-          <input type="text"  tooltip="name" ng-model="user.name"
-                 tooltip-trigger="focus" tooltip-placement="right" class="form-control" placeholder="e.g Piyush Beli"/>
+          <input type="password" class="form-control" placeholder="retype password" ng-model="vendor.confirm_password" required>
         </div>
         <div class="form-group">
           <button class="btn btn-primary" type="submit">Register</button>
-        </div>
-        <div class="form-group" ng-if="registrationSuccessful">
-          <div class="alert alert-success" role="alert">Confirmation email has been sent on your email id</div>
         </div>
       </form>
     </div>

@@ -12,10 +12,20 @@ appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $
         .state('app.dealDetail', Routes.dealDetail)
         .state('app.addresses', Routes.addresses)
 
-    $urlRouterProvider.otherwise('verifyLogin');
+    $urlRouterProvider.otherwise('app/deals');
     //$locationProvider.html5Mode(true);
 
     $authProvider.configure({
-        apiUrl: 'vendor_auth'
+        apiUrl: '',
+        tokenValidationPath:     '/auth_vendor/validate_token',
+        signOutUrl:              '/auth_vendor/sign_out',
+        emailRegistrationPath:   '/auth_vendor',
+        accountUpdatePath:       '/auth_vendor',
+        accountDeletePath:       '/auth_vendor',
+        confirmationSuccessUrl:  window.location.href,
+        passwordResetPath:       '/auth_vendor/password',
+        passwordUpdatePath:      '/auth_vendor/password',
+        passwordResetSuccessUrl: window.location.href,
+        emailSignInPath:         '/auth_vendor/sign_in'
     })
 });

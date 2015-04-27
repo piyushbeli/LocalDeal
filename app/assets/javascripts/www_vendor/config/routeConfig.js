@@ -26,6 +26,19 @@ appVendor.constant("Routes", {
                 templateUrl: 'vendor/nav/nav.html',
                 controller: 'NavController'
             }
+        },
+        resolve: {
+            user: function($auth, $state, $q) {
+                var deferred = $q.defer();
+                $auth.validateUser()
+                    .then(function(user) {
+                        deferred.resolve(user);
+                    })
+                    .catch(function() {
+                        $state.go('login');
+                    })
+                return deferred.promise;
+            }
         }
     },
     deals: {
