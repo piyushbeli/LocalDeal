@@ -1,0 +1,7 @@
+1) Add ui validation using vald angular module.
+2) use angular file upload for uploading the picture on s3 bucket
+3) use loader for showing loading icon
+
+1) Vendor signup
+2) Add outlets
+3) Add deals (select outlets for the deal)

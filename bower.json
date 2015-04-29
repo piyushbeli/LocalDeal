@@ -23,6 +23,9 @@
     "angular-devise": "~1.0.2",
     "ng-token-auth": "~0.0.24",
     "angular-cookie": "~4.0.6",
-    "angular-bootstrap": "~0.12.1"
+    "angular-bootstrap": "~0.12.1",
+    "angular-loading-bar": "~0.7.1",
+    "angular-file-upload": "~1.1.5",
+    "valdr": "~1.1.1"
   }
 }
