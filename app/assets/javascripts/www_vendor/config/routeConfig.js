@@ -44,7 +44,7 @@ appVendor.constant("Routes", {
     deals: {
         url: '/deals',
         views: {
-            'navContent': {
+            'mainContent': {
                 templateUrl: 'vendor/deal/dealList.html',
                 controller: 'DealListController'
             }
@@ -53,7 +53,7 @@ appVendor.constant("Routes", {
     addresses: {
         url: '/addresses',
         views: {
-            'navContent': {
+            'mainContent': {
                 templateUrl: 'vendor/address/addressList.html',
                 controller: 'AddressController'
             }
@@ -62,9 +62,17 @@ appVendor.constant("Routes", {
     dealDetail: {
         url: '/deals/:id',
         views: {
-            'navContent': {
+            'mainContent': {
                 templateUrl: 'vendor/deal/dealDetail.html',
                 controller: 'DealDetailController'
+            }
+        }
+    },
+    emailConfirmation: {
+        url: '/emailConfirmation',
+        views: {
+            'navContent': {
+                templateUrl: 'vendor/login/emailConfirmation.html'
             }
         }
     }

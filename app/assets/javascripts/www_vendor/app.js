@@ -3,7 +3,7 @@ var appVendor = angular
         'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap'
     ]);
 
-appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, Routes) {
+appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, Routes, Constants) {
     $stateProvider
         .state('verifyLogin', Routes.verifyLogin)
         .state('login', Routes.login)
@@ -11,6 +11,7 @@ appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $
         .state('app.deals', Routes.deals)
         .state('app.dealDetail', Routes.dealDetail)
         .state('app.addresses', Routes.addresses)
+        .state('emailConfirmation', Routes.emailConfirmation)
 
     $urlRouterProvider.otherwise('app/deals');
     //$locationProvider.html5Mode(true);
@@ -22,7 +23,7 @@ appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $
         emailRegistrationPath:   '/auth_vendor',
         accountUpdatePath:       '/auth_vendor',
         accountDeletePath:       '/auth_vendor',
-        confirmationSuccessUrl:  window.location.href,
+        confirmationSuccessUrl:  Constants.emailConfirmationUrl,
         passwordResetPath:       '/auth_vendor/password',
         passwordUpdatePath:      '/auth_vendor/password',
         passwordResetSuccessUrl: window.location.href,
