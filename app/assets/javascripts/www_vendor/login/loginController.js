@@ -1,7 +1,11 @@
-appVendor.controller("LoginController", function($scope, $rootScope, $state, Constants, LoginService) {
+appVendor.controller("LoginController", function ($scope, $rootScope, $state, Constants, LoginService, $auth) {
     $scope.showLoginForm = true;
     $scope.vendor = {};
     $scope.isRegistrationSuccessful = false;
+
+    if ($auth.userIsAuthenticated()) {
+        $state.go(Constants.landingState);
+    }
 
     $scope.doLogin = function() {
         LoginService.doLogin($scope.vendor)
@@ -25,11 +29,11 @@ appVendor.controller("LoginController", function($scope, $rootScope, $state, Con
 
     //Register for events
     $rootScope.$on('auth:login-success', function (e) {
-        $rootScope.user = e.currentScope.user;
+        $rootScope.vendor = e.currentScope.user;
         $state.go(Constants.landingState);
     });
     $rootScope.$on('auth:logout-success', function (e) {
-        $rootScope.user = null
+        $rootScope.vendor = null
         $state.go('login');
     });
 

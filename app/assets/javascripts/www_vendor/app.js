@@ -5,13 +5,13 @@ var appVendor = angular
 
 appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, Routes, Constants) {
     $stateProvider
-        .state('verifyLogin', Routes.verifyLogin)
         .state('login', Routes.login)
         .state('app', Routes.root)
         .state('app.deals', Routes.deals)
         .state('app.dealDetail', Routes.dealDetail)
         .state('app.addresses', Routes.addresses)
         .state('emailConfirmation', Routes.emailConfirmation)
+        .state('app.accountDetail', Routes.accountDetail)
 
     $urlRouterProvider.otherwise('app/deals');
     //$locationProvider.html5Mode(true);

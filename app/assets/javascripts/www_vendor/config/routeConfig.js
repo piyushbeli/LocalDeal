@@ -1,14 +1,4 @@
 appVendor.constant("Routes", {
-    verifyLogin: {
-        //This state will be used to redirect the user to login or deals state based on login status
-        url: '/verifyLogin',
-        views: {
-            'navContent': {
-                templateUrl: 'vendor/login/verifyLogin.html',
-                controller: 'VerifyLoginController'
-            }
-        }
-    },
     login: {
         url: '/login',
         views: {
@@ -28,16 +18,18 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            user: function($auth, $state, $q) {
-                var deferred = $q.defer();
+            vendor: function ($auth, $state, $q) {
+                /*var deferred = $q.defer();
                 $auth.validateUser()
                     .then(function(user) {
                         deferred.resolve(user);
                     })
-                    .catch(function() {
+                 .catch(function(response) {
                         $state.go('login');
+                 deferred.reject(response.errors.full_messages.join('\n'));
                     })
-                return deferred.promise;
+                 return deferred.promise;*/
+                $auth.validateToken();
             }
         }
     },
@@ -73,6 +65,15 @@ appVendor.constant("Routes", {
         views: {
             'navContent': {
                 templateUrl: 'vendor/login/emailConfirmation.html'
+            }
+        }
+    },
+    accountDetail: {
+        url: '/account',
+        views: {
+            'mainContent': {
+                templateUrl: 'vendor/account/profile.html',
+                controller: 'AccountController'
             }
         }
     }

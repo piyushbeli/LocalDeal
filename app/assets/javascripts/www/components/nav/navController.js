@@ -17,8 +17,8 @@ app.controller("NavController", function ($scope, $auth, $rootScope, $modal, $st
         $rootScope.user = e.currentScope.user;
     });
     $rootScope.isLoggedIn = function() {
-        return $rootScope.user && $rootScope.user.signedIn;
-    }
+        return $auth.userIsAuthenticated();
+    };
 
     $scope.openSignInModal = function () {
         $scope.registerModal = $modal.open({

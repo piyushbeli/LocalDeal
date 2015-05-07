@@ -36,10 +36,6 @@ ActiveRecord::Schema.define(version: 20150429162730) do
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
-  create_table "roles", force: :cascade do |t|
-    t.string "type", limit: 255, default: "user"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "provider",               limit: 255,                null: false
     t.string   "uid",                    limit: 255,   default: "", null: false
@@ -63,12 +59,10 @@ ActiveRecord::Schema.define(version: 20150429162730) do
     t.text     "tokens",                 limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "role_id",                limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
   create_table "vendors", force: :cascade do |t|
@@ -96,7 +90,7 @@ ActiveRecord::Schema.define(version: 20150429162730) do
     t.datetime "updated_at"
     t.decimal  "latitude",                             precision: 10
     t.decimal  "longitude",                            precision: 10
-    t.integer  "mobile",                 limit: 4
+    t.string   "mobile",                 limit: 255
     t.string   "website",                limit: 255
   end
 
@@ -107,5 +101,4 @@ ActiveRecord::Schema.define(version: 20150429162730) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "users", "roles"
 end
