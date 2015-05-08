@@ -15,8 +15,11 @@ Rails.application.routes.draw do
   end
 
   mount_devise_token_auth_for 'Vendor', at: 'auth_vendor', skip: [:omniauth_callbacks]
-  as :vendor do
 
+  devise_scope :vendor do
+    get '/vendor' => 'application#vendor'
+    post 'outlets' => 'vendor/outlets#create'
+    put 'outlets/:id' => 'vendor/outlet#update'
   end
 
 
@@ -25,7 +28,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'application#index'
-  get '/vendor' => 'application#vendor'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

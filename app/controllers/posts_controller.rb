@@ -3,6 +3,8 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :update]
   before_action :verify_ownership, only: [:update]
 
+  respond_to :json
+
   def index
     respond_with Post.all
   end
@@ -16,6 +18,8 @@ class PostsController < ApplicationController
     post.upvotes = 0
     if post.save
       respond_with post
+    else
+      render json: {errors: post.errors.full_messages}, status: 422
     end
   end
 
