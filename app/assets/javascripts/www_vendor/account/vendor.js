@@ -1,4 +1,4 @@
-appVendor.factory("Vendor", function () {
+appVendor.factory("Vendor", function (Outlet) {
     function Vendor(data) {
         if (!data) {
             return;
@@ -9,6 +9,7 @@ appVendor.factory("Vendor", function () {
         this.website = data.website;
         this.mobile = data.mobile;
         this.city = data.city;
+        this.outlets = (data.outlets && Outlet.build(data.outlets)) || [];
     }
 
     Vendor.build = function (data) {

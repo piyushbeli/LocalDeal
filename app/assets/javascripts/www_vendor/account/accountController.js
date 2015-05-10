@@ -10,35 +10,53 @@ appVendor.controller("AccountController", function ($scope, $rootScope, AccountS
                 $scope.errorMessage = errorMessage;
             })
     };
-
-    $scope.addOutlet = function (outlet) {
-        var modalInstance = $modal.open({
-            templateUrl: 'vendor/outlet/outlet.html',
-            controller: 'OutletModalController',
-            resolve: {
-                outlet: function () {
-                    return outlet ? outlet : AccountService.newOutlet();
-                }
-            }
-        });
-    }
 })
 
-appVendor.controller('OutletModalController', function ($scope, $rootScope, $modalInstance, AccountService, outlet) {
-    $scope.outlet = outlet;
+appVendor.controller('OutletModalController', function ($scope, $rootScope, AccountService) {
+    $scope.shouldUseCurrentLocation = false;
+    $scope.addOutlet = function (outlet) {
+        $scope.outlet =  AccountService.newOutlet();
+    };
+
     $scope.save = function () {
-        AccountService.createOutlet($scope.outlet)
+        AccountService.saveOutlet($scope.outlet)
             .then(function(response) {
-                $rootScope.vendor.outlets.push(response);
-                $modalInstance.close();
+                if ($scope.outlet.id) {
+                    $scope.outlet = response;
+                } else {
+                    $rootScope.vendor.outlets.push(response);
+                }
+                $scope.close();
             })
             .catch(function(errorMessage) {
                 alert(errorMessage);
             });
     };
 
-    $scope.close = function () {
-        $modalInstance.dismiss('cancel');
+    $scope.selectOutlet = function(outlet) {
+      $scope.outlet = outlet;
+      $scope.shouldUseCurrentLocation = false;
     };
+
+    $scope.close = function () {
+        $scope.outlet = null;
+    };
+
+    $scope.googlePlaceAutoCompleteOptions = {
+        types: '(cities)',
+        country: 'in'
+    };
+
+    $scope.userCurrentLocation = function() {
+        if (!$scope.shouldUseCurrentLocation) {
+            $scope.outlet.latitude = '';
+            $scope.outlet.longitude = '';
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(function (position) {
+            $scope.outlet.latitude = position.coords.latitude;
+            $scope.outlet.longitude = position.coords.longitude;
+        });
+    }
 
 });

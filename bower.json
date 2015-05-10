@@ -26,6 +26,7 @@
     "angular-bootstrap": "~0.12.1",
     "angular-loading-bar": "~0.7.1",
     "angular-file-upload": "~1.1.5",
-    "valdr": "~1.1.1"
+    "valdr": "~1.1.1",
+    "ngAutocomplete": "~1.0.0"
   }
 }

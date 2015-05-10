@@ -1,4 +1,4 @@
 appVendor.constant("HttpRoutes", {
     apiUrl: '/',
-    outlet: '/outlets.json'
+    outlet: '/outlets'
 })

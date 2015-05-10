@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   devise_scope :vendor do
     get '/vendor' => 'application#vendor'
     post 'outlets' => 'vendor/outlets#create'
-    put 'outlets/:id' => 'vendor/outlet#update'
+    put 'outlets/:id' => 'vendor/outlets#update'
   end
 
 
