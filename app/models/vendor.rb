@@ -4,7 +4,7 @@ class Vendor < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  has_many :outlets
+  has_many :outlets, dependent: :destroy
 
   validates :mobile, length: {is: 10}, numericality: {only_integer: true}, uniqueness: true, presence: true
 

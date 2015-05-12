@@ -18,8 +18,13 @@ Rails.application.routes.draw do
 
   devise_scope :vendor do
     get '/vendor' => 'application#vendor'
-    post 'outlets' => 'vendor/outlets#create'
-    put 'outlets/:id' => 'vendor/outlets#update'
+    namespace :vendor do
+      #post 'outlets' => 'vendor/outlets#create'
+      #put 'outlets/:id' => 'vendor/outlets#update'
+      resources :outlets , only: [:create, :update, :delete]
+      resources :deals, only: [:show, :index, :create, :update, :delete]
+    end
+
   end
 
 

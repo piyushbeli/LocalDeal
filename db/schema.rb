@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507155044) do
+ActiveRecord::Schema.define(version: 20150511103316) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body",       limit: 255
@@ -25,11 +25,24 @@ ActiveRecord::Schema.define(version: 20150507155044) do
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
+  create_table "deals", force: :cascade do |t|
+    t.string  "title",       limit: 255
+    t.integer "vendor_id",   limit: 4
+    t.string  "description", limit: 255
+  end
+
+  add_index "deals", ["vendor_id"], name: "index_deals_on_vendor_id", using: :btree
+
+  create_table "deals_outlets", id: false, force: :cascade do |t|
+    t.integer "deal_id",   limit: 4, null: false
+    t.integer "outlet_id", limit: 4, null: false
+  end
+
   create_table "outlets", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.integer  "vendor_id",  limit: 4
-    t.decimal  "longitude",              precision: 9, scale: 5
-    t.decimal  "latitude",               precision: 9, scale: 5
+    t.string   "name",       limit: 255,                         null: false
+    t.integer  "vendor_id",  limit: 4,                           null: false
+    t.decimal  "longitude",              precision: 9, scale: 5, null: false
+    t.decimal  "latitude",               precision: 9, scale: 5, null: false
     t.string   "city",       limit: 255,                         null: false
     t.string   "city_id",    limit: 255,                         null: false
     t.string   "address",    limit: 255
@@ -117,5 +130,6 @@ ActiveRecord::Schema.define(version: 20150507155044) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "deals", "vendors"
   add_foreign_key "posts", "users"
 end
