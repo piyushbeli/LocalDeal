@@ -56,6 +56,9 @@ Rails.application.configure do
         :domain => "localhost",
         :authentication => :plain
     }
+
+    #Caching
+    config.cache_store = :memory_store, { size: 32.megabytes }
   end
 
 end

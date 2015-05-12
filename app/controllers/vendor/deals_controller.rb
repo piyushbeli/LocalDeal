@@ -2,6 +2,8 @@ class Vendor::DealsController < ApplicationController
   before_action :find_deal, except: [:create]
   before_action :verify_ownership, only: [:update]
 
+  caches_action :find_deal
+
   respond_to :json
 
   def find_deal
@@ -10,11 +12,11 @@ class Vendor::DealsController < ApplicationController
   end
 
   def index
-
+    render json: Deal.All
   end
 
   def show
-
+    render json: @deal
   end
 
   def create
