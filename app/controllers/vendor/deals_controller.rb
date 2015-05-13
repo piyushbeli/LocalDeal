@@ -1,4 +1,7 @@
 class Vendor::DealsController < ApplicationController
+  #Commentout this line after development testing
+  include Vendor::VendorResourceController
+
   before_action :find_deal, except: [:create]
   before_action :verify_ownership, only: [:update]
 

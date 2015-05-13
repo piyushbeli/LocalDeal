@@ -16,13 +16,18 @@ Rails.application.routes.draw do
 
   mount_devise_token_auth_for 'Vendor', at: 'auth_vendor', skip: [:omniauth_callbacks]
 
+  mount_devise_token_auth_for 'God', at: 'auth_god'
+  as :god do
+    # Define routes for God within this block.
+  end
+
   devise_scope :vendor do
     get '/vendor' => 'application#vendor'
     namespace :vendor do
       #post 'outlets' => 'vendor/outlets#create'
       #put 'outlets/:id' => 'vendor/outlets#update'
       resources :outlets , only: [:create, :update, :delete]
-      resources :deals, only: [:show, :index, :create, :update, :delete]
+      resources :deals
     end
 
   end
