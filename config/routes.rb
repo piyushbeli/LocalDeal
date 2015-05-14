@@ -24,10 +24,10 @@ Rails.application.routes.draw do
   devise_scope :vendor do
     get '/vendor' => 'application#vendor'
     namespace :vendor do
-      #post 'outlets' => 'vendor/outlets#create'
-      #put 'outlets/:id' => 'vendor/outlets#update'
       resources :outlets , only: [:create, :update, :delete]
       resources :deals
+      #Remove an outlet from deal.
+      delete 'deals/:id/outlets/:outlet_id' => 'deals#removeOutlet'
     end
 
   end

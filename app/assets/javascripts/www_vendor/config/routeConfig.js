@@ -76,6 +76,11 @@ appVendor.constant("Routes", {
                 templateUrl: 'vendor/deal/dealDetail.html',
                 controller: 'DealDetailController'
             }
+        },
+        resolve: {
+            deal: function(DealService) {
+                return DealService.newDeal();
+            }
         }
     },
     emailConfirmation: {

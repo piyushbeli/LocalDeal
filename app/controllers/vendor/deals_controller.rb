@@ -3,7 +3,7 @@ class Vendor::DealsController < ApplicationController
   include Vendor::VendorResourceController
 
   before_action :find_deal, except: [:create, :index]
-  before_action :verify_ownership, only: [:update]
+  before_action :verify_ownership, only: [:update, :destroy, :removeOutlet]
 
   caches_action :find_deal
 
@@ -23,7 +23,7 @@ class Vendor::DealsController < ApplicationController
   end
 
   def create
-    deal = Deal.new(deal_params.merge(vendor_id: current_vendor.id))
+    deal = Deal.new(deal_create_params.merge(vendor_id: current_vendor.id))
     outlets = Outlet.where(:id => params[:outlets])
     deal.outlets << outlets
     if deal.save
@@ -34,11 +34,25 @@ class Vendor::DealsController < ApplicationController
   end
 
   def update
-
+    if @deal.update(deal_update_params)
+      render json: {success:true}
+    else
+      render json: {errors: @deal.errors.full_messages}, status: 422
+    end
   end
 
   def destroy
 
+  end
+
+  def removeOutlet
+    outlet = Outlet.find_by_id(params[:outlet_id])
+    @deal.outlets.delete(outlet)
+    if @deal.save
+      render json: {success: true}
+    else nmmkjj
+      render json: {errors: @deal.errors.full_messages}, status: 422
+    end
   end
 
   def verify_ownership
@@ -47,7 +61,11 @@ class Vendor::DealsController < ApplicationController
     end
   end
 
-  def deal_params
+  def deal_create_params
     params.require(:deal).permit!
+  end
+
+  def deal_update_params
+    params.require(:deal).permit(:title, :description)
   end
 end

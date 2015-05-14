@@ -11,7 +11,13 @@ appVendor.controller("DealDetailController", function($scope, $state, $rootScope
             })
     };
 
-    $scope.removeOutlet = function() {
-
+    $scope.removeOutlet = function(outlet) {
+        DealService.removeOutlet($scope.deal, outlet)
+            .then(function(response) {
+                $scope.deal.outlets.delete(outlet.id);
+            })
+            .catch(function(errorMessage) {
+                alert(errorMessage);
+            })
     }
 })

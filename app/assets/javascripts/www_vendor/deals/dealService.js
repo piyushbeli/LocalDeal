@@ -75,5 +75,24 @@ appVendor.service("DealService", function (Deal, $q, $http, HttpRoutes, $interpo
                 deferred.reject(errorMessage);
             });
         return deferred.promise;
-    }
+    };
+
+    self.removeOutlet = function(deal, outlet) {
+        var deferred = $q.defer(),
+            url = HttpRoutes.removeOutlet.format({
+                deal_id: deal.id,
+                outlet_id: outlet.id
+            });
+        $http.delete(url)
+            .then(function(response) {
+                deferred.resolve();
+            })
+            .catch(function(response) {
+                var errorMessage = response.data.errors.join("\n");
+                deferred.reject(errorMessage);
+            });
+        return deferred.promise;
+    };
+
+    //End
 })

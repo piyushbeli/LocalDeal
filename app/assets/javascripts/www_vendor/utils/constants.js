@@ -1,7 +1,8 @@
 appVendor.constant("HttpRoutes", {
     apiUrl: '/',
     outlet: '/vendor/outlets',
-    deal: '/vendor/deals'
+    deal: '/vendor/deals',
+    removeOutlet: '/vendor/deals/{deal_id}/outlets/{outlet_id}'
 })
 .constant('Constants', {
     apiUrl: 'localhost:3000/vendor#',
