@@ -7,9 +7,10 @@ appVendor.factory("Vendor", function (Outlet) {
         this.name = data.name;
         this.email = data.email;
         this.website = data.website;
-        this.mobile = data.mobile;
+        this.mobile = Number.parseInt(data.mobile);
         this.city = data.city;
-        this.outlets = (data.outlets && Outlet.build(data.outlets)) || [];
+        this.outlets = data.outlets ? Outlet.build(data.outlets) : [];
+        this.deals = []; //We will add the deals whenever it would be fetched
     }
 
     Vendor.build = function (data) {

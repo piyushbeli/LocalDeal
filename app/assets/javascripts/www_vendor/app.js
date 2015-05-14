@@ -1,6 +1,6 @@
 var appVendor = angular
     .module('LocalDeal_Vendor', [
-        'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap', 'ngAutocomplete'
+        'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap', 'ngAutocomplete', 'checklist-model'
     ]);
 
 appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, Routes, Constants) {
@@ -9,6 +9,7 @@ appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $
         .state('app', Routes.root)
         .state('app.deals', Routes.deals)
         .state('app.dealDetail', Routes.dealDetail)
+        .state('app.newDeal', Routes.newDeal)
         .state('app.addresses', Routes.addresses)
         .state('emailConfirmation', Routes.emailConfirmation)
         .state('app.accountDetail', Routes.accountDetail)

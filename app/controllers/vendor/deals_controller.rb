@@ -2,7 +2,7 @@ class Vendor::DealsController < ApplicationController
   #Commentout this line after development testing
   include Vendor::VendorResourceController
 
-  before_action :find_deal, except: [:create]
+  before_action :find_deal, except: [:create, :index]
   before_action :verify_ownership, only: [:update]
 
   caches_action :find_deal
@@ -15,7 +15,7 @@ class Vendor::DealsController < ApplicationController
   end
 
   def index
-    render json: Deal.All
+    render json: Deal.where(:vendor_id => current_vendor.id)
   end
 
   def show
@@ -24,7 +24,7 @@ class Vendor::DealsController < ApplicationController
 
   def create
     deal = Deal.new(deal_params.merge(vendor_id: current_vendor.id))
-    outlets = Outlet.where(:id => params[:outlets_ids])
+    outlets = Outlet.where(:id => params[:outlets])
     deal.outlets << outlets
     if deal.save
       render json: deal

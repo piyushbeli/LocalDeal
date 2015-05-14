@@ -32,7 +32,7 @@ class Vendor::OutletsController < ApplicationController
     if @outlet.update(outlet_params)
       render json: {success: true}, status:200
     else
-      render json: {success: false, errors: ["Error occurred while updating outlet #{@outlet.name}"]}
+      render json: {success: false, errors: @outlet.errors.full_messages}, status: 422
     end
   end
 

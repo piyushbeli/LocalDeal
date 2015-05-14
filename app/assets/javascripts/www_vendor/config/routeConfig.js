@@ -18,18 +18,17 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            vendor: function ($auth, $state, $q) {
-                /*var deferred = $q.defer();
+            auth: function ($auth, $q, $state, Vendor, $rootScope) {
+                var deferred = $q.defer();
                 $auth.validateUser()
-                    .then(function(user) {
-                        deferred.resolve(user);
+                    .then(function(response) {
+                        $rootScope.vendor = Vendor.build(response);
+                        deferred.resolve();
                     })
-                 .catch(function(response) {
+                    .catch(function(response) {
                         $state.go('login');
-                 deferred.reject(response.errors.full_messages.join('\n'));
                     })
-                 return deferred.promise;*/
-                $auth.validateToken();
+                return deferred.promise;
             }
         }
     },
@@ -53,6 +52,25 @@ appVendor.constant("Routes", {
     },
     dealDetail: {
         url: '/deals/:id',
+        views: {
+            'mainContent': {
+                templateUrl: 'vendor/deal/dealDetail.html',
+                controller: 'DealDetailController'
+            }
+        },
+        resolve: {
+            deal: function(DealService, $stateParams) {
+                var dealId = $stateParams['id'];
+                if (dealId == 'new') {
+                    return DealService.newDeal();
+                } else {
+                    return DealService.fetchDealDetails(dealId);
+                }
+            }
+        }
+    },
+    newDeal: { //This is same as dealDetail but id has been hardcoded to 'new'
+        url: '/deals/new',
         views: {
             'mainContent': {
                 templateUrl: 'vendor/deal/dealDetail.html',

@@ -8,6 +8,10 @@ appVendor.controller("NavController", function ($scope, $auth, $rootScope, $moda
         $rootScope.vendor = null;
         $state.go('login');
     });
+    $rootScope.$on('auth:invalid', function (e) {
+        $rootScope.vendor = null;
+        $state.go('login');
+    });
     $rootScope.$on('auth:validation-success', function (e) {
         $rootScope.vendor = Vendor.build(e.currentScope.user);
     });

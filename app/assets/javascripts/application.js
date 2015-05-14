@@ -14,3 +14,4 @@
 //= require angular-loading-bar
 //= require valdr
 //= require ngAutocomplete
+//= require checklist-model

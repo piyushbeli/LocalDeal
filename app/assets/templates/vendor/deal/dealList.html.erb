@@ -1,1 +1,4 @@
-<h1>Detail List</h1>
+<a ui-sref="app.newDeal">Create deal</a>
+<div ng-repeat="deal in data.deals">
+    <a ng-click="openDealDetail(deal)">{{deal.title}}</a>
+</div>
