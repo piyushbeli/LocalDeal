@@ -39,27 +39,25 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  Rails.application.configure do
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.raise_delivery_errors = false
-    config.action_mailer.default :charset => "utf-8"
-    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  #Mailer config
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.smtp_settings = {
-        :address => "smtp.mandrillapp.com",
-        :port => 587,
-        :user_name => ENV["MANDRILL_USERNAME"],
-        :password => ENV["MANDRILL_APIKEY"],
-        :domain => "localhost",
-        :authentication => :plain
-    }
-
-    #Caching
-    config.cache_store = :memory_store, { size: 32.megabytes }
-  end
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+      :address => "smtp.mandrillapp.com",
+      :port => 587,
+      :user_name => ENV["MANDRILL_USERNAME"],
+      :password => ENV["MANDRILL_APIKEY"],
+      :domain => "localhost",
+      :authentication => :plain
+  }
+  #Caching
+  config.action_controller.perform_caching = true
+  config.cache_store = :memory_store, { size: 32.megabytes }
 end
 

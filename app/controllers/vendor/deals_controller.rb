@@ -5,7 +5,8 @@ class Vendor::DealsController < ApplicationController
   before_action :find_deal, except: [:create, :index]
   before_action :verify_ownership, only: [:update, :destroy, :removeOutlet]
 
-  caches_action :find_deal
+  caches_action :show, expires_in: 5.minutes #A deal rarely changes after creation so lets cache it for some time.
+  caches_action :index, expires_in: 5.minutes
 
   respond_to :json
 
@@ -15,7 +16,9 @@ class Vendor::DealsController < ApplicationController
   end
 
   def index
-    render json: Deal.where(:vendor_id => current_vendor.id)
+    @deals =  Deal.where(:vendor_id => current_vendor.id)
+    render 'vendor/deals/index'
+    #render json: @deals
   end
 
   def show
@@ -67,5 +70,13 @@ class Vendor::DealsController < ApplicationController
 
   def deal_update_params
     params.require(:deal).permit(:title, :description)
+  end
+
+  def deal_pluck_fields
+    if self.action_name == "show"
+      return :id, :vendor_id, :name
+    else
+      return :id, :vendor_id
+    end
   end
 end

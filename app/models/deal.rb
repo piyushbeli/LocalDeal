@@ -3,6 +3,7 @@ class Deal < ActiveRecord::Base
 
   has_many :deal_outlets
   has_and_belongs_to_many :outlets, through: :deal_outlets
+  belongs_to :vendor
 
   validates_presence_of :title, :vendor_id
 
@@ -15,6 +16,10 @@ class Deal < ActiveRecord::Base
                          }
                      }
           ))
+  end
+
+  def outletsCount
+    outlets.length
   end
 
 end

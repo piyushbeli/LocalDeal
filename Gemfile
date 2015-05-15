@@ -44,8 +44,9 @@ gem 'omniauth', '~> 1.0.0'
 gem 'devise_token_auth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'rabl-rails'
+gem 'rabl'
+gem 'oj' #dependency for rabl
 #gem 'memcached', '~> 1.8.0'
 gem 'dalli' #Instead of memcache store use it, it claims to be 20% faster than memcache
 gem 'actionpack-action_caching'  #For controller's action caching, this is what we would ever require
-gem 'seed_dump' #used for creating the seed data automatically
+gem 'seed_dump' #used for creating the seed data automatically rake db:seed:dump
