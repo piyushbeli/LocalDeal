@@ -4,6 +4,7 @@
 //= require angular-bootstrap
 //= require angular-rails-templates
 //= require_tree ../templates
+//= require ./www_common/app.js
 //= require ./www/app.js
 //= require ./www_vendor/app.js
 //= require_tree .
@@ -15,3 +16,4 @@
 //= require valdr
 //= require ngAutocomplete
 //= require checklist-model
+//= require angular-cache

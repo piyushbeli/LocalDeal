@@ -8,6 +8,9 @@ appVendor.factory("Deal", function(Utils) {
         this.vendor = data.vendor;
         this.outlets = data.outlets;
         this.offers = data.offers;
+
+        //List specific
+        this.noOfOutlets = data.no_of_outlets;
     }
 
     Deal.build = function(data) {
@@ -25,6 +28,15 @@ appVendor.factory("Deal", function(Utils) {
     Deal.prototype.isNew = function() {
         return angular.isUndefined(this.id);
     };
+
+    Deal.prototype.getOffer = function(offerId) {
+        this.offers.forEach(function(item) {
+            if (item.id == offerId) {
+                return item;
+            }
+        });
+        return null;
+    }
 
     //End
     return Deal;

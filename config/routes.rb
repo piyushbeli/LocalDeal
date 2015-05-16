@@ -24,13 +24,18 @@ Rails.application.routes.draw do
   devise_scope :vendor do
     get '/vendor' => 'application#vendor'
     namespace :vendor do
-      resources :outlets , only: [:create, :update, :delete]
-      resources :deals
+      resources :outlets , only: [:create, :update, :destroy, :index, :show]
+      resources :deals, only: [:create, :update, :destroy, :index, :show]
+      resources :offers, only: [:create, :update, :destroy]
       #Remove an outlet from deal.
       delete 'deals/:id/outlets/:outlet_id' => 'deals#removeOutlet'
     end
-
   end
+
+  #Reference data which does not require any authentication and common for all roles
+  get '/categories' => 'reference_data#categories'
+  get 'subcategories/:category_id' => 'reference_data#sub_categories'
+  get 'offertypes' => 'reference_data#offer_types'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

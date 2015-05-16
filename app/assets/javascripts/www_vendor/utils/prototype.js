@@ -27,3 +27,13 @@ Array.prototype.delete = function(id) {
     }
     this.splice(i,1);
 }
+
+Date.prototype.isBefore = function(date) {
+    return moment(this).isBefore(date);
+}
+Date.prototype.isAfter = function(date) {
+    return moment(this).isAfter(date);
+}
+Date.prototype.isSame = function(date) {
+    return moment(this).isSame(date);
+}

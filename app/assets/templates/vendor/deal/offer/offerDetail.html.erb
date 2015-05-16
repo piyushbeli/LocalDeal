@@ -1,0 +1,11 @@
+<form role="form">
+  <div class="form-group">
+    <label class="control-label">Discount Type</label>
+    <select class="form-control" ng-model="offer.offerType"
+            ng-options="offerType.name for offerType in data.offerTypes"></select>
+  </div>
+  <div class="form-group">
+    <label class="control-label">What you get</label>
+    <input type="text" class="form-control" ng-model="offer.whatYouGet">
+  </div>
+</form>

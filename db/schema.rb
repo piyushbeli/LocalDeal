@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513113421) do
+ActiveRecord::Schema.define(version: 20150515175958) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 255, null: false
@@ -75,6 +75,20 @@ ActiveRecord::Schema.define(version: 20150513113421) do
     t.string  "type",     limit: 255, null: false
     t.integer "discount", limit: 4,   null: false
   end
+
+  create_table "offers", force: :cascade do |t|
+    t.integer  "deal_id",       limit: 4
+    t.integer  "offer_type_id", limit: 4
+    t.integer  "discount",      limit: 4
+    t.string   "what_you_get",  limit: 255
+    t.text     "fine_print",    limit: 65535
+    t.string   "instruction",   limit: 255
+    t.datetime "start_time"
+    t.datetime "expire_time"
+  end
+
+  add_index "offers", ["deal_id"], name: "index_offers_on_deal_id", using: :btree
+  add_index "offers", ["offer_type_id"], name: "index_offers_on_offer_type_id", using: :btree
 
   create_table "outlets", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -190,6 +204,8 @@ ActiveRecord::Schema.define(version: 20150513113421) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "deals", "vendors"
+  add_foreign_key "offers", "deals"
+  add_foreign_key "offers", "offer_types"
   add_foreign_key "posts", "users"
   add_foreign_key "subcategories", "categories"
   add_foreign_key "vendor_images", "vendors"

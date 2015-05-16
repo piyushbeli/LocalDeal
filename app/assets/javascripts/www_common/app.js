@@ -1,0 +1,1 @@
+var appCommon = angular.module("app.common", ['angular-cache']);

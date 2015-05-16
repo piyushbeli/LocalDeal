@@ -18,11 +18,10 @@ class Vendor::DealsController < ApplicationController
   def index
     @deals =  Deal.where(:vendor_id => current_vendor.id)
     render 'vendor/deals/index'
-    #render json: @deals
   end
 
   def show
-    render json: @deal
+    render 'vendor/deals/show'
   end
 
   def create
@@ -45,7 +44,7 @@ class Vendor::DealsController < ApplicationController
   end
 
   def destroy
-
+    render json: {errors: ["Not authorized to delete a deal"]}, status: 422
   end
 
   def removeOutlet
@@ -53,7 +52,17 @@ class Vendor::DealsController < ApplicationController
     @deal.outlets.delete(outlet)
     if @deal.save
       render json: {success: true}
-    else nmmkjj
+    else
+      render json: {errors: @deal.errors.full_messages}, status: 422
+    end
+  end
+
+  def addOutlet
+    outlet = Outlet.find_by_id(params[:outlet_id])
+    @deal.outlets.add(outlet)
+    if @deal.save
+      render json: {success: true}
+    else
       render json: {errors: @deal.errors.full_messages}, status: 422
     end
   end
@@ -72,11 +81,4 @@ class Vendor::DealsController < ApplicationController
     params.require(:deal).permit(:title, :description)
   end
 
-  def deal_pluck_fields
-    if self.action_name == "show"
-      return :id, :vendor_id, :name
-    else
-      return :id, :vendor_id
-    end
-  end
 end

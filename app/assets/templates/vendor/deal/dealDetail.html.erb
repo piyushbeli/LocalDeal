@@ -29,4 +29,11 @@
 
     </div>
   </div>
+  <h3> Offers</h3>
+  <button class="button button-primary" ui-sref="app.dealDetail.newOffer">Create Offer</button>
+  <div class="form-group" ng-repeat="offer in deal.offers">
+    <span>{{offer.whatYouGet}}</span>
+    <button class="button button-primary" ng-click="editOffer(offer)">Edit</button>
+  </div>
 </form>
+<div ui-view="offerDetailContent"></div>

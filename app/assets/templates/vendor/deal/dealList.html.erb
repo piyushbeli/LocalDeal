@@ -1,4 +1,5 @@
 <a ui-sref="app.newDeal">Create deal</a>
 <div ng-repeat="deal in data.deals">
     <a ng-click="openDealDetail(deal)">{{deal.title}}</a>
+    <span class="bg-success">{{deal.noOfOutlets}}</span>
 </div>

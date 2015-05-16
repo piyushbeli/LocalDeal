@@ -19,5 +19,9 @@ appVendor.controller("DealDetailController", function($scope, $state, $rootScope
             .catch(function(errorMessage) {
                 alert(errorMessage);
             })
+    };
+
+    $scope.editOffer = function(offer) {
+        $state.go('app.detailDetail.offerDetail', {offer: offer});
     }
 })

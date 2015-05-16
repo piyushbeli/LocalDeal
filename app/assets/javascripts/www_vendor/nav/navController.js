@@ -1,4 +1,4 @@
-appVendor.controller("NavController", function ($scope, $auth, $rootScope, $modal, $state, $location, Vendor) {
+appVendor.controller("NavController", function ($scope, $auth, $rootScope, $modal, $state, $location, $window, Vendor) {
 
     $rootScope.$on('auth:logout-success', function (e) {
         $rootScope.vendor = null;
@@ -27,6 +27,12 @@ appVendor.controller("NavController", function ($scope, $auth, $rootScope, $moda
             .catch(function (response) {
 
             })
+    };
+
+    $scope.$back = function() {
+        setTimeout(function() {
+            $window.history.back();
+        },100);
     };
 
 })

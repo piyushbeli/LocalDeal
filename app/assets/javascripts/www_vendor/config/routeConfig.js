@@ -83,6 +83,46 @@ appVendor.constant("Routes", {
             }
         }
     },
+    offerDetail: {
+        url: '/offers/:id',
+        //params: {offer: null},
+        views: {
+            'offerDetailContent': {
+                templateUrl: 'vendor/deal/offer/offerDetail.html',
+                controller: 'OfferDetailController'
+            }
+        },
+        resolve: {
+            offer: function($stateParams, OfferService) {
+                var offer = $stateParams['offer'];
+                if (offer) {
+                    return offer;
+                } else {
+                    var offerId = $stateParams['id'];
+                    if (offerId == 'new') {
+                        return OfferService.newOffer();
+                    } else {
+                        //Fetch offer from $scope.deal
+                        //return $scope.deal.getOffer(offerId);
+                    }
+                }
+            }
+        }
+    },
+    newOffer: {
+        url: '/offers/new',
+        views: {
+            'offerDetailContent': {
+                templateUrl: 'vendor/deal/offer/offerDetail.html',
+                controller: 'OfferDetailController'
+            }
+        },
+        resolve: {
+            offer: function(OfferService) {
+                return OfferService.newOffer();
+            }
+        }
+    },
     emailConfirmation: {
         url: '/emailConfirmation',
         views: {
