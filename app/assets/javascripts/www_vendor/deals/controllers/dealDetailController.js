@@ -22,6 +22,6 @@ appVendor.controller("DealDetailController", function($scope, $state, $rootScope
     };
 
     $scope.editOffer = function(offer) {
-        $state.go('app.detailDetail.offerDetail', {offer: offer});
+        $state.go('app.dealDetail.offerDetail', {offer_id: offer.id, offer: offer});
     }
 })

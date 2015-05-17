@@ -1,7 +1,7 @@
 var appVendor = angular
     .module('LocalDeal_Vendor', [
         'app.common', 'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap', 'ngAutocomplete',
-        'checklist-model'
+        'checklist-model', 'ui.bootstrap.datetimepicker'
     ]);
 
 appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, Routes, Constants) {

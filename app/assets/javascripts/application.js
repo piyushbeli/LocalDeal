@@ -17,3 +17,5 @@
 //= require ngAutocomplete
 //= require checklist-model
 //= require angular-cache
+//= require angular-ui-bootstrap-datetimepicker
+//= require moment

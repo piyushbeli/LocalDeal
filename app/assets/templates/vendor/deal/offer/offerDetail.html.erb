@@ -5,7 +5,38 @@
             ng-options="offerType.name for offerType in data.offerTypes"></select>
   </div>
   <div class="form-group">
+    <label class="control-label">Discount</label>
+    <input type="number" class="form-control" ng-model="offer.discount">
+  </div>
+  <div class="form-group">
     <label class="control-label">What you get</label>
     <input type="text" class="form-control" ng-model="offer.whatYouGet">
+  </div>
+  <div class="form-group">
+    <label class="control-label">Fine prints</label>
+    <textarea class="form-control" ng-model="offer.finePrint"></textarea>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Instructions</label>
+    <textarea class="form-control" ng-model="offer.instruction"></textarea>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Start time</label>
+    <datetimepicker min-date="data.minDate" max-date="date.maxDate"  hour-step="hourStep"
+                    minute-step="minuteStep" ng-model="offer.startTime" show-meridian="data.showMeridian"
+                    date-format="dd-MMM-yyyy" date-options="data.dateOptions" readonly-time="false">
+    </datetimepicker>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Expire time</label>
+    <datetimepicker min-date="data.minDate"  hour-step="hourStep"
+                    minute-step="minuteStep" ng-model="offer.expireTime" show-meridian="data.showMeridian"
+                    date-format="dd-MMM-yyyy" date-options="data.dateOptions" readonly-time="false">
+    </datetimepicker>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary" ng-click="saveOffer()">Save</button>
+    <button class="btn btn-calm" ng-click="cancel()">Cancel</button>
   </div>
 </form>

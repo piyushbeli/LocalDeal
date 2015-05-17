@@ -84,8 +84,8 @@ appVendor.constant("Routes", {
         }
     },
     offerDetail: {
-        url: '/offers/:id',
-        //params: {offer: null},
+        url: '/offers/:offer_id',
+        params: {offer: null},
         views: {
             'offerDetailContent': {
                 templateUrl: 'vendor/deal/offer/offerDetail.html',
@@ -93,17 +93,16 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            offer: function($stateParams, OfferService) {
+            offer: function($stateParams, OfferService, deal) {
                 var offer = $stateParams['offer'];
                 if (offer) {
                     return offer;
                 } else {
-                    var offerId = $stateParams['id'];
+                    var offerId = $stateParams['offer_id'];
                     if (offerId == 'new') {
                         return OfferService.newOffer();
                     } else {
-                        //Fetch offer from $scope.deal
-                        //return $scope.deal.getOffer(offerId);
+                        return deal.offers.find({id: offerId})
                     }
                 }
             }

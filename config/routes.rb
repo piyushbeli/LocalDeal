@@ -25,8 +25,10 @@ Rails.application.routes.draw do
     get '/vendor' => 'application#vendor'
     namespace :vendor do
       resources :outlets , only: [:create, :update, :destroy, :index, :show]
-      resources :deals, only: [:create, :update, :destroy, :index, :show]
-      resources :offers, only: [:create, :update, :destroy]
+      resources :deals, only: [:create, :update, :destroy, :index, :show] do
+        resources :offers, only: [:create, :update, :destroy]
+      end
+
       #Remove an outlet from deal.
       delete 'deals/:id/outlets/:outlet_id' => 'deals#removeOutlet'
     end

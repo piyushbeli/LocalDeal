@@ -1,12 +1,25 @@
-appVendor.controller("OfferDetailController", function ($scope, offer, OfferService, $state, ReferenceDataCache,
+appVendor.controller("OfferDetailController", function ($scope, deal, offer, OfferService, $state, ReferenceDataCache,
                                                         CacheKeys) {
+    $scope.deal = deal; //Injected by app.deatDetail state via resolve
     $scope.offer = offer;
-    $scope.data = {};
+    $scope.data = {
+        minDate:  new Date(),
+        maxDate: moment().add(7, 'day').toDate(),
+        dateOptions: {
+            startingDay: 1,
+            showWeeks: false
+        },
+        showMeridian: true,
+        hourStep: 1,
+        minuteStep: 5
+    };
 
     ReferenceDataCache.get(CacheKeys.OfferTypes)
         .then(function(offerTypes) {
             $scope.data.offerTypes = offerTypes;
-        })
+            //Set the reference of offer type from the above array
+            $scope.offer.offerType = $scope.data.offerTypes.find(offer.offerType);
+        });
 
     $scope.saveOffer = function() {
         OfferService.saveOffer($scope.deal.id, offer)
@@ -17,6 +30,10 @@ appVendor.controller("OfferDetailController", function ($scope, offer, OfferServ
             .catch(function(errorMessage) {
                 alert(errorMessage);
             })
+    };
+
+    $scope.cancelOffer = function() {
+        $state.go('app.dealDetail', {id: $scope.deal.id});
     };
 
 })

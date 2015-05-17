@@ -15,6 +15,9 @@ class Deal < ActiveRecord::Base
                        include: {
                            outlets: {
                                except: [:created_at, :updated_at]
+                           },
+                           offers: {
+                               except: [:created_at, :updated_at, :deal_id]
                            }
                        }
             ))

@@ -1,11 +1,11 @@
-class OffersController < ApplicationController
-  include VendorResourceController
+class Vendor::OffersController < ApplicationController
+  include Vendor::VendorResourceController
 
   before_action :find_offer, only: [:show, :update]
-  before_action :verify_ownership, only: [:update, :destroy]
+  before_action :verify_ownership, only: [:update, :destroy, :create]
 
   def find_offer
-    @offer = Offer.All(:deal_id => params[:deal_id])
+    @offer = Offer.All(:deal_id => params[:deal_id], :id => params[:id])
   end
 
   def show
@@ -13,7 +13,7 @@ class OffersController < ApplicationController
   end
 
   def create
-    @offer = Offer.new(offer_params.merge(:vendor_id => current_vendor.id))
+    @offer = Offer.new(offer_params.merge(:deal_id => params[:deal_id]))
     if @offer.save
       render 'vendor/offers/show'
     else
@@ -30,7 +30,8 @@ class OffersController < ApplicationController
   end
 
   def verify_ownership
-    if @deal.vendor.id != current_vendor.id
+    deal = Deal.find_by_id(params[:deal_id])
+    if deal.vendor.id != current_vendor.id
       render json: {errors: ["Not authorized"]}, status: 401
     end
   end

@@ -36,4 +36,12 @@ Date.prototype.isAfter = function(date) {
 }
 Date.prototype.isSame = function(date) {
     return moment(this).isSame(date);
+};
+
+Array.prototype.find = function(inputItem) {
+   for (var i=0; i< this.length; i++) {
+       if (this[i].id == inputItem.id) {
+           return this[i];
+       }
+   }
 }

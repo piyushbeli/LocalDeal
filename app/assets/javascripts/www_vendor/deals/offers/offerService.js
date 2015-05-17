@@ -1,4 +1,4 @@
-appVendor.service("OfferService", function(Offer) {
+appVendor.service("OfferService", function(Offer, $q, $http, HttpRoutes) {
     var self = this;
 
     self.newOffer = function() {
@@ -15,11 +15,20 @@ appVendor.service("OfferService", function(Offer) {
 
     self.createOffer = function(dealId, offer) {
         var deferred = $q.defer(),
-            url = HttpRoutes.offers.format({
-                deal_id: deal.id
-            });
+            url = HttpRoutes.offer.format({
+                deal_id: dealId
+            }),
+            postData = {
+                offer_type_id: offer.offerType.id,
+                discount: offer.discount,
+                what_you_get: offer.whatYouGet,
+                fine_print: offer.finePrint.split("\n"),
+                instruction: offer.instruction,
+                start_time: offer.startTime,
+                expire_time: offer.expireTime
+            };
 
-        $http.post(url, offer)
+        $http.post(url, postData)
             .then(function(response) {
                 deferred.resolve(Offer.build(response.data));
             })
@@ -32,11 +41,19 @@ appVendor.service("OfferService", function(Offer) {
 
     self.updateOffer = function(dealId, offer) {
         var deferred = $q.defer(),
-            url = HttpRoutes.offers.format({
+            url = HttpRoutes.offer.format({
                 deal_id: deal.id
-            });
+            }),
+            postData = {
+                offer_type_id: offer.offerType.id,
+                what_you_get: offer.whatYouGet,
+                fine_print: offer.finePrint.split("\n"),
+                instructions: offer.instructions,
+                start_time: offer.startTime,
+                expire_time: offer.expiretime
+            };
 
-        $http.put(url, offer)
+        $http.put(url, postData)
             .then(function(response) {
                 deferred.resolve(Offer.build(response.data));
             })

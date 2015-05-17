@@ -1,4 +1,4 @@
-appVendor.factory("Deal", function(Utils) {
+appVendor.factory("Deal", function(Utils, Offer) {
     function Deal(data) {
         if (!data) {
             return;
@@ -7,10 +7,10 @@ appVendor.factory("Deal", function(Utils) {
         this.title = data.title;
         this.vendor = data.vendor;
         this.outlets = data.outlets;
-        this.offers = data.offers;
+        this.offers = Offer.build(data.offers);
 
         //List specific
-        this.noOfOutlets = data.no_of_outlets;
+        this.noOfOutlets = data.no_of_outlets ? Number.parseInt(data.no_of_outlets) : null;
     }
 
     Deal.build = function(data) {
