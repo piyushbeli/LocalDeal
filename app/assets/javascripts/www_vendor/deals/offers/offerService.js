@@ -42,15 +42,17 @@ appVendor.service("OfferService", function(Offer, $q, $http, HttpRoutes) {
     self.updateOffer = function(dealId, offer) {
         var deferred = $q.defer(),
             url = HttpRoutes.offer.format({
-                deal_id: deal.id
+                deal_id: dealId
             }),
+            url = url + "/" + offer.id,
             postData = {
                 offer_type_id: offer.offerType.id,
+                discount: offer.discount,
                 what_you_get: offer.whatYouGet,
                 fine_print: offer.finePrint.split("\n"),
-                instructions: offer.instructions,
+                instruction: offer.instruction,
                 start_time: offer.startTime,
-                expire_time: offer.expiretime
+                expire_time: offer.expireTime
             };
 
         $http.put(url, postData)

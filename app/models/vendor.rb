@@ -4,6 +4,7 @@ class Vendor < ActiveRecord::Base
   has_many :outlets, dependent: :destroy
   belongs_to :category
   has_many :vendor_images, dependent:  :destroy
+  has_many :deals
 
   has_many :vendor_subcategories
   has_and_belongs_to_many :subcategories, through: :vendor_subcategories
@@ -29,5 +30,9 @@ class Vendor < ActiveRecord::Base
                          }
                      }
           ))
+  end
+
+  def dealCountLimitReached?
+    deals.length >= 4
   end
 end

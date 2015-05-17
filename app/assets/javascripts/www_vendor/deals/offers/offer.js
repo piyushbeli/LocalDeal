@@ -10,7 +10,7 @@ appVendor.factory("Offer", function(Utils, ReferenceDataCache, CacheKeys) {
         this.dealId = data.deal_id;
         this.whatYouGet = data.what_you_get;
         this.instruction = data.instruction;
-        this.finePrint = data.fine_print;
+        this.finePrint = data.fine_print ? JSON.parse(data.fine_print).join("\n") : null;
         this.discount = data.discount ? Number.parseInt(data.discount) : null;
         this.offerType = data.offer_type;
         this.startTime = data.start_time ? new Date(data.start_time) : new Date();

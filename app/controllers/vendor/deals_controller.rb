@@ -25,6 +25,10 @@ class Vendor::DealsController < ApplicationController
   end
 
   def create
+    if current_vendor.dealCountLimitReached?
+      render json: {errors: ["You have reached limit of creating deal under your account, but you can still update some older deal"]}, status: 422
+      return
+    end
     deal = Deal.new(deal_create_params.merge(vendor_id: current_vendor.id))
     outlets = Outlet.where(:id => params[:outlets])
     deal.outlets << outlets

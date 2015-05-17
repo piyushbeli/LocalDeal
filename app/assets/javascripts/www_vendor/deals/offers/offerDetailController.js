@@ -23,8 +23,8 @@ appVendor.controller("OfferDetailController", function ($scope, deal, offer, Off
 
     $scope.saveOffer = function() {
         OfferService.saveOffer($scope.deal.id, offer)
-            .then(function(offer) {
-                $scope.deal.offers.push(offer);
+            .then(function(anOffer) {
+                offer.isNew() ? $scope.deal.offers.push(anOffer) : null
                 $state.go('app.dealDetail', {id: $scope.deal.id});
             })
             .catch(function(errorMessage) {

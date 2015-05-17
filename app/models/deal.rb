@@ -27,4 +27,8 @@ class Deal < ActiveRecord::Base
       outlets.length
     end
 
+    def offerCountLimitReached?
+      offers.length == 5
+    end
+
 end
