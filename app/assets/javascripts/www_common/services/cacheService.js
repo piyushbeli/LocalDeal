@@ -3,7 +3,7 @@ appCommon
         var self = this;
         if (!CacheFactory.get('LOCAL_DEAL_REFERENCE_DATA_CACHE')) {
             CacheFactory.createCache('LOCAL_DEAL_REFERENCE_DATA_CACHE', {
-                maxAge: 84000,
+                maxAge: 86400000, //1 day
                 deleteOnExpire: 'aggressive',
                 storageMode: 'localStorage'
             });

@@ -27,5 +27,7 @@ module RoR
     #Uncomment this line after setting up memcache for production and testing environment
     #config.cache_store = :dalli_store, "cache-1.example.com", "cache-2.example.com",
     #{ :namespace => 'LocalDeal', :expires_in => 1.day, :compress => true }
+
+    config.active_record.default_timezone = :local
   end
 end

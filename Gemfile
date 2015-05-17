@@ -50,3 +50,4 @@ gem 'oj' #dependency for rabl
 gem 'dalli' #Instead of memcache store use it, it claims to be 20% faster than memcache
 gem 'actionpack-action_caching'  #For controller's action caching, this is what we would ever require
 gem 'seed_dump' #used for creating the seed data automatically rake db:seed:dump
+gem 'validates_timeliness', '~> 3.0' #For activerecord datetime validations
