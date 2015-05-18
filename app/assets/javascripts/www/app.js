@@ -3,7 +3,7 @@ var app = angular
         'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap'
     ]);
 
-app.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider) {
+app.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, $locationProvider) {
     $stateProvider
         .state('user', {
             url: '/user',
@@ -42,7 +42,7 @@ app.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authPr
             }
         })
     $urlRouterProvider.otherwise('user/posts');
-    //$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 
     $authProvider.configure({
         apiUrl: '',

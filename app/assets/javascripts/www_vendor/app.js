@@ -4,7 +4,7 @@ var appVendor = angular
         'checklist-model', 'ui.bootstrap.datetimepicker'
     ]);
 
-appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, Routes, Constants) {
+appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider, $authProvider, Routes, Constants) {
     $stateProvider
         .state('login', Routes.login)
         .state('app', Routes.root)
@@ -17,8 +17,8 @@ appVendor.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $
         .state('emailConfirmation', Routes.emailConfirmation)
         .state('app.accountDetail', Routes.accountDetail)
 
-    $urlRouterProvider.otherwise('app/deals');
-    //$locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('vendor/app/deals');
+    $locationProvider.html5Mode(true);
 
     $authProvider.configure({
         apiUrl: '',

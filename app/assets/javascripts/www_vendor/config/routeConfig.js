@@ -1,6 +1,6 @@
 appVendor.constant("Routes", {
     login: {
-        url: '/login',
+        url: '/vendor/login',
         views: {
             'navContent': {
                 templateUrl: 'vendor/login/login.html',
@@ -9,7 +9,7 @@ appVendor.constant("Routes", {
         }
     },
     root: {
-        url: '/app',
+        url: '/vendor/app',
         abstract: true,
         views: {
             'navContent': {
