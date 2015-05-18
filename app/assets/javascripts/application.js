@@ -19,3 +19,5 @@
 //= require angular-cache
 //= require angular-ui-bootstrap-datetimepicker
 //= require moment
+//= require lodash
+//= require angular-google-maps

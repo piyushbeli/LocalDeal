@@ -30,6 +30,10 @@ appVendor.factory("Outlet", function(Utils) {
         }
     };
 
+    Outlet.prototype.isNew = function() {
+        return angular.isUndefined(this.id);
+    };
+
     //End
     return Outlet;
 })

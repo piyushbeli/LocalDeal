@@ -1,10 +1,11 @@
 var appVendor = angular
     .module('LocalDeal_Vendor', [
         'app.common', 'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap', 'ngAutocomplete',
-        'checklist-model', 'ui.bootstrap.datetimepicker'
+        'checklist-model', 'ui.bootstrap.datetimepicker', 'uiGmapgoogle-maps'
     ]);
 
-appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider, $authProvider, Routes, Constants) {
+appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider, $authProvider,
+                           uiGmapGoogleMapApiProvider, Routes, Constants) {
     $stateProvider
         .state('login', Routes.login)
         .state('app', Routes.root)
@@ -32,5 +33,11 @@ appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $u
         passwordUpdatePath:      '/auth_vendor/password',
         passwordResetSuccessUrl: window.location.href,
         emailSignInPath:         '/auth_vendor/sign_in'
-    })
+    });
+
+    uiGmapGoogleMapApiProvider.configure({
+        //key: 'your api key',
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+    });
 });
