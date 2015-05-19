@@ -2,7 +2,7 @@ class Vendor::RegistrationsController < DeviseTokenAuth::RegistrationsController
   def update
     if @resource
       subcategories = Subcategory.where(:id => params[:subcategory_ids])
-      @resource.subcategories << subcategories
+      @resource.subcategories = subcategories
       if @resource.update_attributes(account_update_params)
         render json: {
                    status: 'success',
