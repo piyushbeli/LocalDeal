@@ -11,10 +11,13 @@ appVendor.factory("Outlet", function(Utils) {
         this.longitude = Utils.formatDecimal(data.longitude, 6);
         this.contactNo = Number.parseFloat(data.contact_no);
         this.city = data.city;
-        this.city_id = data.city_id;
+        this.street = data.street;
         this.address = data.address;
-        this.placeDetail = {
+        this.cityDetail = {
             place_id: data.city_id
+        };
+        this.streetDetail = {
+            place_id: data.street_id
         };
     }
 
@@ -33,6 +36,20 @@ appVendor.factory("Outlet", function(Utils) {
     Outlet.prototype.isNew = function() {
         return angular.isUndefined(this.id);
     };
+
+    Outlet.prototype.getCoordinates = function() {
+        if (this.latitude && this.longitude) {
+            return LatLng(this.latitude, this.longitude);
+        } else if (this.streetDetail && !this.isNew()) {
+            return LatLng(this.streetDetail.geometry.location.lat(), this.longitude.geometry.location.lng());
+        } else if (this.cityDetail && !this.isNew()) {
+            return LatLng(this.cityDetail.geometry.location.lat(), this.cityDetail.geometry.location.lng());
+        }
+    };
+
+    Outlet.prototype.getStreetBoundry = function() {
+       return !this.isNew() ? LatLng(this.cityDetail.geometry.location.lat(), this.cityDetail.geometry.location.lng()): ''
+    }
 
     //End
     return Outlet;

@@ -7,6 +7,8 @@ class CreateOutlets < ActiveRecord::Migration
       t.decimal :latitude, precision: 9, scale: 5
       t.string :city, null:false
       t.string :city_id, null:false
+      t.string :street, null: false
+      t.string :street_id, null: false
       t.string :address
       t.string :email
       t.string :mobile, limit:10, null:false

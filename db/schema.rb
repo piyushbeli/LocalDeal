@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 20150515175958) do
   add_index "gods", ["uid", "provider"], name: "index_gods_on_uid_and_provider", unique: true, using: :btree
 
   create_table "offer_types", force: :cascade do |t|
-    t.string  "type",     limit: 255, null: false
-    t.integer "discount", limit: 4,   null: false
+    t.string "name",        limit: 255, null: false
+    t.string "description", limit: 255
   end
 
   create_table "offers", force: :cascade do |t|
@@ -91,18 +91,20 @@ ActiveRecord::Schema.define(version: 20150515175958) do
   add_index "offers", ["offer_type_id"], name: "index_offers_on_offer_type_id", using: :btree
 
   create_table "outlets", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.integer  "vendor_id",  limit: 4
-    t.decimal  "longitude",              precision: 9, scale: 5
-    t.decimal  "latitude",               precision: 9, scale: 5
-    t.string   "city",       limit: 255,                         null: false
-    t.string   "city_id",    limit: 255,                         null: false
-    t.string   "address",    limit: 255
-    t.string   "email",      limit: 255
-    t.string   "mobile",     limit: 10,                          null: false
-    t.string   "contact_no", limit: 11
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.string   "name",           limit: 255
+    t.integer  "vendor_id",      limit: 4
+    t.decimal  "longitude",                  precision: 9, scale: 5
+    t.decimal  "latitude",                   precision: 9, scale: 5
+    t.string   "city",           limit: 255,                         null: false
+    t.string   "city_id",        limit: 255,                         null: false
+    t.string   "street",         limit: 255,                         null: false
+    t.string   "street_address", limit: 255,                         null: false
+    t.string   "address",        limit: 255
+    t.string   "email",          limit: 255
+    t.string   "mobile",         limit: 10,                          null: false
+    t.string   "contact_no",     limit: 11
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "outlets", ["vendor_id"], name: "index_outlets_on_vendor_id", using: :btree

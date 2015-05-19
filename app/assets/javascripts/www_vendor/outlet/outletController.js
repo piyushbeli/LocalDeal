@@ -64,9 +64,14 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
         $scope.outlet = null;
     };
 
-    $scope.googlePlaceAutoCompleteOptions = {
+    $scope.googlePlaceAutoCompleteOptionsCity = {
         types: '(cities)',
         country: 'in'
+    };
+    $scope.googlePlaceAutoCompleteOptionsStreet = {
+        types: ['establishment'],
+        country: 'in',
+        location: $scope.outlet ? $scope.outlet.getStreetBoundry() : ""
     };
 
     $scope.userCurrentLocation = function() {
@@ -77,28 +82,34 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
         } else {
             $scope.outlet.latitude = $scope.currentLocation.latitude;
             $scope.outlet.longitude = $scope.currentLocation.longitude;
-            self.setMapOnThisCenter($scope.outlet.latitude, $scope.outlet.latitude);
+            self.setMapOnThisCenter($scope.outlet.latitude, $scope.outlet.longitude,15);
         }
 
     };
 
-    self.setMapOnThisCenter = function(lat, lng) {
+    self.setMapOnThisCenter = function(lat, lng, zoom) {
         $scope.map.center.latitude = lat;
         $scope.map.center.longitude = lng;
         $scope.marker.coords.latitude = lat;
         $scope.marker.coords.longitude = lng;
-        $scope.map.zoom = 15;
+        $scope.map.zoom = zoom;
     }
 
-    $scope.$watch('outlet.placeDetail', function(newVal, oldVal) {
+    $scope.$watch('outlet.cityDetail', function(newVal, oldVal) {
         if (newVal && newVal.geometry) {
-            self.setMapOnThisCenter(newVal.geometry.location.lat(), newVal.geometry.location.lng());
+            self.setMapOnThisCenter(newVal.geometry.location.lat(), newVal.geometry.location.lng(), 15);
+        }
+    });
+
+    $scope.$watch('outlet.streetDetail', function(newVal, oldVal) {
+        if (newVal && newVal.geometry) {
+            self.setMapOnThisCenter(newVal.geometry.location.lat(), newVal.geometry.location.lng(), 15);
         }
     });
 
     $scope.$watch('outlet', function(newVal, oldVal) {
         if (newVal && !newVal.isNew()) {
-            self.setMapOnThisCenter(newVal.latitude, newVal.longitude);
+            self.setMapOnThisCenter(newVal.latitude, newVal.longitude, 15);
         }
     })
 

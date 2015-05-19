@@ -15,13 +15,24 @@ appVendor.service("AccountService", function ($q, $auth, $http, HttpRoutes, Outl
 
     self.saveOutlet = function(outlet) {
         var deferred = $q.defer();
-        outlet.city_id = outlet.placeDetail && outlet.placeDetail.place_id;
         outlet.latitude = Utils.formatDecimal(outlet.latitude, 6);
         outlet.longitude = Utils.formatDecimal(outlet.longitude, 6);
         var request = {
             method: outlet.id ? 'PUT' : 'POST',
             url: outlet.id ? HttpRoutes.outlet + "/" + outlet.id : HttpRoutes.outlet ,
-            data: outlet
+            data: {
+                name: outlet.name,
+                city: outlet.city,
+                city_id: outlet.cityDetail && outlet.cityDetail.place_id,
+                street: outlet.street,
+                street_id: outlet.streetDetail && outlet.streetDetail.place_id,
+                latitude: outlet.latitude,
+                longitude: outlet.longitude,
+                mobile: outlet.mobile,
+                email: outlet.email,
+                contact_no: outlet.contactNo,
+                address: outlet.address
+            }
         };
         $http(request)
             .then(function(response) {
