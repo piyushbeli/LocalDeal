@@ -14,19 +14,16 @@ class Vendor < ActiveRecord::Base
 
   def as_json(options={})
     super(options.merge(
-                     except: [:created_at, :updated_at, :category_id],
+                     except: [:created_at, :updated_at],
                      include: {
                          outlets: {
-                             except: [:created_at, :updated_at, :vendor_id]
-                         },
-                         category: {
                              except: [:created_at, :updated_at, :vendor_id]
                          },
                          vendor_images: {
                              except: [:created_at, :updated_at, :vendor_id]
                          },
                          subcategories: {
-                             except: [:created_at, :updated_at, :category_id]
+                             except: [:created_at, :updated_at, :category_id, :name]
                          }
                      }
           ))

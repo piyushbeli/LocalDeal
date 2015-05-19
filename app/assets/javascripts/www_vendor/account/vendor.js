@@ -11,6 +11,10 @@ appVendor.factory("Vendor", function (Outlet) {
         this.city = data.city;
         this.outlets = data.outlets ? Outlet.build(data.outlets) : [];
         this.deals = []; //We will add the deals whenever it would be fetched
+        this.category = {
+            id: data.category_id
+        };
+        this.subcategories = data.subcategories;
     }
 
     Vendor.build = function (data) {

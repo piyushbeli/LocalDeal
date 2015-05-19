@@ -7,7 +7,7 @@ class Vendor::ParameterSanitizer < Devise::ParameterSanitizer
       when :sign_up
         auth_keys + [:password, :password_confirmation, :name, :mobile]
       when :account_update
-        auth_keys + [:password, :password_confirmation, :current_password, :name, :website, :latitude, :longitude]
+        auth_keys + [:password, :password_confirmation, :current_password, :name, :website, :mobile, :category_id, :subcategory_ids]
     end
   end
 

@@ -103,13 +103,13 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
 
     $scope.$watch('outlet.streetDetail', function(newVal, oldVal) {
         if (newVal && newVal.geometry) {
-            self.setMapOnThisCenter(newVal.geometry.location.lat(), newVal.geometry.location.lng(), 15);
+            self.setMapOnThisCenter(newVal.geometry.location.lat(), newVal.geometry.location.lng(), 17);
         }
     });
 
     $scope.$watch('outlet', function(newVal, oldVal) {
         if (newVal && !newVal.isNew()) {
-            self.setMapOnThisCenter(newVal.latitude, newVal.longitude, 15);
+            self.setMapOnThisCenter(newVal.latitude, newVal.longitude, 17);
         }
     })
 

@@ -39,9 +39,25 @@ Date.prototype.isSame = function(date) {
 };
 
 Array.prototype.find = function(inputItem) {
-   for (var i=0; i< this.length; i++) {
-       if (this[i].id == inputItem.id) {
-           return this[i];
-       }
-   }
+    if (!inputItem) {
+        return;
+    }
+    if (angular.isArray(inputItem)) {
+        var result = [];
+        for(var i=0; i<inputItem.length; i++) {
+            this.forEach(function(item) {
+                if (item.id == inputItem[i].id) {
+                    result.push(item);
+                }
+            })
+        }
+        return result;
+    } else {
+        for (var i=0; i< this.length; i++) {
+            if (this[i].id == inputItem.id) {
+                return this[i];
+            }
+        }
+    }
+
 }
