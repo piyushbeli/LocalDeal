@@ -27,5 +27,16 @@ appUser.controller("OutletListController", function($scope, $rootScope, OutletSe
 
     $scope.showOutletDetail = function(outlet) {
         $state.go(States.outletDetail, {id: outlet.id});
-    }
+    };
+
+    $scope.$watch('criteria.street', function(newVal, oldVal) {
+        if (newVal == null || newVal.trim() == "") {
+            $scope.criteria.streetLocationDetail = null;
+        }
+    });
+    $scope.$watch('criteria.city', function(newVal, oldVal) {
+        if (newVal == null || newVal.trim() == "") {
+            $scope.criteria.cityDetail = null;
+        }
+    });
 })

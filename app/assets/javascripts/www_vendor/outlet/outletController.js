@@ -94,10 +94,20 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
             self.setMapOnThisCenter(newVal.geometry.location.lat(), newVal.geometry.location.lng(), 15);
         }
     });
+    $scope.$watch('outlet.city', function(newVal, oldVal) {
+        if (newVal == null && newVal.trim() == "") {
+            $scope.cityDetail = null;
+        }
+    });
 
     $scope.$watch('outlet.streetDetail', function(newVal, oldVal) {
         if (newVal && newVal.geometry) {
             self.setMapOnThisCenter(newVal.geometry.location.lat(), newVal.geometry.location.lng(), 17);
+        }
+    });
+    $scope.$watch('outlet.street', function(newVal, oldVal) {
+        if (newVal == null && newVal.trim() == "") {
+            $scope.streetDetail = null;
         }
     });
 
