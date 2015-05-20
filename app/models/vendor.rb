@@ -6,8 +6,8 @@ class Vendor < ActiveRecord::Base
   has_many :vendor_images, dependent:  :destroy
   has_many :deals
 
-  has_many :vendor_subcategories
-  has_and_belongs_to_many :subcategories, through: :vendor_subcategories
+  has_many :vendors_subcategories
+  has_and_belongs_to_many :subcategories, through: :vendors_subcategories
 
 
   validates :mobile, length: {is: 10}, numericality: {only_integer: true}, uniqueness: true, presence: true

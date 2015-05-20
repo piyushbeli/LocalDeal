@@ -52,3 +52,4 @@ gem 'actionpack-action_caching'  #For controller's action caching, this is what 
 gem 'seed_dump' #used for creating the seed data automatically rake db:seed:dump
 gem 'validates_timeliness', '~> 3.0' #For activerecord datetime validations
 gem 'geokit-rails' #for geo location calculation
+gem 'json' #for all JSON methods just like javascript

@@ -13,8 +13,9 @@ class CreateOutlets < ActiveRecord::Migration
       t.string :email
       t.string :mobile, limit:10, null:false
       t.string :contact_no, limit:11
-
       t.timestamps null: false
     end
+    add_index :outlets, [:latitude, :longitude]
+
   end
 end

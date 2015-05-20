@@ -20,7 +20,7 @@ appVendor.service("LoginService", function($auth, $q) {
                 deferred.resolve(response.data);
             })
             .catch(function (response) {
-                deferred.reject(response.errors.fullMessage);
+                deferred.reject(response.data.errors.fullMessages);
             })
         return deferred.promise;
     }
