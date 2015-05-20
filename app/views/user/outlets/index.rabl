@@ -4,5 +4,5 @@ child(:vendor) do
     attributes :name
 end
 child(:deals) do
-    attributes :title
+    attributes :title, :id
 end

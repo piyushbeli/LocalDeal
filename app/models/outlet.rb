@@ -15,7 +15,7 @@ class Outlet < ActiveRecord::Base
   validates :contact_no, allow_blank: true, length: {maximum: 15}
 
   scope :by_city, ->(id = nil) { where("city_id = ?", "#{id}") }
-  scope :category, ->(idby_ = nil) { joins(:vendor).where("vendors.category_id = ?", "#{id}") }
+  scope :by_category, ->(id = nil) { joins(:vendor).where("vendors.category_id = ?", id) }
   scope :by_street, ->(id = nil) { where("street_id = ?", "#{id}") }
   scope :by_sub_categories, ->(subcategory_ids) { joins(:vendor => :subcategories).where("subcategories.id IN (?)", subcategory_ids) }
 

@@ -1,4 +1,4 @@
-app.controller("LoginController", function ($scope, $rootScope, $modalInstance, $auth, $state, $log) {
+appUser.controller("LoginController", function ($scope, $rootScope, $modalInstance, $auth, $state, $log) {
     $scope.showLoginForm = true;
     $scope.user = {};
 

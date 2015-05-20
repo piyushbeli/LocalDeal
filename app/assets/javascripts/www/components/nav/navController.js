@@ -1,37 +1,41 @@
-app.controller("NavController", function ($scope, $auth, $rootScope, $modal, $state, $location) {
+appUser.controller("NavController", function ($scope, $auth, $rootScope, $modal, $state, $location) {
+    //Lets fetch the current location and save in rootScope
+    navigator.geolocation.getCurrentPosition(function (position) {
+        $rootScope.currentLocation = [position.coords.latitude, position.coords.longitude];
+    });
+
+
     $rootScope.$on('auth:login-success', function (e) {
         $rootScope.user = e.currentScope.user;
         $rootScope.isLoggedIn = true;
         //window.location.reload();
-        if ($scope.registerModal) {
-            $scope.registerModal.dismiss('cancel');
+        if ($scope.loginModal) {
+            $scope.loginModal.dismiss('cancel');
         }
+    });
+    $rootScope.$on('auth:validation-success', function (e) {
+        $rootScope.user = e.currentScope.user;
     });
     $rootScope.$on('auth:logout-success', function (e) {
         $rootScope.user = null
     });
     $rootScope.$on('auth:invalid', function (e) {
-        $rootScope.user = e.currentScope.user;
+        $rootScope.user = user;
     });
-    $rootScope.$on('auth:validation-success', function (e) {
-        $rootScope.user = e.currentScope.user;
+    $rootScope.$on('auth:validation-error', function (e) {
+        $rootScope.user = null;
     });
+
     $rootScope.isLoggedIn = function() {
         return $auth.userIsAuthenticated();
     };
 
     $scope.openSignInModal = function () {
-        $scope.registerModal = $modal.open({
-            templateUrl: 'nav/login.html',
-            controller: 'LoginController',
-            //size: size,
-            resolve: {
-                items: function () {
-                    return $scope.items;
-                }
-            }
+        $scope.loginModal = $modal.open({
+            templateUrl: 'user/nav/login.html',
+            controller: 'LoginController'
         });
-    }
+    };
 
     $scope.doLogout = function () {
         $auth.signOut()

@@ -1,7 +1,6 @@
 var appVendor = angular
     .module('LocalDeal_Vendor', [
-        'app.common', 'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap', 'ngAutocomplete',
-        'checklist-model', 'ui.bootstrap.datetimepicker', 'uiGmapgoogle-maps'
+        'app.common'
     ]);
 
 appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider, $authProvider,

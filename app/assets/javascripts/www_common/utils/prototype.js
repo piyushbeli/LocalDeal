@@ -19,13 +19,18 @@ Array.prototype.notEmpty = function() {
 };
 
 Array.prototype.delete = function(id) {
-    var index = -1, i;
+    var i = -1;
     for (i =0; i < this.length; i++) {
         if (this[i].id == id) {
             break;
         }
     }
-    this.splice(i,1);
+    if (i >= 0) {
+        return this.splice(i,1);
+    } else {
+        return null;
+    }
+
 }
 
 Date.prototype.isBefore = function(date) {
@@ -59,5 +64,8 @@ Array.prototype.find = function(inputItem) {
             }
         }
     }
+};
 
+Array.prototype.findAll = function(inputItems) {
+    return this.find(inputItems);
 }

@@ -1,47 +1,18 @@
-var app = angular
+var appUser = angular
     .module('LocalDeal_User', [
-        'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap'
+        'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap', 'app.common', 'uiGmapgoogle-maps'
     ]);
 
-app.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, $locationProvider) {
+appUser.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, $locationProvider, uiGmapGoogleMapApiProvider, Routes) {
     $stateProvider
-        .state('user', {
-            url: '/user',
-            views: {
-                'navContent': {
-                    templateUrl: 'nav/nav.html',
-                    controller: 'NavController'
-                }
-                /*'mainContent': {
-                    templateUrl: 'home/home.html'
-                }*/
-            }
-        })
-        .state('user.posts', {
-            url: '/posts',
-            views: {
-                'mainContent': {
-                    templateUrl: 'post/post.html',
-                    controller: 'PostController'
-                }
-            }
-        })
-        .state('user.postDetail', {
-            url: '/posts/:id',
-            views: {
-                'mainContent': {
-                    templateUrl: 'post/postDetail.html',
-                    controller: 'PostDetailController'
-                }
-            },
-            resolve: {
-                PostService: 'PostService',
-                post: function (PostService, $stateParams, $state) {
-                    return PostService.fetchPost($stateParams['id']);
-                }
-            }
-        })
-    $urlRouterProvider.otherwise('user/posts');
+        .state('app', Routes.root)
+        .state('app.profile', Routes.profile)
+        .state('app.outlets', Routes.outlets)
+        .state('app.outletDetail', Routes.outletDetail)
+  /*      .state('app.deals', Routes.deals)
+        .state('app.dealDetail', Routes.dealDetail)*/
+
+    $urlRouterProvider.otherwise('app/outlets');
     $locationProvider.html5Mode(true);
 
     $authProvider.configure({
@@ -51,5 +22,11 @@ app.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authPr
             facebook: '/auth/facebook',
             google:   '/auth/google_oauth2'
         }
-    })
+    });
+
+    uiGmapGoogleMapApiProvider.configure({
+        //key: 'your api key',
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+    });
 });

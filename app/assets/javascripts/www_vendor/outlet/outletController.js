@@ -1,4 +1,5 @@
-appVendor.controller('OutletController', function ($scope, $rootScope, AccountService, $log, uiGmapGoogleMapApi, uiGmapIsReady) {
+appVendor.controller('OutletController', function ($scope, $rootScope, AccountService, $log, uiGmapGoogleMapApi,
+                                                   uiGmapIsReady, Utils) {
     var self = this;
     $scope.shouldUseCurrentLocation = false;
     $scope.currentLocation = {};
@@ -64,15 +65,8 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
         $scope.outlet = null;
     };
 
-    $scope.googlePlaceAutoCompleteOptionsCity = {
-        types: '(cities)',
-        country: 'in'
-    };
-    $scope.googlePlaceAutoCompleteOptionsStreet = {
-        types: ['establishment'],
-        country: 'in',
-        location: $scope.outlet ? $scope.outlet.getStreetBoundry() : ""
-    };
+    $scope.googlePlaceAutoCompleteOptionsCity = Utils.googlePlaceAutoCompleteOptionsCity();
+    $scope.googlePlaceAutoCompleteOptionsStreet = $scope.outlet ? Utils.googlePlaceAutoCompleteOptionsStreet( $scope.outlet.getStreetBoundary()) : "";
 
     $scope.userCurrentLocation = function() {
         if (!$scope.shouldUseCurrentLocation) {

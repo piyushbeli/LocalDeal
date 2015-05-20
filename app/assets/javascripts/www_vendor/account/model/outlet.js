@@ -47,7 +47,7 @@ appVendor.factory("Outlet", function(Utils) {
         }
     };
 
-    Outlet.prototype.getStreetBoundry = function() {
+    Outlet.prototype.getStreetBoundary = function() {
        return !this.isNew() ? LatLng(this.cityDetail.geometry.location.lat(), this.cityDetail.geometry.location.lng()): ''
     }
 
