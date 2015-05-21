@@ -1,5 +1,6 @@
 class Vendor < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
+  devise :timeoutable, :timeout_in => 1.hour
 
   has_many :outlets, dependent: :destroy
   belongs_to :category
