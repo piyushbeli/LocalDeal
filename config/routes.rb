@@ -54,8 +54,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'application#index'
-  get "/vendor/*path" => "application#vendor"
-  get "/user/*path" => "application#index"
-  get "*path" => "application#index"
+  #Below 2 lines are important for using htmp5 mode of angularjs. For any resource after /app and /vendor/app we are
+  # actually moving to some angular state (no REST url should have this format) so return the application layout.
+  get "/vendor/app/*path" => "application#vendor"
+  get "/app/*path" => "application#index"
 
 end
