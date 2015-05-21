@@ -1,6 +1,6 @@
 var appUser = angular
     .module('LocalDeal_User', [
-        'ngRoute','templates', 'ui.router', 'ng-token-auth', 'ui.bootstrap', 'app.common', 'uiGmapgoogle-maps'
+        'app.common', 'infinite-scroll'
     ]);
 
 appUser.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, $locationProvider, uiGmapGoogleMapApiProvider, Routes) {

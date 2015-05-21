@@ -53,3 +53,4 @@ gem 'seed_dump' #used for creating the seed data automatically rake db:seed:dump
 gem 'validates_timeliness', '~> 3.0' #For activerecord datetime validations
 gem 'geokit-rails' #for geo location calculation
 gem 'json' #for all JSON methods just like javascript
+gem 'will_paginate', '~> 3.0.6' #For pagination, we can use specific gem for bootstrap pagination but for now we just want simple infinite scroll.

@@ -13,6 +13,7 @@ appUser.constant('Constants', {
     .constant('Constants', {
         apiUrl: 'localhost:3000/vendor#',
         landingState: 'app.deals',
+        itemsPerPage: 10,
         emailConfirmationUrl: 'http://40ea6b.ngrok.com/vendor#/emailConfirmation'
     })
     .constant("States", {

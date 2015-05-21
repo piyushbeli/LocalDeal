@@ -16,14 +16,36 @@ appUser.controller("OutletListController", function($scope, $rootScope, OutletSe
         });
 
     $scope.fetchOutlets = function() {
-        OutletService.fetchOutlets($scope.criteria, $rootScope.currentLocation)
+        $scope.criteria.pageNo = 1;
+        $scope.criteria.busy = false;
+        OutletService.fetchOutlets($scope.criteria, $scope.criteria.pageNo)
             .then(function(outlets) {
-                $scope.outlets = outlets;
+                $scope.criteria.outlets = outlets;
             })
             .catch(function(errorMessage) {
                 alert(errorMessage);
             });
     };
+
+    $scope.loadMore = function() {
+        if ($scope.criteria.busy || !$scope.criteria.outlets.notEmpty()) {
+            return;
+        }
+        $scope.criteria.busy = true;
+        OutletService.fetchOutlets($scope.criteria, $scope.criteria.pageNo++)
+            .then(function(outlets) {
+                $scope.criteria.outlets = $scope.criteria.outlets.concat(outlets);
+                if (!outlets.notEmpty()) {
+                    $scope.criteria.showLoading = false;
+                } else {
+                    $scope.criteria.busy = false;
+                }
+            })
+            .catch(function(errorMessage) {
+                alert(errorMessage);
+            });
+    };
+
 
     $scope.showOutletDetail = function(outlet) {
         $state.go(States.outletDetail, {id: outlet.id});

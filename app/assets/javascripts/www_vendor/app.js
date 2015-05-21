@@ -1,6 +1,6 @@
 var appVendor = angular
     .module('LocalDeal_Vendor', [
-        'app.common'
+        'uiGmapgoogle-maps', 'app.common'
     ]);
 
 appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider, $authProvider,

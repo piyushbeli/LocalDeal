@@ -1,12 +1,17 @@
 <div search-criteria></div>
-<div class="row" ng-repeat="outlet in outlets">
+<div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled='criteria.busy'>
+  <div class="row" ng-repeat="outlet in criteria.outlets">
     <div class="col col-md-5">
       {{outlet.name}}
     </div>
     <div class="col col-md-2 col-sm-1">
       {{outlet.distance}}
     </div>
-  <div class="col col-3 col-sm-1">
-    {{outlet.street}}
+    <div class="col col-3 col-sm-1">
+      {{outlet.street}}
+    </div>
   </div>
+  <h3 class="center-block" ng-show='criteria.busy && criteria.showLading'>Loading data...</h3>
+  <h3 class="center-block" ng-show='criteria.busy && !criteria.showLoading'>No more data to display</h3>
 </div>
+

@@ -7,6 +7,10 @@ appUser.factory("SearchCriteria", function() {
         this.currentLocation = [];
         this.streetLocationDetail = null;
         this.showOnlyNearBy = false;
+        this.pageNo = 1;
+        this.busy = false;
+        this.showLoading = true;
+        this.outlets = [];
     }
 
     SearchCriteria.prototype.toQueryString = function() {
@@ -21,13 +25,15 @@ appUser.factory("SearchCriteria", function() {
             var ids = this.subcategories.map(function(item) {
                 return item.id;
             });
-            query.push("subcategory_ids=" + ids);
+            query.push("subcategory_ids={ids}".format({ids: ids})); //Handle this line with care. We need to send the array of ids as per server compatibility
         }
         if (this.currentLocation) {
-            query.push("current_location=[{location}]".format({location: this.currentLocation}));
+            //query.push("current_location=[{location}]".format({location: this.currentLocation}));
+            query.push("current_location=" + this.currentLocation);
         }
         if (this.streetLocationDetail) {
-            query.push("street_location=[{street}]".format({street: this.getStreetLatLng()}));
+            //query.push("street_location=[{street}]".format({street: this.getStreetLatLng()}));
+            query.push("street_location=" + this.getStreetLatLng());
         }
         if(this.showNearBy) {
             query.push("show_only_near_by=" + this.showOnlyNearBy);

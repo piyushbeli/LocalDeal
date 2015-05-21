@@ -1,9 +1,9 @@
 appUser.service("OutletService", function($http, $q, HttpRoutes, SearchCriteria, Outlet) {
     var self = this;
 
-    self.fetchOutlets = function(criteria, currentLocation) {
+    self.fetchOutlets = function(criteria, pageNo) {
         var deferred = $q.defer(),
-            url = HttpRoutes.outlets + criteria.toQueryString();
+            url = HttpRoutes.outlets + criteria.toQueryString() + "&page=" + pageNo;
 
         $http.get(url)
             .then(function(response) {

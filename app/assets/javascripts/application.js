@@ -21,3 +21,4 @@
 //= require moment
 //= require lodash
 //= require angular-google-maps
+//= require ngInfiniteScroll

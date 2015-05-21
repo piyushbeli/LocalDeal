@@ -14,20 +14,11 @@ class User::OutletsController < ApplicationController
     near_by_distance = params[:near_by_distance] || 2
     #If user is searching by some particular locality
     street_location = params[:street_location]
+    page = params[:page] || 1
+    per_page = params[:per_page]  || 3
 
-=begin
     if !subcategory_ids.nil?
-      subcategory_ids = JSON.parse(subcategory_ids)
-    end
-=end
-
-    if current_location
-      #origin for sorting by distance will always be user's current location, because we will show the distance form current location only
-      current_location = JSON.parse(current_location)
-    end
-
-    if !street_location.nil?
-      street_location = JSON.parse(street_location)
+      subcategory_ids = subcategory_ids.split(",")
     end
 
     @outlets = Outlet.by_city(city_id)
@@ -42,6 +33,7 @@ class User::OutletsController < ApplicationController
       @outlets = @outlets.within(near_by_distance, :origin => street_location)
     end
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
+    @outlets = @outlets.paginate(:page => page, :per_page => per_page)
     render 'user/outlets/index'
   end
 

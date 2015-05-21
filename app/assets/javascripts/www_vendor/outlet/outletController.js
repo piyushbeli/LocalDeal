@@ -66,7 +66,7 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
     };
 
     $scope.googlePlaceAutoCompleteOptionsCity = Utils.googlePlaceAutoCompleteOptionsCity();
-    $scope.googlePlaceAutoCompleteOptionsStreet = $scope.outlet ? Utils.googlePlaceAutoCompleteOptionsStreet( $scope.outlet.getStreetBoundary()) : "";
+    $scope.googlePlaceAutoCompleteOptionsStreet =  Utils.googlePlaceAutoCompleteOptionsStreet( /*$scope.outlet ? $scope.outlet.getStreetBoundary() : ""*/);
 
     $scope.userCurrentLocation = function() {
         if (!$scope.shouldUseCurrentLocation) {
@@ -86,7 +86,7 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
         $scope.map.center.longitude = lng;
         $scope.marker.coords.latitude = lat;
         $scope.marker.coords.longitude = lng;
-        $scope.map.zoom = zoom;
+        $scope.map.zoom = zoom || 15;
     }
 
     $scope.$watch('outlet.cityDetail', function(newVal, oldVal) {
@@ -95,7 +95,7 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
         }
     });
     $scope.$watch('outlet.city', function(newVal, oldVal) {
-        if (newVal == null && newVal.trim() == "") {
+        if (newVal == null || newVal.trim() == "") {
             $scope.cityDetail = null;
         }
     });
@@ -106,7 +106,7 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
         }
     });
     $scope.$watch('outlet.street', function(newVal, oldVal) {
-        if (newVal == null && newVal.trim() == "") {
+        if (newVal == null || newVal.trim() == "") {
             $scope.streetDetail = null;
         }
     });
