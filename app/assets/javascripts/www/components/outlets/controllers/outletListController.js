@@ -1,4 +1,5 @@
-appUser.controller("OutletListController", function($scope, $rootScope, OutletService, States, Utils, ReferenceDataCache, CacheKeys ) {
+appUser.controller("OutletListController", function($scope, $rootScope, $window, OutletService, States, Utils, ReferenceDataCache, CacheKeys ) {
+    $window.document.title = $window.document.title + " - Outlets";
     $scope.criteria = OutletService.newSearchCriteria();
     $scope.criteria.currentLocation = $rootScope.currentLocation;
     $scope.googlePlaceAutoCompleteOptionsCity = Utils.googlePlaceAutoCompleteOptionsCity();

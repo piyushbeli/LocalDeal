@@ -35,7 +35,7 @@ appUser.factory("SearchCriteria", function() {
             //query.push("street_location=[{street}]".format({street: this.getStreetLatLng()}));
             query.push("street_location=" + this.getStreetLatLng());
         }
-        if(this.showNearBy) {
+        if(this.showOnlyNearBy) {
             query.push("show_only_near_by=" + this.showOnlyNearBy);
         }
         return query.join("&");

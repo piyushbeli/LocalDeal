@@ -25,6 +25,11 @@ appUser.constant("Routes", {
                 templateUrl: 'user/outlet/outletList.html',
                 controller: 'OutletListController'
             }
+        },
+        resolve: {
+            setTitle: function($window, Constants) {
+                $window.document.title = $window.document.title + " - Outlets"
+            }
         }
     },
     outletDetail: {
@@ -36,7 +41,7 @@ appUser.constant("Routes", {
             }
         },
         resolve: {
-            deal: function (OutletService, $stateParams) {
+            outlet: function (OutletService, $stateParams) {
                 return OutletService.fetchOutletDetails(dealId);
             }
         }
