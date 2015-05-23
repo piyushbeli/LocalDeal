@@ -1,1 +1,5 @@
-<h1> Outlet detail</h1>
+<h4> {{outlet.name}} </h4>
+<h5>{{outlet.distance | distance}}</h5>
+<span>Total Deals: {{outlet.noOfDeal()}}</span>
+
+<div ui-view="outletDealContent"></div>

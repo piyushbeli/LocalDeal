@@ -9,8 +9,8 @@ appUser.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $au
         .state('app.profile', Routes.profile)
         .state('app.outlets', Routes.outlets)
         .state('app.outletDetail', Routes.outletDetail)
-  /*      .state('app.deals', Routes.deals)
-        .state('app.dealDetail', Routes.dealDetail)*/
+        .state('app.outletDetail.deals', Routes.deals)
+        .state('app.outletDetail.dealDetail', Routes.dealDetail)
 
     $urlRouterProvider.otherwise('app/outlets');
     $locationProvider.html5Mode(true);

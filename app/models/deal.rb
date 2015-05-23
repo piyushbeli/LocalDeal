@@ -1,5 +1,6 @@
 class Deal < ActiveRecord::Base
     include Vendor::VendorResource
+    include Commentable
 
     has_many :offers
     has_many :deal_outlets

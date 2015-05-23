@@ -6,6 +6,8 @@ class Outlet < ActiveRecord::Base
                    :lat_column_name => :latitude,
                    :lng_column_name => :longitude
 
+  attr_accessor :distance_from_current_loc
+
   has_many :deal_outlets
   has_and_belongs_to_many :deals, through: :deal_outlets ,dependent: :destroy
 
@@ -19,21 +21,5 @@ class Outlet < ActiveRecord::Base
   scope :by_street, ->(id = nil) { where("street_id = ?", "#{id}") }
   scope :by_sub_categories, ->(subcategory_ids) { joins(:vendor => :subcategories).where("subcategories.id IN (?)", subcategory_ids) }
 
-
-  def as_json(options = {})
-    super(except: [:created_at, :updated_at, :vendor_id],
-          include: {
-              vendor: {
-                  only: [:id, :name]
-              },
-              deals: {
-                  include: {
-                      #Offers
-                  }
-              }
-          }
-    )
-
-  end
 
 end

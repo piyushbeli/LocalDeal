@@ -1,4 +1,4 @@
-appUser.controller("OutletListController", function($scope, $rootScope, $window, OutletService, States, Utils, ReferenceDataCache, CacheKeys ) {
+appUser.controller("OutletListController", function($scope, $rootScope, $state, $window, OutletService, States, Utils, ReferenceDataCache, CacheKeys ) {
     $window.document.title = $window.document.title + " - Outlets";
     $scope.criteria = OutletService.newSearchCriteria();
     $scope.criteria.currentLocation = $rootScope.currentLocation;
@@ -49,7 +49,7 @@ appUser.controller("OutletListController", function($scope, $rootScope, $window,
 
 
     $scope.showOutletDetail = function(outlet) {
-        $state.go(States.outletDetail, {id: outlet.id});
+        $state.go(States.deals, {id: outlet.id});
     };
 
     $scope.$watch('criteria.street', function(newVal, oldVal) {

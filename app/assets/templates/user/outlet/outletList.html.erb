@@ -1,8 +1,8 @@
-<div search-criteria></div>
+<div search-criteria xmlns="http://www.w3.org/1999/html"></div>
 <div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled='criteria.busy'>
   <div class="row" ng-repeat="outlet in criteria.outlets">
     <div class="col col-md-5">
-      {{outlet.name}}
+      <a ng-click="showOutletDetail(outlet)">{{outlet.name}}</a>
     </div>
     <div class="col col-md-2 col-sm-1">
       {{outlet.distance | distance}}

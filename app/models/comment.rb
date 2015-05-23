@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
-  include UserResource
-  belongs_to :post
+  belongs_to :commentable, polymorphic: true
+  belongs_to :commentator, polymorphic: true
 
+  validates_presence_of :title, :body, :commentable, :commentator
 end

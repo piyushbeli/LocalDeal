@@ -41,8 +41,33 @@ appUser.constant("Routes", {
             }
         },
         resolve: {
-            outlet: function (OutletService, $stateParams) {
-                return OutletService.fetchOutletDetails(dealId);
+            outlet: function (OutletService, $stateParams, $state) {
+                return OutletService.fetchOutletDetail($stateParams['id']);
+            }
+        }
+    },
+
+    deals: {
+        url: '/deals',
+        views: {
+            'outletDealContent': {
+                templateUrl: 'user/deal/dealList.html',
+                controller: 'DealListController'
+            }
+        }
+    },
+
+    dealDetail: {
+        url: '/deals/:deal_id',
+        views: {
+            'outletDealContent': {
+                templateUrl: 'user/deal/dealDetail.html',
+                controller: 'DealDetailController'
+            }
+        },
+        resolve: {
+            deal: function(outlet, $stateParams) {
+                return outlet.findDeal($stateParams['deal_id']);
             }
         }
     },
@@ -51,7 +76,7 @@ appUser.constant("Routes", {
         url: '/profile',
         views: {
             'mainContent': {
-                templateUrl: 'vendor/account/profile.html',
+                templateUrl: 'user/account/profile.html',
                 controller: 'AccountController'
             }
         }

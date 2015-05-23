@@ -1,4 +1,4 @@
-appVendor.factory("Deal", function(Utils, Offer) {
+appUser.factory("Deal", function(Utils, Offer) {
     function Deal(data) {
         if (!data) {
             return;

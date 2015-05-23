@@ -5,7 +5,7 @@ appUser.constant('Constants', {
     .constant("HttpRoutes", {
         apiUrl: '/',
         deals: '/user/deals/?',
-        outlets: '/user/outlets?'
+        outlets: '/outlets'
         /*city_id={city_id}&category_id={category_id}&subcategory_ids={subcategory_ids}' +
         '&current_location={current_location}&street_location={street_location}&show_near_by={show_near_by}'*/,
         offers: 'vendor/deals/{deal_id}/offers'
@@ -18,8 +18,10 @@ appUser.constant('Constants', {
     })
     .constant("States", {
         root: 'app',
-        deals: 'app.deals',
-        dealDetail: 'app.dealDetail',
+        deals: 'app.outletDetail.deals',
+        dealDetail: 'app.outletDetail.dealDetail',
+        outlets: 'app.outlets',
+        outletDetail: 'app.outletDetail',
         orders: 'app.orders',
         orderDetail: 'app.orderDetail'
     })

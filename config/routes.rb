@@ -10,19 +10,17 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'God', at: 'auth_god'
 
 
+=begin
   devise_scope :user do
-    resources :posts, only: [:show, :create, :index, :update] do
-      resources :comments, only: [:show, :create, :index] do
-        member do
-          put '/upvote' => 'comment#upvote'
-        end
-      end
-
-      member do
-        put '/upvote' => 'posts#upvote'
-      end
+    post  '/comments' => 'comments#create'
+  end
+=end
+  devise_scope :member => [:user, :vendor] do
+    resources :deals, only: [] do
+      resources :comments, only: [:index, :show, :create, :update, :destroy]
     end
   end
+
 
 
   devise_scope :vendor do
@@ -31,6 +29,7 @@ Rails.application.routes.draw do
       resources :outlets, only: [:create, :update, :destroy, :index, :show]
       resources :deals, only: [:create, :update, :destroy, :index, :show] do
         resources :offers, only: [:create, :update, :destroy]
+        resources :comments, only: [:create, :update, :destroy, :index]
       end
 
       #Remove an outlet from deal.
@@ -42,6 +41,7 @@ Rails.application.routes.draw do
     # Define routes for God within this block.
   end
 
+
   #Reference data which does not require any authentication and common for all roles
   get '/categories' => 'reference_data#categories'
   get 'subcategories/:category_id' => 'reference_data#sub_categories'
@@ -49,8 +49,8 @@ Rails.application.routes.draw do
 
 
   #Fetch deals with different criteria which also does not need any authentication
-  get "user/outlets" => "user/outlets#index"
-
+  get "/outlets" => "user/outlets#index"
+  get "/outlets/:id" => "user/outlets#show"
 
   # You can have the root of your site routed with "root"
   root 'application#index'

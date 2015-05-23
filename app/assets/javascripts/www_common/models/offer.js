@@ -1,11 +1,10 @@
-appVendor.factory("Offer", function(Utils, ReferenceDataCache, CacheKeys) {
+appCommon.factory("Offer", function(Utils) {
     function Offer(data) {
         if (!data) {
             this.startTime =  new Date();
             this.expireTime = new Date();
             return;
         }
-        var self = this;
         this.id = data.id;
         this.dealId = data.deal_id;
         this.whatYouGet = data.what_you_get;

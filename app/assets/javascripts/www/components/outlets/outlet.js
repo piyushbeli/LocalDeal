@@ -1,11 +1,12 @@
-appUser.factory("Outlet", function() {
+appUser.factory("Outlet", function(Deal) {
     function Outlet(data) {
         if (!data) {
             return;
         }
+        this.id = data.id;
         this.name = data.name;
         this.vendor = data.vendor; //name (for detail id also)
-        this.deals = data.deals; //title (for detail id and rating also)
+        this.deals = Deal.build(data.deals); //title (for detail id and rating also)
         this.city = data.city;
         this.street = data.street;
         this.distance = data.distance; //Distance form current location
@@ -36,12 +37,27 @@ appUser.factory("Outlet", function() {
     };
 
     Outlet.prototype.bestDeal = function() {
-        var bestDeal = this.filter(function(item) {
+        var bestDeal = this.deals.filter(function(item) {
             return item.isBestDeal;
         });
-        if (!bestDeal && this.deals.notEmpty()) {
-            bestDeal = this.deals[0];
+        if (!bestDeal.notEmpty() && this.deals.notEmpty()) {
+            return this.deals[0];
         }
+        return bestDeal[0];
+    };
+
+    Outlet.prototype.dealsExcept = function(deal) {
+        var remainingDeals = this.deals.filetr(function(item) {
+            return item.id != deal.id;
+        });
+        return remainingDeals;
+    };
+
+    Outlet.prototype.findDeal = function(dealId) {
+        var deals = this.deals.filter(function(item) {
+            return item.id == dealId
+        });
+        return deals.notEmpty() ? deals[0] : null;
     };
 
     Outlet.prototype.distance = function() {

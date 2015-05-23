@@ -37,6 +37,14 @@ class User::OutletsController < ApplicationController
     render 'user/outlets/index'
   end
 
+  def show
+    @outlet = Outlet.find(params[:id])
+    current_location =  [26.8806736,75.7712396]
+    #Can not use distance name because that is internally used by order_by_distance query.
+    @outlet.distance_from_current_loc = @outlet.distance_from(current_location, :units => :kms) unless current_location.nil?
+    render 'user/outlets/show'
+  end
+
 
   def validateCriteria
     if params[:city_id].nil?

@@ -38,7 +38,7 @@ appUser.factory("SearchCriteria", function() {
         if(this.showOnlyNearBy) {
             query.push("show_only_near_by=" + this.showOnlyNearBy);
         }
-        return query.join("&");
+        return "?" + query.join("&");
     };
 
     SearchCriteria.prototype.getStreetBoundary = function() {
