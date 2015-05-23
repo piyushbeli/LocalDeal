@@ -34,6 +34,7 @@
     "angular-bootstrap-datetimepicker": "~0.3.12",
     "angular-ui-bootstrap-datetimepicker": "~0.11.2",
     "angular-google-maps": "~2.1.1",
-    "ngInfiniteScroll": "~1.2.1"
+    "ngInfiniteScroll": "~1.2.1",
+    "ngScrollTo": "*"
   }
 }

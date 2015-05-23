@@ -22,3 +22,4 @@
 //= require lodash
 //= require angular-google-maps
 //= require ngInfiniteScroll
+//= require ngScrollTo

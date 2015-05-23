@@ -22,7 +22,10 @@ include UserResourceController
   end
 
   def index
-    render json: @commentable.comments
+    per_page = params[:perPage] || 10
+    page = params[:page] || 1
+    @reviews = @commentable.comments.paginate(:page => page, :per_page => per_page).order("created_at DESC")
+    render 'reviews/index'
   end
 
   def show
@@ -30,11 +33,11 @@ include UserResourceController
   end
 
   def create
-    comment = Comment.new(:title => params[:title], :body => params[:body],:commentator => current_member, :commentable => @commentable)
+    comment = Comment.new(comment_params.merge(:commentator => current_member, :commentable => @commentable))
     if comment.save
       render json: comment
     else
-      render json: [errors: comment.errors.full_messages]
+      render json: {errors: comment.errors.full_messages}, status: 422
     end
 
     def destroy

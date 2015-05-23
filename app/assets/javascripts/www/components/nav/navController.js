@@ -30,7 +30,7 @@ appUser.controller("NavController", function ($scope, $auth, $rootScope, $modal,
         return $auth.userIsAuthenticated();
     };
 
-    $scope.openSignInModal = function () {
+    $rootScope.openSignInModal = function () {
         $scope.loginModal = $modal.open({
             templateUrl: 'user/nav/login.html',
             controller: 'LoginController'

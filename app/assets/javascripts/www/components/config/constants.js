@@ -5,10 +5,8 @@ appUser.constant('Constants', {
     .constant("HttpRoutes", {
         apiUrl: '/',
         deals: '/user/deals/?',
-        outlets: '/outlets'
-        /*city_id={city_id}&category_id={category_id}&subcategory_ids={subcategory_ids}' +
-        '&current_location={current_location}&street_location={street_location}&show_near_by={show_near_by}'*/,
-        offers: 'vendor/deals/{deal_id}/offers'
+        outlets: '/outlets',
+        dealReviews: 'deals/{deal_id}/comments'
     })
     .constant('Constants', {
         apiUrl: 'localhost:3000/vendor#',

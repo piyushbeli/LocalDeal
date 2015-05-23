@@ -1,6 +1,6 @@
 var appUser = angular
     .module('LocalDeal_User', [
-        'app.common', 'infinite-scroll'
+        'app.common', 'infinite-scroll', 'ngScrollTo'
     ]);
 
 appUser.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, $locationProvider, uiGmapGoogleMapApiProvider, Routes) {

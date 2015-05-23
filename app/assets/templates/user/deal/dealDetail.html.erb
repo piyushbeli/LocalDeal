@@ -3,3 +3,34 @@
   <h3> Deal not found</h3>
 </div>
 <h4>{{deal.title}}</h4>
+<h5>Reviews: {{deal.reviewCount}}</h5>
+<a class="button button-primary" scroll-to="reviewForm">Write review</a>
+
+<div>
+  <div ng-repeat="review in deal.reviews">
+    <div class="form-group">
+      <label class="control-label">{{review.title}}</label>
+      <span>{{review.body}}</span>
+    </div>
+  </div>
+  <a ng-show="!noMoreReviews" ng-click="loadMoreReviews()">Load more</a>
+  <h4 ng-show="noMoreReviews">No more reviews</h4>
+</div>
+<div id="reviewForm">
+  <h4>Write review</h4>
+  <hr>
+  <div ng-if="!isLoggedIn()">
+    <a ng-click="openSignInModal()">Login to submit a review</a>
+  </div>
+  <form role="form" ng-submit="submitReview()" ng-if="isLoggedIn()">
+    <div class="form-group">
+      <label class="control-label">Title</label>
+      <input type="text" class="form-control" ng-model="review.title">
+    </div>
+    <div class="form-group">
+      <label class="control-label">Comment</label>
+      <textarea class="form-control" ng-model="review.body" rows="3"></textarea>
+    </div>
+    <button type="submit" class="button button-primary">Submit</button>
+  </form>
+</div>

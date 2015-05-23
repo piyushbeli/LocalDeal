@@ -1,29 +1,27 @@
-appUser.service("DealService", function($http, $q, HttpRoutes) {
+appUser.service("DealService", function($http, $q, HttpRoutes, Review) {
     var self = this;
 
-    self.fetchDeals = function(criteria, currentLocation) {
-        var deferred = $q.defer(),
-            params = {
-                city_id: criteria.cityId,
-                category_id: criteria.category_id,
-                subcategory_ids: criteria.subcategories.map(function(item) {
-                    return item.id
-                }),
-                current_location: currentLocation,
-                street_location: criteria.street_location,
-                show_near_by: criteria.showNearBy
-            },
-            url = HttpRoutes.deals.format(params);
+   self.submitReview = function(deal, review) {
+       var deferred = $q.defer(),
+           url = HttpRoutes.dealReviews.format({deal_id: deal.id});
+       $http.post(url, review)
+           .then(function(response) {
+                deferred.resolve(Review.build(response.data));
+           })
+           .catch(function(response) {
+               var errorMessage = response.message || response.data.errors.join("\n");
+               deferred.reject(errorMessage);
+           });
+       return deferred.promise;
+   };
 
+    self.loadMoreReviews = function(deal, pageNo) {
+        var deferred = $q.defer(),
+            url = HttpRoutes.dealReviews.format({deal_id: deal.id}) + "?perPage=10&page=" + pageNo;
         $http.get(url)
             .then(function(response) {
-                deferred.resolve(Deal.build(response.data))
+                deferred.resolve(Review.build(response.data));
             })
-            .catch(function(response) {
-
-            })
-    }
-    self.fetchDetailDetail = function() {
-
+        return deferred.promise;
     }
 })
