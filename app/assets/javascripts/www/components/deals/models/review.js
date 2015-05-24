@@ -6,7 +6,10 @@ appUser.factory("Review", function(Utils, Offer, Reviewer) {
         this.id = data.id;
         this.title = data.title;
         this.body = data.body;
+        this.comments = data.comments || [];
+        this.createdAt = data.created_at;
         this.reviewedBy = Reviewer.build(data.reviewer);
+        this.newComment = new Review();
     }
 
     Review.build = function(data) {

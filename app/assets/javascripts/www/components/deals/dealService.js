@@ -23,5 +23,19 @@ appUser.service("DealService", function($http, $q, HttpRoutes, Review) {
                 deferred.resolve(Review.build(response.data));
             })
         return deferred.promise;
-    }
+    };
+
+    self.postComment = function(review, comment) {
+        var deferred = $q.defer(),
+            url = HttpRoutes.postComment.format({comment_id: review.id});
+        $http.post(url, comment)
+            .then(function(response) {
+                deferred.resolve(Review.build(response.data));
+            })
+            .catch(function(response) {
+                var errorMessage = response.message || response.data.errors.join("\n");
+                deferred.reject(errorMessage);
+            });
+        return deferred.promise;
+    };
 })

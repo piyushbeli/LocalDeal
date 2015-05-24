@@ -9,19 +9,14 @@ Rails.application.routes.draw do
 
   mount_devise_token_auth_for 'God', at: 'auth_god'
 
-
-=begin
-  devise_scope :user do
-    post  '/comments' => 'comments#create'
-  end
-=end
   devise_scope :member => [:user, :vendor] do
     resources :deals, only: [] do
       resources :comments, only: [:index, :show, :create, :update, :destroy]
     end
+    resources :comments, only: [] do
+      resources :comments, only: [:index, :create, :update, :destroy]
+    end
   end
-
-
 
   devise_scope :vendor do
     get '/vendor' => 'application#vendor'

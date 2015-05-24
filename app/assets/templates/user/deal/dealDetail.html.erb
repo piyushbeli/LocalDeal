@@ -7,11 +7,20 @@
 <a class="button button-primary" scroll-to="reviewForm">Write review</a>
 
 <div>
-  <div ng-repeat="review in deal.reviews">
+  <div ng-repeat="review in deal.reviews | orderBy: '-createdAt'">
     <div class="form-group">
       <label class="control-label">{{review.title}}</label>
       <span>{{review.body}}</span>
     </div>
+    <div ng-repeat="comment in review.comments" style="padding-left: 10px">
+      <span>{{comment.body}}</span>
+    </div>
+   <form role="form" ng-submit="postComment(review)">
+     <div class="form-group" style="padding-left:10px">
+       <textarea ng-enter="postComment(review, comment)" ng-model="review.newComment.body" placeholder="Write a comment"></textarea>
+     </div>
+   </form>
+
   </div>
   <a ng-show="!noMoreReviews" ng-click="loadMoreReviews()">Load more</a>
   <h4 ng-show="noMoreReviews">No more reviews</h4>
