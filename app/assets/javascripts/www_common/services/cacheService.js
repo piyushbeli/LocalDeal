@@ -22,8 +22,9 @@ appCommon
 
         self.get = function (key) {
             var deferred = $q.defer(),
-                url = self.buildHttpUrl(key);
-            if (referenceDataCache.get(key)) {
+                url = self.buildHttpUrl(key),
+                values = referenceDataCache.get(key);
+            if (values && values.notEmpty()) {
                 deferred.resolve(referenceDataCache.get(key));
             } else {
                 $http.get(url)

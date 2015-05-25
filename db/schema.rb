@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522105917) do
+ActiveRecord::Schema.define(version: 20150524172038) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 255, null: false
@@ -91,6 +91,24 @@ ActiveRecord::Schema.define(version: 20150522105917) do
 
   add_index "offers", ["deal_id"], name: "index_offers_on_deal_id", using: :btree
   add_index "offers", ["offer_type_id"], name: "index_offers_on_offer_type_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "order_no",     limit: 255
+    t.integer  "user_id",      limit: 4
+    t.integer  "vendor_id",    limit: 4
+    t.integer  "offer_id",     limit: 4
+    t.integer  "outlet_id",    limit: 4
+    t.string   "what_you_get", limit: 255
+    t.text     "fine_print",   limit: 65535
+    t.string   "instruction",  limit: 255
+    t.datetime "expiry_time",                               null: false
+    t.boolean  "redeemed",     limit: 1,     default: true
+  end
+
+  add_index "orders", ["offer_id"], name: "index_orders_on_offer_id", using: :btree
+  add_index "orders", ["outlet_id"], name: "index_orders_on_outlet_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+  add_index "orders", ["vendor_id"], name: "index_orders_on_vendor_id", using: :btree
 
   create_table "outlets", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -230,6 +248,10 @@ ActiveRecord::Schema.define(version: 20150522105917) do
   add_foreign_key "deals", "vendors"
   add_foreign_key "offers", "deals"
   add_foreign_key "offers", "offer_types"
+  add_foreign_key "orders", "offers"
+  add_foreign_key "orders", "outlets"
+  add_foreign_key "orders", "users"
+  add_foreign_key "orders", "vendors"
   add_foreign_key "posts", "users"
   add_foreign_key "subcategories", "categories"
   add_foreign_key "vendor_images", "vendors"

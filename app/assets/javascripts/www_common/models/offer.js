@@ -1,8 +1,8 @@
 appCommon.factory("Offer", function(Utils) {
     function Offer(data) {
         if (!data) {
-            this.startTime =  new Date();
-            this.expireTime = new Date();
+            this.startAt =  new Date();
+            this.expireAt = new Date();
             return;
         }
         this.id = data.id;
@@ -10,10 +10,12 @@ appCommon.factory("Offer", function(Utils) {
         this.whatYouGet = data.what_you_get;
         this.instruction = data.instruction;
         this.finePrint = data.fine_print ? JSON.parse(data.fine_print).join("\n") : null;
+        //for user we will need fine print as an array.
+        this.finePrints = data.fine_print ? JSON.parse(data.fine_print) : null;
         this.discount = data.discount ? Number.parseInt(data.discount) : null;
         this.offerType = data.offer_type;
-        this.startTime = data.start_time ? new Date(data.start_time) : new Date();
-        this.expireTime = data.expire_time ? new Date(data.expire_time) : new Date();
+        this.startAt = data.start_at ? new Date(data.start_at) : new Date();
+        this.expireAt = data.expire_at ? new Date(data.expire_at) : new Date();
     }
 
     Offer.build = function(data) {

@@ -8,10 +8,13 @@ child(:deals) do
     node :review_count do
         |deal| deal.comments.count
     end
-    child(:offers) do
-
+    child :offers do
+        attributes :id, :what_you_get, :fine_print, :instruction, :start_at, :expire_at
     end
-    node(:reviews) do
+    child :outlets do
+        attributes :name, :id, :street_address
+    end
+    node :reviews do
         |deal|
         partial('reviews/show', :object => deal.comments.order("created_at DESC").limit(10))
     end

@@ -6,6 +6,7 @@ class Vendor < ActiveRecord::Base
   belongs_to :category
   has_many :vendor_images, dependent:  :destroy
   has_many :deals
+  has_many :orders
 
   has_many :vendors_subcategories
   has_and_belongs_to_many :subcategories, through: :vendors_subcategories

@@ -29,5 +29,8 @@ module RoR
     #{ :namespace => 'LocalDeal', :expires_in => 1.day, :compress => true }
 
     config.active_record.default_timezone = :local
+
+    #application specific global constants
+    config.x.order_no_length = 8
   end
 end

@@ -7,7 +7,8 @@ appUser.constant('Constants', {
         deals: '/user/deals/?',
         outlets: '/outlets',
         dealReviews: 'deals/{deal_id}/comments',
-        postComment: 'comments/{comment_id}/comments'
+        postComment: 'comments/{comment_id}/comments',
+        buyOffer: 'offers/{id}/buy'
     })
     .constant('Constants', {
         apiUrl: 'localhost:3000/vendor#',

@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   mount_devise_token_auth_for 'God', at: 'auth_god'
 
+  devise_scope :user do
+    post '/offers/:id/buy' => 'orders#create'
+  end
+
   devise_scope :member => [:user, :vendor] do
     resources :deals, only: [] do
       resources :comments, only: [:index, :show, :create, :update, :destroy]

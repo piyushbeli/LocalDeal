@@ -30,7 +30,11 @@ appUser.factory("Deal", function(Utils, Offer, Review) {
             }
         });
         return null;
-    }
+    };
+
+    Deal.prototype.offerCount = function() {
+      return this.offers.length;
+    };
 
     //End
     return Deal;

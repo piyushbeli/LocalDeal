@@ -1,0 +1,12 @@
+<h3>{{deal.offerCount()}} offer(s) available</h3>
+<div ng-repeat="offer in deal.offers">
+  <h4>{{offer.whatYouGet}}</h4>
+  <ul>
+    <li ng-repeat="finePrint in offer.finePrints">
+      {{finePrint}}
+    </li>
+  </ul>
+  <label>Instructions</label>
+  <span>{{offer.instruction}}</span>
+  <button class="btn btn-primary" ng-click="buyOffer(offer)">Buy</button>
+</div>
