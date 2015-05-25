@@ -35,7 +35,11 @@ appCommon.factory("Offer", function(Utils) {
     };
 
     Offer.prototype.isExpired = function() {
-        return moment(this.expireTime).isBefore(moment())
+        return moment(this.expireAt).isBefore(moment())
+    };
+
+    Offer.prototype.expiresIn = function() {
+        return moment(this.expireAt).from(moment());
     };
 
     //End

@@ -1,5 +1,7 @@
 <h3>{{deal.offerCount()}} offer(s) available</h3>
 <div ng-repeat="offer in deal.offers">
+  <label ng-class="danger" ng-if="offer.isExpired()">Expired {{offer.expiresIn()}}</label>
+  <label ng-class="calm" ng-if="!offer.isExpired()">Expires {{offer.expiresIn()}}</label>
   <h4>{{offer.whatYouGet}}</h4>
   <ul>
     <li ng-repeat="finePrint in offer.finePrints">
@@ -8,5 +10,5 @@
   </ul>
   <label>Instructions</label>
   <span>{{offer.instruction}}</span>
-  <button class="btn btn-primary" ng-click="buyOffer(offer)">Buy</button>
+  <button class="btn btn-primary" ng-disabled="offer.isExpired()" ng-click="buyOffer(offer)">Buy</button>
 </div>
