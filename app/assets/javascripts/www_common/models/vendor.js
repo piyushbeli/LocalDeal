@@ -1,4 +1,4 @@
-appVendor.factory("Vendor", function (Outlet) {
+appCommon.factory("Vendor", function (Outlet) {
     function Vendor(data) {
         if (!data) {
             return;

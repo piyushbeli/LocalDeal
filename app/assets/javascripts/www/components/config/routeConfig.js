@@ -72,6 +72,31 @@ appUser.constant("Routes", {
         }
     },
 
+    orders: {
+        url: '/orders',
+        views: {
+            'mainContent': {
+                templateUrl: 'user/order/orderList.html',
+                controller: 'OrderListController'
+            }
+        }
+    },
+
+    orderDetail: {
+        url: '/orders/:order_no',
+        views: {
+            'mainContent': {
+                templateUrl: 'user/order/orderDetail.html',
+                controller: 'OrderDetailController'
+            }
+        },
+        resolve: {
+            order: function(OrderService, $stateParams) {
+                return OrderService.fetchOrderDetail($stateParams['order_no']);
+            }
+        }
+    },
+
     profile: {
         url: '/profile',
         views: {

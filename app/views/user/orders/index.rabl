@@ -1,8 +1,8 @@
 collection @orders
-attributes :what_you_get, :created_at, expiry_time
+attributes :what_you_get, :created_at, :expire_at, :order_no
 child :vendor do
-    attributes :name, :id
+    attributes :name, :id, :image
 end
-node :no_of_valid_outlets do
-    |order| order.outlets.count
+child :outlet do
+    attributes :id, :name, :street
 end

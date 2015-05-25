@@ -11,6 +11,8 @@ appUser.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $au
         .state('app.outletDetail', Routes.outletDetail)
         .state('app.outletDetail.deals', Routes.deals)
         .state('app.outletDetail.dealDetail', Routes.dealDetail)
+        .state('app.orders', Routes.orders)
+        .state('app.orderDetail', Routes.orderDetail)
 
     $urlRouterProvider.otherwise('app/outlets');
     $locationProvider.html5Mode(true);

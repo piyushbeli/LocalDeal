@@ -1,4 +1,4 @@
-appUser.factory("User", function() {
+appCommon.factory("User", function() {
     function User(data) {
         if (!data) {
             return;

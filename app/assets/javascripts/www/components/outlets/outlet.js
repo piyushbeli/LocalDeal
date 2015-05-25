@@ -5,6 +5,7 @@ appUser.factory("Outlet", function(Deal) {
         }
         this.id = data.id;
         this.name = data.name;
+        //We have injected Outlet into Vendor so can not inject Vendor here, it should be Vendor.build(data.vendor) otherwise
         this.vendor = data.vendor; //name (for detail id also)
         this.deals = Deal.build(data.deals); //title (for detail id and rating also)
         this.city = data.city;

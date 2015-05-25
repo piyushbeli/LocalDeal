@@ -11,7 +11,7 @@ appCommon.factory("Offer", function(Utils) {
         this.instruction = data.instruction;
         this.finePrint = data.fine_print ? JSON.parse(data.fine_print).join("\n") : null;
         //for user we will need fine print as an array.
-        this.finePrints = data.fine_print ? JSON.parse(data.fine_print) : null;
+        this.finePrints = data.fine_print ? JSON.parse(data.fine_print) : ["Not mentioned"];
         this.discount = data.discount ? Number.parseInt(data.discount) : null;
         this.offerType = data.offer_type;
         this.startAt = data.start_at ? new Date(data.start_at) : new Date();

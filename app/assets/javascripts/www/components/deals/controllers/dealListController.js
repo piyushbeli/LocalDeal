@@ -1,4 +1,4 @@
-appUser.controller("DealListController", function($scope, $rootScope, $state, DealService, States, outlet) {
+appUser.controller("DealListController", function($scope, $rootScope, $state, $window, DealService, States, outlet) {
     $scope.outlet = outlet;
     if (outlet) {
         $window.document.title = $window.document.title + outlet.name;

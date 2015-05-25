@@ -12,10 +12,11 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-    if current_user && current_user.id == order.user_id
+    #We are actually sending order_no from the client request in the id parameter.
+    @order = Order.find_by_order_no(params[:id])
+    if current_user && current_user.id == @order.user_id
       render 'user/orders/show'
-    elsif curent_vendor && current_vendor.id == order_vendor_id
+    elsif curent_vendor && current_vendor.id == @order_vendor_id
       render 'vendor/orders/show'
     else
       render json: {errors: ["You are not authorized to see this order"]}, status: 422

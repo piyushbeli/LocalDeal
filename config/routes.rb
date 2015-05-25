@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   end
 
   devise_scope :member => [:user, :vendor] do
+    resources :orders, only: [:index, :show]
+  end
+
+  devise_scope :member => [:user, :vendor] do
     resources :deals, only: [] do
       resources :comments, only: [:index, :show, :create, :update, :destroy]
     end
