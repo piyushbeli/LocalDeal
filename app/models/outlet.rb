@@ -23,7 +23,8 @@ class Outlet < ActiveRecord::Base
   scope :by_street, ->(id = nil) { where("street_id = ?", "#{id}") }
   scope :by_sub_categories, ->(subcategory_ids) { joins(:vendor => :subcategories).where("subcategories.id IN (?)", subcategory_ids) }
 
-  #Because we are using custom slug generator I don't think we will need this.
+
+  #Slug candidate in sequence of priority
   def slug_candidates
     [
         "#{name} #{street}",
@@ -31,8 +32,5 @@ class Outlet < ActiveRecord::Base
     ]
   end
 
-  def generate_custom_slug
-    "#{name} #{street}"
-  end
 
 end

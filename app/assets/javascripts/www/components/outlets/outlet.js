@@ -3,7 +3,7 @@ appUser.factory("Outlet", function(Deal) {
         if (!data) {
             return;
         }
-        this.id = data.id;
+        this.id = data.slug;
         this.name = data.name;
         //We have injected Outlet into Vendor so can not inject Vendor here, it should be Vendor.build(data.vendor) otherwise
         this.vendor = data.vendor; //name (for detail id also)

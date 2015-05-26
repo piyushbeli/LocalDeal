@@ -1,6 +1,7 @@
 class Deal < ActiveRecord::Base
     include Vendor::VendorResource
     include Commentable
+    include FriendlyId
 
     has_many :offers
     has_many :deal_outlets
@@ -9,6 +10,8 @@ class Deal < ActiveRecord::Base
 
     validates_presence_of :title, :vendor_id
     validates_associated :offers
+
+    friendly_id :slug_candidates, use: [:slugged, :history]
 
     def as_json(options={})
       super(options.merge(
@@ -25,11 +28,19 @@ class Deal < ActiveRecord::Base
     end
 
     def outletsCount
-      outlets.length
+      outlets.count
     end
 
     def offerCountLimitReached?
-      offers.length == 5
+      offers.count == 5
+    end
+
+    #Slug candidate in sequence of priority
+    def slug_candidates
+      [
+          "#{vendor.name} #{title}",
+          "#{title}"
+      ]
     end
 
 end

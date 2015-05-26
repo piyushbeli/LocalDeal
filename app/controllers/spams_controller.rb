@@ -1,7 +1,6 @@
 class SpamsController < ApplicationController
-  include UserResourceController
 
-  before_filter :find_spammable
+  before_filter :find_spammable, :authenticate_user!
 
   def create
     spam = Spam.new(spammer: current_user, spammable: @spammable, reason: params[:reason])

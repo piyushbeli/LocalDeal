@@ -6,7 +6,7 @@ appVendor.service("AccountService", function ($q, $auth, $http, HttpRoutes, Outl
             postData = {
                 name: vendor.name,
                 mobile: vendor.mobile,
-                category_id: vendor.category.id,
+                category_id: vendor.category && vendor.category.id,
                 subcategory_ids: vendor.subcategories.map(function(item) {
                     return item.id
                 }),

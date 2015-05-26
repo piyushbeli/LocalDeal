@@ -10,7 +10,7 @@ appUser.service("OutletService", function($http, $q, HttpRoutes, SearchCriteria,
                 deferred.resolve(Outlet.build(response.data))
             })
             .catch(function(response) {
-                var errorMessage = response.errors.full_messages.join("\n");
+                var errorMessage = response.data.errors.join("\n");
                 deferred.reject(errorMessage);
             });
 
@@ -26,7 +26,7 @@ appUser.service("OutletService", function($http, $q, HttpRoutes, SearchCriteria,
                 deferred.resolve(Outlet.build(response.data));
             })
             .catch(function(response) {
-                var errorMessage = response.errors.full_messages.join("\n");
+                var errorMessage = response.data.errors.join("\n");
                 deferred.reject(errorMessage);
             })
         return deferred.promise;
@@ -62,7 +62,7 @@ appUser.service("OutletService", function($http, $q, HttpRoutes, SearchCriteria,
                 deferred.resolve();
             })
             .catch(function(response) {
-                var errorMessage = response.errors.full_messages.join("\n");
+                var errorMessage = response.data.errors.join("\n");
                 deferred.reject(errorMessage);
             })
         return deferred.promise;

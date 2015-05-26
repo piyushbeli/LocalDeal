@@ -4,7 +4,7 @@ appUser.controller("OutletDetailController", function($scope, $rootScope, outlet
 
     $scope.showReportAbuseComment = false;
     $scope.reportSpam = function(reason) {
-        OutletService.reportAbuse(outlet, reason)
+        OutletService.reportSpam(outlet, reason)
             .then(function() {
                 $scope.showReportAbuseComment = false;
                 $scope.outlet.vendor.spammed = true;

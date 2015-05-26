@@ -3,7 +3,7 @@ appUser.factory("Deal", function(Utils, Offer, Review) {
         if (!data) {
             return;
         }
-        this.id = data.id;
+        this.id = data.slug;
         this.title = data.title;
         this.vendor = data.vendor;
         this.offers = Offer.build(data.offers);

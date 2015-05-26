@@ -1,5 +1,5 @@
 object @outlet
-attributes :id, :name, :city, :street
+attributes :name, :city, :street, :slug
 child(:vendor) do
     attributes :name, :id
     node :spammed do
@@ -7,7 +7,7 @@ child(:vendor) do
     end
 end
 child(:deals) do
-    attributes :title, :id
+    attributes :title, :slug
     node :review_count do
         |deal| deal.comments.count
     end

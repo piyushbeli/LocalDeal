@@ -1,5 +1,5 @@
 collection @outlets
-attributes :id, :name, :distance, :city, :street
+attributes :name, :distance, :city, :street, :slug
 child(:vendor) do
     attributes :name
 end
