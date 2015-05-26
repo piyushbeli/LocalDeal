@@ -15,6 +15,7 @@ appCommon.factory("Vendor", function (Outlet) {
             id: data.category_id
         };
         this.subcategories = data.subcategories;
+        this.spammed = data.spammed; //Whether spammed by current user (not valid for vendor login)
     }
 
     Vendor.build = function (data) {

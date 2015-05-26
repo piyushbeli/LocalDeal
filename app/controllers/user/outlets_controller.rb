@@ -38,6 +38,10 @@ class User::OutletsController < ApplicationController
   end
 
   def show
+    #It's a hack over devise, can not make this route authenticated because it can be accessed by unauthenticated guys
+    #also, calling authenticate_user! will render an error message so hacked thos from authenticate_user! method
+    set_user_by_token(:user)
+    @current_user = current_user
     @outlet = Outlet.find(params[:id])
     current_location =  [26.8806736,75.7712396]
     #Can not use distance name because that is internally used by order_by_distance query.

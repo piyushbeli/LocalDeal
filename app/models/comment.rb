@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
+  #A comment is also commentable
   include Commentable
 
   belongs_to :commentable, polymorphic: true

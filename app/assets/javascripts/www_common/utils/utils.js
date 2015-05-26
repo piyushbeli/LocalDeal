@@ -12,7 +12,7 @@ appCommon.constant("Utils", {
     },
     googlePlaceAutoCompleteOptionsStreet: function(boundry){
        return {
-           types: ['establishment'],
+           types: '(regions)',
            country: 'in',
            //bounds: boundry ? boundry : "",
            watchEnter: true

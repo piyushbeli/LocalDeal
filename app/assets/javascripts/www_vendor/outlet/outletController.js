@@ -72,13 +72,11 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
         if (!$scope.shouldUseCurrentLocation) {
             $scope.outlet.latitude = '';
             $scope.outlet.longitude = '';
-            return;
         } else {
             $scope.outlet.latitude = $scope.currentLocation.latitude;
             $scope.outlet.longitude = $scope.currentLocation.longitude;
             self.setMapOnThisCenter($scope.outlet.latitude, $scope.outlet.longitude,15);
         }
-
     };
 
     self.setMapOnThisCenter = function(lat, lng, zoom) {

@@ -4,10 +4,6 @@
 //= require angular-bootstrap
 //= require angular-rails-templates
 //= require_tree ../templates
-//= require ./www_common/app.js
-//= require ./www/app.js
-//= require ./www_vendor/app.js
-//= require_tree .
 
 //= require ng-token-auth
 //= require angular-cookie
@@ -23,3 +19,9 @@
 //= require angular-google-maps
 //= require ngInfiniteScroll
 //= require ngScrollTo
+//= require inspector-gadget
+
+//= require ./www_common/app.js
+//= require ./www/app.js
+//= require ./www_vendor/app.js
+//= require_tree .

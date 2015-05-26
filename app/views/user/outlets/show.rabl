@@ -2,6 +2,9 @@ object @outlet
 attributes :id, :name, :city, :street
 child(:vendor) do
     attributes :name, :id
+    node :spammed do
+      |vendor| vendor.spammed_by_user?(@current_user) unless @current_user.nil?
+    end
 end
 child(:deals) do
     attributes :title, :id

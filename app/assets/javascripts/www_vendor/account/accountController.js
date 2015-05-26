@@ -5,8 +5,12 @@ appVendor.controller("AccountController", function ($scope, $rootScope, AccountS
         .then(function(categories) {
             $scope.data.categories = categories;
             //Set the reference of offer type from the above array
-            $rootScope.vendor.category = $scope.data.categories.find($rootScope.vendor.category);
-            $rootScope.vendor.subcategories = $rootScope.vendor.category.subcategories.find($rootScope.vendor.subcategories);
+            if ($rootScope.vendor.category) {
+                $rootScope.vendor.category = $scope.data.categories.find($rootScope.vendor.category);
+            }
+            if ($rootScope.vendor.category && $rootScope.vendor.subcategories) {
+                $rootScope.vendor.subcategories = $rootScope.vendor.category.subcategories.find($rootScope.vendor.subcategories);
+            }
         });
     $scope.updateProfile = function () {
         AccountService.updateProfile($rootScope.vendor)

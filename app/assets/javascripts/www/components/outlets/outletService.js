@@ -34,6 +34,39 @@ appUser.service("OutletService", function($http, $q, HttpRoutes, SearchCriteria,
 
     self.newSearchCriteria = function() {
         return new SearchCriteria();
+    };
+
+    self.reportSpam = function(outlet, reason) {
+        var deferred = $q.defer(),
+            url = HttpRoutes.spamVendor.format({vendor_id: outlet.vendor.id}),
+            postData = {
+                reason: reason
+            };
+        $http.post(url, postData)
+            .then(function(response) {
+                deferred.resolve();
+            })
+            .catch(function(response) {
+                var errorMessage = response.errors.full_messages.join("\n");
+                deferred.reject(errorMessage);
+            })
+        return deferred.promise;
+    };
+
+    self.unSpam = function(outlet) {
+        var deferred = $q.defer(),
+            url = HttpRoutes.spamVendor.format({vendor_id: outlet.vendor.id});
+
+        $http.delete(url)
+            .then(function(response) {
+                deferred.resolve();
+            })
+            .catch(function(response) {
+                var errorMessage = response.errors.full_messages.join("\n");
+                deferred.reject(errorMessage);
+            })
+        return deferred.promise;
     }
+
 
 })

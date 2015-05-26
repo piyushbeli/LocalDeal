@@ -1,9 +1,5 @@
 class CommentsController < ApplicationController
 include UserResourceController
-=begin
-  devise_group :member, contains: [:user, :vendor]
-  before_filter :authenticate_member!
-=end
 
   before_action :find_commentable
 

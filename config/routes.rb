@@ -10,7 +10,20 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'God', at: 'auth_god'
 
   devise_scope :user do
+    #Create an order
     post '/offers/:id/buy' => 'orders#create'
+
+    #Fetch deals with different criteria which also does not need any authentication
+    get "/outlets" => "user/outlets#index"
+    get "/outlets/:id" => "user/outlets#show"
+
+    #spam/unspam a user
+    post  "/vendors/:vendor_id/spam"  => "spams#create"
+    delete  "/vendors/:vendor_id/spam"  => "spams#destroy"
+    #spam/unspam a vendor
+    post  "/vendors/:user_id/spam"  => "spams#create"
+    delete  "/vendors/:user_id/spam"  => "spams#destroy"
+
   end
 
   devise_scope :member => [:user, :vendor] do
@@ -50,10 +63,6 @@ Rails.application.routes.draw do
   get 'subcategories/:category_id' => 'reference_data#sub_categories'
   get 'offertypes' => 'reference_data#offer_types'
 
-
-  #Fetch deals with different criteria which also does not need any authentication
-  get "/outlets" => "user/outlets#index"
-  get "/outlets/:id" => "user/outlets#show"
 
   # You can have the root of your site routed with "root"
   root 'application#index'

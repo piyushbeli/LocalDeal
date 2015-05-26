@@ -1,5 +1,6 @@
 class Vendor < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
+  include Spammable
   devise :timeoutable, :timeout_in => 1.hour
 
   has_many :outlets, dependent: :destroy
@@ -10,7 +11,6 @@ class Vendor < ActiveRecord::Base
 
   has_many :vendors_subcategories
   has_and_belongs_to_many :subcategories, through: :vendors_subcategories
-
 
   validates :mobile, length: {is: 10}, numericality: {only_integer: true}, uniqueness: true, presence: true
 
@@ -33,5 +33,9 @@ class Vendor < ActiveRecord::Base
 
   def dealCountLimitReached?
     deals.length >= 4
+  end
+
+  def spammed_by_user? (user_id)
+    return spams.where(spammer_id: user_id).count > 0
   end
 end

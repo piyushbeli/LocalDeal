@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524172038) do
+ActiveRecord::Schema.define(version: 20150525165557) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 255, null: false
@@ -43,6 +43,19 @@ ActiveRecord::Schema.define(version: 20150524172038) do
     t.integer "deal_id",   limit: 4, null: false
     t.integer "outlet_id", limit: 4, null: false
   end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",           limit: 255, null: false
+    t.integer  "sluggable_id",   limit: 4,   null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope",          limit: 255
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "gods", force: :cascade do |t|
     t.string   "provider",               limit: 255,                null: false
@@ -82,11 +95,11 @@ ActiveRecord::Schema.define(version: 20150524172038) do
     t.integer  "deal_id",       limit: 4
     t.integer  "offer_type_id", limit: 4
     t.integer  "discount",      limit: 4
-    t.string   "what_you_get",  limit: 255
+    t.string   "what_you_get",  limit: 255,   null: false
     t.text     "fine_print",    limit: 65535
     t.string   "instruction",   limit: 255
-    t.datetime "start_time"
-    t.datetime "expire_time"
+    t.datetime "start_at"
+    t.datetime "expire_at"
   end
 
   add_index "offers", ["deal_id"], name: "index_offers_on_deal_id", using: :btree
@@ -101,7 +114,7 @@ ActiveRecord::Schema.define(version: 20150524172038) do
     t.string   "what_you_get", limit: 255
     t.text     "fine_print",   limit: 65535
     t.string   "instruction",  limit: 255
-    t.datetime "expiry_time",                               null: false
+    t.datetime "expire_at",                                 null: false
     t.boolean  "redeemed",     limit: 1,     default: true
   end
 
@@ -121,12 +134,15 @@ ActiveRecord::Schema.define(version: 20150524172038) do
     t.string   "street_id",  limit: 255,                         null: false
     t.string   "address",    limit: 255
     t.string   "email",      limit: 255
+    t.string   "slug",       limit: 255
     t.string   "mobile",     limit: 10,                          null: false
     t.string   "contact_no", limit: 11
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
   end
 
+  add_index "outlets", ["latitude", "longitude"], name: "index_outlets_on_latitude_and_longitude", using: :btree
+  add_index "outlets", ["slug"], name: "index_outlets_on_slug", using: :btree
   add_index "outlets", ["vendor_id"], name: "index_outlets_on_vendor_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
@@ -135,10 +151,20 @@ ActiveRecord::Schema.define(version: 20150524172038) do
     t.integer  "upvotes",    limit: 4,   default: 0
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.integer  "user_id",    limit: 4
   end
 
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+  create_table "spammable", force: :cascade do |t|
+    t.integer  "spammer_id",     limit: 4
+    t.string   "spammer_type",   limit: 255
+    t.integer  "spammable_id",   limit: 4
+    t.string   "spammable_type", limit: 255
+    t.string   "reason",         limit: 255, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "spammable", ["spammable_type", "spammable_id"], name: "index_spammable_on_spammable_type_and_spammable_id", using: :btree
+  add_index "spammable", ["spammer_type", "spammer_id"], name: "index_spammable_on_spammer_type_and_spammer_id", using: :btree
 
   create_table "subcategories", force: :cascade do |t|
     t.string  "name",        limit: 255, null: false
@@ -153,36 +179,29 @@ ActiveRecord::Schema.define(version: 20150524172038) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",                    limit: 255,                null: false
-    t.string   "uid",                         limit: 255,   default: "", null: false
-    t.string   "encrypted_password",          limit: 255,   default: "", null: false
-    t.string   "reset_password_token",        limit: 255
+    t.string   "provider",               limit: 255,                null: false
+    t.string   "uid",                    limit: 255,   default: "", null: false
+    t.string   "encrypted_password",     limit: 255,   default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",               limit: 4,     default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",          limit: 255
-    t.string   "last_sign_in_ip",             limit: 255
-    t.string   "confirmation_token",          limit: 255
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "confirmation_token",     limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email",           limit: 255
-    t.string   "name",                        limit: 255
-    t.string   "nickname",                    limit: 255
-    t.string   "image",                       limit: 255
-    t.string   "email",                       limit: 255
-    t.text     "tokens",                      limit: 65535
+    t.string   "unconfirmed_email",      limit: 255
+    t.string   "name",                   limit: 255
+    t.string   "nickname",               limit: 255
+    t.string   "image",                  limit: 255
+    t.string   "email",                  limit: 255
+    t.text     "tokens",                 limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "mobile",                      limit: 10
-    t.integer  "my_draft_comments_count",     limit: 4,     default: 0
-    t.integer  "my_published_comments_count", limit: 4,     default: 0
-    t.integer  "my_comments_count",           limit: 4,     default: 0
-    t.integer  "draft_comcoms_count",         limit: 4,     default: 0
-    t.integer  "published_comcoms_count",     limit: 4,     default: 0
-    t.integer  "deleted_comcoms_count",       limit: 4,     default: 0
-    t.integer  "spam_comcoms_count",          limit: 4,     default: 0
+    t.string   "mobile",                 limit: 10
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
@@ -230,21 +249,6 @@ ActiveRecord::Schema.define(version: 20150524172038) do
   add_index "vendors", ["reset_password_token"], name: "index_vendors_on_reset_password_token", unique: true, using: :btree
   add_index "vendors", ["uid", "provider"], name: "index_vendors_on_uid_and_provider", unique: true, using: :btree
 
-  create_table "votes", force: :cascade do |t|
-    t.integer  "votable_id",   limit: 4
-    t.string   "votable_type", limit: 255
-    t.integer  "voter_id",     limit: 4
-    t.string   "voter_type",   limit: 255
-    t.boolean  "vote_flag",    limit: 1
-    t.string   "vote_scope",   limit: 255
-    t.integer  "vote_weight",  limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
-
   add_foreign_key "deals", "vendors"
   add_foreign_key "offers", "deals"
   add_foreign_key "offers", "offer_types"
@@ -252,7 +256,6 @@ ActiveRecord::Schema.define(version: 20150524172038) do
   add_foreign_key "orders", "outlets"
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "vendors"
-  add_foreign_key "posts", "users"
   add_foreign_key "subcategories", "categories"
   add_foreign_key "vendor_images", "vendors"
   add_foreign_key "vendors", "categories"

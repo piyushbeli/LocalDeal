@@ -9,13 +9,14 @@ class CreateOutlets < ActiveRecord::Migration
       t.string :city_id, null:false
       t.string :street, null: false
       t.string :street_id, null: false
-      t.string :address
-      t.string :email
+      t.string :address, :email
+      t.string :slug, null:false
       t.string :mobile, limit:10, null:false
       t.string :contact_no, limit:11
       t.timestamps null: false
     end
     add_index :outlets, [:latitude, :longitude]
+    add_index :outlets, :slug, unique: true
 
   end
 end

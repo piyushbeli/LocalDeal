@@ -9,7 +9,9 @@ appUser.constant('Constants', {
         dealReviews: '/deals/{deal_id}/comments',
         postComment: '/comments/{comment_id}/comments',
         buyOffer: '/offers/{id}/buy',
-        orders: '/orders'
+        orders: '/orders',
+        spamVendor: 'vendors/{vendor_id}/spam',
+        spamUser: 'users/{user_id}/spam'
     })
     .constant('Constants', {
         apiUrl: 'localhost:3000/vendor#',

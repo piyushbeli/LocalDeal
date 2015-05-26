@@ -1,5 +1,9 @@
 <h4> {{outlet.name}} </h4>
 <h5>{{outlet.distance | distance}}</h5>
 <span>Total Deals: {{outlet.noOfDeal()}}</span>
+<button class="btn btn-danger" ng-click="showReportAbuseComment = !showReportAbuseComment" ng-show="!outlet.vendor.spammed">Spam</button>
+<button class="btn btn-danger" ng-click="unSpam()" ng-show="outlet.vendor.spammed">Un Spam</button>
+<textarea ng-model="reason" ng-enter="reportSpam(reason)" ng-show="showReportAbuseComment"
+          placeholder="What is wrong with this vendor..."></textarea>
 
 <div ui-view="outletDealContent"></div>
