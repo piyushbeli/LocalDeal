@@ -13,17 +13,6 @@ appUser.controller("OutletListController", function($scope, $rootScope, $state, 
         $scope.criteria.currentLocation = [position.coords.latitude, position.coords.longitude];
     });
 
-    ReferenceDataCache.get(CacheKeys.Categories)
-        .then(function (categories) {
-            $scope.data.categories = categories;
-            if ($scope.criteria.category) {
-                $scope.criteria.category = $scope.data.categories.find($scope.criteria.category);
-            }
-            if ($scope.criteria.category && $scope.criteria.subcategories.notEmpty()) {
-                $scope.criteria.subcategories = $scope.criteria.category.subcategories.find($scope.criteria.subcategories);
-            }
-        });
-
     $scope.fetchOutlets = function() {
         $scope.criteria.pageNo = 1;
         $scope.criteria.busy = false;
@@ -55,6 +44,22 @@ appUser.controller("OutletListController", function($scope, $rootScope, $state, 
             });
     };
 
+    ReferenceDataCache.get(CacheKeys.Categories)
+        .then(function (categories) {
+            $scope.data.categories = categories;
+            if ($scope.criteria.category) {
+                $scope.criteria.category = $scope.data.categories.find($scope.criteria.category);
+            }
+            if ($scope.criteria.category && $scope.criteria.subcategories.notEmpty()) {
+                $scope.criteria.subcategories = $scope.criteria.category.subcategories.find($scope.criteria.subcategories);
+            }
+            //This statement should be below fetchOutlets() method. I know it's a hack but it will make the life very easy
+            //for loading the outlets when somebody hits refresh.
+            if ($scope.criteria.qualifyForSearch()) {
+                $scope.fetchOutlets();
+            }
+        });
+
 
     $scope.showOutletDetail = function(outlet) {
         $state.go(States.deals, {id: outlet.id});
@@ -71,8 +76,9 @@ appUser.controller("OutletListController", function($scope, $rootScope, $state, 
         }
     });
     $scope.$watch('criteria.category', function(newVal, oldVal) {
-        if (newVal.slug != oldVal.slug) {
+        if ((newVal && oldVal) && (newVal.slug != oldVal.slug)) {
             $scope.criteria.subcategories = [];
         }
     });
+
 })

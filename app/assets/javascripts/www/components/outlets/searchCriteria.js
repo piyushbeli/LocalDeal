@@ -115,5 +115,10 @@ appUser.factory("SearchCriteria", function(Geocoder, $q, ReferenceDataCache, Cac
         return criteria;
     };
 
+    SearchCriteria.prototype.qualifyForSearch = function() {
+        //It should at least have either street address or category.
+        return this.street || this.category
+    }
+
     return SearchCriteria;
 })
