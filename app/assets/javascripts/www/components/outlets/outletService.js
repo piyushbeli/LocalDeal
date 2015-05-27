@@ -1,18 +1,24 @@
-appUser.service("OutletService", function($http, $q, HttpRoutes, SearchCriteria, Outlet) {
+appUser.service("OutletService", function($http, $q, HttpRoutes, Outlet, CommonCache, CacheKeys, $location, Geocoder) {
     var self = this;
 
     self.fetchOutlets = function(criteria, pageNo) {
         var deferred = $q.defer(),
             url = HttpRoutes.outlets + criteria.toQueryString() + "&page=" + pageNo;
+        $location.search(criteria.clientSideQueryString());
 
-        $http.get(url)
-            .then(function(response) {
-                deferred.resolve(Outlet.build(response.data))
-            })
-            .catch(function(response) {
-                var errorMessage = response.data.errors.join("\n");
-                deferred.reject(errorMessage);
-            });
+        criteria.toQueryString().then(function (promise) {
+            return promise;
+        }).then(function (queryString) {
+            var url = HttpRoutes.outlets + queryString + "&page=" + pageNo;
+            return $http.get(url);
+        })
+        .then(function (response) {
+            deferred.resolve(Outlet.build(response.data))
+        })
+        .catch(function (response) {
+            var errorMessage = response.data.errors.join("\n");
+            deferred.reject(errorMessage);
+        });
 
         //End
         return deferred.promise;
@@ -30,10 +36,6 @@ appUser.service("OutletService", function($http, $q, HttpRoutes, SearchCriteria,
                 deferred.reject(errorMessage);
             })
         return deferred.promise;
-    };
-
-    self.newSearchCriteria = function() {
-        return new SearchCriteria();
     };
 
     self.reportSpam = function(outlet, reason) {
@@ -66,7 +68,6 @@ appUser.service("OutletService", function($http, $q, HttpRoutes, SearchCriteria,
                 deferred.reject(errorMessage);
             })
         return deferred.promise;
-    }
-
+    };
 
 })

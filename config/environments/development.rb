@@ -59,5 +59,8 @@ Rails.application.configure do
   #Caching
   #config.action_controller.perform_caching = true
   config.cache_store = :memory_store, { size: 32.megabytes }
+
+  #geokit-rails
+  config.geokit.geocoders.ssl_verify_mode = OpenSSL::SSL::VERIFY_NONE
 end
 

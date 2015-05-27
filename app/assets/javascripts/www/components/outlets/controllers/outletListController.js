@@ -1,9 +1,11 @@
-appUser.controller("OutletListController", function($scope, $rootScope, $state, $window, OutletService, States, Utils, ReferenceDataCache, CacheKeys ) {
+appUser.controller("OutletListController", function($scope, $rootScope, $state, $location, $window, OutletService, States,
+                                                    Utils, ReferenceDataCache, CacheKeys , CommonCache, SearchCriteria) {
     $window.document.title = $window.document.title + " - Outlets";
-    $scope.criteria = OutletService.newSearchCriteria();
+    $scope.criteria = SearchCriteria.instanceFromQueryString($location.search());
+
     $scope.criteria.currentLocation = $rootScope.currentLocation;
     $scope.googlePlaceAutoCompleteOptionsCity = Utils.googlePlaceAutoCompleteOptionsCity();
-    $scope.googlePlaceAutoCompleteOptionsStreet = Utils.googlePlaceAutoCompleteOptionsStreet( $scope.criteria.getStreetBoundary());
+    $scope.googlePlaceAutoCompleteOptionsStreet = Utils.googlePlaceAutoCompleteOptionsStreet();
 
     //NavController is ditching many times so making sure that we have current location here.
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -33,7 +35,7 @@ appUser.controller("OutletListController", function($scope, $rootScope, $state, 
             return;
         }
         $scope.criteria.busy = true;
-        OutletService.fetchOutlets($scope.criteria, $scope.criteria.pageNo++)
+        OutletService.fetchOutlets($scope.criteria, ++$scope.criteria.pageNo)
             .then(function(outlets) {
                 $scope.criteria.outlets = $scope.criteria.outlets.concat(outlets);
                 if (!outlets.notEmpty()) {

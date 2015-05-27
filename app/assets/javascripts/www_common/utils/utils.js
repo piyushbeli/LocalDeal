@@ -10,11 +10,10 @@ appCommon.constant("Utils", {
             watchEnter: true
         }
     },
-    googlePlaceAutoCompleteOptionsStreet: function(boundry){
+    googlePlaceAutoCompleteOptionsStreet: function(){
        return {
            types: '(regions)',
            country: 'in',
-           //bounds: boundry ? boundry : "",
            watchEnter: true
        }
     }

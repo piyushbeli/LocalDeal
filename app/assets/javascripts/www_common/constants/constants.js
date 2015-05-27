@@ -2,7 +2,8 @@ appCommon
     .constant("CacheKeys", {
         OfferTypes: 'offerTypes',
         Categories: 'categories',
-        SubCategories: 'subcategories'
+        SubCategories: 'subcategories',
+        LastSearchCriteria: 'lastsearchcriteria'
     })
     .constant("CommonHttpRoutes", {
         Categories: '/categories',

@@ -19,7 +19,7 @@
 //= require angular-google-maps
 //= require ngInfiniteScroll
 //= require ngScrollTo
-//= require inspector-gadget
+//= require ngstorage
 
 //= require ./www_common/app.js
 //= require ./www/app.js

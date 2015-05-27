@@ -37,49 +37,22 @@ appCommon
         };
 
     })
-    /*.service("SubCategoryCache", function ($http, $q, CacheKeys, DSCacheFactory, CommonHttpRoutes) {
+.service("CommonCache", function(CacheFactory) {
         var self = this;
-        var subCategoryCache = DSCacheFactory('LOCAL_DEAL_SUB_CATEGORY_CACHE');
-        subCategoryCache.setOptions({
-            maxAge: 86400,
-            deleteOnExpire: 'aggressive'
-        });
+        if (!CacheFactory.get('LOCAL_DEAL_COMMON_DATA_CACHE')) {
+            CacheFactory.createCache('LOCAL_DEAL_COMMON_DATA_CACHE', {
+                maxAge: 30*86400000, //30 day
+                deleteOnExpire: 'aggressive',
+                storageMode: 'localStorage'
+            });
+        }
+        var commonDataCache = CacheFactory.get('LOCAL_DEAL_COMMON_DATA_CACHE');
 
-        self.get = function (id) {
-            var deferred = $q.defer(),
-                cacheKey = CacheKeys.SubCategories + "-" + id;
-            if (subCategoryCache.get(cacheKey)) {
-                deferred.resolve(subCategoryCache.get(cacheKey));
-            } else {
-                $http.get(CommonHttpRoutes.SubCategories)
-                    .success(function (response) {
-                        subCategoryCache.set(cacheKey, response.data);
-                        deferred.resolve(response.data);
-                    });
-            }
+        self.get = function(key){
+            return commonDataCache.get(key);
         };
 
-    })
-
-    .service("OfferTypeCache", function ($http, $q, CacheKeys, DSCacheFactory, CommonHttpRoutes) {
-        var self = this;
-        var offerTypeCache = DSCacheFactory('LOCAL_DEAL_OFFER_TYPE_CACHE');
-        offerTypeCache.setOptions({
-            maxAge: 86400,
-            deleteOnExpire: 'aggressive'
-        });
-
-        self.get = function (key) {
-            var deferred = $q.defer();
-            if (offerTypeCache.get(key)) {
-                deferred.resolve(offerTypeCache.get(key));
-            } else {
-                $http.get(CommonHttpRoutes.SubCategories)
-                    .success(function (response) {
-                        offerTypeCache.set(key, response.data);
-                        deferred.resolve(response.data);
-                    });
-            }
+        self.set = function(key, val) {
+            commonDataCache.put(key, val);
         };
-
-    });*/
+})

@@ -4,7 +4,6 @@ class User::OutletsController < ApplicationController
   respond_to :json
 
   def index
-    city_id = params[:city_id]
     category_id = params[:category_id]
     subcategory_ids = params[:subcategory_ids]
 
@@ -21,17 +20,21 @@ class User::OutletsController < ApplicationController
       subcategory_ids = subcategory_ids.split(",")
     end
 
-    @outlets = Outlet.by_city(city_id)
+    #If city_id is null then check if
+    #Check if street location which has lat/lng is nil then street (text) is available, in this case there will an additional step to geocode the address
+    if street_location.nil? && !params[:street].blank?
+      street_location = params[:street]
+    end
+    #User can either search near by places or by locality/street
+    if show_only_near_by == true
+      @outlets = Outlet.within(near_by_distance, :origin => current_location).distinct unless current_location.nil?
+    else
+      @outlets = Outlet.within(near_by_distance, :origin => street_location).distinct
+    end
     @outlets = @outlets.by_category(category_id) unless category_id.nil?
     @outlets = @outlets.by_sub_categories(subcategory_ids) unless subcategory_ids.nil?
-    @outlets = @outlets.select('distinct outlets.*')
 
-    #User can either search near by places or by locality/street
-    if !show_only_near_by.nil?
-      @outlets = @outlets.within(near_by_distance, :origin => current_location) unless current_location.nil?
-    elsif !street_location.nil?
-      @outlets = @outlets.within(near_by_distance, :origin => street_location)
-    end
+    #@outlets = @outlets.select('distinct')
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
     @outlets = @outlets.paginate(:page => page, :per_page => per_page)
     render 'user/outlets/index'
@@ -51,8 +54,8 @@ class User::OutletsController < ApplicationController
 
 
   def validateCriteria
-    if params[:city_id].nil?
-      render json: {errors: ["Please select a city before searching the deals"]}, status: 422
+    if params[:street_location].nil? && params[:street].blank?
+      render json:{errors: ["Invalid criteria"]}, status: 422
     end
     if params[:subcategory_ids] && params[:category_id].nil?
       render json: {errors: ["Please select a category before filtering on subcategory"]}, status: 422
