@@ -51,7 +51,7 @@ Array.prototype.find = function(inputItem) {
         var result = [];
         for(var i=0; i<inputItem.length; i++) {
             this.forEach(function(item) {
-                if (item.id == inputItem[i].id) {
+                if (item.id == inputItem[i].id || item.slug == inputItem[i].slug) {
                     result.push(item);
                 }
             })
@@ -59,7 +59,7 @@ Array.prototype.find = function(inputItem) {
         return result;
     } else {
         for (var i=0; i< this.length; i++) {
-            if (this[i].id == inputItem.id) {
+            if (this[i].id == inputItem.id || this[i].slug == inputItem.slug) {
                 return this[i];
             }
         }

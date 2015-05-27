@@ -15,7 +15,10 @@ ActiveRecord::Schema.define(version: 20150525165557) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 255, null: false
+    t.string "slug", limit: 255, null: false
   end
+
+  add_index "categories", ["slug"], name: "index_categories_on_slug", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.integer  "commentable_id",   limit: 4
@@ -35,8 +38,10 @@ ActiveRecord::Schema.define(version: 20150525165557) do
     t.string  "title",       limit: 255, null: false
     t.integer "vendor_id",   limit: 4,   null: false
     t.string  "description", limit: 255
+    t.string  "slug",        limit: 255, null: false
   end
 
+  add_index "deals", ["slug"], name: "index_deals_on_slug", using: :btree
   add_index "deals", ["vendor_id"], name: "index_deals_on_vendor_id", using: :btree
 
   create_table "deals_outlets", id: false, force: :cascade do |t|
@@ -134,7 +139,7 @@ ActiveRecord::Schema.define(version: 20150525165557) do
     t.string   "street_id",  limit: 255,                         null: false
     t.string   "address",    limit: 255
     t.string   "email",      limit: 255
-    t.string   "slug",       limit: 255
+    t.string   "slug",       limit: 255,                         null: false
     t.string   "mobile",     limit: 10,                          null: false
     t.string   "contact_no", limit: 11
     t.datetime "created_at",                                     null: false
@@ -142,7 +147,7 @@ ActiveRecord::Schema.define(version: 20150525165557) do
   end
 
   add_index "outlets", ["latitude", "longitude"], name: "index_outlets_on_latitude_and_longitude", using: :btree
-  add_index "outlets", ["slug"], name: "index_outlets_on_slug", using: :btree
+  add_index "outlets", ["slug"], name: "index_outlets_on_slug", unique: true, using: :btree
   add_index "outlets", ["vendor_id"], name: "index_outlets_on_vendor_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
@@ -153,7 +158,7 @@ ActiveRecord::Schema.define(version: 20150525165557) do
     t.datetime "updated_at",                         null: false
   end
 
-  create_table "spammable", force: :cascade do |t|
+  create_table "spams", force: :cascade do |t|
     t.integer  "spammer_id",     limit: 4
     t.string   "spammer_type",   limit: 255
     t.integer  "spammable_id",   limit: 4
@@ -163,15 +168,17 @@ ActiveRecord::Schema.define(version: 20150525165557) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "spammable", ["spammable_type", "spammable_id"], name: "index_spammable_on_spammable_type_and_spammable_id", using: :btree
-  add_index "spammable", ["spammer_type", "spammer_id"], name: "index_spammable_on_spammer_type_and_spammer_id", using: :btree
+  add_index "spams", ["spammable_type", "spammable_id"], name: "index_spams_on_spammable_type_and_spammable_id", using: :btree
+  add_index "spams", ["spammer_type", "spammer_id"], name: "index_spams_on_spammer_type_and_spammer_id", using: :btree
 
   create_table "subcategories", force: :cascade do |t|
     t.string  "name",        limit: 255, null: false
     t.integer "category_id", limit: 4,   null: false
+    t.string  "slug",        limit: 255, null: false
   end
 
   add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id", using: :btree
+  add_index "subcategories", ["slug"], name: "index_subcategories_on_slug", using: :btree
 
   create_table "subcategories_vendors", id: false, force: :cascade do |t|
     t.integer "vendor_id",      limit: 4, null: false

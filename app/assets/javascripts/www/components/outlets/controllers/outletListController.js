@@ -6,16 +6,22 @@ appUser.controller("OutletListController", function($scope, $rootScope, $state, 
     $scope.criteria.currentLocation = $rootScope.currentLocation;
     $scope.googlePlaceAutoCompleteOptionsCity = Utils.googlePlaceAutoCompleteOptionsCity();
     $scope.googlePlaceAutoCompleteOptionsStreet = Utils.googlePlaceAutoCompleteOptionsStreet();
+    $scope.data= {};
 
     //NavController is ditching many times so making sure that we have current location here.
     navigator.geolocation.getCurrentPosition(function (position) {
         $scope.criteria.currentLocation = [position.coords.latitude, position.coords.longitude];
     });
 
-    $scope.data= {};
     ReferenceDataCache.get(CacheKeys.Categories)
         .then(function (categories) {
             $scope.data.categories = categories;
+            if ($scope.criteria.category) {
+                $scope.criteria.category = $scope.data.categories.find($scope.criteria.category);
+            }
+            if ($scope.criteria.category && $scope.criteria.subcategories.notEmpty()) {
+                $scope.criteria.subcategories = $scope.criteria.category.subcategories.find($scope.criteria.subcategories);
+            }
         });
 
     $scope.fetchOutlets = function() {
@@ -62,6 +68,11 @@ appUser.controller("OutletListController", function($scope, $rootScope, $state, 
     $scope.$watch('criteria.city', function(newVal, oldVal) {
         if (newVal == null || newVal.trim() == "") {
             $scope.criteria.cityDetail = null;
+        }
+    });
+    $scope.$watch('criteria.category', function(newVal, oldVal) {
+        if (newVal.slug != oldVal.slug) {
+            $scope.criteria.subcategories = [];
         }
     });
 })

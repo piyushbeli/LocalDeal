@@ -1,4 +1,4 @@
-appUser.factory("SearchCriteria", function(Geocoder, $q) {
+appUser.factory("SearchCriteria", function(Geocoder, $q, ReferenceDataCache, CacheKeys) {
     function SearchCriteria(data) {
         this.outlets = [];
         this.currentLocation = [];
@@ -12,6 +12,10 @@ appUser.factory("SearchCriteria", function(Geocoder, $q) {
         }
         this.city = data.city;
         this.cityDetail = data.cityDetail;
+        /*
+        for category and subcategories we will use slug every where in ui but while sending the request to server we will
+        use id. Both the objects will have id, name and slug all 3 fields.
+         */
         this.category = data.category;
         this.subcategories = data.subcategories;
         this.streetLocationDetail = data.streetLocationDetail;
@@ -22,12 +26,6 @@ appUser.factory("SearchCriteria", function(Geocoder, $q) {
     SearchCriteria.prototype.toQueryString = function() {
         var deferred = $q.defer();
         var query = [];
-/*        if (this.cityDetail) {
-            query.push("city_id=" + this.cityDetail.place_id);
-        }
-        if (this.city) {
-            query.push("city=" + this.city);
-        }*/
         if (this.category) {
             query.push("category_id=" + this.category.id);
         }
@@ -58,20 +56,17 @@ appUser.factory("SearchCriteria", function(Geocoder, $q) {
 
     SearchCriteria.prototype.clientSideQueryString = function() {
         var queryString = [];
-   /*     if (this.city) {
-            queryString.push("city=" + this.city);
-        };*/
         if (this.street) {
             queryString.push("street=" + this.street);
         }
         if (this.category) {
-            queryString.push("category=" + this.category.id)
+            queryString.push("category=" + this.category.slug)
         };
         if (this.subcategories.notEmpty()) {
             var ids = this.subcategories.map(function(item) {
-                return item.id;
+                return item.slug;
             });
-            queryString.push("subcategories={ids}".format(ids));
+            queryString.push("subcategories={ids}".format({ids: ids}));
         };
         var commaSpaceRegEx = new RegExp(', ', 'g');
         var spaceRegEx = new RegExp(' ', 'g');
@@ -101,17 +96,21 @@ appUser.factory("SearchCriteria", function(Geocoder, $q) {
         var commaSpaceRegEx = new RegExp('--', 'g');
         var spaceRegEx = new RegExp('-', 'g');
         var criteria = new SearchCriteria();
-    /*    if (queryString['city']) {
-            criteria.city = queryString['city'].replace(commaSpaceRegEx, ', ').replace(spaceRegEx, ' ');
-        }*/
         if (queryString['category']) {
-            criteria.category = queryString['category'].replace(commaSpaceRegEx, ', ').replace(spaceRegEx, ' ');
+            criteria.category = {
+                slug: queryString['category'].replace(commaSpaceRegEx, ', ').replace(spaceRegEx, ' ')
+            };
         }
         if (queryString['street']) {
             criteria.street = queryString['street'].replace(commaSpaceRegEx, ', ').replace(spaceRegEx, ' ');
         }
         if (queryString['subcategories']) {
-            criteria.subcategoriesb = queryString['subcategoriesb'].replace(commaSpaceRegEx, ', ').replace(spaceRegEx, ' ');
+            var subcategories = queryString['subcategories']; //.replace(commaSpaceRegEx, ', ').replace(spaceRegEx, ' ');
+            //Don't replace '-' an d '--' for reference data because we want slug instead of name. It make sense only for text column to replace the '-' with space.
+            subcategories = subcategories.split(",");
+            criteria.subcategories = subcategories.map(function(item) {
+                return {slug: item}
+            })
         }
         return criteria;
     };
