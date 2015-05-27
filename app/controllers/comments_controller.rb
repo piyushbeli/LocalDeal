@@ -9,7 +9,11 @@ include UserResourceController
   def find_commentable
     params.each do |name, value|
       if name =~ /(.+)_id$/
-        @commentable = $1.classify.constantize.find(value)
+        @commentable = $1.classify.constantize.find_by_id(value)
+        #While posting the comment on a deal slug id will be there, so lets try for that too before rendering the error
+        if @commentable.nil?
+          @commentable = $1.classify.constantize.friendly.find(value)
+        end
         if @commentable.nil?
           render json: {errors: ["Could not find the deal with this id"]}, status: 422
         end

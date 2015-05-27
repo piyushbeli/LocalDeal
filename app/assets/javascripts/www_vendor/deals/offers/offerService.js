@@ -24,8 +24,8 @@ appVendor.service("OfferService", function(Offer, $q, $http, HttpRoutes) {
                 what_you_get: offer.whatYouGet,
                 fine_print: offer.finePrint.split("\n"),
                 instruction: offer.instruction,
-                start_time: offer.startTime,
-                expire_time: offer.expireTime
+                start_at: offer.startAt,
+                expire_at: offer.expireAt
             };
 
         $http.post(url, postData)

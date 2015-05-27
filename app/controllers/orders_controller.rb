@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   include CommonResourceController
 
+  before_filter :authenticate_user!, only: [:create]
+
   def index
     @orders = current_member.orders
     if current_user
@@ -25,29 +27,22 @@ class OrdersController < ApplicationController
 
   def create
     offer = Offer.find(params[:id])
-    if offer.nil?
-      render json: {errors: ["Offer does not exist"]}, status: 422
+    message = validateOffer(offer)
+    if !message.blank?
+      render json: {errors: [message]}, status: 422
       return
     end
-    if offer.isExpired?
-      render json: {errors: ["This deal has been expired"]}, status: 422
-      return
-    end
-    if current_user.nil?
-      render json: {errors: ["Not authorized"]}, status: 422
-      return
-    end
-    if current_user.alreadyBoughtTheOffer? (offer)
-      render json: {errors: ["You have already availed this offer"]}, status: 422
+    outlet = Outlet.friendly.find(params[:outlet_id])
+    if outlet.nil?
+      render json: {errors: ["Outlet does not exist"]}, status: 422
       return
     end
 
     vendor_id = offer.deal.vendor.id
-    length = Rails.configuration.x.order_no_length
-    order_no = rand(36**length).to_s(36).upcase
-    order = Order.new(order_params.merge(offer_id: offer.id, user_id: current_user.id, vendor_id: vendor_id, what_you_get: offer.what_you_get,
+    order_no = generateOrderNo
+    order = Order.new(outlet_id: outlet.id, offer_id: offer.id, user_id: current_user.id, vendor_id: vendor_id, what_you_get: offer.what_you_get,
                       fine_print: offer.fine_print, instruction: offer.instruction, redeemed: false,
-                                         expire_at: offer.expire_at,order_no: order_no))
+                                         expire_at: offer.expire_at,order_no: order_no)
     if order.save
       render json: {success: true}
     else
@@ -56,7 +51,21 @@ class OrdersController < ApplicationController
 
   end
 
-  def order_params
-    params.require(:order).permit(:outlet_id)
+  def validateOffer(offer)
+    if offer.nil?
+      return "Offer does not exist"
+    end
+    if offer.isExpired?
+      return "This deal has been expired"
+    end
+    if current_user.alreadyBoughtTheOffer? (offer)
+      return "You have already availed this offer"
+    end
   end
+
+  def generateOrderNo
+    length = Rails.configuration.x.order_no_length || 7
+    rand(36**length).to_s(36).upcase
+  end
+
 end

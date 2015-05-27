@@ -49,7 +49,7 @@ appUser.service("OutletService", function($http, $q, HttpRoutes, Outlet, CommonC
                 deferred.resolve();
             })
             .catch(function(response) {
-                var errorMessage = response.errors.full_messages.join("\n");
+                var errorMessage = response.data.errors.join("\n");
                 deferred.reject(errorMessage);
             })
         return deferred.promise;
