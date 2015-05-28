@@ -1401,19 +1401,151 @@
       <column name="PROCESSLIST_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="NAME" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
     </table>
+    <table name="categories" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_32cfb93c87" table="subcategories" schema="" catalog="ror_development" columns="category_id"/>
+      <exported-key name="fk_rails_cff03d3544" table="vendors" schema="" catalog="ror_development" columns="category_id"/>
+    </table>
     <table name="comments" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="commentable_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="commentable_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="commentator_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="commentator_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="body" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="post_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="fk_rails_4f3548b46c" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="fk_rails_fa7096611b" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="index_comments_on_post_id" unique="false" columns="post_id"/>
-      <index name="index_comments_on_user_id" unique="false" columns="user_id"/>
+      <index name="index_comments_on_commentable_type_and_commentable_id" unique="false" columns="commentable_type,commentable_id"/>
+      <index name="index_comments_on_commentator_type_and_commentator_id" unique="false" columns="commentator_type,commentator_id"/>
+    </table>
+    <table name="deals" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_de8015ec63" columns="vendor_id" ref-table="vendors" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_ad433f7cbb" table="offers" schema="" catalog="ror_development" columns="deal_id"/>
+      <index name="index_deals_on_vendor_id" unique="false" columns="vendor_id"/>
+    </table>
+    <table name="deals_outlets" schema="" catalog="ror_development" type="TABLE">
+      <column name="deal_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="outlet_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="friendly_id_slugs" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="slug" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sluggable_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="sluggable_type" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="scope" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope" unique="true" columns="slug,sluggable_type,scope"/>
+      <index name="index_friendly_id_slugs_on_slug_and_sluggable_type" unique="false" columns="slug,sluggable_type"/>
+      <index name="index_friendly_id_slugs_on_sluggable_id" unique="false" columns="sluggable_id"/>
+      <index name="index_friendly_id_slugs_on_sluggable_type" unique="false" columns="sluggable_type"/>
+    </table>
+    <table name="gods" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="provider" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="uid" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="encrypted_password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="reset_password_token" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="reset_password_sent_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="remember_created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="sign_in_count" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="current_sign_in_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="last_sign_in_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="current_sign_in_ip" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_sign_in_ip" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="confirmation_token" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="confirmed_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="confirmation_sent_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="unconfirmed_email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nickname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="index_gods_on_reset_password_token" unique="true" columns="reset_password_token"/>
+      <index name="index_gods_on_uid_and_provider" unique="true" columns="uid,provider"/>
+      <index name="index_gods_on_email" unique="false" columns="email"/>
+    </table>
+    <table name="offer_types" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_7380f32ed4" table="offers" schema="" catalog="ror_development" columns="offer_type_id"/>
+    </table>
+    <table name="offers" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="deal_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="offer_type_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="discount" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="what_you_get" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fine_print" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="instruction" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="start_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="expire_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_7380f32ed4" columns="offer_type_id" ref-table="offer_types" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_ad433f7cbb" columns="deal_id" ref-table="deals" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_450a4b0b70" table="orders" schema="" catalog="ror_development" columns="offer_id"/>
+      <index name="index_offers_on_deal_id" unique="false" columns="deal_id"/>
+      <index name="index_offers_on_offer_type_id" unique="false" columns="offer_type_id"/>
+    </table>
+    <table name="orders" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="order_no" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="offer_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="outlet_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="what_you_get" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fine_print" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="instruction" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="expire_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="redeemed" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MQ=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_a4af1064e2" columns="outlet_id" ref-table="outlets" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_450a4b0b70" columns="offer_id" ref-table="offers" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_7d4fa2eda9" columns="vendor_id" ref-table="vendors" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_fcfbfc4039" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_orders_on_offer_id" unique="false" columns="offer_id"/>
+      <index name="index_orders_on_outlet_id" unique="false" columns="outlet_id"/>
+      <index name="index_orders_on_user_id" unique="false" columns="user_id"/>
+      <index name="index_orders_on_vendor_id" unique="false" columns="vendor_id"/>
+    </table>
+    <table name="outlets" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="longitude" sqlType="DECIMAL" precision="9" scale="5" nullable="true" jdbcType="3"/>
+      <column name="latitude" sqlType="DECIMAL" precision="9" scale="5" nullable="true" jdbcType="3"/>
+      <column name="city" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="city_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="street" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="street_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="slug" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="mobile" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="contact_no" sqlType="VARCHAR" precision="11" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_a4af1064e2" table="orders" schema="" catalog="ror_development" columns="outlet_id"/>
+      <index name="index_outlets_on_latitude_and_longitude" unique="false" columns="latitude,longitude"/>
+      <index name="index_outlets_on_slug" unique="false" columns="slug"/>
+      <index name="index_outlets_on_vendor_id" unique="false" columns="vendor_id"/>
     </table>
     <table name="posts" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -1422,15 +1554,36 @@
       <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="fk_rails_dc52c6f74d" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="fk_rails_fa7096611b" table="comments" schema="" catalog="ror_development" columns="post_id"/>
-      <index name="index_posts_on_user_id" unique="false" columns="user_id"/>
     </table>
     <table name="schema_migrations" schema="" catalog="ror_development" type="TABLE">
       <column name="version" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <index name="unique_schema_migrations" unique="true" columns="version"/>
+    </table>
+    <table name="spams" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="spammer_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="spammer_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="spammable_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="spammable_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="reason" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="index_spammable_on_spammable_type_and_spammable_id" unique="false" columns="spammable_type,spammable_id"/>
+      <index name="index_spammable_on_spammer_type_and_spammer_id" unique="false" columns="spammer_type,spammer_id"/>
+    </table>
+    <table name="subcategories" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="category_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_32cfb93c87" columns="category_id" ref-table="categories" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_subcategories_on_category_id" unique="false" columns="category_id"/>
+    </table>
+    <table name="subcategories_vendors" schema="" catalog="ror_development" type="TABLE">
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="subcategory_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
     </table>
     <table name="users" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -1456,12 +1609,21 @@
       <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="mobile" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="fk_rails_4f3548b46c" table="comments" schema="" catalog="ror_development" columns="user_id"/>
-      <exported-key name="fk_rails_dc52c6f74d" table="posts" schema="" catalog="ror_development" columns="user_id"/>
+      <exported-key name="fk_rails_fcfbfc4039" table="orders" schema="" catalog="ror_development" columns="user_id"/>
       <index name="index_users_on_reset_password_token" unique="true" columns="reset_password_token"/>
       <index name="index_users_on_uid_and_provider" unique="true" columns="uid,provider"/>
       <index name="index_users_on_email" unique="false" columns="email"/>
+    </table>
+    <table name="vendor_images" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="url" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="caption" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_360a58a323" columns="vendor_id" ref-table="vendors" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_vendor_images_on_vendor_id" unique="false" columns="vendor_id"/>
     </table>
     <table name="vendors" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -1487,13 +1649,17 @@
       <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="latitude" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
-      <column name="longitude" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
-      <column name="mobile" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="mobile" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
       <column name="website" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="category_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_cff03d3544" columns="category_id" ref-table="categories" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_de8015ec63" table="deals" schema="" catalog="ror_development" columns="vendor_id"/>
+      <exported-key name="fk_rails_7d4fa2eda9" table="orders" schema="" catalog="ror_development" columns="vendor_id"/>
+      <exported-key name="fk_rails_360a58a323" table="vendor_images" schema="" catalog="ror_development" columns="vendor_id"/>
       <index name="index_vendors_on_reset_password_token" unique="true" columns="reset_password_token"/>
       <index name="index_vendors_on_uid_and_provider" unique="true" columns="uid,provider"/>
+      <index name="index_vendors_on_category_id" unique="false" columns="category_id"/>
       <index name="index_vendors_on_email" unique="false" columns="email"/>
     </table>
   </data-source>
@@ -2898,19 +3064,151 @@
       <column name="PROCESSLIST_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="NAME" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
     </table>
+    <table name="categories" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_32cfb93c87" table="subcategories" schema="" catalog="ror_development" columns="category_id"/>
+      <exported-key name="fk_rails_cff03d3544" table="vendors" schema="" catalog="ror_development" columns="category_id"/>
+    </table>
     <table name="comments" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="commentable_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="commentable_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="commentator_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="commentator_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="body" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="post_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="fk_rails_4f3548b46c" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="fk_rails_fa7096611b" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="index_comments_on_post_id" unique="false" columns="post_id"/>
-      <index name="index_comments_on_user_id" unique="false" columns="user_id"/>
+      <index name="index_comments_on_commentable_type_and_commentable_id" unique="false" columns="commentable_type,commentable_id"/>
+      <index name="index_comments_on_commentator_type_and_commentator_id" unique="false" columns="commentator_type,commentator_id"/>
+    </table>
+    <table name="deals" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_de8015ec63" columns="vendor_id" ref-table="vendors" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_ad433f7cbb" table="offers" schema="" catalog="ror_development" columns="deal_id"/>
+      <index name="index_deals_on_vendor_id" unique="false" columns="vendor_id"/>
+    </table>
+    <table name="deals_outlets" schema="" catalog="ror_development" type="TABLE">
+      <column name="deal_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="outlet_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="friendly_id_slugs" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="slug" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sluggable_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="sluggable_type" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="scope" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope" unique="true" columns="slug,sluggable_type,scope"/>
+      <index name="index_friendly_id_slugs_on_slug_and_sluggable_type" unique="false" columns="slug,sluggable_type"/>
+      <index name="index_friendly_id_slugs_on_sluggable_id" unique="false" columns="sluggable_id"/>
+      <index name="index_friendly_id_slugs_on_sluggable_type" unique="false" columns="sluggable_type"/>
+    </table>
+    <table name="gods" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="provider" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="uid" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="encrypted_password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="reset_password_token" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="reset_password_sent_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="remember_created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="sign_in_count" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="current_sign_in_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="last_sign_in_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="current_sign_in_ip" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_sign_in_ip" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="confirmation_token" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="confirmed_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="confirmation_sent_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="unconfirmed_email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nickname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="index_gods_on_reset_password_token" unique="true" columns="reset_password_token"/>
+      <index name="index_gods_on_uid_and_provider" unique="true" columns="uid,provider"/>
+      <index name="index_gods_on_email" unique="false" columns="email"/>
+    </table>
+    <table name="offer_types" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_7380f32ed4" table="offers" schema="" catalog="ror_development" columns="offer_type_id"/>
+    </table>
+    <table name="offers" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="deal_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="offer_type_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="discount" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="what_you_get" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fine_print" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="instruction" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="start_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="expire_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_7380f32ed4" columns="offer_type_id" ref-table="offer_types" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_ad433f7cbb" columns="deal_id" ref-table="deals" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_450a4b0b70" table="orders" schema="" catalog="ror_development" columns="offer_id"/>
+      <index name="index_offers_on_deal_id" unique="false" columns="deal_id"/>
+      <index name="index_offers_on_offer_type_id" unique="false" columns="offer_type_id"/>
+    </table>
+    <table name="orders" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="order_no" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="offer_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="outlet_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="what_you_get" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fine_print" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="instruction" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="expire_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="redeemed" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MQ=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_a4af1064e2" columns="outlet_id" ref-table="outlets" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_450a4b0b70" columns="offer_id" ref-table="offers" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_7d4fa2eda9" columns="vendor_id" ref-table="vendors" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_fcfbfc4039" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_orders_on_offer_id" unique="false" columns="offer_id"/>
+      <index name="index_orders_on_outlet_id" unique="false" columns="outlet_id"/>
+      <index name="index_orders_on_user_id" unique="false" columns="user_id"/>
+      <index name="index_orders_on_vendor_id" unique="false" columns="vendor_id"/>
+    </table>
+    <table name="outlets" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="longitude" sqlType="DECIMAL" precision="9" scale="5" nullable="true" jdbcType="3"/>
+      <column name="latitude" sqlType="DECIMAL" precision="9" scale="5" nullable="true" jdbcType="3"/>
+      <column name="city" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="city_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="street" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="street_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="slug" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="mobile" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="contact_no" sqlType="VARCHAR" precision="11" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_a4af1064e2" table="orders" schema="" catalog="ror_development" columns="outlet_id"/>
+      <index name="index_outlets_on_latitude_and_longitude" unique="false" columns="latitude,longitude"/>
+      <index name="index_outlets_on_slug" unique="false" columns="slug"/>
+      <index name="index_outlets_on_vendor_id" unique="false" columns="vendor_id"/>
     </table>
     <table name="posts" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -2919,15 +3217,36 @@
       <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="fk_rails_dc52c6f74d" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="fk_rails_fa7096611b" table="comments" schema="" catalog="ror_development" columns="post_id"/>
-      <index name="index_posts_on_user_id" unique="false" columns="user_id"/>
     </table>
     <table name="schema_migrations" schema="" catalog="ror_development" type="TABLE">
       <column name="version" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <index name="unique_schema_migrations" unique="true" columns="version"/>
+    </table>
+    <table name="spams" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="spammer_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="spammer_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="spammable_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="spammable_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="reason" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="index_spammable_on_spammable_type_and_spammable_id" unique="false" columns="spammable_type,spammable_id"/>
+      <index name="index_spammable_on_spammer_type_and_spammer_id" unique="false" columns="spammer_type,spammer_id"/>
+    </table>
+    <table name="subcategories" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="category_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_32cfb93c87" columns="category_id" ref-table="categories" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_subcategories_on_category_id" unique="false" columns="category_id"/>
+    </table>
+    <table name="subcategories_vendors" schema="" catalog="ror_development" type="TABLE">
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="subcategory_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
     </table>
     <table name="users" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -2953,12 +3272,21 @@
       <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="mobile" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="fk_rails_4f3548b46c" table="comments" schema="" catalog="ror_development" columns="user_id"/>
-      <exported-key name="fk_rails_dc52c6f74d" table="posts" schema="" catalog="ror_development" columns="user_id"/>
+      <exported-key name="fk_rails_fcfbfc4039" table="orders" schema="" catalog="ror_development" columns="user_id"/>
       <index name="index_users_on_reset_password_token" unique="true" columns="reset_password_token"/>
       <index name="index_users_on_uid_and_provider" unique="true" columns="uid,provider"/>
       <index name="index_users_on_email" unique="false" columns="email"/>
+    </table>
+    <table name="vendor_images" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="url" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="caption" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_360a58a323" columns="vendor_id" ref-table="vendors" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_vendor_images_on_vendor_id" unique="false" columns="vendor_id"/>
     </table>
     <table name="vendors" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -2984,13 +3312,17 @@
       <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="latitude" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
-      <column name="longitude" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
-      <column name="mobile" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="mobile" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
       <column name="website" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="category_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_cff03d3544" columns="category_id" ref-table="categories" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_de8015ec63" table="deals" schema="" catalog="ror_development" columns="vendor_id"/>
+      <exported-key name="fk_rails_7d4fa2eda9" table="orders" schema="" catalog="ror_development" columns="vendor_id"/>
+      <exported-key name="fk_rails_360a58a323" table="vendor_images" schema="" catalog="ror_development" columns="vendor_id"/>
       <index name="index_vendors_on_reset_password_token" unique="true" columns="reset_password_token"/>
       <index name="index_vendors_on_uid_and_provider" unique="true" columns="uid,provider"/>
+      <index name="index_vendors_on_category_id" unique="false" columns="category_id"/>
       <index name="index_vendors_on_email" unique="false" columns="email"/>
     </table>
   </data-source>
@@ -4395,19 +4727,151 @@
       <column name="PROCESSLIST_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="NAME" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
     </table>
+    <table name="categories" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_32cfb93c87" table="subcategories" schema="" catalog="ror_development" columns="category_id"/>
+      <exported-key name="fk_rails_cff03d3544" table="vendors" schema="" catalog="ror_development" columns="category_id"/>
+    </table>
     <table name="comments" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="commentable_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="commentable_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="commentator_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="commentator_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="body" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="post_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="fk_rails_4f3548b46c" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="fk_rails_fa7096611b" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="index_comments_on_post_id" unique="false" columns="post_id"/>
-      <index name="index_comments_on_user_id" unique="false" columns="user_id"/>
+      <index name="index_comments_on_commentable_type_and_commentable_id" unique="false" columns="commentable_type,commentable_id"/>
+      <index name="index_comments_on_commentator_type_and_commentator_id" unique="false" columns="commentator_type,commentator_id"/>
+    </table>
+    <table name="deals" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_de8015ec63" columns="vendor_id" ref-table="vendors" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_ad433f7cbb" table="offers" schema="" catalog="ror_development" columns="deal_id"/>
+      <index name="index_deals_on_vendor_id" unique="false" columns="vendor_id"/>
+    </table>
+    <table name="deals_outlets" schema="" catalog="ror_development" type="TABLE">
+      <column name="deal_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="outlet_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="friendly_id_slugs" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="slug" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sluggable_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="sluggable_type" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="scope" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope" unique="true" columns="slug,sluggable_type,scope"/>
+      <index name="index_friendly_id_slugs_on_slug_and_sluggable_type" unique="false" columns="slug,sluggable_type"/>
+      <index name="index_friendly_id_slugs_on_sluggable_id" unique="false" columns="sluggable_id"/>
+      <index name="index_friendly_id_slugs_on_sluggable_type" unique="false" columns="sluggable_type"/>
+    </table>
+    <table name="gods" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="provider" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="uid" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="encrypted_password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="reset_password_token" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="reset_password_sent_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="remember_created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="sign_in_count" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="current_sign_in_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="last_sign_in_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="current_sign_in_ip" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_sign_in_ip" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="confirmation_token" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="confirmed_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="confirmation_sent_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="unconfirmed_email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nickname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="index_gods_on_reset_password_token" unique="true" columns="reset_password_token"/>
+      <index name="index_gods_on_uid_and_provider" unique="true" columns="uid,provider"/>
+      <index name="index_gods_on_email" unique="false" columns="email"/>
+    </table>
+    <table name="offer_types" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_7380f32ed4" table="offers" schema="" catalog="ror_development" columns="offer_type_id"/>
+    </table>
+    <table name="offers" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="deal_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="offer_type_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="discount" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="what_you_get" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fine_print" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="instruction" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="start_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="expire_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_7380f32ed4" columns="offer_type_id" ref-table="offer_types" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_ad433f7cbb" columns="deal_id" ref-table="deals" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_450a4b0b70" table="orders" schema="" catalog="ror_development" columns="offer_id"/>
+      <index name="index_offers_on_deal_id" unique="false" columns="deal_id"/>
+      <index name="index_offers_on_offer_type_id" unique="false" columns="offer_type_id"/>
+    </table>
+    <table name="orders" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="order_no" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="offer_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="outlet_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="what_you_get" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fine_print" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="instruction" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="expire_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="redeemed" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MQ=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_a4af1064e2" columns="outlet_id" ref-table="outlets" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_450a4b0b70" columns="offer_id" ref-table="offers" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_7d4fa2eda9" columns="vendor_id" ref-table="vendors" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_rails_fcfbfc4039" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_orders_on_offer_id" unique="false" columns="offer_id"/>
+      <index name="index_orders_on_outlet_id" unique="false" columns="outlet_id"/>
+      <index name="index_orders_on_user_id" unique="false" columns="user_id"/>
+      <index name="index_orders_on_vendor_id" unique="false" columns="vendor_id"/>
+    </table>
+    <table name="outlets" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="longitude" sqlType="DECIMAL" precision="9" scale="5" nullable="true" jdbcType="3"/>
+      <column name="latitude" sqlType="DECIMAL" precision="9" scale="5" nullable="true" jdbcType="3"/>
+      <column name="city" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="city_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="street" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="street_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="slug" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="mobile" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="contact_no" sqlType="VARCHAR" precision="11" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_a4af1064e2" table="orders" schema="" catalog="ror_development" columns="outlet_id"/>
+      <index name="index_outlets_on_latitude_and_longitude" unique="false" columns="latitude,longitude"/>
+      <index name="index_outlets_on_slug" unique="false" columns="slug"/>
+      <index name="index_outlets_on_vendor_id" unique="false" columns="vendor_id"/>
     </table>
     <table name="posts" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -4416,15 +4880,36 @@
       <column name="upvotes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="fk_rails_dc52c6f74d" columns="user_id" ref-table="users" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="fk_rails_fa7096611b" table="comments" schema="" catalog="ror_development" columns="post_id"/>
-      <index name="index_posts_on_user_id" unique="false" columns="user_id"/>
     </table>
     <table name="schema_migrations" schema="" catalog="ror_development" type="TABLE">
       <column name="version" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <index name="unique_schema_migrations" unique="true" columns="version"/>
+    </table>
+    <table name="spams" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="spammer_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="spammer_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="spammable_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="spammable_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="reason" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="index_spammable_on_spammable_type_and_spammable_id" unique="false" columns="spammable_type,spammable_id"/>
+      <index name="index_spammable_on_spammer_type_and_spammer_id" unique="false" columns="spammer_type,spammer_id"/>
+    </table>
+    <table name="subcategories" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="category_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_32cfb93c87" columns="category_id" ref-table="categories" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_subcategories_on_category_id" unique="false" columns="category_id"/>
+    </table>
+    <table name="subcategories_vendors" schema="" catalog="ror_development" type="TABLE">
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="subcategory_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
     </table>
     <table name="users" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -4450,12 +4935,21 @@
       <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="mobile" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="fk_rails_4f3548b46c" table="comments" schema="" catalog="ror_development" columns="user_id"/>
-      <exported-key name="fk_rails_dc52c6f74d" table="posts" schema="" catalog="ror_development" columns="user_id"/>
+      <exported-key name="fk_rails_fcfbfc4039" table="orders" schema="" catalog="ror_development" columns="user_id"/>
       <index name="index_users_on_reset_password_token" unique="true" columns="reset_password_token"/>
       <index name="index_users_on_uid_and_provider" unique="true" columns="uid,provider"/>
       <index name="index_users_on_email" unique="false" columns="email"/>
+    </table>
+    <table name="vendor_images" schema="" catalog="ror_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="url" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="vendor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="caption" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_360a58a323" columns="vendor_id" ref-table="vendors" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_vendor_images_on_vendor_id" unique="false" columns="vendor_id"/>
     </table>
     <table name="vendors" schema="" catalog="ror_development" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -4481,13 +4975,17 @@
       <column name="tokens" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="latitude" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
-      <column name="longitude" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
-      <column name="mobile" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="mobile" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
       <column name="website" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="category_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_cff03d3544" columns="category_id" ref-table="categories" ref-schema="" ref-catalog="ror_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_rails_de8015ec63" table="deals" schema="" catalog="ror_development" columns="vendor_id"/>
+      <exported-key name="fk_rails_7d4fa2eda9" table="orders" schema="" catalog="ror_development" columns="vendor_id"/>
+      <exported-key name="fk_rails_360a58a323" table="vendor_images" schema="" catalog="ror_development" columns="vendor_id"/>
       <index name="index_vendors_on_reset_password_token" unique="true" columns="reset_password_token"/>
       <index name="index_vendors_on_uid_and_provider" unique="true" columns="uid,provider"/>
+      <index name="index_vendors_on_category_id" unique="false" columns="category_id"/>
       <index name="index_vendors_on_email" unique="false" columns="email"/>
     </table>
   </data-source>
