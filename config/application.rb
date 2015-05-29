@@ -22,7 +22,8 @@ module RoR
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.assets.initialize_on_precompile = true
+    config.assets.initialize_on_precompile = false
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
 
     #Uncomment this line after setting up memcache for production and testing environment
     #config.cache_store = :dalli_store, "cache-1.example.com", "cache-2.example.com",
