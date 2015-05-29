@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
+  host: localdeal.cyrc4h3obnuq.us-west-2.rds.amazonaws.com
   database: LocalDeal
   username: root
   password: <%= ENV['ROR_DATABASE_PASSWORD'] %>
