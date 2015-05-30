@@ -57,3 +57,7 @@ gem 'geokit-rails' #for geo location calculation
 gem 'json' #for all JSON methods just like javascript
 gem 'will_paginate', '~> 3.0.6' #For pagination, we can use specific gem for bootstrap pagination but for now we just want simple infinite scroll.
 gem 'friendly_id', '~> 5.1.0'
+
+group :development, :test do
+  gem 'passenger' #will be used as a webserver in production
+end

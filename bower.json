@@ -1,12 +1,12 @@
 {
-  "name": "ToDo App",
+  "name": "LocalDeal",
   "version": "0.0.1",
   "authors": [
     "piyushbeli <piyush.beli@metacube.com>"
   ],
   "description": "Practice app",
   "keywords": [
-    "todo"
+    "localdeal"
   ],
   "license": "MIT",
   "ignore": [
