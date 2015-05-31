@@ -48,10 +48,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  adapter: mysql2
-  encoding: utf8
-  pool: 15
-  username: root
-  host: localdeal.cyrc4h3obnuq.us-west-2.rds.amazonaws.com
-  database: LocalDeal
-  password: <%= ENV['LOCALDEAL_DATABASE_PASSWORD'] %>
+  url: <%= ENV['CLEARDB_DATABASE_URL'] %>
