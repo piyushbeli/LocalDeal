@@ -12,5 +12,5 @@ BowerRails.configure do |bower_rails|
    bower_rails.clean_before_precompile = true if Rails.env.production?
 
   # Invokes rake bower:install:deployment instead rake bower:install. Defaults to false
-   bower_rails.use_bower_install_deployment = true if Rails.env.production?
+   #bower_rails.use_bower_install_deployment = true if Rails.env.production?
 end
