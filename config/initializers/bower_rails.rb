@@ -1,6 +1,6 @@
 BowerRails.configure do |bower_rails|
   # Tell bower-rails what path should be considered as root. Defaults to Dir.pwd
-   bower_rails.root_path = Rails.root.join('vendor', 'assets')
+   bower_rails.root_path = Rails.root.join()
 
   # Invokes rake bower:install before precompilation. Defaults to false
    bower_rails.install_before_precompile = true if Rails.env.production?
