@@ -18,7 +18,7 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            auth: function ($auth, $q, $state, Vendor, $rootScope) {
+            auth: ['$auth', '$q', '$state', 'Vendor', '$rootScope', function ($auth, $q, $state, Vendor, $rootScope) {
                 var deferred = $q.defer();
                 $auth.validateUser()
                     .then(function(response) {
@@ -29,7 +29,7 @@ appVendor.constant("Routes", {
                         $state.go('login');
                     })
                 return deferred.promise;
-            }
+            }]
         }
     },
     deals: {
@@ -59,14 +59,14 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            deal: function(DealService, $stateParams) {
+            deal: ['DealService', '$stateParams', function(DealService, $stateParams) {
                 var dealId = $stateParams['id'];
                 if (dealId == 'new') {
                     return DealService.newDeal();
                 } else {
                     return DealService.fetchDealDetails(dealId);
                 }
-            }
+            }]
         }
     },
     newDeal: { //This is same as dealDetail but id has been hardcoded to 'new'
@@ -78,9 +78,9 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            deal: function(DealService) {
+            deal: ['DealService', function(DealService) {
                 return DealService.newDeal();
-            }
+            }]
         }
     },
     offerDetail: {
@@ -93,7 +93,7 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            offer: function($stateParams, OfferService, deal) {
+            offer: ['$stateParams', 'OfferService', 'deal', function($stateParams, OfferService, deal) {
                 var offer = $stateParams['offer'];
                 if (offer) {
                     return offer;
@@ -105,7 +105,7 @@ appVendor.constant("Routes", {
                         return deal.offers.find({id: offerId})
                     }
                 }
-            }
+            }]
         }
     },
     newOffer: {
@@ -117,9 +117,9 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            offer: function(OfferService) {
+            offer: ['OfferService', function(OfferService) {
                 return OfferService.newOffer();
-            }
+            }]
         }
     },
     emailConfirmation: {
