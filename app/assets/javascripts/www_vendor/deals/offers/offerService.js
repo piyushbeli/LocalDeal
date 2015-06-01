@@ -1,4 +1,4 @@
-appVendor.service("OfferService", function(Offer, $q, $http, HttpRoutes) {
+appVendor.service("OfferService", ['Offer', '$q', '$http', 'HttpRoutes', function(Offer, $q, $http, HttpRoutes) {
     var self = this;
 
     self.newOffer = function() {
@@ -65,4 +65,4 @@ appVendor.service("OfferService", function(Offer, $q, $http, HttpRoutes) {
             });
         return deferred.promise;
     };
-})
+}])

@@ -1,4 +1,4 @@
-appUser.factory("Review", function(Utils, Offer, Reviewer) {
+appUser.factory("Review", ['Utils', 'Offer', 'Reviewer', function(Utils, Offer, Reviewer) {
     function Review(data) {
         if (!data) {
             return;
@@ -27,4 +27,4 @@ appUser.factory("Review", function(Utils, Offer, Reviewer) {
 
     //End
     return Review;
-})
+}])

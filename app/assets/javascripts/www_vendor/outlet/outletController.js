@@ -1,4 +1,5 @@
-appVendor.controller('OutletController', function ($scope, $rootScope, AccountService, $log, uiGmapGoogleMapApi,
+appVendor.controller('OutletController', ['$scope', '$rootScope', 'AccountService', '$log', 'uiGmapGoogleMapApi',
+    'uiGmapIsReady', 'Utils', function ($scope, $rootScope, AccountService, $log, uiGmapGoogleMapApi,
                                                    uiGmapIsReady, Utils) {
     var self = this;
     $scope.shouldUseCurrentLocation = false;
@@ -116,4 +117,4 @@ appVendor.controller('OutletController', function ($scope, $rootScope, AccountSe
     })
 
 
-});
+}]);

@@ -1,4 +1,5 @@
-appUser.factory("SearchCriteria", function(Geocoder, $q, ReferenceDataCache, CacheKeys) {
+appUser.factory("SearchCriteria", ['Geocoder', '$q', 'ReferenceDataCache', 'CacheKeys',
+    function(Geocoder, $q, ReferenceDataCache, CacheKeys) {
     function SearchCriteria(data) {
         this.outlets = [];
         this.currentLocation = [];
@@ -121,4 +122,4 @@ appUser.factory("SearchCriteria", function(Geocoder, $q, ReferenceDataCache, Cac
     }
 
     return SearchCriteria;
-})
+}])

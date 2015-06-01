@@ -3,7 +3,8 @@ var appVendor = angular
         'uiGmapgoogle-maps', 'app.common'
     ]);
 
-appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider, $authProvider,
+appVendor.config(['$routeProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider', '$authProvider',
+    'uiGmapGoogleMapApiProvider', 'Routes', 'Constants', function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider, $authProvider,
                            uiGmapGoogleMapApiProvider, Routes, Constants) {
     $stateProvider
         .state('login', Routes.login)
@@ -39,4 +40,4 @@ appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $u
         v: '3.17',
         libraries: 'weather,geometry,visualization'
     });
-});
+}]);

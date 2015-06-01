@@ -1,4 +1,5 @@
-appUser.controller("NavController", function ($scope, $auth, $rootScope, $modal, $state, $location) {
+appUser.controller("NavController", ['$scope', '$auth', '$rootScope', '$modal', '$state', '$location',
+    function ($scope, $auth, $rootScope, $modal, $state, $location) {
     //Lets fetch the current location and save in rootScope
     navigator.geolocation.getCurrentPosition(function (position) {
         $rootScope.currentLocation = [position.coords.latitude, position.coords.longitude];
@@ -47,4 +48,4 @@ appUser.controller("NavController", function ($scope, $auth, $rootScope, $modal,
             })
     };
 
-})
+}])

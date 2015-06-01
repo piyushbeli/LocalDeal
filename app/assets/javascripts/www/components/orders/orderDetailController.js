@@ -1,4 +1,5 @@
-appUser.controller("OrderDetailController", function($scope, $state, States, OrderService, order) {
+appUser.controller("OrderDetailController", ['$scope', '$state', 'States', 'OrderService', 'order',
+    function($scope, $state, States, OrderService, order) {
     $scope.order = order;
 
     $scope.checkIn = function(order) {
@@ -10,4 +11,4 @@ appUser.controller("OrderDetailController", function($scope, $state, States, Ord
                 alert(errorMessage);
             })
     }
-})
+}])

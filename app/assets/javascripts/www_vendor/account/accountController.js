@@ -1,4 +1,4 @@
-appVendor.controller("AccountController", function ($scope, $rootScope, AccountService, CacheKeys, ReferenceDataCache) {
+appVendor.controller("AccountController", ['$scope', '$rootScope', 'AccountService', 'CacheKeys', 'ReferenceDataCache', function ($scope, $rootScope, AccountService, CacheKeys, ReferenceDataCache) {
     $scope.errorMessage = null;
     $scope.data = {};
     ReferenceDataCache.get(CacheKeys.Categories)
@@ -21,4 +21,4 @@ appVendor.controller("AccountController", function ($scope, $rootScope, AccountS
                 $scope.errorMessage = errorMessage;
             })
     };
-});
+}]);

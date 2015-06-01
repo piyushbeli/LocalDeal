@@ -1,4 +1,4 @@
-appVendor.factory("Outlet", function(Utils) {
+appVendor.factory("Outlet", ['Utils', function(Utils) {
     function Outlet(data) {
         if (!data) {
             return;
@@ -53,4 +53,4 @@ appVendor.factory("Outlet", function(Utils) {
 
     //End
     return Outlet;
-})
+}])

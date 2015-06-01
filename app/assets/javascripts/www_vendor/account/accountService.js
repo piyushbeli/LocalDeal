@@ -1,4 +1,4 @@
-appVendor.service("AccountService", function ($q, $auth, $http, HttpRoutes, Outlet, Utils) {
+appVendor.service("AccountService", ['$q', '$auth', '$http', 'HttpRoutes', 'Outlet', 'Utils', function ($q, $auth, $http, HttpRoutes, Outlet, Utils) {
     var self = this;
 
     self.updateProfile = function (vendor) {
@@ -58,4 +58,4 @@ appVendor.service("AccountService", function ($q, $auth, $http, HttpRoutes, Outl
     self.newOutlet = function() {
         return Outlet.build();
     }
-})
+}])

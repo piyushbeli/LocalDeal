@@ -1,4 +1,5 @@
-appUser.service("OutletService", function($http, $q, HttpRoutes, Outlet, CommonCache, CacheKeys, $location, Geocoder) {
+appUser.service("OutletService", ['$http', '$q', 'HttpRoutes', 'Outlet', 'CommonCache', 'CacheKeys', '$location', 'Geocoder',
+    function($http, $q, HttpRoutes, Outlet, CommonCache, CacheKeys, $location, Geocoder) {
     var self = this;
 
     self.fetchOutlets = function(criteria, pageNo) {
@@ -70,4 +71,4 @@ appUser.service("OutletService", function($http, $q, HttpRoutes, Outlet, CommonC
         return deferred.promise;
     };
 
-})
+}])

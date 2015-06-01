@@ -1,4 +1,4 @@
-appUser.factory("Order", function(Vendor, Outlet) {
+appUser.factory("Order", ['Vendor', 'Outlet', function(Vendor, Outlet) {
     function Order(data) {
         if (!data) {
             return;
@@ -34,4 +34,4 @@ appUser.factory("Order", function(Vendor, Outlet) {
     };
 
     return Order;
-})
+}])

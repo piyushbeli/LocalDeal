@@ -1,4 +1,4 @@
-appUser.controller("OutletDetailController", function($scope, $rootScope, outlet, $window, OutletService) {
+appUser.controller("OutletDetailController", ['$scope', '$rootScope', 'outlet', '$window', 'OutletService', function($scope, $rootScope, outlet, $window, OutletService) {
     $window.document.title = $window.document.title + " - Outlets - " + outlet.name;
     $scope.outlet = outlet;
 
@@ -23,4 +23,4 @@ appUser.controller("OutletDetailController", function($scope, $rootScope, outlet
                 alert(errorMessage);
             })
     };
-})
+}])

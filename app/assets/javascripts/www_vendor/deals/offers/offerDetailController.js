@@ -1,5 +1,5 @@
-appVendor.controller("OfferDetailController", function ($scope, deal, offer, OfferService, $state, ReferenceDataCache,
-                                                        CacheKeys) {
+appVendor.controller("OfferDetailController", ['$scope', 'deal', 'offer', 'OfferService', '$state', 'ReferenceDataCache', 'CacheKeys',
+    function ($scope, deal, offer, OfferService, $state, ReferenceDataCache, CacheKeys) {
     $scope.deal = deal; //Injected by app.deatDetail state via resolve
     $scope.offer = offer;
     $scope.data = {
@@ -36,4 +36,4 @@ appVendor.controller("OfferDetailController", function ($scope, deal, offer, Off
         $state.go('app.dealDetail', {id: $scope.deal.id});
     };
 
-})
+}])

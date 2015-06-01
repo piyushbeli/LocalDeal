@@ -1,4 +1,4 @@
-appCommon.factory("Offer", function(Utils) {
+appCommon.factory("Offer", ['Utils', function(Utils) {
     function Offer(data) {
         if (!data) {
             this.startAt =  new Date();
@@ -44,4 +44,4 @@ appCommon.factory("Offer", function(Utils) {
 
     //End
     return Offer;
-})
+}])

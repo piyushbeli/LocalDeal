@@ -1,4 +1,5 @@
-appVendor.service("DealService", function (Deal, Offer, $q, $http, HttpRoutes, $interpolate) {
+appVendor.service("DealService", ['Deal', 'Offer', '$q', '$http', 'HttpRoutes', '$interpolate',
+    function (Deal, Offer, $q, $http, HttpRoutes, $interpolate) {
     var self = this;
 
     self.fetchDealList = function() {
@@ -95,4 +96,4 @@ appVendor.service("DealService", function (Deal, Offer, $q, $http, HttpRoutes, $
     };
 
     //End
-})
+}])

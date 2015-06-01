@@ -1,4 +1,4 @@
-appUser.service("DealService", function($http, $q, HttpRoutes, Review) {
+appUser.service("DealService", ['$http', '$q', 'HttpRoutes', 'Review', function($http, $q, HttpRoutes, Review) {
     var self = this;
 
    self.submitReview = function(deal, review) {
@@ -57,4 +57,4 @@ appUser.service("DealService", function($http, $q, HttpRoutes, Review) {
             });
         return deferred.promise;
     };
-})
+}])

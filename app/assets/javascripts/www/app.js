@@ -3,7 +3,8 @@ var appUser = angular
         'app.common', 'infinite-scroll', 'ngScrollTo'
     ]);
 
-appUser.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, $locationProvider, uiGmapGoogleMapApiProvider, Routes) {
+appUser.config(['$routeProvider', '$stateProvider', '$urlRouterProvider', '$authProvider', '$locationProvider', 'uiGmapGoogleMapApiProvider', 'Routes',
+    function ($routeProvider, $stateProvider, $urlRouterProvider, $authProvider, $locationProvider, uiGmapGoogleMapApiProvider, Routes) {
     $stateProvider
         .state('app', Routes.root)
         .state('app.profile', Routes.profile)
@@ -31,4 +32,4 @@ appUser.config(function ($routeProvider, $stateProvider, $urlRouterProvider, $au
         v: '3.17',
         libraries: 'weather,geometry,visualization'
     });
-});
+}]);

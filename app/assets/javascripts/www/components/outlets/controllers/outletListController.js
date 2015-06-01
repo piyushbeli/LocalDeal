@@ -1,4 +1,6 @@
-appUser.controller("OutletListController", function($scope, $rootScope, $state, $location, $window, OutletService, States,
+appUser.controller("OutletListController", ['$scope', '$rootScope', '$state', '$location', '$window', 'OutletService', 'States',
+    'Utils', 'ReferenceDataCache', 'CacheKeys' , 'CommonCache', 'SearchCriteria',
+    function($scope, $rootScope, $state, $location, $window, OutletService, States,
                                                     Utils, ReferenceDataCache, CacheKeys , CommonCache, SearchCriteria) {
     $window.document.title = $window.document.title + " - Outlets";
     $scope.criteria = SearchCriteria.instanceFromQueryString($location.search());
@@ -81,4 +83,4 @@ appUser.controller("OutletListController", function($scope, $rootScope, $state, 
         }
     });
 
-})
+}])

@@ -1,4 +1,5 @@
-appUser.controller("DealDetailController", function($scope, $rootScope, $state, DealService, deal, outlet, $window, DealService) {
+appUser.controller("DealDetailController", ['$scope', '$rootScope', '$state', 'DealService', 'deal', 'outlet', '$window', 'DealService',
+    function($scope, $rootScope, $state, DealService, deal, outlet, $window, DealService) {
     if (deal) {
         $window.document.title = $window.document.title + deal.title;
     }
@@ -60,4 +61,4 @@ appUser.controller("DealDetailController", function($scope, $rootScope, $state, 
     };
 
     //End
-})
+}])

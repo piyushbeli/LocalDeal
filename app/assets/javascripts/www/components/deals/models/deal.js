@@ -1,4 +1,4 @@
-appUser.factory("Deal", function(Utils, Offer, Review) {
+appUser.factory("Deal", ['Utils', 'Offer', 'Review', function(Utils, Offer, Review) {
     function Deal(data) {
         if (!data) {
             return;
@@ -38,4 +38,4 @@ appUser.factory("Deal", function(Utils, Offer, Review) {
 
     //End
     return Deal;
-})
+}])
