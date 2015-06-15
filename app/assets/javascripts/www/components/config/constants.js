@@ -6,12 +6,14 @@ appUser.constant('Constants', {
         apiUrl: '/',
         deals: '/user/deals/?',
         outlets: '/outlets',
-        dealReviews: '/deals/{deal_id}/comments',
+        outletReviews: '/outlets/{outlet_id}/comments',
         postComment: '/comments/{comment_id}/comments',
         buyOffer: '/offers/{id}/buy',
         orders: '/orders',
         spamVendor: 'vendors/{vendor_id}/spam',
-        spamUser: 'users/{user_id}/spam'
+        spamUser: 'users/{user_id}/spam',
+        markAsFavorite: 'outlets/{id}/favorite',
+        favoriteOutlets: 'favoriteOutlets'
     })
     .constant('Constants', {
         apiUrl: 'localhost:3000/vendor#',

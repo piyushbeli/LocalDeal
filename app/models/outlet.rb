@@ -1,6 +1,9 @@
 class Outlet < ActiveRecord::Base
   include Vendor::VendorResource
+  include Commentable
   include FriendlyId
+  markable_as :favorite
+
   friendly_id :slug_candidates, use: [:slugged, :history]
   acts_as_mappable :default_units => :kms,
                    :default_formula => :sphere,

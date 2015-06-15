@@ -1,0 +1,17 @@
+<div class="row" ng-repeat="outlet in outlets">
+  <div class="col col-md-4">
+    <a ng-click="showOutletDetail(outlet)">{{outlet.name}}</a>
+  </div>
+  <div class="col col-md-2 col-sm-1">
+    {{outlet.distance | distance}}
+  </div>
+  <div class="col col-md-3 col-sm-1">
+    {{outlet.street}}
+  </div>
+  <div class="col col-md-2 col-sm-1">
+    <button type="button" ng-click="toggleFavorite(outlet)" class="btn btn-primary">
+      {{outlet.markedAsFavorite ? 'Un Favorite' : 'Favorite'}}
+    </button>
+  </div>
+</div>
+</div>

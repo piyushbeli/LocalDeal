@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525165557) do
+ActiveRecord::Schema.define(version: 20150603085038) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 255, null: false
@@ -90,6 +90,18 @@ ActiveRecord::Schema.define(version: 20150525165557) do
   add_index "gods", ["email"], name: "index_gods_on_email", using: :btree
   add_index "gods", ["reset_password_token"], name: "index_gods_on_reset_password_token", unique: true, using: :btree
   add_index "gods", ["uid", "provider"], name: "index_gods_on_uid_and_provider", unique: true, using: :btree
+
+  create_table "marks", force: :cascade do |t|
+    t.integer  "marker_id",     limit: 4
+    t.string   "marker_type",   limit: 255
+    t.integer  "markable_id",   limit: 4
+    t.string   "markable_type", limit: 255
+    t.string   "mark",          limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "marks", ["markable_id", "markable_type", "mark"], name: "index_marks_on_markable_id_and_markable_type_and_mark", using: :btree
+  add_index "marks", ["marker_id", "marker_type", "mark"], name: "index_marks_on_marker_id_and_marker_type_and_mark", using: :btree
 
   create_table "offer_types", force: :cascade do |t|
     t.string "name",        limit: 255, null: false

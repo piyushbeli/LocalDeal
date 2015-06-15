@@ -1,5 +1,5 @@
  <label>Reviews:</label>
-  <div ng-repeat="review in deal.reviews | orderBy: '-createdAt'">
+  <div ng-repeat="review in outlet.reviews | orderBy: '-createdAt'">
     <div class="form-group">
       <label class="control-label">{{review.title}}</label>
       <span>{{review.body}}</span>

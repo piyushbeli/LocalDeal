@@ -9,6 +9,12 @@ Rails.application.routes.draw do
 
   mount_devise_token_auth_for 'God', at: 'auth_god'
 
+  devise_scope :user do
+    post 'outlets/:outlet_id/favorite' => 'user/users#addFavortiteOutlet'
+    delete 'outlets/:outlet_id/favorite' => 'user/users#removeFavoriteOutlet'
+    get 'favoriteOutlets' => 'user/users#favoriteOutlets'
+  end
+
   devise_scope member: [:user, :god] do
     #Create an order
     post '/offers/:id/buy' => 'orders#create'
@@ -31,7 +37,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :member => [:user, :vendor] do
-    resources :deals, only: [] do
+    resources :outlets, only: [] do
       resources :comments, only: [:index, :show, :create, :update, :destroy]
     end
     resources :comments, only: [] do

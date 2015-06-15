@@ -105,5 +105,15 @@ appUser.constant("Routes", {
                 controller: 'AccountController'
             }
         }
+    },
+
+    favoriteOutlets: {
+        url: '/favorites',
+        views: {
+            'mainContent': {
+                templateUrl: 'user/outlet/favoriteOutletList.html',
+                controller: 'FavoriteOutletListController'
+            }
+        }
     }
 })

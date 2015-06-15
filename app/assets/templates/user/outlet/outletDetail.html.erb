@@ -5,5 +5,9 @@
 <button class="btn btn-danger" ng-click="unSpam()" ng-show="outlet.vendor.spammed">Un Spam</button>
 <textarea ng-model="reason" ng-enter="reportSpam(reason)" ng-show="showReportAbuseComment"
           placeholder="What is wrong with this vendor..."></textarea>
-
+<button type="button" ng-click="toggleFavorite(outlet)" class="btn btn-primary">
+  {{outlet.markedAsFavorite ? 'Un Favorite' : 'Favorite'}}
+</button>
+<a class="button button-primary" scroll-to="reviewForm">Write review</a>
 <div ui-view="outletDealContent"></div>
+<div outlet-reviews></div>

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use mysql as the database for Active Record
@@ -57,7 +56,8 @@ gem 'geokit-rails' #for geo location calculation
 gem 'json' #for all JSON methods just like javascript
 gem 'will_paginate', '~> 3.0.6' #For pagination, we can use specific gem for bootstrap pagination but for now we just want simple infinite scroll.
 gem 'friendly_id', '~> 5.1.0'
+gem 'markable', :git => 'https://github.com/effektz/markable.git', :branch => :master
 
-group :development, :test do
+group :production do
   gem 'passenger' #will be used as a webserver in production
 end

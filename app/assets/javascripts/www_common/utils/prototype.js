@@ -68,4 +68,16 @@ Array.prototype.find = function(inputItem) {
 
 Array.prototype.findAll = function(inputItems) {
     return this.find(inputItems);
+};
+
+Array.prototype.remove = function(inputItem) {
+    var index = -1;
+    var self = this;
+    this.forEach(function(item) {
+        index++;
+        if (item.id == inputItem.id || item.slug == inputItem.slug) {
+            self.splice(index,1);
+            return;
+        }
+    })
 }

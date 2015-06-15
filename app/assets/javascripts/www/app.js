@@ -14,6 +14,7 @@ appUser.config(['$routeProvider', '$stateProvider', '$urlRouterProvider', '$auth
         .state('app.outletDetail.dealDetail', Routes.dealDetail)
         .state('app.orders', Routes.orders)
         .state('app.orderDetail', Routes.orderDetail)
+        .state('app.favoriteOutlets', Routes.favoriteOutlets)
 
     $urlRouterProvider.otherwise('app/outlets');
     $locationProvider.html5Mode(true);

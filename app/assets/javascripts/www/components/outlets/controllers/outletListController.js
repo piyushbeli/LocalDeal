@@ -1,7 +1,7 @@
 appUser.controller("OutletListController", ['$scope', '$rootScope', '$state', '$location', '$window', 'OutletService', 'States',
-    'Utils', 'ReferenceDataCache', 'CacheKeys' , 'CommonCache', 'SearchCriteria',
-    function($scope, $rootScope, $state, $location, $window, OutletService, States,
-                                                    Utils, ReferenceDataCache, CacheKeys , CommonCache, SearchCriteria) {
+    'Utils', 'ReferenceDataCache', 'CacheKeys' , 'CommonCache', 'SearchCriteria', 'LoginService', 'LocationService',
+    function($scope, $rootScope, $state, $location, $window, OutletService, States, Utils, ReferenceDataCache,
+             CacheKeys , CommonCache, SearchCriteria, LoginService, LocationService) {
     $window.document.title = $window.document.title + " - Outlets";
     $scope.criteria = SearchCriteria.instanceFromQueryString($location.search());
 
@@ -11,8 +11,8 @@ appUser.controller("OutletListController", ['$scope', '$rootScope', '$state', '$
     $scope.data= {};
 
     //NavController is ditching many times so making sure that we have current location here.
-    navigator.geolocation.getCurrentPosition(function (position) {
-        $scope.criteria.currentLocation = [position.coords.latitude, position.coords.longitude];
+        LocationService.getCurrentLocation(function (location) {
+        $scope.criteria.currentLocation = location;
     });
 
     $scope.fetchOutlets = function() {
@@ -44,6 +44,21 @@ appUser.controller("OutletListController", ['$scope', '$rootScope', '$state', '$
             .catch(function(errorMessage) {
                 alert(errorMessage);
             });
+    };
+
+    $scope.toggleFavorite = function(outlet) {
+        if (!$rootScope.isLoggedIn()) {
+            LoginService.openLoginDialog();
+            return;
+        }
+        OutletService.toggleFavorite(outlet)
+            .then(function(response) {
+                $rootScope.data.favoriteOutletsCount++;
+                outlet.markedAsFavorite = !outlet.markedAsFavorite;
+            })
+            .catch(function(errorMessage) {
+                alert(errorMessage);
+            })
     };
 
     ReferenceDataCache.get(CacheKeys.Categories)

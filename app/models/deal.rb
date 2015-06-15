@@ -1,6 +1,5 @@
 class Deal < ActiveRecord::Base
     include Vendor::VendorResource
-    include Commentable
     include FriendlyId
 
     has_many :offers
