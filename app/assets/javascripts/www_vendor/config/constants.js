@@ -15,3 +15,8 @@ appVendor.constant('Constants', {
         landingState: 'app.deals',
         emailConfirmationUrl: 'http://40ea6b.ngrok.com/vendor#/emailConfirmation'
     })
+    .constant("States", {
+        deals: 'app.deals',
+        outlets: 'app.outlets',
+        orders: 'app.orders'
+    })

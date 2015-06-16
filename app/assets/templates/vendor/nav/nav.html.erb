@@ -1,9 +1,12 @@
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="collapse navbar-collapse pull-right" ng-controller="NavController">
-            <ul class="nav navbar-nav">
-              <li ng-show="isLoggedIn()"><a ui-sref="app.accountDetail">{{ user.name || user.email }}</a></li>
-              <li ng-show="isLoggedIn()"><a class="btn" href="javascript:void(0)" ng-click="doLogout()">Log Out</a></li>
+            <ul ng-show="isLoggedIn()" class="nav navbar-nav">
+              <li><a ui-sref="app.accountDetail">{{ user.name || user.email }}</a></li>
+              <li><a class="btn" href="javascript:void(0)" ui-sref="app.outlets">Outlets</a></li>
+              <li><a class="btn" href="javascript:void(0)" ui-sref="app.deals">Deals</a></li>
+              <li><a class="btn" href="javascript:void(0)" ng-click="doLogout()">Log Out</a></li>
+
             </ul>
         </div>
     </div>

@@ -6,7 +6,7 @@ class Vendor::OutletsController < ApplicationController
 
 
   def fetch_outlet
-    @outlet = Outlet.find_by_id(params[:id])
+    @outlet = Outlet.friendly.find(params[:id])
   end
 
   def verify_ownership
