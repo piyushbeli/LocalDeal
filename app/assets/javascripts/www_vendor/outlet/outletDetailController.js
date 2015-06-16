@@ -71,6 +71,10 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
                 });
         };
 
+        $scope.cancel = function() {
+            $state.go(States.outlets);
+        };
+
         $scope.googlePlaceAutoCompleteOptionsCity = Utils.googlePlaceAutoCompleteOptionsCity();
         $scope.googlePlaceAutoCompleteOptionsStreet = Utils.googlePlaceAutoCompleteOptionsStreet(/*$scope.outlet ? $scope.outlet.getStreetBoundary() : ""*/);
 

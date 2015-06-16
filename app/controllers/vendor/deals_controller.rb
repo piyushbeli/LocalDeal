@@ -11,7 +11,7 @@ class Vendor::DealsController < ApplicationController
   respond_to :json
 
   def find_deal
-    @deal = Deal.find_by_id(params[:id])
+    @deal = Deal.friendly.find(params[:id])
     render json: {errors: ["Deal not found"]},status: 422 if @deal.nil?
   end
 
@@ -30,7 +30,7 @@ class Vendor::DealsController < ApplicationController
       return
     end
     deal = Deal.new(deal_create_params.merge(vendor_id: current_vendor.id))
-    outlets = Outlet.where(:id => params[:outlets])
+    outlets = Outlet.where(:slug => params[:outlets])
     deal.outlets << outlets
     if deal.save
       render json: deal

@@ -3,9 +3,9 @@ appVendor.factory("Deal", ['Utils', 'Offer', function(Utils, Offer) {
         if (!data) {
             return;
         }
-        this.id = data.id;
+        this.id = data.slug;
         this.title = data.title;
-        this.vendor = data.vendor;
+        this.description = data.description;
         this.outlets = data.outlets;
         this.offers = Offer.build(data.offers);
 

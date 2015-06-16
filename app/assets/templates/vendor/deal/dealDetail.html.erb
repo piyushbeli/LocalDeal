@@ -17,8 +17,10 @@
     </div>
   </div>
   <div class="form-group">
-    <button class="button button-primary" ng-click="saveDeal()">Create</button>
+    <button class="btn btn-primary" ng-click="saveDeal()">Save</button>
+    <button class="btn btn-calm" ng-click="cancel()">Cancel</button>
   </div>
+
   <div ng-if="!deal.isNew()">
     <h3>Selected outlets</h3>
     <div class="form-group" ng-repeat="outlet in deal.outlets">
@@ -29,11 +31,13 @@
 
     </div>
   </div>
-  <h3> Offers</h3>
-  <button class="button button-primary" ui-sref="app.dealDetail.newOffer">Create Offer</button>
-  <div class="form-group" ng-repeat="offer in deal.offers">
-    <span>{{offer.whatYouGet}}</span>
-    <button class="button button-primary" ng-click="editOffer(offer)">Edit</button>
-  </div>
+ <div ng-show="!deal.isNew()">
+   <h3> Offers</h3>
+   <button class="button button-primary" ui-sref="app.dealDetail.newOffer">Create Offer</button>
+   <div class="form-group" ng-repeat="offer in deal.offers">
+     <span>{{offer.whatYouGet}}</span>
+     <button class="button button-primary" ng-click="editOffer(offer)">Edit</button>
+   </div>
+ </div>
 </form>
 <div ui-view="offerDetailContent"></div>

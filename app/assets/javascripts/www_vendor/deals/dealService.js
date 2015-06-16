@@ -40,7 +40,7 @@ appVendor.service("DealService", ['Deal', 'Offer', '$q', '$http', 'HttpRoutes', 
         if (deal.isNew()) {
             return self.createDeal(deal);
         } else {
-
+            return self.updateDeal(deal);
         }
     }
 
@@ -61,7 +61,7 @@ appVendor.service("DealService", ['Deal', 'Offer', '$q', '$http', 'HttpRoutes', 
 
     self.updateDeal = function(deal) {
         var deferred = $q.defer(),
-            url = HttpRoutes.deal + "/" + "id",
+            url = HttpRoutes.deal + "/" + deal.id,
             postData = {
                 title: deal.title,
                 description: deal.description
