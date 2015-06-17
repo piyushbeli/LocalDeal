@@ -40,6 +40,6 @@
     "ngstorage": "~0.3.4"
   },
   "resolutions": {
-    "angular": "1.4.0"
+    "angular": "1.4.1"
   }
 }
