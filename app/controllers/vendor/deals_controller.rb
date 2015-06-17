@@ -62,7 +62,7 @@ class Vendor::DealsController < ApplicationController
   end
 
   def addOutlet
-    outlet = Outlet.find_by_id(params[:outlet_id])
+    outlet = Outlet.friendly.find(params[:outlet_id])
     @deal.outlets.add(outlet)
     if @deal.save
       render json: {success: true}

@@ -18,12 +18,12 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            vendor: ['$auth', '$q', '$state', 'Vendor', '$rootScope', function ($auth, $q, $state, Vendor, $rootScope) {
+            auth: ['$auth', '$q', '$state', 'Vendor', '$rootScope', function ($auth, $q, $state, Vendor, $rootScope) {
                 var deferred = $q.defer();
                 $auth.validateUser()
                     .then(function(response) {
                         $rootScope.vendor = Vendor.build(response);
-                        deferred.resolve($rootScope.vendor);
+                        deferred.resolve();
                     })
                     .catch(function(response) {
                         $state.go('login');
@@ -87,7 +87,7 @@ appVendor.constant("Routes", {
         url: '/offers/:offer_id',
         params: {offer: null},
         views: {
-            'offerDetailContent': {
+            'mainContent@app': {
                 templateUrl: 'vendor/deal/offer/offerDetail.html',
                 controller: 'OfferDetailController'
             }
@@ -111,7 +111,7 @@ appVendor.constant("Routes", {
     newOffer: {
         url: '/offers/new',
         views: {
-            'offerDetailContent': {
+            'mainContent@app': {
                 templateUrl: 'vendor/deal/offer/offerDetail.html',
                 controller: 'OfferDetailController'
             }
@@ -156,16 +156,16 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            outlet: ['$stateParams', 'OutletService', 'vendor', function($stateParams, OutletService, vendor) {
+            outlet: ['$stateParams', 'OutletService', '$rootScope', function($stateParams, OutletService, $rootScope) {
                 var outlet = $stateParams['outlet'];
                 if (outlet) {
                     return outlet;
                 } else {
-                    var outletId = $stateParams['id'];
+                    var outletId = $stateParams['outlet_id'];
                     if (outletId == 'new') {
-                        return OutletService.newOutlet();
+                        return OutletService.newOffer();
                     } else {
-                        return vendor.outlets.find({id: outletId});
+                        return $rootScope.vendor.outlets.find({id: outletId});
                     }
                 }
             }]

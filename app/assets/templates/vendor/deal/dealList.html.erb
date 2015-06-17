@@ -1,5 +1,12 @@
-<a ui-sref="app.newDeal">Create deal</a>
-<div ng-repeat="deal in data.deals">
-    <a ng-click="openDealDetail(deal)">{{deal.title}}</a>
-    <span class="bg-success">{{deal.noOfOutlets}}</span>
+<div class="row">
+  <div class="col col-md-6 col-md-offset-3">
+    <button class="btn btn-primary" ui-sref="app.newDeal">Create deal</button>
+    <div ng-repeat="deal in data.deals">
+      <div class="row">
+        <a class="col col-md-9" ng-click="openDealDetail(deal)" href="javascript:void(0)">{{deal.title}}</a>
+        <span class="col col-md-3">{{deal.noOfOutlets || 0}} outlets</span>
+      </div>
+      <hr>
+    </div>
+  </div>
 </div>

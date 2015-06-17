@@ -13,8 +13,7 @@ class Vendor::OffersController < ApplicationController
   end
 
   def create
-
-    @offer = Offer.new(offer_params.merge(:deal_id => params[:deal_id]))
+    @offer = Offer.new(offer_params.merge(:deal_id => @deal.id))
     if @offer.save
       render 'vendor/offers/show'
     else
@@ -31,12 +30,12 @@ class Vendor::OffersController < ApplicationController
   end
 
   def verify_ownership
-    deal = Deal.find_by_id(params[:deal_id])
-    if deal.vendor.id != current_vendor.id
+    @deal = Deal.friendly.find(params[:deal_id])
+    if @deal.vendor.id != current_vendor.id
       render json: {errors: ["Not authorized"]}, status: 401
     end
-    #All ow only 5 offers per deal
-    if deal.offerCountLimitReached?
+    #Allow only 5 offers per deal
+    if @deal.offerLimitReached?
       render json: {errors: ["You have reached limit of creating offers under this deal, but you can still update some older offer"]}, status: 422
       return
     end

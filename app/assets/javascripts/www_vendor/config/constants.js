@@ -18,5 +18,11 @@ appVendor.constant('Constants', {
     .constant("States", {
         deals: 'app.deals',
         outlets: 'app.outlets',
-        orders: 'app.orders'
+        orders: 'app.orders',
+        dealDetail: 'app.dealDetail',
+        offerDetail: 'app.dealDetail.offerDetail',
+        newDeal: 'app.newDeal',
+        newOffer: 'app.dealDetail.newOffer',
+        outletDetail: 'app.outletDetail',
+        newOutlet: 'app.newOutlet'
     })

@@ -30,7 +30,7 @@ class Deal < ActiveRecord::Base
       outlets.count
     end
 
-    def offerCountLimitReached?
+    def offerLimitReached?
       offers.count == 5
     end
 

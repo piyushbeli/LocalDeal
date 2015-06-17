@@ -17,7 +17,7 @@ appVendor.config(['$routeProvider', '$locationProvider', '$stateProvider', '$url
         .state('app.addresses', Routes.addresses)
         .state('app.outlets', Routes.outlets)
         .state('app.outletDetail', Routes.outletDetail)
-        .state('app.newOutlet', Routes.newOutlet)
+        .state('app.newOutlet', Routes.outletDetail)
         .state('emailConfirmation', Routes.emailConfirmation)
         .state('app.accountDetail', Routes.accountDetail)
 
