@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h3 class="modal-title">Select Outlets</h3>
+</div>
+<div class="modal-body">
+  <div ng-repeat="outlet in vendor.outlets">
+    <label class="checkbox">
+      <input type="checkbox" checklist-model="selectedOutlets" checklist-value="outlet"
+             ng-disabled="deal.outlets.contains(outlet)">
+      {{outlet.name}}
+    </label>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="addSelectedOutlets()">Add</button>
+  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

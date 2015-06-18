@@ -8,6 +8,7 @@ appVendor.constant('Constants', {
         outlet: '/vendor/outlets',
         deal: '/vendor/deals',
         removeOutlet: '/vendor/deals/{deal_id}/outlets/{outlet_id}',
+        addOutlets: 'vendor/deals/{deal_id}/outlets',
         offer: 'vendor/deals/{deal_id}/offers'
     })
     .constant('Constants', {

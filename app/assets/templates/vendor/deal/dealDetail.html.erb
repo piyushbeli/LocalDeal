@@ -26,13 +26,13 @@
       <div ng-if="!deal.isNew()" style="margin-top: 12%">
         <div class="row">
           <h4 class="col col-md-6"> Selected outlets </h4>
-          <button class="col col-md-3 btn btn-primary" >Add Outlet</button>
+          <button class="col col-md-3 btn btn-primary" ng-click="openOutletSelectionModal()">Add Outlet</button>
         </div>
         <hr>
         <div class="form-group" ng-repeat="outlet in deal.outlets">
           <div class="row">
             <a ui-sref="app.outletDetail({id: outlet.id})" class="col col-md-4">{{outlet.name}}</a>
-            <a class="col col-md-2" ng-click="removeOutlet(outlet)">Remove</a>
+            <a class="col col-md-2" ng-click="removeOutlet(outlet)" href="javascript:void(0)">Remove</a>
           </div>
         </div>
         <h5 ng-show="deal.outlets.length == 0">No outlet selected for this deal</h5>
@@ -50,7 +50,7 @@
         </div>
         <hr>
       </div>
-      <h5 ng-show="deal.outlets.length == 0">No offer added for this deal</h5>
+      <h5 ng-show="deal.offers.length == 0">No offer added for this deal</h5>
     </form>
   </div>
 </div>

@@ -56,6 +56,7 @@ Rails.application.routes.draw do
 
       #Remove an outlet from deal.
       delete 'deals/:id/outlets/:outlet_id' => 'deals#removeOutlet'
+      put 'deals/:id/outlets' => 'deals#addOutlets'
     end
   end
 

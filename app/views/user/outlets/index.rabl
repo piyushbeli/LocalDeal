@@ -7,5 +7,5 @@ child(:deals) do
     attributes :title, :id
 end
 node(:markedAsFavorite) do |outlet|
-  outlet.marked_as? :favorite, :by => @current_user
+  outlet.marked_as? :favorite, :by => @current_user unless @current_user.nil?
 end

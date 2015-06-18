@@ -80,4 +80,8 @@ Array.prototype.remove = function(inputItem) {
             return;
         }
     })
+};
+
+Array.prototype.contains = function(item) {
+    return this.find(item) != null;
 }

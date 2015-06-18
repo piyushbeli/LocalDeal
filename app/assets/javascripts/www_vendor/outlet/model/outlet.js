@@ -1,6 +1,6 @@
 appVendor.factory("Outlet", ['Utils', function(Utils) {
     function Outlet(data) {
-        if (!data) {$rootScope.vendor
+        if (!data) {
             return;
         }
         this.id = data.slug;

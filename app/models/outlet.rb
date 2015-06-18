@@ -13,8 +13,8 @@ class Outlet < ActiveRecord::Base
 
   attr_accessor :distance_from_current_loc
 
-  has_many :deal_outlets
-  has_and_belongs_to_many :deals, through: :deal_outlets ,dependent: :destroy
+  has_many :deals_outlets
+  has_many :deals, through: :deals_outlets ,dependent: :destroy
 
   validates_presence_of :city_id, :vendor_id, :latitude, :longitude, :name, :mobile, :city, :street, :street_id, :slug
   validates_format_of :latitude, :longitude, with: /\A\d{1,9}\.?\d{0,6}\z/

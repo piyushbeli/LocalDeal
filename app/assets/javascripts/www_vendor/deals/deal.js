@@ -1,4 +1,4 @@
-appVendor.factory("Deal", ['Utils', 'Offer', function(Utils, Offer) {
+appVendor.factory("Deal", ['Utils', 'Offer', '$injector', function(Utils, Offer, $injector) {
     function Deal(data) {
         if (!data) {
             return;
@@ -6,7 +6,8 @@ appVendor.factory("Deal", ['Utils', 'Offer', function(Utils, Offer) {
         this.id = data.slug;
         this.title = data.title;
         this.description = data.description;
-        this.outlets = data.outlets;
+        var Outlet = $injector.get("Outlet");
+        this.outlets = Outlet.build(data.outlets);
         this.offers = Offer.build(data.offers);
 
         //List specific

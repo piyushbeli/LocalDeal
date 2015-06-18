@@ -3,8 +3,8 @@ class Deal < ActiveRecord::Base
     include FriendlyId
 
     has_many :offers
-    has_many :deal_outlets
-    has_and_belongs_to_many :outlets, through: :deal_outlets
+    has_many :deals_outlet
+    has_many :outlets, through: :deals_outlet
     belongs_to :vendor
 
     validates_presence_of :title, :vendor_id
