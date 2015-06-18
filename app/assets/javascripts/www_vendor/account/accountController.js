@@ -1,10 +1,10 @@
-appVendor.controller("AccountController", function ($scope, $rootScope, AccountService, CacheKeys, ReferenceDataCache) {
+appVendor.controller("AccountController", ['$scope', '$rootScope', 'AccountService', 'CacheKeys', 'ReferenceDataCache', function ($scope, $rootScope, AccountService, CacheKeys, ReferenceDataCache) {
     $scope.errorMessage = null;
     $scope.data = {};
     ReferenceDataCache.get(CacheKeys.Categories)
         .then(function(categories) {
             $scope.data.categories = categories;
-            //Set the reference of offer type from the above array
+            //Set the reference of category and subcategory from the above array
             if ($rootScope.vendor.category) {
                 $rootScope.vendor.category = $scope.data.categories.find($rootScope.vendor.category);
             }
@@ -21,4 +21,4 @@ appVendor.controller("AccountController", function ($scope, $rootScope, AccountS
                 $scope.errorMessage = errorMessage;
             })
     };
-});
+}]);

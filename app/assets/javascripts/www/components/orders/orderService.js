@@ -1,4 +1,4 @@
-appUser.service("OrderService", function($http, $q, HttpRoutes, Order) {
+appUser.service("OrderService", ['$http', '$q', 'HttpRoutes', 'Order', function($http, $q, HttpRoutes, Order) {
     var self = this;
 
     self.fetchOrders = function() {
@@ -32,4 +32,4 @@ appUser.service("OrderService", function($http, $q, HttpRoutes, Order) {
     self.checkIn = function(order) {
 
     };
-})
+}])

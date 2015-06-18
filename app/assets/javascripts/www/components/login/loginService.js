@@ -1,4 +1,4 @@
-appUser.service("LoginService", function ($modal) {
+appUser.service("LoginService", ['$modal', function ($modal) {
     var self = this;
 
     self.loginDialog = null;
@@ -9,4 +9,4 @@ appUser.service("LoginService", function ($modal) {
             controller: 'LoginController'
         });
     };
-})
+}])

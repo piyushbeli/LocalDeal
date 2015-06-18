@@ -1,4 +1,4 @@
-appCommon.factory("Vendor", function (Outlet) {
+appCommon.factory("Vendor", ['Outlet', function (Outlet) {
     function Vendor(data) {
         if (!data) {
             return;
@@ -23,4 +23,4 @@ appCommon.factory("Vendor", function (Outlet) {
     }
 
     return Vendor;
-})
+}])

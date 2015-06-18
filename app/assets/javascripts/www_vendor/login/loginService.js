@@ -1,4 +1,4 @@
-appVendor.service("LoginService", function($auth, $q) {
+appVendor.service("LoginService", ['$auth', '$q', function($auth, $q) {
     var self = this;
 
     self.doLogin = function(vendorData) {
@@ -24,4 +24,4 @@ appVendor.service("LoginService", function($auth, $q) {
             })
         return deferred.promise;
     }
-})
+}])

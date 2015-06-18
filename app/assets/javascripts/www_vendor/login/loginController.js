@@ -1,4 +1,5 @@
-appVendor.controller("LoginController", function ($scope, $rootScope, $state, Constants, LoginService, $auth) {
+appVendor.controller("LoginController", ['$scope', '$rootScope', '$state', 'Constants', 'LoginService', '$auth',
+    function ($scope, $rootScope, $state, Constants, LoginService, $auth) {
     $scope.showLoginForm = true;
     $scope.vendor = {};
     $scope.isRegistrationSuccessful = false;
@@ -37,4 +38,4 @@ appVendor.controller("LoginController", function ($scope, $rootScope, $state, Co
         $state.go('login');
     });
 
-})
+}])

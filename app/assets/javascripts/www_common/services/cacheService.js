@@ -1,5 +1,6 @@
 appCommon
-    .service("ReferenceDataCache", function ($http, $q, CacheKeys, CacheFactory, CommonHttpRoutes) {
+    .service("ReferenceDataCache", ['$http', '$q', 'CacheKeys', 'CacheFactory', 'CommonHttpRoutes',
+        function ($http, $q, CacheKeys, CacheFactory, CommonHttpRoutes) {
         var self = this;
         if (!CacheFactory.get('LOCAL_DEAL_REFERENCE_DATA_CACHE')) {
             CacheFactory.createCache('LOCAL_DEAL_REFERENCE_DATA_CACHE', {
@@ -36,8 +37,8 @@ appCommon
             return deferred.promise;
         };
 
-    })
-.service("CommonCache", function(CacheFactory) {
+    }])
+.service("CommonCache", ['CacheFactory', function(CacheFactory) {
         var self = this;
         if (!CacheFactory.get('LOCAL_DEAL_COMMON_DATA_CACHE')) {
             CacheFactory.createCache('LOCAL_DEAL_COMMON_DATA_CACHE', {
@@ -55,4 +56,4 @@ appCommon
         self.set = function(key, val) {
             commonDataCache.put(key, val);
         };
-})
+}])

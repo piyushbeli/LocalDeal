@@ -1,8 +1,7 @@
-class CreateJoinTableDealsOutlets < ActiveRecord::Migration
+class CreateJoinTableDealOutlet < ActiveRecord::Migration
   def change
     create_join_table :deals, :outlets do |t|
-      # t.index [:deal_id, :outlet_id]
-      # t.index [:outlet_id, :deal_id]
     end
+    add_index :deals_outlets, [ :deal_id, :outlet_id ], :unique => true, :name => 'by_deal_and_outlet'
   end
 end

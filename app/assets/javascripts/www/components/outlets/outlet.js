@@ -1,4 +1,4 @@
-appUser.factory("Outlet", function(Deal) {
+appUser.factory("Outlet", ['Deal', 'Review', function(Deal, Review) {
     function Outlet(data) {
         if (!data) {
             return;
@@ -11,6 +11,9 @@ appUser.factory("Outlet", function(Deal) {
         this.city = data.city;
         this.street = data.street;
         this.distance = data.distance; //Distance form current location
+        this.markedAsFavorite = data.markedAsFavorite;
+        this.reviews = Review.build(data.reviews);
+        this.reviewCount = data.review_count;
 
         //Detail specific
         this.latitude = data.latitude;
@@ -71,4 +74,4 @@ appUser.factory("Outlet", function(Deal) {
 
     //End
     return Outlet;
-})
+}])

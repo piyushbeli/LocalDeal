@@ -27,9 +27,9 @@ appUser.constant("Routes", {
             }
         },
         resolve: {
-            setTitle: function($window, Constants) {
+            setTitle: ['$window', 'Constants', function($window, Constants) {
                 $window.document.title = $window.document.title + " - Outlets"
-            }
+            }]
         }
     },
     outletDetail: {
@@ -41,9 +41,9 @@ appUser.constant("Routes", {
             }
         },
         resolve: {
-            outlet: function (OutletService, $stateParams, $state) {
+            outlet: ['OutletService', '$stateParams', '$state', function (OutletService, $stateParams, $state) {
                 return OutletService.fetchOutletDetail($stateParams['id']);
-            }
+            }]
         }
     },
 
@@ -66,9 +66,9 @@ appUser.constant("Routes", {
             }
         },
         resolve: {
-            deal: function(outlet, $stateParams) {
+            deal: ['outlet', '$stateParams', function(outlet, $stateParams) {
                 return outlet.findDeal($stateParams['deal_id']);
-            }
+            }]
         }
     },
 
@@ -91,9 +91,9 @@ appUser.constant("Routes", {
             }
         },
         resolve: {
-            order: function(OrderService, $stateParams) {
+            order: ['OrderService', '$stateParams', function(OrderService, $stateParams) {
                 return OrderService.fetchOrderDetail($stateParams['order_no']);
-            }
+            }]
         }
     },
 
@@ -103,6 +103,16 @@ appUser.constant("Routes", {
             'mainContent': {
                 templateUrl: 'user/account/profile.html',
                 controller: 'AccountController'
+            }
+        }
+    },
+
+    favoriteOutlets: {
+        url: '/favorites',
+        views: {
+            'mainContent': {
+                templateUrl: 'user/outlet/favoriteOutletList.html',
+                controller: 'FavoriteOutletListController'
             }
         }
     }

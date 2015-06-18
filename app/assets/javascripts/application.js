@@ -20,6 +20,7 @@
 //= require ngInfiniteScroll
 //= require ngScrollTo
 //= require ngstorage
+//=require  angular-loading-bar
 
 //= require ./www_common/app.js
 //= require ./www/app.js

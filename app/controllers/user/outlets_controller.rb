@@ -46,7 +46,7 @@ class User::OutletsController < ApplicationController
     set_user_by_token(:user)
     @current_user = current_user
     @outlet = Outlet.friendly.find(params[:id])
-    current_location =  [26.8806736,75.7712396]
+    current_location =  params[:current_location]
     #Can not use distance name because that is internally used by order_by_distance query.
     @outlet.distance_from_current_loc = @outlet.distance_from(current_location, :units => :kms) unless current_location.nil?
     render 'user/outlets/show'

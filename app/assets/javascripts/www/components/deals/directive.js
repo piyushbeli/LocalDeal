@@ -4,9 +4,9 @@ appUser.directive("dealSummary", function () {
         restrict: 'A'
     }
 })
-    .directive("dealReviews", function () {
+    .directive("outletReviews", function () {
         return {
-            templateUrl: 'user/deal/dealReviews.html',
+            templateUrl: 'user/outlet/outletReviews.html',
             restrict: 'A'
         }
     })

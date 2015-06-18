@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   include Spammable
   include Spammer
+  acts_as_marker
 
   devise :timeoutable, :timeout_in => 30.days
   validates :name, presence: true, allow_blank: false

@@ -1,4 +1,4 @@
-appUser.factory("Deal", function(Utils, Offer, Review) {
+appUser.factory("Deal", ['Utils', 'Offer', function(Utils, Offer) {
     function Deal(data) {
         if (!data) {
             return;
@@ -7,8 +7,6 @@ appUser.factory("Deal", function(Utils, Offer, Review) {
         this.title = data.title;
         this.vendor = data.vendor;
         this.offers = Offer.build(data.offers);
-        this.reviews = Review.build(data.reviews);
-        this.reviewCount = data.review_count;
     }
 
     Deal.build = function(data) {
@@ -38,4 +36,4 @@ appUser.factory("Deal", function(Utils, Offer, Review) {
 
     //End
     return Deal;
-})
+}])

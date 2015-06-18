@@ -11,7 +11,7 @@ class Vendor::DealsController < ApplicationController
   respond_to :json
 
   def find_deal
-    @deal = Deal.find_by_id(params[:id])
+    @deal = Deal.friendly.find(params[:id])
     render json: {errors: ["Deal not found"]},status: 422 if @deal.nil?
   end
 
@@ -30,7 +30,7 @@ class Vendor::DealsController < ApplicationController
       return
     end
     deal = Deal.new(deal_create_params.merge(vendor_id: current_vendor.id))
-    outlets = Outlet.where(:id => params[:outlets])
+    outlets = Outlet.where(:slug => params[:outlets])
     deal.outlets << outlets
     if deal.save
       render json: deal
@@ -52,7 +52,7 @@ class Vendor::DealsController < ApplicationController
   end
 
   def removeOutlet
-    outlet = Outlet.find_by_id(params[:outlet_id])
+    outlet = Outlet.friendly.find(params[:outlet_id])
     @deal.outlets.delete(outlet)
     if @deal.save
       render json: {success: true}
@@ -61,14 +61,16 @@ class Vendor::DealsController < ApplicationController
     end
   end
 
-  def addOutlet
-    outlet = Outlet.find_by_id(params[:outlet_id])
-    @deal.outlets.add(outlet)
-    if @deal.save
-      render json: {success: true}
-    else
-      render json: {errors: @deal.errors.full_messages}, status: 422
+  def addOutlets
+    outlets = Outlet.where(:slug => params[:outlets])
+    begin
+      @deal.outlets << outlets
+      @deal.save
+    rescue ActiveRecord::RecordInvalid
+      render json: {errors: ["Error occurred while adding the outlet"]}, status: 422
+      return
     end
+    render json: {success: true}
   end
 
   def verify_ownership

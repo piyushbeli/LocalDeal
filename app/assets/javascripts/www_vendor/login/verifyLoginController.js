@@ -1,4 +1,4 @@
-appVendor.controller("VerifyLoginController", function($rootScope, $state, Constants) {
+appVendor.controller("VerifyLoginController", ['$rootScope', '$state', 'Constants', function($rootScope, $state, Constants) {
    /* $rootScope.$on('auth:login-success', function (e) {
         $rootScope.user = e.currentScope.user;
         $state.go(Constants.landingState);
@@ -13,4 +13,4 @@ appVendor.controller("VerifyLoginController", function($rootScope, $state, Const
         $rootScope.user = e.currentScope.user;
         $state.go(Constants.landingState);
     });*/
-})
+}])

@@ -1,39 +1,56 @@
-<form role="form">
-  <div class="form-group">
-    <label class="control-label">Title</label>
-    <input type="text" class="form-control" ng-model="deal.title">
-  </div>
-  <div class="form-group">
-    <label class="control-label">Description</label>
-    <textarea rows="5" class="form-control" ng-model="deal.description"></textarea>
-  </div>
-  <div ng-if="deal.isNew()">
-    <h3>Select outlets</h3>
-    <div class="form-group" ng-repeat="outlet in vendor.outlets">
-      <label class="checkbox">
-        <input type="checkbox" checklist-model="deal.outlets" checklist-value="outlet.id">
-        {{outlet.name}}
-      </label>
-    </div>
-  </div>
-  <div class="form-group">
-    <button class="button button-primary" ng-click="saveDeal()">Create</button>
-  </div>
-  <div ng-if="!deal.isNew()">
-    <h3>Selected outlets</h3>
-    <div class="form-group" ng-repeat="outlet in deal.outlets">
-      <div class="row">
-        <h4 class="col col-md-4">{{outlet.name}}</h4>
-        <a class="col col-md-2" ng-click="removeOutlet(outlet)">Remove</a>
+<div class="row">
+  <div class="col col-md-6 col-md-offset-3">
+    <form role="form">
+      <div class="form-group">
+        <label class="control-label">Title</label>
+        <input type="text" class="form-control" ng-model="deal.title">
+      </div>
+      <div class="form-group">
+        <label class="control-label">Description</label>
+        <textarea rows="5" class="form-control" ng-model="deal.description"></textarea>
+      </div>
+      <div ng-if="deal.isNew()">
+        <h3>Select outlets</h3>
+        <div class="form-group" ng-repeat="outlet in vendor.outlets">
+          <label class="checkbox">
+            <input type="checkbox" checklist-model="deal.outlets" checklist-value="outlet.id">
+            {{outlet.name}}
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" ng-click="saveDeal()">Save</button>
+        <button class="btn btn-calm" ng-click="cancel()">Cancel</button>
       </div>
 
-    </div>
+      <div ng-if="!deal.isNew()" style="margin-top: 12%">
+        <div class="row">
+          <h4 class="col col-md-6"> Selected outlets </h4>
+          <button class="col col-md-3 btn btn-primary" ng-click="openOutletSelectionModal()">Add Outlet</button>
+        </div>
+        <hr>
+        <div class="form-group" ng-repeat="outlet in deal.outlets">
+          <div class="row">
+            <a ui-sref="app.outletDetail({id: outlet.id})" class="col col-md-4">{{outlet.name}}</a>
+            <a class="col col-md-2" ng-click="removeOutlet(outlet)" href="javascript:void(0)">Remove</a>
+          </div>
+        </div>
+        <h5 ng-show="deal.outlets.length == 0">No outlet selected for this deal</h5>
+      </div>
+
+      <div ng-show="!deal.isNew()" style="margin-top: 12%">
+        <div class="row">
+          <h4 class="col col-md-6"> Offers</h4>
+          <button class="col col-md-3 btn btn-primary" ui-sref="app.dealDetail.newOffer">Add Offer</button>
+        </div>
+        <hr>
+        <div class="form-group" ng-repeat="offer in deal.offers">
+          <span>{{offer.whatYouGet}}</span>
+          <button class="btn btn-warning" ng-click="editOffer(offer)">Edit</button>
+        </div>
+        <hr>
+      </div>
+      <h5 ng-show="deal.offers.length == 0">No offer added for this deal</h5>
+    </form>
   </div>
-  <h3> Offers</h3>
-  <button class="button button-primary" ui-sref="app.dealDetail.newOffer">Create Offer</button>
-  <div class="form-group" ng-repeat="offer in deal.offers">
-    <span>{{offer.whatYouGet}}</span>
-    <button class="button button-primary" ng-click="editOffer(offer)">Edit</button>
-  </div>
-</form>
-<div ui-view="offerDetailContent"></div>
+</div>

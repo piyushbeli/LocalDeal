@@ -13,7 +13,7 @@
 
 'use strict';
 
-angular.module('geocoder', ['ngStorage']).factory('Geocoder', function ($localStorage, $q, $timeout, $rootScope) {
+angular.module('geocoder', ['ngStorage']).factory('Geocoder', ['$localStorage', '$q', '$timeout', '$rootScope', function ($localStorage, $q, $timeout, $rootScope) {
     var locations = $localStorage.locations ? JSON.parse($localStorage.locations) : {};
 
     var queue = [];
@@ -110,4 +110,4 @@ angular.module('geocoder', ['ngStorage']).factory('Geocoder', function ($localSt
             return d.promise;
         }
     };
-});
+}]);

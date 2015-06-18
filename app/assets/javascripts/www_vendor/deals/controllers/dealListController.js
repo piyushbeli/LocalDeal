@@ -1,4 +1,4 @@
-appVendor.controller("DealListController", function($scope, $state, DealService) {
+appVendor.controller("DealListController", ['$scope', '$state', 'DealService', function($scope, $state, DealService) {
     $scope.data = {};
     DealService.fetchDealList()
         .then(function(deals) {
@@ -13,4 +13,4 @@ appVendor.controller("DealListController", function($scope, $state, DealService)
     };
 
 
-})
+}])

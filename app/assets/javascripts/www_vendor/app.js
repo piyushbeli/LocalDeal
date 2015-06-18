@@ -3,7 +3,8 @@ var appVendor = angular
         'uiGmapgoogle-maps', 'app.common'
     ]);
 
-appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider, $authProvider,
+appVendor.config(['$routeProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider', '$authProvider',
+    'uiGmapGoogleMapApiProvider', 'Routes', 'Constants', function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider, $authProvider,
                            uiGmapGoogleMapApiProvider, Routes, Constants) {
     $stateProvider
         .state('login', Routes.login)
@@ -14,6 +15,9 @@ appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $u
         .state('app.dealDetail.offerDetail', Routes.offerDetail)
         .state('app.dealDetail.newOffer', Routes.newOffer)
         .state('app.addresses', Routes.addresses)
+        .state('app.outlets', Routes.outlets)
+        .state('app.outletDetail', Routes.outletDetail)
+        .state('app.newOutlet', Routes.newOutlet)
         .state('emailConfirmation', Routes.emailConfirmation)
         .state('app.accountDetail', Routes.accountDetail)
 
@@ -36,7 +40,7 @@ appVendor.config(function ($routeProvider, $locationProvider, $stateProvider, $u
 
     uiGmapGoogleMapApiProvider.configure({
         //key: 'your api key',
-        v: '3.17',
+        v: '3.19.18',
         libraries: 'weather,geometry,visualization'
     });
-});
+}]);
