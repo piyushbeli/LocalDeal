@@ -14,14 +14,14 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
                 $scope.currentLocation.longitude = location[1];
                 //Set the center of the map to current location initially if outle's latitude and longitude is not already set.
                 if ($scope.outlet && $scope.outlet.latitude && $scope.outlet.longitude) {
-                    self.setMapOnThisCenter($scope.outlet.latitude, $scope.outlet.longitude);
+                    self.setMapOnThisCenter($scope.outlet.latitude, $scope.outlet.longitude, 18);
                 } else {
-                    self.setMapOnThisCenter(location[0], location[1]);
+                    self.setMapOnThisCenter(location[0], location[1], 15);
                 }
             })
 
         //Set options and initial setting for map
-        $scope.map = {center: {latitude: 45, longitude: -73}, zoom: 8};
+        $scope.map = {center: {latitude: 45, longitude: -73}, zoom: 10};
         $scope.options = {scrollwheel: true};
         $scope.marker = {
             id: 0,
@@ -48,7 +48,7 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
                     console.log(JSON.stringify(address));
                     $scope.outlet.latitude = address.lat;
                     $scope.outlet.longitude = address.lng;
-                    self.setMapOnThisCenter($scope.outlet.latitude, $scope.outlet.longitude, 15);
+                    self.setMapOnThisCenter($scope.outlet.latitude, $scope.outlet.longitude, 18);
                 })
                 .catch(function (error) {
                     console.log(JSON.stringify(error));
@@ -85,7 +85,7 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
             } else {
                 $scope.outlet.latitude = $scope.currentLocation.latitude;
                 $scope.outlet.longitude = $scope.currentLocation.longitude;
-                self.setMapOnThisCenter($scope.outlet.latitude, $scope.outlet.longitude, 15);
+                self.setMapOnThisCenter($scope.outlet.latitude, $scope.outlet.longitude, 18);
             }
         };
 
@@ -94,7 +94,7 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
             $scope.map.center.longitude = lng;
             $scope.marker.coords.latitude = lat;
             $scope.marker.coords.longitude = lng;
-            $scope.map.zoom = 18;
+            $scope.map.zoom = zoom || 15;
         }
 
         $scope.$watch('outlet.cityDetail', function (newVal, oldVal) {
@@ -126,7 +126,7 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
 
         $scope.$watch('outlet', function (newVal, oldVal) {
             if (newVal && !newVal.isNew()) {
-                self.setMapOnThisCenter(newVal.latitude, newVal.longitude, 18);
+                self.setMapOnThisCenter(newVal.latitude, newVal.longitude, 15);
             }
         })
 

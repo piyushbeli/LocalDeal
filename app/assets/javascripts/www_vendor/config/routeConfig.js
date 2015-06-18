@@ -18,12 +18,12 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            auth: ['$auth', '$q', '$state', 'Vendor', '$rootScope', function ($auth, $q, $state, Vendor, $rootScope) {
+            vendor: ['$auth', '$q', '$state', 'Vendor', '$rootScope', function ($auth, $q, $state, Vendor, $rootScope) {
                 var deferred = $q.defer();
                 $auth.validateUser()
                     .then(function(response) {
                         $rootScope.vendor = Vendor.build(response);
-                        deferred.resolve();
+                        deferred.resolve($rootScope.vendor);
                     })
                     .catch(function(response) {
                         $state.go('login');
@@ -156,16 +156,16 @@ appVendor.constant("Routes", {
             }
         },
         resolve: {
-            outlet: ['$stateParams', 'OutletService', '$rootScope', function($stateParams, OutletService, $rootScope) {
+            outlet: ['$stateParams', 'OutletService', 'vendor', function($stateParams, OutletService, vendor) {
                 var outlet = $stateParams['outlet'];
                 if (outlet) {
                     return outlet;
                 } else {
-                    var outletId = $stateParams['outlet_id'];
+                    var outletId = $stateParams['id'];
                     if (outletId == 'new') {
-                        return OutletService.newOffer();
+                        return OutletService.newOutlet();
                     } else {
-                        return $rootScope.vendor.outlets.find({id: outletId});
+                        return vendor.outlets.find({id: outletId});
                     }
                 }
             }]
