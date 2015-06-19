@@ -1,0 +1,21 @@
+<order-filter-criteria></order-filter-criteria>
+<div ng-repeat="order in orders">
+  <div class="row">
+    <div class="col col-md-4">
+      <div>Order no: {{order.orderNo}}</div>
+      <div><label>{{order.user.name}}</label></div>
+      <div><label>{{order.user.email}} | {{order.user.mobile}}</label></div>
+    </div>
+    <div class="col col-md-4 col-sm-1">
+      <div><label>{{order.whatYouGet}}</label></div>
+      <div>
+        <label ng-if="order.isExpired()">Expired {{order.expiresIn()}}</label>
+        <label ng-if="!order.isExpired()">Expires {{order.expiresIn()}}</label>
+      </div>
+    </div>
+    <div class="col col-md-1">
+      <button class="btn btn-primary" ng-click="showOrderDetail(order)">Show detail</button>
+    </div>
+  </div>
+  <hr>
+</div>

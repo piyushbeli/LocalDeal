@@ -1,14 +1,11 @@
 appUser.service("DealService", ['$http', '$q', 'HttpRoutes', 'Review', function($http, $q, HttpRoutes) {
     var self = this;
 
-    self.buyOffer = function(offer, outlet) {
+    self.buyOffer = function(offer) {
         var deferred = $q.defer(),
-            url = HttpRoutes.buyOffer.format({id: offer.id}),
-            postData = {
-                outlet_id: outlet.id
-            };
+            url = HttpRoutes.buyOffer.format({id: offer.id});
 
-        $http.post(url, postData)
+        $http.post(url)
             .then(function(response) {
                 deferred.resolve(response.data.order_no);
             })

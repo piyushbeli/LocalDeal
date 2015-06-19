@@ -37,7 +37,8 @@
     "angular-google-maps": "~2.1.1",
     "ngInfiniteScroll": "~1.2.1",
     "ngScrollTo": "*",
-    "ngstorage": "~0.3.4"
+    "ngstorage": "~0.3.4",
+    "isteven-angular-multiselect": "~4.0.0"
   },
   "resolutions": {
     "angular": "1.4.1"

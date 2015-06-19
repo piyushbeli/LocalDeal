@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
     user_offer = orders.select { |order| order.offer_id == offer.id}
     !user_offer.blank?
   end
+
+  def validateProfileCompletness?
+    !(email.blank? || mobile.blank? || name.blank?)
+  end
 end

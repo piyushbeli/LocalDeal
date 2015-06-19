@@ -1,10 +1,11 @@
-appUser.factory("Order", ['Vendor', 'Outlet', function(Vendor, Outlet) {
+appCommon.factory("Order", ['Vendor', 'User', 'Outlet', function(Vendor, User, Outlet) {
     function Order(data) {
         if (!data) {
             return;
         }
         this.orderNo = data.order_no;
         this.vendor = Vendor.build(data.vendor);
+        this.user = User.build(data.user);
         this.whatYouGet = data.what_you_get;
         this.finePrints = data.fine_print ? JSON.parse(data.fine_print): ["Not mentioned"];
         this.instruction = data.instruction;

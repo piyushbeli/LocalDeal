@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   include CommonResourceController
 
   before_filter :authenticate_user!, only: [:create]
+  before_filter :authenticate_member!, only: [:show, :index]
 
   def index
     @orders = current_member.orders
@@ -18,7 +19,7 @@ class OrdersController < ApplicationController
     @order = Order.find_by_order_no(params[:id])
     if current_user && current_user.id == @order.user_id
       render 'user/orders/show'
-    elsif curent_vendor && current_vendor.id == @order_vendor_id
+    elsif current_vendor && current_vendor.id == @order.vendor_id
       render 'vendor/orders/show'
     else
       render json: {errors: ["You are not authorized to see this order"]}, status: 422
@@ -32,15 +33,10 @@ class OrdersController < ApplicationController
       render json: {errors: [message]}, status: 422
       return
     end
-    outlet = Outlet.friendly.find(params[:outlet_id])
-    if outlet.nil?
-      render json: {errors: ["Outlet does not exist"]}, status: 422
-      return
-    end
 
     vendor_id = offer.deal.vendor.id
     order_no = generateOrderNo
-    order = Order.new(outlet_id: outlet.id, offer_id: offer.id, user_id: current_user.id, vendor_id: vendor_id, what_you_get: offer.what_you_get,
+    order = Order.new(offer_id: offer.id, user_id: current_user.id, vendor_id: vendor_id, what_you_get: offer.what_you_get,
                       fine_print: offer.fine_print, instruction: offer.instruction, redeemed: false,
                                          expire_at: offer.expire_at,order_no: order_no)
     if order.save
@@ -55,11 +51,14 @@ class OrdersController < ApplicationController
     if offer.nil?
       return "Offer does not exist"
     end
-    if offer.isExpired?
+    if offer.isExpired?l
       return "This deal has been expired"
     end
     if current_user.alreadyBoughtTheOffer? (offer)
       return "You have already availed this offer"
+    end
+    if current_user.validateProfileCompletness?
+      return "Please complete your profile before buying any dea"
     end
   end
 

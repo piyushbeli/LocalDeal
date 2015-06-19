@@ -41,15 +41,6 @@ appVendor.constant("Routes", {
             }
         }
     },
-    addresses: {
-        url: '/addresses',
-        views: {
-            'mainContent': {
-                templateUrl: 'vendor/address/addressList.html',
-                controller: 'AddressController'
-            }
-        }
-    },
     dealDetail: {
         url: '/deals/:id',
         views: {
@@ -182,6 +173,30 @@ appVendor.constant("Routes", {
         resolve: {
             outlet: ['OutletService', function(OutletService) {
                 return OutletService.newOutlet();
+            }]
+        }
+    },
+    orders: {
+        url: '/orders',
+        views: {
+            'mainContent': {
+                templateUrl: 'vendor/order/orderList.html',
+                controller: 'OrderListController'
+            }
+        }
+    },
+    orderDetail: {
+        url: '/orders/:id',
+        views: {
+            'mainContent': {
+                templateUrl: 'vendor/order/orderDetail.html',
+                controller: 'OrderDetailController'
+            }
+        },
+        resolve: {
+            order: ['OrderService', '$stateParams', function (OrderService, $stateParams) {
+                var id = $stateParams['id'];
+                return OrderService.fetchOrder(id);
             }]
         }
     }

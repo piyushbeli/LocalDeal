@@ -14,6 +14,7 @@
  *= require_self
  *= require bootstrap/dist/css/bootstrap
  *= require angular-loading-bar/build/loading-bar.min.css
+ *= require isteven-angular-multiselect/isteven-multi-select.css
  */
 
 

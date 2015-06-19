@@ -1,8 +1,8 @@
 collection @orders
 attributes :what_you_get, :created_at, :expire_at, :order_no, :redeemed
-child :vendor do
-    attributes :name, :id, :image
+child :user do
+    attributes :name, :id, :image, :mobile, :email
 end
 child :outlet do
-    attributes :id, :street
+    attributes :id, :name, :street
 end

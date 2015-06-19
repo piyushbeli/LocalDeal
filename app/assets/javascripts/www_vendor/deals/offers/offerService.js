@@ -51,8 +51,8 @@ appVendor.service("OfferService", ['Offer', '$q', '$http', 'HttpRoutes', functio
                 what_you_get: offer.whatYouGet,
                 fine_print: offer.finePrint.split("\n"),
                 instruction: offer.instruction,
-                start_time: offer.startTime,
-                expire_time: offer.expireTime
+                start_at: offer.startAt,
+                expire_at: offer.expireAt
             };
 
         $http.put(url, postData)

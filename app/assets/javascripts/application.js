@@ -21,6 +21,7 @@
 //= require ngScrollTo
 //= require ngstorage
 //=require  angular-loading-bar
+//=require isteven-angular-multiselect
 
 //= require ./www_common/app.js
 //= require ./www/app.js

@@ -14,12 +14,13 @@ appVendor.config(['$routeProvider', '$locationProvider', '$stateProvider', '$url
         .state('app.newDeal', Routes.newDeal)
         .state('app.dealDetail.offerDetail', Routes.offerDetail)
         .state('app.dealDetail.newOffer', Routes.newOffer)
-        .state('app.addresses', Routes.addresses)
         .state('app.outlets', Routes.outlets)
         .state('app.outletDetail', Routes.outletDetail)
         .state('app.newOutlet', Routes.newOutlet)
         .state('emailConfirmation', Routes.emailConfirmation)
         .state('app.accountDetail', Routes.accountDetail)
+        .state('app.orders', Routes.orders)
+        .state('app.orderDetail', Routes.orderDetail)
 
     $urlRouterProvider.otherwise('vendor/app/deals');
     $locationProvider.html5Mode(true);
