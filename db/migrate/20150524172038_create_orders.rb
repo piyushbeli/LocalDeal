@@ -10,6 +10,7 @@ class CreateOrders < ActiveRecord::Migration
       t.text :fine_print
       t.string :instruction
       t.datetime :expire_at, null:false
+      t.datetime :created_at, null:false
       t.boolean :redeemed, default: true
     end
     add_foreign_key :orders, :users

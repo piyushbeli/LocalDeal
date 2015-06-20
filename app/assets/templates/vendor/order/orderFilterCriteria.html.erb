@@ -1,10 +1,28 @@
 <form role="form">
-  <div class="form-group">
-    <label class="control-label">
-      Select outlets
-    </label>
-    <isteven-multi-select  input-model="vendor.outlets" output-model="selectedOutlets" button-label="name"
-                           item-label="name" tick-property="selected" >
-    </isteven-multi-select>
+  <div class="form-group row">
+    <div class="col col-md-5">
+      <div class="btn-group">
+        <label class="btn btn-success" ng-model="filter.orderStatus" btn-radio="OrderStatus.Active" uncheckable>Active</label>
+        <label class="btn btn-success" ng-model="filter.orderStatus" btn-radio="OrderStatus.Redeemed" uncheckable>Redeemed</label>
+        <label class="btn btn-success" ng-model="filter.orderStatus" btn-radio="OrderStatus.Expired" uncheckable>Expired</label>
+      </div>
+     <div ng-show="filter.orderStatus == OrderStatus.Redeemed">
+       <label class="control-label">
+         Select outlets
+       </label>
+       <isteven-multi-select  input-model="vendor.outlets" output-model="selectedOutlets" button-label="name"
+                              item-label="name" tick-property="selected" >
+       </isteven-multi-select>
+     </div>
+    </div>
+    <div class="col col-md-5 col-md-offset-1">
+      <label class="control-label">
+        Order by
+      </label>
+      <isteven-multi-select input-model="sortOptions" output-model="selectedSortOption" button-label="value"
+                             item-label="value" tick-property="selected" selection-mode="single"
+                            on-item-click="onChangeSortOption(data)">
+      </isteven-multi-select>
+    </div>
   </div>
 </form>

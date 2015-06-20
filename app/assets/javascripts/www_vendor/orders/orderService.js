@@ -4,6 +4,7 @@ appVendor.service("OrderService", ['$http', '$q', 'HttpRoutes', 'Order',  functi
     self.fetchOrders = function(filter) {
         var deferred = $q.defer(),
             url = HttpRoutes.orders + filter.toQueryString();
+
         $http.get(url)
             .then(function(response) {
                 deferred.resolve(Order.build(response.data));

@@ -12,6 +12,7 @@ appCommon.factory("Order", ['Vendor', 'User', 'Outlet', function(Vendor, User, O
         this.offerId = data.offer_id;
         this.outlet = Outlet.build(data.outlet);
         this.expireAt = data.expire_at;
+        this.createdAt = data.created_at;
     };
 
     Order.build = function(data) {

@@ -5,7 +5,7 @@ appUser.service("OutletService", ['$http', '$q', 'HttpRoutes', 'Outlet', 'Common
 
         self.fetchOutlets = function (criteria, pageNo) {
             var deferred = $q.defer(),
-                url = HttpRoutes.outlets + criteria.toQueryString() + "&page=" + pageNo;
+                url = null;
             $location.search(criteria.clientSideQueryString());
 
             criteria.toQueryString().then(function (promise) {

@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     !user_offer.blank?
   end
 
-  def validateProfileCompletness?
+  def isProfileComplete?
     !(email.blank? || mobile.blank? || name.blank?)
   end
 end

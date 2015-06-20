@@ -12,6 +12,7 @@
         <label ng-if="order.isExpired()">Expired {{order.expiresIn()}}</label>
         <label ng-if="!order.isExpired()">Expires {{order.expiresIn()}}</label>
       </div>
+      <div><label> Ordered At {{order.createdAt | datetime}}</label></div>
     </div>
     <div class="col col-md-1">
       <button class="btn btn-primary" ng-click="showOrderDetail(order)">Show detail</button>
