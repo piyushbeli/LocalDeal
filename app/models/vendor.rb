@@ -1,7 +1,13 @@
 class Vendor < ActiveRecord::Base
+
+  devise :database_authenticatable, :recoverable,
+         :trackable, :validatable, :registerable
+
+  devise :timeoutable, :timeout_in => 1.hour
+
   include DeviseTokenAuth::Concerns::User
   include Spammable
-  devise :timeoutable, :timeout_in => 1.hour
+
 
   has_many :outlets, dependent: :destroy
   belongs_to :category

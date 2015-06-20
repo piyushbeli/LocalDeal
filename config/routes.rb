@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
   mount_devise_token_auth_for 'Vendor', at: 'auth_vendor',
-                              skip: [:omniauth_callbacks],
+                              skip: [:omniauth_callbacks, :confirmations],
                               controllers: {
                                           registrations: 'vendor/registrations'
                               }
@@ -73,9 +73,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'application#index'
-  #Below 2 lines are important for using htmp5 mode of angularjs. For any resource after /app and /vendor/app we are
+  #Below lines are important for using htmp5 mode of angularjs. For any resource after /app and /vendor/app we are
   # actually moving to some angular state (no REST url should have this format) so return the application layout.
   get "/vendor/app/*path" => "application#vendor"
+  get "/vendor/*path" => "application#vendor"
   get "/app/*path" => "application#index"
 
 end

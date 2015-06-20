@@ -23,8 +23,8 @@ appVendor.controller("LoginController", ['$scope', '$rootScope', '$state', 'Cons
             .then(function(response) {
                 $scope.isRegistrationSuccessful = true;
             })
-            .catch(function(errors) {
-                alert(errors.join('\n'));
+            .catch(function(errorMessage) {
+                alert(errorMessage);
             })
     };
 
