@@ -1,8 +1,15 @@
-collection @orders
-attributes :what_you_get, :created_at, :expire_at, :order_no, :redeemed
-child :user do
+object false
+
+child  @orders => :items do
+  attributes :what_you_get, :created_at, :expire_at, :order_no, :redeemed
+  child :user do
     attributes :name, :id, :image, :mobile, :email
-end
-child :outlet do
+  end
+  child :outlet do
     attributes :id, :name, :street
+  end
+end
+
+node :total_items do
+  @total_items
 end

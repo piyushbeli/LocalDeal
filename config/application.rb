@@ -33,5 +33,6 @@ module RoR
 
     #application specific global constants
     config.x.order_no_length = 8
+    config.x.per_page = 10
   end
 end

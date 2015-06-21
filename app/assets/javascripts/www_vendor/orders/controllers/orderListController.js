@@ -5,12 +5,15 @@ appVendor.controller("OrderListController", ['$rootScope', '$scope', '$state', '
         $scope.sortOptions = CommonConstants.OrderSortCriteria;
         $scope.OrderStatus = CommonConstants.OrderStatus;
         $scope.filter.orderStatus = CommonConstants.OrderStatus.Active;
+        $scope.filter.page = $scope.filter.page || 1;
+        $scope.itemsPerPage = CommonConstants.ItemsPerPage;
 
         var self = this;
         self.refreshItems = function () {
             OrderService.fetchOrders($scope.filter)
-                .then(function (orders) {
-                    $scope.orders = orders;
+                .then(function (response) {
+                    $scope.orders = response.items;
+                    $scope.totalItems = response.totalItems;
                 })
                 .catch(function (errorMessage) {
                     alert(errorMessage);
@@ -37,5 +40,9 @@ appVendor.controller("OrderListController", ['$rootScope', '$scope', '$state', '
                 self.refreshItems();
             }
         });
+
+        $scope.onChangePageNo = function(data) {
+            self.refreshItems();
+        }
 
     }])

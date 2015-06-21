@@ -7,7 +7,11 @@ appVendor.service("OrderService", ['$http', '$q', 'HttpRoutes', 'Order',  functi
 
         $http.get(url)
             .then(function(response) {
-                deferred.resolve(Order.build(response.data));
+                var result = {
+                    items: Order.build(response.data.items),
+                    totalItems: response.data.total_items || 0
+                }
+                deferred.resolve(result);
             })
             .catch(function(response) {
                 var errorMessage = response.data.errors && response.data.errors.join("\n");

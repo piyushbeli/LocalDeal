@@ -12,6 +12,7 @@ appCommon
     })
     .constant("CommonConstants", {
         appName: 'LocalDeals',
+        ItemsPerPage: 10,
         DateFormat: 'MMMM Do YYYY, h:mm a',
         OrderStatus: {
             Active: 'active',

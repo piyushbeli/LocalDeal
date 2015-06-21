@@ -8,6 +8,7 @@ appVendor.factory("OrderFilter", [function() {
         this.endDate = data.end_date;
         this.sortBy = data.sort_by;
         this.orderStatus = data.order_status;
+        this.page = data.page;
     };
 
     OrderFilter.build = function(data) {
@@ -31,6 +32,9 @@ appVendor.factory("OrderFilter", [function() {
         }
         if (this.orderStatus) {
             queryString.push("order_status=" + this.orderStatus);
+        }
+        if (this.page) {
+            queryString.push("page=" + this.page);
         }
         return "?" + queryString.join("&");
     };

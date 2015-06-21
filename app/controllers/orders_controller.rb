@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
     sort_order = params[:sort_order]
     order_status = params[:order_status]
     @orders = current_member.orders
+    page = params[:page]
 
     #Filter orders based on order status
     if order_status == 'active'
@@ -30,6 +31,9 @@ class OrdersController < ApplicationController
     elsif order_status == 'redeemed'
       @orders = @orders.order("created_at DESC")
     end
+    @total_items = @orders.count
+    per_page = Rails.configuration.x.per_page
+    @orders = @orders.paginate(:page => page, :per_page => per_page)
 
     if current_user
       render 'user/orders/index'
