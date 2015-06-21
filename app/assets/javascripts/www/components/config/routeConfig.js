@@ -25,11 +25,6 @@ appUser.constant("Routes", {
                 templateUrl: 'user/outlet/outletList.html',
                 controller: 'OutletListController'
             }
-        },
-        resolve: {
-            setTitle: ['$window', 'Constants', function($window, Constants) {
-                $window.document.title = $window.document.title + " - Outlets"
-            }]
         }
     },
     outletDetail: {

@@ -1,7 +1,7 @@
 appUser.controller("DealDetailController", ['$scope', 'DealService', 'deal', '$window', 'DealService',
     function ($scope, DealService, deal, $window, DealService) {
         if (deal) {
-            $window.document.title = $window.document.title + deal.title;
+            $window.document.title = deal.title + " | " + $window.document.title;
         }
         $scope.deal = deal;
 

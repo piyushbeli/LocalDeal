@@ -1,7 +1,9 @@
-appUser.controller("OutletDetailController", ['$scope', '$rootScope', 'outlet', '$window', 'OutletService', 'ReviewService',
-    function ($scope, $rootScope, outlet, $window, OutletService, ReviewService) {
+appUser.controller("OutletDetailController", ['$scope', '$rootScope', 'outlet', '$window', 'OutletService',
+    'ReviewService', 'CommonConstants',
+    function ($scope, $rootScope, outlet, $window, OutletService, ReviewService, CommonConstants) {
 
-        $window.document.title = $window.document.title + " - Outlets - " + outlet.name;
+        $window.document.title =  outlet.name + " " + outlet.street + " | " + CommonConstants.appName;
+
         $scope.outlet = outlet;
         $scope.showReportAbuseComment = false;
 

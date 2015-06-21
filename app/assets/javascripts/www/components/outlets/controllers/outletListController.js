@@ -1,8 +1,9 @@
 appUser.controller("OutletListController", ['$scope', '$rootScope', '$state', '$location', '$window', 'OutletService', 'States',
-    'Utils', 'ReferenceDataCache', 'CacheKeys' , 'CommonCache', 'SearchCriteria', 'LoginService', 'LocationService',
+    'Utils', 'ReferenceDataCache', 'CacheKeys' , 'CommonCache', 'SearchCriteria', 'LoginService', 'LocationService', 'CommonConstants',
     function($scope, $rootScope, $state, $location, $window, OutletService, States, Utils, ReferenceDataCache,
-             CacheKeys , CommonCache, SearchCriteria, LoginService, LocationService) {
-    $window.document.title = $window.document.title + " - Outlets";
+             CacheKeys , CommonCache, SearchCriteria, LoginService, LocationService, CommonConstants) {
+
+    $window.document.title = "Outlets | " + CommonConstants.appName;
     $scope.criteria = SearchCriteria.instanceFromQueryString($location.search());
 
     $scope.criteria.currentLocation = $rootScope.currentLocation;

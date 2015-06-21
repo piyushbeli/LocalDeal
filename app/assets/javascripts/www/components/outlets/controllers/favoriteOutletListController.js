@@ -16,7 +16,7 @@ appUser.controller("FavoriteOutletListController", ['$scope', '$rootScope', 'Out
     };
 
     $scope.showOutletDetail = function(outlet) {
-        $state.go(States.outletDetail, {id: outlet.id});
+        $state.go(States.deals, {id: outlet.id});
     }
 
 }])

@@ -11,6 +11,7 @@ appCommon
         OfferTypes: '/offertypes'
     })
     .constant("CommonConstants", {
+        appName: 'LocalDeals',
         DateFormat: 'MMMM Do YYYY, h:mm a',
         OrderStatus: {
             Active: 'active',
