@@ -2,14 +2,14 @@ class User::UsersController < ApplicationController
 
   before_action :authenticate_user!
 
-  def favoriteOutlets
+  def favorite_outlets
     current_location = params[:current_location]
     @outlets = Outlet.marked_as :favorite , :by => current_user
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
     render 'user/outlets/index'
   end
 
-  def addFavortiteOutlet
+  def add_favortite_outlet
     outlet = Outlet.friendly.find(params[:outlet_id])
     if current_user.mark_as_favorite  outlet
       render json: {success: true}
@@ -18,10 +18,35 @@ class User::UsersController < ApplicationController
     end
   end
 
-  def removeFavoriteOutlet
+  def remove_favorite_outlet
     outlet = Outlet.friendly.find(params[:outlet_id])
     outlet.unmark :favorite, :by => current_user
     #TODO Check if we can handle the error here.
+    render json: {success: true}
+  end
+
+  def update_favorite_categories
+    if params[:category_ids].blank?
+      current_favorite_categories = current_user.categories_marked_as_favorite
+      current_user.favorite_categories.delete current_favorite_categories
+      render json: {success: true}
+      return
+    end
+
+    current_favorite_category_ids = current_user.categories_marked_as_favorite.pluck(:id)
+    input_categories = Category.friendly.find(params[:category_ids])
+    new_categories = input_categories.select do
+      |c|
+      !current_favorite_category_ids.include?(c.id)
+    end
+
+    remove_categories = current_favorite_category_ids.select do
+      |c|
+      !params[:category_ids].include?(c)
+    end
+    remove_categories = Category.friendly.find(remove_categories)
+    current_user.remove_mark :favorite,  remove_categories
+    current_user.mark_as_favorite  new_categories
     render json: {success: true}
   end
 

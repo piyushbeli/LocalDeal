@@ -11,6 +11,17 @@ class User < ActiveRecord::Base
   has_many :comments, as: :commentator
   has_many :orders
 
+  def as_json(options={})
+    super(options.merge(
+              except: [:created_at, updated_at],
+              include: {
+                  favorite_categories: {
+
+                  }
+              }
+          ))
+  end
+
 
   def alreadyBoughtTheOffer? (offer)
     user_offer = orders.select { |order| order.offer_id == offer.id}

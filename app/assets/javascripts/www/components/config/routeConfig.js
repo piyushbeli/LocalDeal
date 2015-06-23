@@ -99,6 +99,16 @@ appUser.constant("Routes", {
                 templateUrl: 'user/account/profile.html',
                 controller: 'AccountController'
             }
+        },
+        resolve: {
+            user: ['$auth', '$q', 'User', function ($auth, $q, User) {
+                var deferred = $q.defer();
+                $auth.validateUser()
+                    .then(function (response) {
+                        deferred.resolve(User.build(response))
+                    })
+                return deferred.promise;
+            }]
         }
     },
 

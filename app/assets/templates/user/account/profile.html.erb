@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col col-md-6 col-md-offset-3">
+    <form role="form" ng-submit="updateProfile()">
+      <div class="form-group">
+        <label class="control-label"> Email </label>
+        <input class="form-control" ng-model="user.email">
+      </div>
+      <div class="form-group">
+        <label class="control-label"> Mobile# </label>
+        <input class="form-control" ng-model="user.mobile">
+      </div>
+      <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+    <hr>
+    <h4> Notifications </h4>
+    <div class="form-group">
+      <label class="control-label">Select categories for which you want to receive notifications</label>
+      <div isteven-multi-select  input-model="categories" output-model="selectedCategories"  tick-property="selected" button-label="name"
+                             item-label="name">
+
+      </div>
+    </div>
+    <button class="btn btn-primary" ng-click="updateFavoriteCategories()">Update</button>
+    <hr>
+  </div>
+</div>

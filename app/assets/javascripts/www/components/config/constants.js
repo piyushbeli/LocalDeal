@@ -13,7 +13,8 @@ appUser.constant('Constants', {
         spamVendor: 'vendors/{vendor_id}/spam',
         spamUser: 'users/{user_id}/spam',
         markAsFavorite: 'outlets/{id}/favorite',
-        favoriteOutlets: 'favoriteOutlets'
+        favoriteOutlets: 'outlets/favorite',
+        favoriteCategories: 'categories/favorite'
     })
     .constant('Constants', {
         apiUrl: 'localhost:3000/vendor#',
@@ -28,5 +29,7 @@ appUser.constant('Constants', {
         outlets: 'app.outlets',
         outletDetail: 'app.outletDetail',
         orders: 'app.orders',
-        orderDetail: 'app.orderDetail'
+        orderDetail: 'app.orderDetail',
+        favoriteOutlets: 'app.favoriteOutlets',
+        profile: 'app.profile'
     })
