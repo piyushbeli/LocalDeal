@@ -10,9 +10,10 @@ appCommon.factory("User", function() {
         this.label = data.label;
         this.photoUrl = data.photoUrl;
         this.favoriteCategories = data.favorite_categories;
-        this.favoriteCategories.forEach(function(item) {
-            //item.selected = true; //Set the tick property of select
-        });
+        this.city = data.city;
+        this.cityDetail = {
+            place_id: data.city_id
+        };
     }
 
     User.build = function(data) {

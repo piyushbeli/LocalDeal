@@ -1,6 +1,7 @@
-appUser.controller("AccountController", ['$scope', '$rootScope', 'ReferenceDataCache', 'AccountService', 'CacheKeys', 'user',
-    function ($scope, $rootScope, ReferenceDataCache, AccountService, CacheKeys, user) {
+appUser.controller("AccountController", ['$scope', '$rootScope', 'ReferenceDataCache', 'AccountService', 'CacheKeys', 'user', 'Utils',
+    function ($scope, $rootScope, ReferenceDataCache, AccountService, CacheKeys, user, Utils) {
         $scope.selectedCategories = user.favoriteCategories;
+        $scope.googlePlaceAutoCompleteOptionsCity = Utils.googlePlaceAutoCompleteOptionsCity();
 
         ReferenceDataCache.get(CacheKeys.Categories)
             .then(function (categories) {

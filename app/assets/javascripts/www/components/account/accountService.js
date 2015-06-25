@@ -6,7 +6,9 @@ appUser.service("AccountService", ['$auth', '$http', '$q', 'HttpRoutes', 'User',
             url = HttpRoutes.profile,
             postData = {
                 email: user.email,
-                mobile: user.mobile
+                mobile: user.mobile,
+                city: user.city,
+                city_id: user.cityDetail.place_id
             };
         $auth.updateAccount(postData)
             .then(function (response) {
