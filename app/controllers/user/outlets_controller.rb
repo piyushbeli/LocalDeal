@@ -14,7 +14,7 @@ class User::OutletsController < ApplicationController
     #If user is searching by some particular locality
     street_location = params[:street_location]
     page = params[:page] || 1
-    per_page = params[:per_page]  || 10
+    per_page = params[:per_page]  || Rails.configuration.x.per_page
 
     if !subcategory_ids.nil?
       subcategory_ids = subcategory_ids.split(",")
@@ -26,16 +26,16 @@ class User::OutletsController < ApplicationController
       street_location = params[:street]
     end
     #User can either search near by places or by locality/street
+
     if show_only_near_by == true
-      @outlets = Outlet.within(near_by_distance, :origin => current_location).distinct unless current_location.nil?
+      @outlets = Outlet.within(near_by_distance, :origin => current_location) unless current_location.nil?
     else
-      @outlets = Outlet.within(near_by_distance, :origin => street_location).distinct
+      @outlets = Outlet.within(near_by_distance, :origin => street_location)
     end
     @outlets = @outlets.by_category(category_id) unless category_id.nil?
     @outlets = @outlets.by_sub_categories(subcategory_ids) unless subcategory_ids.nil?
-
-    #@outlets = @outlets.select('distinct')
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
+    @total_items = @outlets.count('*')
     @outlets = @outlets.paginate(:page => page, :per_page => per_page)
     render 'user/outlets/index'
   end

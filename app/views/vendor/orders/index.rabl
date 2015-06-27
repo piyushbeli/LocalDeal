@@ -11,5 +11,5 @@ child  @orders => :items do
 end
 
 node :total_items do
-  @total_items
+  @orders.count
 end

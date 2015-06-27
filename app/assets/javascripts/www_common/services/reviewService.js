@@ -15,12 +15,16 @@ appCommon.service("ReviewService", ['$q', 'HttpRoutes', '$http', 'Review', funct
         return deferred.promise;
     };
 
-    self.loadMoreReviews = function(outlet, pageNo) {
+    self.refreshItems = function(outlet, page) {
         var deferred = $q.defer(),
-            url = HttpRoutes.outletReviews.format({outlet_id: outlet.id}) + "?perPage=10&page=" + pageNo;
+            url = HttpRoutes.outletReviews.format({outlet_id: outlet.id}) + "?per_page=10&page=" + page;
         $http.get(url)
             .then(function(response) {
-                deferred.resolve(Review.build(response.data));
+                var result = {
+                    items: Review.build(response.data),
+                    totalItems: response.totalItems
+                };
+                deferred.resolve(result);
             })
         return deferred.promise;
     };

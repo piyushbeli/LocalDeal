@@ -8,12 +8,14 @@ appUser.service("OutletService", ['$http', '$q', 'HttpRoutes', 'Outlet', 'Common
                 url = null;
             $location.search(criteria.clientSideQueryString());
 
-            criteria.toQueryString().then(function (promise) {
-                return promise;
-            }).then(function (queryString) {
-                var url = HttpRoutes.outlets + queryString;
-                return $http.get(url);
-            })
+            LocationService.getCurrentLocation()
+                .then(function(location) {
+                    return criteria.toQueryString(location)
+                })
+                .then(function (queryString) {
+                    var url = HttpRoutes.outlets + queryString;
+                    return $http.get(url);
+                })
                 .then(function (response) {
                     var result = {
                         items: Outlet.build(response.data.items),
@@ -96,7 +98,11 @@ appUser.service("OutletService", ['$http', '$q', 'HttpRoutes', 'Outlet', 'Common
                     return $http.get(url);
                 })
                 .then(function(response) {
-                    deferred.resolve(Outlet.build(response.data));
+                    var result = {
+                        items: Outlet.build(response.data.items),
+                        totalItems: response.total_items
+                    }
+                    deferred.resolve(result);
                 })
                 .catch(function(response) {
                     var errorMessage = response.data.errors.join("\n");

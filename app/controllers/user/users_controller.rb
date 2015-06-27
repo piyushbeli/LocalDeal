@@ -5,6 +5,7 @@ class User::UsersController < ApplicationController
   def favorite_outlets
     current_location = params[:current_location]
     @outlets = Outlet.marked_as :favorite , :by => current_user
+    @total_items = @outlets.count
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
     render 'user/outlets/index'
   end

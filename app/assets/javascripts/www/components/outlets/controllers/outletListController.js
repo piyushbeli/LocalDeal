@@ -33,25 +33,6 @@ appUser.controller("OutletListController", ['$scope', '$rootScope', '$state', '$
                 });
         };
         $scope.refreshItems();
-/*
-        $scope.loadMore = function () {
-            if ($scope.criteria.busy || !$scope.criteria.outlets.notEmpty()) {
-                return;
-            }
-            $scope.criteria.busy = true;
-            OutletService.fetchOutlets($scope.criteria, ++$scope.criteria.pageNo)
-                .then(function (outlets) {
-                    $scope.criteria.outlets = $scope.criteria.outlets.concat(outlets);
-                    if (!outlets.notEmpty()) {
-                        $scope.criteria.showLoading = false;
-                    } else {
-                        $scope.criteria.busy = false;
-                    }
-                })
-                .catch(function (errorMessage) {
-                    alert(errorMessage);
-                });
-        };*/
 
         $scope.toggleFavorite = function (outlet) {
             if (!$rootScope.isLoggedIn()) {

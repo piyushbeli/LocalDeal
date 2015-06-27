@@ -31,7 +31,6 @@ class OrdersController < ApplicationController
     elsif order_status == 'redeemed'
       @orders = @orders.order("created_at DESC")
     end
-    @total_items = @orders.count
     per_page = Rails.configuration.x.per_page
     @orders = @orders.paginate(:page => page, :per_page => per_page)
 

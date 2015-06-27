@@ -33,6 +33,10 @@ appUser.constant("Routes", {
             'mainContent': {
                 templateUrl: 'user/outlet/outletDetail.html',
                 controller: 'OutletDetailController'
+            },
+            'reviewsContent': {
+                templateUrl: 'user/outlet/outletReviews.html',
+                controller: 'ReviewController'
             }
         },
         resolve: {

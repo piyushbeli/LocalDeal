@@ -23,5 +23,5 @@ child @outlets => :items do
   end
 end
 node :total_items do
-  @outlets.count
+  @total_items
 end

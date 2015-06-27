@@ -1,8 +1,8 @@
 appUser.controller("FavoriteOutletListController", ['$scope', '$rootScope', 'OutletService', '$state', 'States',  function($scope, $rootScope, OutletService, $state, States) {
 
     OutletService.fetchFavoriteOutlets()
-        .then(function(outlets) {
-            $scope.outlets = outlets;
+        .then(function(response) {
+            $scope.outlets = response.items;
         })
         .catch(function(errorMessage) {
             alert(errorMessage);

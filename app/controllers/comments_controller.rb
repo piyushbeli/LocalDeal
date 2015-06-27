@@ -22,7 +22,7 @@ include UserResourceController
   end
 
   def index
-    per_page = params[:perPage] || 10
+    per_page = params[:per_page] || Rails.configuration.x.per_page
     page = params[:page] || 1
     @reviews = @commentable.comments.paginate(:page => page, :per_page => per_page).order("created_at DESC")
     render 'reviews/index'

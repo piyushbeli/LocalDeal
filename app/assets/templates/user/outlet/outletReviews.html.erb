@@ -1,5 +1,6 @@
- <label>Reviews:</label>
-  <div ng-repeat="review in outlet.reviews | orderBy: '-createdAt'">
+<div ng-controller="ReviewController">
+  <label>Reviews:</label>
+  <div ng-repeat="review in reviews | orderBy: '-createdAt'">
     <div>
       <label class="control-label">{{review.title}}</label>
       <span>{{review.body}}</span>
@@ -8,31 +9,32 @@
       <span>{{comment.body}}</span>
     </div>
     <a ng-click="showCommentBox = !showCommentBox">comment</a>
+
     <form role="form" ng-submit="postComment(review)" ng-show="showCommentBox">
       <div class="form-group" style="padding-left:10px">
         <textarea ng-if="isLoggedIn()" ng-enter="postComment(review, comment)" ng-model="review.newComment.body" placeholder="Write a comment"></textarea>
       </div>
     </form>
   </div>
-
-  <a ng-show="!noMoreReviews" ng-click="loadMoreReviews()">Load more</a>
-  <h4 ng-show="noMoreReviews">No more reviews</h4>
-
-<div id="reviewForm">
-  <h4>Write review</h4>
+  <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="page" ng-change="refreshItems()"></pagination>
   <hr>
-  <div ng-if="!isLoggedIn()">
-    <a ng-click="openSignInModal()">Login to submit a review</a>
+
+  <div id="reviewForm">
+    <h4>Write review</h4>
+    <hr>
+    <div ng-if="!isLoggedIn()">
+      <a ng-click="openSignInModal()">Login to submit a review</a>
+    </div>
+    <form role="form" ng-submit="submitReview()" ng-if="isLoggedIn()">
+      <div class="form-group">
+        <label class="control-label">Title</label>
+        <input type="text" class="form-control" ng-model="review.title">
+      </div>
+      <div class="form-group">
+        <label class="control-label">Comment</label>
+        <textarea class="form-control" ng-model="review.body" rows="3"></textarea>
+      </div>
+      <button type="submit" class="button button-primary">Submit</button>
+    </form>
   </div>
-  <form role="form" ng-submit="submitReview()" ng-if="isLoggedIn()">
-    <div class="form-group">
-      <label class="control-label">Title</label>
-      <input type="text" class="form-control" ng-model="review.title">
-    </div>
-    <div class="form-group">
-      <label class="control-label">Comment</label>
-      <textarea class="form-control" ng-model="review.body" rows="3"></textarea>
-    </div>
-    <button type="submit" class="button button-primary">Submit</button>
-  </form>
 </div>

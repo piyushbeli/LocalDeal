@@ -26,7 +26,7 @@ appUser.factory("SearchCriteria", ['Geocoder', '$q', 'ReferenceDataCache', 'Cach
         this.showOnlyNearBy = data.showOnlyNearBy;
     }
 
-    SearchCriteria.prototype.toQueryString = function() {
+    SearchCriteria.prototype.toQueryString = function(currentLocation) {
         var deferred = $q.defer();
         var query = [];
         if (this.category) {
@@ -38,8 +38,8 @@ appUser.factory("SearchCriteria", ['Geocoder', '$q', 'ReferenceDataCache', 'Cach
             });
             query.push("subcategory_ids={ids}".format({ids: ids})); //Handle this line with care. We need to send the array of ids as per server compatibility
         }
-        if (this.currentLocation) {
-            query.push("current_location=" + this.currentLocation);
+        if (currentLocation) {
+            query.push("current_location=" + currentLocation);
         }
         if (this.street) {
             query.push("street=" + this.street);
