@@ -20,4 +20,5 @@
   </div>
   <hr>
 </div>
-<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="filter.page" ng-change="onChangePageNo()"></pagination>
+<pagination ng-show="totalItems>0" total-items="totalItems" items-per-page="itemsPerPage" ng-model="filter.page" ng-change="onChangePageNo()"></pagination>
+<span ng-show="totalItems==0"><b>No item found</b></span>

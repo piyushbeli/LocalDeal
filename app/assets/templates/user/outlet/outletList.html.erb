@@ -25,4 +25,5 @@
     <span class="bg-primary">{{outlet.reviewCount}} Reviews</span>
   </div>
 </div>
-<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="criteria.page" ng-change="refreshItems()"></pagination>
+<pagination ng-show="totalItems>0" total-items="totalItems" items-per-page="itemsPerPage" ng-model="criteria.page" ng-change="refreshItems()"></pagination>
+<span ng-show="totalItems==0"><b>No item found</b></span>

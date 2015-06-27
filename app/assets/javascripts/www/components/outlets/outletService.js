@@ -100,7 +100,7 @@ appUser.service("OutletService", ['$http', '$q', 'HttpRoutes', 'Outlet', 'Common
                 .then(function(response) {
                     var result = {
                         items: Outlet.build(response.data.items),
-                        totalItems: response.total_items
+                        totalItems: response.data.total_items
                     }
                     deferred.resolve(result);
                 })

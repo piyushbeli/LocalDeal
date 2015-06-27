@@ -16,7 +16,8 @@
       </div>
     </form>
   </div>
-  <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="page" ng-change="refreshItems()"></pagination>
+  <pagination ng-show="totalItems>0" total-items="totalItems" items-per-page="itemsPerPage" ng-model="page" ng-change="refreshItems()"></pagination>
+  <div ng-show="totalItems==0"><b>No item found</b></div>
   <hr>
 
   <div id="reviewForm">

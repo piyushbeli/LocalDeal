@@ -61,7 +61,7 @@ appUser.controller("OutletListController", ['$scope', '$rootScope', '$state', '$
                 //This statement should be below fetchOutlets() method. I know it's a hack but it will make the life very easy
                 //for loading the outlets when somebody hits refresh.
                 if ($scope.criteria.qualifyForSearch()) {
-                    $scope.fetchOutlets();
+                    $scope.refreshItems();
                 }
             });
 

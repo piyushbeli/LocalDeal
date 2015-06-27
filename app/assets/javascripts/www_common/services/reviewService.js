@@ -21,8 +21,8 @@ appCommon.service("ReviewService", ['$q', 'HttpRoutes', '$http', 'Review', funct
         $http.get(url)
             .then(function(response) {
                 var result = {
-                    items: Review.build(response.data),
-                    totalItems: response.totalItems
+                    items: Review.build(response.data.items),
+                    totalItems: response.data.total_items
                 };
                 deferred.resolve(result);
             })
