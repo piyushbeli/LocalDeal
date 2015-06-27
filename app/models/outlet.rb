@@ -37,7 +37,7 @@ class Outlet < ActiveRecord::Base
   end
 
   def user_rating (user)
-    if user.nil?
+    if !user || user.nil?
       return nil
     else
       rating = user.ratings_given.where(dimension: "service", rateable_id: self.id, rateable_type: self.class.name)

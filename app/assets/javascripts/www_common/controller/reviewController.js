@@ -1,10 +1,11 @@
 appCommon.controller("ReviewController", ['$scope', '$window', 'ReviewService', 'CommonConstants',
-    function($scope, $window, ReviewService, CommonConstants) {
+    function ($scope, $window, ReviewService, CommonConstants) {
         //$window.document.title =  $scope.outlet.name + " " + $scope.outlet.street + " - Reviews " + " | " + CommonConstants.appName;
 
         //$scope.outlet = outlet;
         $scope.review = {}; //If a user submit a review
         $scope.comment = {}; //For comment on a review
+        $scope.showCommentBox = false;
         $scope.page = 1;
         $scope.itemsPerPage = CommonConstants.itemsPerPage;
 

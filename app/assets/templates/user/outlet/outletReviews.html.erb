@@ -8,11 +8,11 @@
     <div ng-repeat="comment in review.comments" style="padding-left: 10px">
       <span>{{comment.body}}</span>
     </div>
-    <a ng-click="showCommentBox = !showCommentBox">comment</a>
+    <a ng-if="isLoggedIn()" ng-click="review.showCommentBox = !review.showCommentBox">comment</a>
 
-    <form role="form" ng-submit="postComment(review)" ng-show="showCommentBox">
+    <form role="form" ng-submit="postComment(review)" ng-show="review.showCommentBox">
       <div class="form-group" style="padding-left:10px">
-        <textarea ng-if="isLoggedIn()" ng-enter="postComment(review, comment)" ng-model="review.newComment.body" placeholder="Write a comment"></textarea>
+        <textarea ng-enter="postComment(review, comment)" ng-model="review.newComment.body" placeholder="Write a comment"></textarea>
       </div>
     </form>
   </div>
