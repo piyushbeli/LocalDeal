@@ -74,6 +74,10 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+  #In production we would like to precompile the assets
+  config.assets.initialize_on_precompile = true
+  config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.cache_store = :dalli_store,
