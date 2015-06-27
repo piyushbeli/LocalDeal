@@ -3,9 +3,12 @@
 <span>Total Deals: {{outlet.noOfDeal()}}</span>
 <button class="btn btn-danger" ng-click="showReportAbuseComment = !showReportAbuseComment" ng-show="!outlet.vendor.spammed">Spam</button>
 <button class="btn btn-danger" ng-click="unSpam()" ng-show="outlet.vendor.spammed">Un Spam</button>
-<div>
+<div ng-show="outlet.noOfRaters > 0">
   <label class="bg-primary">Rating: {{outlet.rating}}</label>
   <span> (Based on <span class="bg-info">{{outlet.noOfRaters}}</span> votes)</span>
+</div>
+<div>
+  <span class="bg-primary" ng-show="outlet.noOfRaters == 0">Be the first to vote</span>
 </div>
 <div>
   <label>Rated by you: </label>

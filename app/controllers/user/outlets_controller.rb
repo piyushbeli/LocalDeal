@@ -14,7 +14,7 @@ class User::OutletsController < ApplicationController
     #If user is searching by some particular locality
     street_location = params[:street_location]
     page = params[:page] || 1
-    per_page = params[:per_page]  || 3
+    per_page = params[:per_page]  || 10
 
     if !subcategory_ids.nil?
       subcategory_ids = subcategory_ids.split(",")

@@ -46,7 +46,8 @@ class Outlet < ActiveRecord::Base
   end
 
   def average_rating
-    self.average("service").avg
+    average_rating = self.average("service")
+    return average_rating.avg unless average_rating.nil?
   end
 
   def no_of_raters

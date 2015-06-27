@@ -16,7 +16,10 @@
   </div>
 
   <div class="col col-md-2">
-    <span class="bg-primary">{{outlet.rating}} <span> ({{outlet.noOfRaters}} votes)</span></span>
+    <span class="bg-primary" ng-show="outlet.noOfRaters > 0">{{outlet.rating}}
+      <span> ({{outlet.noOfRaters}} votes)</span>
+    </span>
+    <span class="bg-primary"  ng-show="outlet.noOfRaters == 0">No votes</span>
   </div>
   <div class="col col-md-1">
     <span class="bg-primary">{{outlet.reviewCount}} Reviews</span>
