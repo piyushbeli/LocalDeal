@@ -1,6 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  require 'active_support/cache/dalli_store23'
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -76,4 +76,13 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.cache_store = :dalli_store,
+      (ENV["MEMCACHIER_SERVERS"] || "").split(","),
+      {:username => ENV["MEMCACHIER_USERNAME"],
+       :password => ENV["MEMCACHIER_PASSWORD"],
+       :failover => true,
+       :socket_timeout => 1.5,
+       :socket_failure_delay => 0.2
+      }
+  config.session_store = :dalli_store
 end
