@@ -3,7 +3,7 @@ appUser.service("OutletService", ['$http', '$q', 'HttpRoutes', 'Outlet', 'Common
     function ($http, $q, HttpRoutes, Outlet, CommonCache, CacheKeys, $location, Geocoder, LoginService, LocationService) {
         var self = this;
 
-        self.fetchOutlets = function (criteria, pageNo) {
+        self.fetchOutlets = function (criteria) {
             var deferred = $q.defer(),
                 url = null;
             $location.search(criteria.clientSideQueryString());
@@ -11,11 +11,15 @@ appUser.service("OutletService", ['$http', '$q', 'HttpRoutes', 'Outlet', 'Common
             criteria.toQueryString().then(function (promise) {
                 return promise;
             }).then(function (queryString) {
-                var url = HttpRoutes.outlets + queryString + "&page=" + pageNo;
+                var url = HttpRoutes.outlets + queryString;
                 return $http.get(url);
             })
                 .then(function (response) {
-                    deferred.resolve(Outlet.build(response.data))
+                    var result = {
+                        items: Outlet.build(response.data.items),
+                        totalItems: response.data.total_items || 0
+                    };
+                    deferred.resolve(result);
                 })
                 .catch(function (response) {
                     var errorMessage = response.data.errors.join("\n");

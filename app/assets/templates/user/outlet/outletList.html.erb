@@ -1,30 +1,25 @@
 <div search-criteria></div>
-<div infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-disabled='criteria.busy'>
-  <div class="row" ng-repeat="outlet in criteria.outlets">
-    <div class="col col-md-1">
-      <a ng-click="showOutletDetail(outlet)">{{outlet.name}}</a>
-    </div>
-    <div class="col col-md-1 col-sm-1">
-      {{outlet.distance | distance}}
-    </div>
-    <div class="col col-md-3 col-sm-1">
-      {{outlet.street}}
-    </div>
-    <div class="col col-md-2">
-      <button type="button" ng-click="toggleFavorite(outlet)" class="btn btn-primary">
-        {{outlet.markedAsFavorite ? 'Un Favorite' : 'Favorite'}}
-      </button>
-    </div>
-
-    <div class="col col-md-2">
-      <span class="bg-primary">{{outlet.rating}} <span> ({{outlet.noOfRaters}} votes)</span></span>
-    </div>
-    <div class="col col-md-1">
-      <span class="bg-primary">{{outlet.reviewCount}} Reviews</span>
-    </div>
+<div class="row" ng-repeat="outlet in criteria.outlets">
+  <div class="col col-md-1">
+    <a ng-click="showOutletDetail(outlet)">{{outlet.name}}</a>
+  </div>
+  <div class="col col-md-1 col-sm-1">
+    {{outlet.distance | distance}}
+  </div>
+  <div class="col col-md-3 col-sm-1">
+    {{outlet.street}}
+  </div>
+  <div class="col col-md-2">
+    <button type="button" ng-click="toggleFavorite(outlet)" class="btn btn-primary">
+      {{outlet.markedAsFavorite ? 'Un Favorite' : 'Favorite'}}
+    </button>
   </div>
 
-  <h3 class="center-block" ng-show='criteria.busy && criteria.showLading'>Loading data...</h3>
-
-  <h3 class="center-block" ng-show='criteria.busy && !criteria.showLoading'>No more data to display</h3>
+  <div class="col col-md-2">
+    <span class="bg-primary">{{outlet.rating}} <span> ({{outlet.noOfRaters}} votes)</span></span>
+  </div>
+  <div class="col col-md-1">
+    <span class="bg-primary">{{outlet.reviewCount}} Reviews</span>
+  </div>
 </div>
+<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="criteria.page" ng-change="refreshItems()"></pagination>

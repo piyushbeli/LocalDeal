@@ -3,14 +3,16 @@ appUser.factory("SearchCriteria", ['Geocoder', '$q', 'ReferenceDataCache', 'Cach
     function SearchCriteria(data) {
         this.outlets = [];
         this.currentLocation = [];
-        this.pageNo = 1;
+
         this.busy = false;
         this.showLoading = true;
         if (!data) {
             this.subcategories = [];
             this.currentLocation = [];
+            this.page = 1;
             return;
         }
+        this.page = data.page;
         this.city = data.city;
         this.cityDetail = data.cityDetail;
         /*
@@ -44,6 +46,9 @@ appUser.factory("SearchCriteria", ['Geocoder', '$q', 'ReferenceDataCache', 'Cach
         }
         if(this.showOnlyNearBy) {
             query.push("show_only_near_by=" + this.showOnlyNearBy);
+        }
+        if (this.page) {
+            query.push("page=" + this.page);
         }
         this.getStreetLatLng()
             .then(function (street_location) {
