@@ -50,4 +50,23 @@ class User::UsersController < ApplicationController
     render json: {success: true}
   end
 
+  def update_outlet_rating
+    dimension = "service" #this is constant for now because we are rating on overall basis
+    outlet = Outlet.friendly.find(params[:outlet_id])
+    stars = params[:stars]
+    if outlet.nil?
+      render json: {errors: ["Outlet not found"]}, status: 422
+      return
+    end
+    if stars.blank?
+      render json: {errors: ["Rating can not be empty"]}, status: 422
+      return
+    end
+    if outlet.rate params[:stars].to_f, current_user, dimension
+      render json: {success: true}
+    else
+      render json: {errors: ["Error occurred while rating"]}, status: 422
+    end
+  end
+
 end

@@ -3,6 +3,7 @@ class Outlet < ActiveRecord::Base
   include Commentable
   include FriendlyId
   markable_as :favorite
+  ratyrate_rateable "service"
 
   friendly_id :slug_candidates, use: [:slugged, :history]
   acts_as_mappable :default_units => :kms,
@@ -35,5 +36,21 @@ class Outlet < ActiveRecord::Base
     ]
   end
 
+  def user_rating (user)
+    if user.nil?
+      return nil
+    else
+      rating = user.ratings_given.where(dimension: "service", rateable_id: self.id, rateable_type: self.class.name)
+      return rating[0].stars unless rating.blank?
+    end
+  end
+
+  def average_rating
+    self.average("service").avg
+  end
+
+  def no_of_raters
+    self.raters("service").count
+  end
 
 end

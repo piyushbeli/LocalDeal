@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get 'outlets/favorite' => 'user/users#favorite_outlets'
     post 'categories/favorite' => 'user/users#update_favorite_categories'
     delete 'categories/:category_id/favorite' => 'user/users#remove_favorite_category'
+    post 'outlets/:outlet_id/rate' => 'user/users#update_outlet_rating'
   end
 
   devise_scope member: [:user, :god] do
@@ -25,12 +26,9 @@ Rails.application.routes.draw do
     get "/outlets" => "user/outlets#index"
     get "/outlets/:id" => "user/outlets#show"
 
-    #spam/unspam a user
+    #spam/unspam a vendor
     post  "/vendors/:vendor_id/spam"  => "spams#create"
     delete  "/vendors/:vendor_id/spam"  => "spams#destroy"
-    #spam/unspam a vendor
-    post  "/vendors/:user_id/spam"  => "spams#create"
-    delete  "/vendors/:user_id/spam"  => "spams#destroy"
 
   end
 

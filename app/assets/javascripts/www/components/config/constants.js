@@ -14,7 +14,8 @@ appUser.constant('Constants', {
         spamUser: 'users/{user_id}/spam',
         markAsFavorite: 'outlets/{id}/favorite',
         favoriteOutlets: 'outlets/favorite',
-        favoriteCategories: 'categories/favorite'
+        favoriteCategories: 'categories/favorite',
+        rateOutlet: 'outlets/{outlet_id}/rate'
     })
     .constant('Constants', {
         apiUrl: 'localhost:3000/vendor#',

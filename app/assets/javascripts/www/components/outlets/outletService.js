@@ -99,6 +99,23 @@ appUser.service("OutletService", ['$http', '$q', 'HttpRoutes', 'Outlet', 'Common
                     deferred.reject(errorMessage);
                 })
             return deferred.promise;
+        };
+
+        self.updateUserRating = function(outlet, stars) {
+            var deferred = $q.defer(),
+                url = HttpRoutes.rateOutlet.format({outlet_id: outlet.id}),
+                postData = {
+                    stars: stars
+                };
+            $http.post(url, postData)
+                .then(function (response) {
+                    deferred.resolve();
+                })
+                .catch(function (response) {
+                    var errorMessage = response.data.errors.join("\n");
+                    deferred.reject(errorMessage);
+                })
+            return deferred.promise;
         }
 
     }])

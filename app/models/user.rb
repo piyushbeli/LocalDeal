@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   include Spammable
   include Spammer
   acts_as_marker
+  ratyrate_rater
 
   devise :timeoutable, :timeout_in => 30.days
   validates :name, presence: true, allow_blank: false

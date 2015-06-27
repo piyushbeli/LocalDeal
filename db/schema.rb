@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603085038) do
+ActiveRecord::Schema.define(version: 20150625162445) do
+
+  create_table "average_caches", force: :cascade do |t|
+    t.integer  "rater_id",      limit: 4
+    t.integer  "rateable_id",   limit: 4
+    t.string   "rateable_type", limit: 255
+    t.float    "avg",           limit: 24,  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 255, null: false
@@ -131,8 +140,9 @@ ActiveRecord::Schema.define(version: 20150603085038) do
     t.string   "what_you_get", limit: 255
     t.text     "fine_print",   limit: 65535
     t.string   "instruction",  limit: 255
-    t.datetime "expire_at",                                 null: false
-    t.boolean  "redeemed",     limit: 1,     default: true
+    t.datetime "expire_at",                                  null: false
+    t.boolean  "redeemed",     limit: 1,     default: false
+    t.datetime "created_at",                                 null: false
   end
 
   add_index "orders", ["offer_id"], name: "index_orders_on_offer_id", using: :btree
@@ -162,6 +172,14 @@ ActiveRecord::Schema.define(version: 20150603085038) do
   add_index "outlets", ["slug"], name: "index_outlets_on_slug", unique: true, using: :btree
   add_index "outlets", ["vendor_id"], name: "index_outlets_on_vendor_id", using: :btree
 
+  create_table "overall_averages", force: :cascade do |t|
+    t.integer  "rateable_id",   limit: 4
+    t.string   "rateable_type", limit: 255
+    t.float    "overall_avg",   limit: 24,  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.string   "link",       limit: 255
@@ -169,6 +187,31 @@ ActiveRecord::Schema.define(version: 20150603085038) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
+
+  create_table "rates", force: :cascade do |t|
+    t.integer  "rater_id",      limit: 4
+    t.integer  "rateable_id",   limit: 4
+    t.string   "rateable_type", limit: 255
+    t.float    "stars",         limit: 24,  null: false
+    t.string   "dimension",     limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
+  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
+
+  create_table "rating_caches", force: :cascade do |t|
+    t.integer  "cacheable_id",   limit: 4
+    t.string   "cacheable_type", limit: 255
+    t.float    "avg",            limit: 24,  null: false
+    t.integer  "qty",            limit: 4,   null: false
+    t.string   "dimension",      limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
   create_table "spams", force: :cascade do |t|
     t.integer  "spammer_id",     limit: 4
@@ -221,6 +264,8 @@ ActiveRecord::Schema.define(version: 20150603085038) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "mobile",                 limit: 10
+    t.string   "city",                   limit: 255
+    t.string   "city_id",                limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

@@ -29,6 +29,18 @@ child :comments => :reviews do
   extends 'reviews/show'
 end
 
-node(:markedAsFavorite) do |outlet|
-  outlet.marked_as? :favorite, :by => @current_user
+node(:marked_as_favorite) do |outlet|
+  outlet.marked_as? :favorite, :by => @current_user unless @current_user.nil?
+end
+
+node(:user_rating) do |outlet|
+  outlet.user_rating (@current_user)
+end
+
+node(:rating) do |outlet|
+  outlet.average_rating
+end
+
+node(:no_of_raters) do |outlet|
+  outlet.no_of_raters
 end

@@ -1,17 +1,23 @@
 <div class="row" ng-repeat="outlet in outlets">
-  <div class="col col-md-4">
+  <div class="col col-md-1">
     <a ng-click="showOutletDetail(outlet)">{{outlet.name}}</a>
   </div>
-  <div class="col col-md-2 col-sm-1">
+  <div class="col col-md-1 col-sm-1">
     {{outlet.distance | distance}}
   </div>
   <div class="col col-md-3 col-sm-1">
     {{outlet.street}}
   </div>
-  <div class="col col-md-2 col-sm-1">
+  <div class="col col-md-2">
     <button type="button" ng-click="toggleFavorite(outlet)" class="btn btn-primary">
       {{outlet.markedAsFavorite ? 'Un Favorite' : 'Favorite'}}
     </button>
   </div>
-</div>
+
+  <div class="col col-md-2">
+    <span class="bg-primary">{{outlet.rating}} <span> ({{outlet.noOfRaters}} votes)</span></span>
+  </div>
+  <div class="col col-md-1">
+    <span class="bg-primary">{{outlet.reviewCount}} Reviews</span>
+  </div>
 </div>

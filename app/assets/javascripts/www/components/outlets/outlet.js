@@ -11,11 +11,14 @@ appUser.factory("Outlet", ['Deal', 'Review', function(Deal, Review) {
         this.city = data.city;
         this.street = data.street;
         this.distance = data.distance; //Distance form current location
-        this.markedAsFavorite = data.markedAsFavorite;
+        this.markedAsFavorite = data.marked_as_favorite;
         this.reviews = Review.build(data.reviews);
-        this.reviewCount = data.review_count;
+        this.rating = data.rating;
 
         //Detail specific
+        this.reviewCount = data.review_count;
+        this.userRating = data.user_rating * 2; //On UI we are showing 10 stars instead of 5
+        this.noOfRaters = data.no_of_raters;
         this.latitude = data.latitude;
         this.longitude = data.longitude;
     };

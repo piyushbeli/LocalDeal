@@ -89,4 +89,22 @@ appUser.controller("OutletDetailController", ['$scope', '$rootScope', 'outlet', 
                 })
         };
 
+        $scope.hoveringOver = function(val) {
+            $scope.overStar = val;
+            $scope.value = val/2; //Because we are using 1-5 scale but on UI we would show 10 stars so that half star can work
+        };
+
+        $scope.$watch('outlet.userRating', function(newVal, oldVal) {
+            if (newVal && newVal != oldVal) {
+                //Do half before sending to service, because we are showing 10 stars but scale is 1 to 5
+                OutletService.updateUserRating($scope.outlet, newVal/2)
+                    .then(function () {
+
+                    })
+                    .catch(function () {
+                        $scope.outlet.userRating = oldVal;
+                    })
+            }
+        });
+
     }])
