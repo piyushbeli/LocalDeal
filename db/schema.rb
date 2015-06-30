@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625162445) do
+ActiveRecord::Schema.define(version: 20150630161050) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id",      limit: 4
@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 20150625162445) do
 
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
   add_index "comments", ["commentator_type", "commentator_id"], name: "index_comments_on_commentator_type_and_commentator_id", using: :btree
+
+  create_table "company_settings", force: :cascade do |t|
+    t.string "terms_and_conditions_vendor", limit: 255
+    t.string "terms_and_conditions_user",   limit: 255
+    t.string "about_us",                    limit: 255
+    t.string "contact_us",                  limit: 255
+  end
 
   create_table "deals", force: :cascade do |t|
     t.string  "title",       limit: 255, null: false

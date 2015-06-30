@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   get '/categories' => 'reference_data#categories'
   get 'subcategories/:category_id' => 'reference_data#sub_categories'
   get 'offertypes' => 'reference_data#offer_types'
+  get 'companysetting' => 'company_setting#show'
 
 
   # You can have the root of your site routed with "root"

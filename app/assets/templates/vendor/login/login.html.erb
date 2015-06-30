@@ -10,37 +10,12 @@
       <div class="form-group" ng-show="showLoginForm">
         New to LocalDeal ? <a ng-click="showLoginForm = false" href="javascript:void(0)">Sign up</a>
       </div>
-      <form ng-show="showLoginForm" role="form" ng-submit="doLogin()">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="username" ng-model="vendor.email" required>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" placeholder="password" ng-model="vendor.password" required>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit">Login</button>
-        </div>
-      </form>
-      <form ng-show="!showLoginForm" role="form" ng-submit="doRegister()">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="e.g Macdonalds" ng-model="vendor.name" required>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="e.g piyush.beli@gmail.com" ng-model="vendor.email" required>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control" placeholder="e.g 9928618166" ng-model="vendor.mobile" required>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" placeholder="password" ng-model="vendor.password" required>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" placeholder="retype password" ng-model="vendor.confirm_password" required>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit">Register</button>
-        </div>
-      </form>
+     <div ng-show="showLoginForm">
+        <sign-in></sign-in>
+     </div>
+     <div ng-show="!showLoginForm">
+        <sign-up></sign-up>
+     </div>
     </div>
   </div>
 </div>
