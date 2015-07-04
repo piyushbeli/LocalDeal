@@ -5,7 +5,7 @@ appCommon
          */
         return function (d) {
             if (!d) {
-                return;
+                return 'NA';
             }
             return d < 1 ? ((d * 1000).toFixed(2) + " meters") : (d.toFixed(2) + " kms");
         }

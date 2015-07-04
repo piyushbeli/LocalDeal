@@ -1,4 +1,4 @@
-appUser.factory("Outlet", ['Deal', 'Review', function(Deal, Review) {
+appUser.factory("Outlet", ['Deal', 'Review', 'LocationService', function(Deal, Review, LocationService) {
     function Outlet(data) {
         if (!data) {
             return;
@@ -10,7 +10,12 @@ appUser.factory("Outlet", ['Deal', 'Review', function(Deal, Review) {
         this.deals = Deal.build(data.deals); //title (for detail id and rating also)
         this.city = data.city;
         this.street = data.street;
-        this.distance = data.distance; //Distance form current location
+        if (LocationService.isLocationServiceOn) {
+            this.distance = data.distance; //Distance form current location
+        } else {
+            this.distance = null;
+        }
+
         this.markedAsFavorite = data.marked_as_favorite;
         this.reviews = Review.build(data.reviews);
         this.rating = data.rating;
