@@ -13,8 +13,8 @@ appVendor.controller("LoginController", ['$scope', '$rootScope', '$state', 'Cons
             .then(function() {
 
             })
-            .catch(function(erros) {
-
+            .catch(function(errorMessage) {
+                alert(errorMessage);
             })
     };
 
