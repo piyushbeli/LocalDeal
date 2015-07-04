@@ -26,11 +26,11 @@ class User::OutletsController < ApplicationController
       street_location = params[:street]
     end
     #User can either search near by places or by locality/street
-
+    @outlets = Outlet.verified_vendors
     if show_only_near_by == true
-      @outlets = Outlet.within(near_by_distance, :origin => current_location) unless current_location.nil?
+      @outlets = @outlets.within(near_by_distance, :origin => current_location) unless current_location.nil?
     else
-      @outlets = Outlet.within(near_by_distance, :origin => street_location)
+      @outlets = @outlets.within(near_by_distance, :origin => street_location)
     end
     @outlets = @outlets.by_category(category_id) unless category_id.nil?
     @outlets = @outlets.by_sub_categories(subcategory_ids) unless subcategory_ids.nil?

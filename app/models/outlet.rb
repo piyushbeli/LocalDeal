@@ -22,6 +22,7 @@ class Outlet < ActiveRecord::Base
   validates_length_of :mobile, is: 10
   validates :contact_no, allow_blank: true, length: {maximum: 15}
 
+  scope :verified_vendors, -> {joins(:vendor).where("vendors.is_verified = true")}
   scope :by_city, ->(id = nil) { where("city_id = ?", "#{id}") }
   scope :by_category, ->(id = nil) { joins(:vendor).where("vendors.category_id = ?", id) }
   scope :by_street, ->(id = nil) { where("street_id = ?", "#{id}") }
