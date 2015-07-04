@@ -19,6 +19,7 @@ appVendor
         emailConfirmationUrl: 'http://40ea6b.ngrok.com/vendor#/emailConfirmation'
     })
     .constant("States", {
+        login: 'login',
         deals: 'app.deals',
         outlets: 'app.outlets',
         orders: 'app.orders',

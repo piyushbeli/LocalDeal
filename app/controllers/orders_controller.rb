@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   include CommonResourceController
 
-  before_filter :authenticate_user!, only: [:create]
-  before_filter :authenticate_member!, only: [:show, :index]
+  #before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_member!, only: [:create, :show, :index]
 
   def index
     #Filter and order criteria
