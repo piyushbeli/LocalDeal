@@ -10,7 +10,11 @@ appVendor.service("AccountService", ['$q', '$auth', '$http', 'HttpRoutes', 'Outl
                 subcategory_ids: vendor.subcategories.map(function(item) {
                     return item.id
                 }),
-                website: vendor.website
+                website: vendor.website,
+                google_plus_page: vendor.googlePlus,
+                instagram_page: vendor.instagram,
+                facebook_page: vendor.facebook,
+                twitter_page: vendor.twitter
             }
         $auth.updateAccount(postData)
             .then(function (response) {

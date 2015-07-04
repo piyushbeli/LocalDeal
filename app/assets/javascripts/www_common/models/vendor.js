@@ -14,6 +14,10 @@ appCommon.factory("Vendor", ['Outlet', function (Outlet) {
         this.category = {
             id: data.category_id
         };
+        this.facebook = data.facebook_page;
+        this.instagram = data.instagram_page;
+        this.googlePlus = this.google_plus_page;
+        this.twitter = data.twitter_page;
         this.subcategories = data.subcategories;
         this.spammed = data.spammed; //Whether spammed by current user (not valid for vendor login)
     }

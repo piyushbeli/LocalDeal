@@ -4,6 +4,10 @@ class AddExtraFieldsToVendor < ActiveRecord::Migration
     add_column :vendors, :website, :string
     add_column :vendors, :is_verified, :boolean, null: false, default: false
     add_reference :vendors, :category, index: true
+    add_column :vendors, :fb_page, :string
+    add_column :vendors, :google_plus_page, :string
+    add_column :vendors, :twitter_page, :string
+    add_column :vendors, :instagram_page, :string
     add_foreign_key :vendors, :categories
   end
 end
