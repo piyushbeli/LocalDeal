@@ -4,7 +4,8 @@ appCommon.service("LocationService", ['$q', function ($q) {
 
     self.getCurrentLocation = function () {
         var deferred = $q.defer();
-        navigator.geolocation.getCurrentPosition(function (position) {
+        deferred.resolve(null);
+        /*navigator.geolocation.getCurrentPosition(function (position) {
                 self.isLocationServiceOn = true;
                 deferred.resolve([position.coords.latitude, position.coords.longitude]);
             },
@@ -16,7 +17,7 @@ appCommon.service("LocationService", ['$q', function ($q) {
                     self.isLocationServiceOn = false;
                 }
                 deferred.resolve(null);
-            });
+            });*/
         return deferred.promise;
     };
 
