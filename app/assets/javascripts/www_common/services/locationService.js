@@ -11,7 +11,7 @@ appCommon.service("LocationService", ['$q', function ($q) {
             function (error) {
                 //If geo location service is not enabled
                 if( self.isLocationServiceOn != false) {
-                    alert("Please turn on the location service by going Setting->Advance->Content Setting->Location->Manage Exception " +
+                    console.log("Please turn on the location service by going Setting->Advance->Content Setting->Location->Manage Exception " +
                     "and then delete the block entry");
                     self.isLocationServiceOn = false;
                 }
