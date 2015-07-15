@@ -1,18 +1,18 @@
-<form role="form" ng-submit="doRegister()">
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="e.g Macdonalds" ng-model="vendor.name" required>
+<form name="signUpForm" role="form" ng-submit="doRegister()" valdr-type="SignUp" novalidate>
+  <div valdr-form-group class="form-group">
+    <input type="text" class="form-control" placeholder="e.g Macdonalds" ng-model="vendor.name" name="name">
   </div>
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="e.g piyush.beli@gmail.com" ng-model="vendor.email" required>
+  <div valdr-form-group class="form-group">
+    <input type="text" class="form-control" placeholder="e.g piyush.beli@gmail.com" ng-model="vendor.email" name="email">
   </div>
-  <div class="form-group">
-    <input type="number" class="form-control" placeholder="e.g 9928618166" ng-model="vendor.mobile" required>
+  <div valdr-form-group class="form-group">
+    <input type="number" class="form-control" placeholder="e.g 9928618166" ng-model="vendor.mobile" name="mobile">
   </div>
-  <div class="form-group">
-    <input type="password" class="form-control" placeholder="password" ng-model="vendor.password" required>
+  <div valdr-form-group class="form-group">
+    <input type="password" class="form-control" placeholder="password" ng-model="vendor.password" name="password">
   </div>
-  <div class="form-group">
-    <input type="password" class="form-control" placeholder="retype password" ng-model="vendor.confirm_password" required>
+  <div valdr-form-group ="form-group">
+    <input type="password" class="form-control" placeholder="retype password" ng-model="vendor.confirm_password" name="confirmPassword">
   </div>
   <div class="form-group">
     <button class="btn btn-primary" type="submit">Register</button>

@@ -1,11 +1,13 @@
-<form role="form" ng-submit="doLogin()">
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="username" ng-model="vendor.email" required>
-  </div>
-  <div class="form-group">
-    <input type="password" class="form-control" placeholder="password" ng-model="vendor.password" required>
-  </div>
-  <div class="form-group">
-    <button class="btn btn-primary" type="submit">Login</button>
+<form role="form" name="signInForm" ng-submit="doLogin()" novalidate>
+  <div valdr-type="Login" valdr-enabled="true">
+    <div valdr-form-group class="form-group">
+      <input type="text" class="form-control" placeholder="username" ng-model="vendor.email" name="userName">
+    </div>
+    <div valdr-form-group class="form-group">
+      <input type="password" class="form-control" placeholder="password" ng-model="vendor.password" name="password">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Login</button>
+    </div>
   </div>
 </form>

@@ -5,3 +5,15 @@
 a {
     cursor: pointer;
 }
+
+.valdr-message {
+    display: none;
+}
+.valdr-message.ng-invalid.ng-touched.ng-dirty {
+    display: inline;
+    color: red;
+}
+.ng-submitted .valdr-message.ng-invalid {
+    display: inline;
+    color: red;
+}

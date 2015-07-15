@@ -23,6 +23,7 @@
 //=require  angular-loading-bar
 //=require isteven-angular-multiselect
 
+//=require valdr/valdr-message.js
 //= require ./www_common/app.js
 //= require ./www/app.js
 //= require ./www_vendor/app.js

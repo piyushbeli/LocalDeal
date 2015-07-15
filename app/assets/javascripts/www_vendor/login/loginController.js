@@ -9,6 +9,9 @@ appVendor.controller("LoginController", ['$scope', '$rootScope', '$state', 'Cons
     }
 
     $scope.doLogin = function() {
+        if ($scope.signInForm.$invalid) {
+            return;
+        }
         LoginService.doLogin($scope.vendor)
             .then(function() {
 
@@ -19,6 +22,9 @@ appVendor.controller("LoginController", ['$scope', '$rootScope', '$state', 'Cons
     };
 
     $scope.doRegister = function() {
+        if ($scope.signUpForm.$invalid) {
+            return;
+        }
         LoginService.doRegister($scope.vendor)
             .then(function(response) {
                 $scope.isRegistrationSuccessful = true;

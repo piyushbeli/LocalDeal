@@ -14,7 +14,7 @@ appCommon.service("LocationService", ['$q', function ($q) {
                 if( self.isLocationServiceOn != false) {
                     console.log("Please turn on the location service by going Setting->Advance->Content Setting->Location->Manage Exception " +
                     "and then delete the block entry");
-                    self.isLocationServiceOn = false;
+                    self.indexisLocationServiceOn = false;
                 }
                 deferred.resolve(null);
             });*/

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-include UserResourceController
 
+  before_action :authenticate_member!, only:[:create]
   before_action :find_commentable
 
   respond_to :json
@@ -15,7 +15,7 @@ include UserResourceController
           @commentable = $1.classify.constantize.friendly.find(value)
         end
         if @commentable.nil?
-          render json: {errors: ["Could not find the deal with this id"]}, status: 422
+          render json: {errors: ["Could not find the outlet with this id"]}, status: 422
         end
       end
     end
