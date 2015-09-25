@@ -61,7 +61,6 @@ GEM
       multi_json
     bower-rails (0.10.0)
     builder (3.2.2)
-    byebug (6.0.2)
     dalli (2.7.4)
     debug_inspector (0.0.2)
     devise (3.5.1)
@@ -87,7 +86,7 @@ GEM
       rails (>= 3.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    hashie (1.2.0)
+    hashie (3.4.2)
     hike (1.2.3)
     httpauth (0.2.1)
     i18n (0.7.0)
@@ -106,8 +105,8 @@ GEM
     minitest (5.8.1)
     multi_json (1.11.2)
     multipart-post (2.0.0)
-    mysql2 (0.4.1)
-    mysql2 (0.4.1-x86-mingw32)
+    mysql2 (0.3.18)
+    mysql2 (0.3.18-x86-mingw32)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     nokogiri (1.6.6.2-x86-mingw32)
@@ -119,9 +118,9 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.2)
     oj (2.12.14)
-    omniauth (1.0.3)
-      hashie (~> 1.2)
-      rack
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
     omniauth-facebook (1.6.0)
       omniauth-oauth2 (~> 1.1)
     omniauth-google-oauth2 (0.2.6)
@@ -131,7 +130,7 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.5.0)
-    passenger (5.0.19)
+    passenger (5.0.20)
       rack
       rake (>= 0.8.1)
     rabl (0.11.6)
@@ -224,7 +223,6 @@ DEPENDENCIES
   angular_rails_csrf
   bower
   bower-rails
-  byebug
   dalli
   devise_token_auth
   figaro
@@ -233,9 +231,9 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   json
   markable!
-  mysql2
+  mysql2 (= 0.3.18)
   oj
-  omniauth (~> 1.0.0)
+  omniauth (~> 1.2.2)
   omniauth-facebook
   omniauth-google-oauth2
   passenger

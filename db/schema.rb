@@ -147,9 +147,8 @@ ActiveRecord::Schema.define(version: 20150630161050) do
     t.string   "what_you_get", limit: 255
     t.text     "fine_print",   limit: 65535
     t.string   "instruction",  limit: 255
-    t.datetime "expire_at",                                  null: false
-    t.boolean  "redeemed",     limit: 1,     default: false
-    t.datetime "created_at",                                 null: false
+    t.datetime "expire_at",                                 null: false
+    t.boolean  "redeemed",     limit: 1,     default: true
   end
 
   add_index "orders", ["offer_id"], name: "index_orders_on_offer_id", using: :btree
@@ -271,8 +270,6 @@ ActiveRecord::Schema.define(version: 20150630161050) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "mobile",                 limit: 10
-    t.string   "city",                   limit: 255
-    t.string   "city_id",                limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
