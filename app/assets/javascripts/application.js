@@ -6,7 +6,7 @@
 //= require_tree ../templates
 
 //= require ng-token-auth
-//= require angular-cookie
+//= require angular-cookies
 //= require angular-file-upload
 //= require angular-loading-bar
 //= require valdr
@@ -16,7 +16,7 @@
 //= require angular-ui-bootstrap-datetimepicker
 //= require moment
 //= require lodash
-//= require angular-simple-logger
+
 //= require angular-google-maps
 //= require ngInfiniteScroll
 //= require ngScrollTo
