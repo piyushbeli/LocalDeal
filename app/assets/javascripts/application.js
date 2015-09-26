@@ -18,6 +18,7 @@
 //= require moment
 //= require lodash
 
+//= require angular-simple-logger
 //= require angular-google-maps
 //= require ngInfiniteScroll
 //= require ngScrollTo
