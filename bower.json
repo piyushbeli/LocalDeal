@@ -22,7 +22,7 @@
     "ui-router": "latest",
     "bootstrap": "latest",
     "angular-devise": "~1.0.2",
-    "ng-token-auth": "0.0.28",
+    "ng-token-auth": "0.0.21",
     "angular-cookie": "~4.0.6",
     "angular-bootstrap": "~0.12.1",
     "angular-loading-bar": "~0.7.1",
