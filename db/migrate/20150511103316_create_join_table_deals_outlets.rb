@@ -1,4 +1,4 @@
-class CreateJoinTableDealOutlet < ActiveRecord::Migration
+class CreateJoinTableDealsOutlets < ActiveRecord::Migration
   def change
     create_join_table :deals, :outlets do |t|
     end

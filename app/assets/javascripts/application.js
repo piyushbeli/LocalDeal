@@ -1,3 +1,5 @@
+//= require jquery
+//= require_tree ./libs
 //= require angular
 //= require angular-route
 //= require ui-router

@@ -1,3 +1,777 @@
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+* { outline:0 !important; }
+
+html, body { height: 100%; margin: 0; padding: 0;}
+
+.log_register header { background:rgba(9, 9, 9, 0.8) ; position:fixed; width:100%; top:0; left:0; z-index:10;}
+
+.log_register header .logo { padding:5px 0;}
+
+
+/*********** Login Page CSS STARTS ***********/
+
+.login_bg { position:absolute; top:0; right:0; left:0; width:100%; float:left; min-height:100%; background:url(../images/bg_login.jpg) fixed top center no-repeat, rgba(255, 255, 255, 0.2); background-size:cover; }
+
+.outer-container { max-width:380px; width:100%; position:relative; margin:0 auto; }
+
+.inner-wrapper { width:100%; margin:60% 0; float:left; background:rgba(0, 0, 0, 0.8);}
+
+.inner-container1 { width:100%; float:left; margin-bottom:60%; }
+
+.inner-wrapper h1 { float:right; margin:0; padding:10px 15px; background:#000; color:#FFF; font-family: 'Open Sans', sans-serif;}
+
+.inner-wrapper h1 i { float:left; font-size:30px; margin-right:10px; }
+
+.inner-wrapper h1 span { float:left; line-height:30px; text-transform:uppercase; font-size:20px; }
+
+.login-form { float:left; max-width:100%; padding:45px; width:100%; }
+
+.login-form .form-field { position:relative; width:100%; float:left; margin-bottom:25px;}
+
+.login-form .form-field span { position:absolute; top:15px; left:15px; font-size:20px; color:#FFF; }
+
+.login-form input { background:none; border:1px solid #FFF; width:100%; min-height:50px; font-size:20px; color:#FFF; padding-left:45px; font-family: 'Open Sans', sans-serif; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.login-form .form-field.active span { color:#1d9d74;}
+
+.login-form input:hover, .login-form input:focus { border-color:#1d9d74;}
+
+.login-form button { width:100%; float:left; background:#1d9d74; box-shadow:none; border:0; padding:10px 0; font-size:20px; text-transform:uppercase; color:#FFF; font-family: 'Open Sans', sans-serif; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.login-form button:hover { background:#006d44;}
+
+.login-reset { width:100%; float:left; }
+
+.login-reset .left-sec { float:left;}
+
+.login-reset .left-sec a { text-decoration:none; font-style:italic; color:#FFF; font-family: 'Open Sans', sans-serif; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;}
+
+.login-reset .left-sec a:hover { opacity:0.75;}
+
+.login-reset .right-sec { float:right;}
+
+.login-reset .right-sec a { text-transform:uppercase; text-decoration:none; color:#ff5a5f; font-family:open Sans; font-weight:600; font-family: 'Open Sans', sans-serif; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.login-reset .right-sec a:hover { color:#ef4a4f;}
+
+
+/*********** Login Page CSS ENDS ***********/
+
+
+/*********** Sign Up Page CSS STARTS ***********/
+
+.register-form { float:left; max-width:100%; padding:45px; width:100%; }
+
+.register-form .form-field { position:relative; width:100%; float:left; margin-bottom:25px;}
+
+.register-form .form-field span { position:absolute; top:15px; left:15px; font-size:20px; color:#FFF; }
+
+.register-form input { background:none; border:1px solid #FFF; width:100%; min-height:50px; font-size:20px; color:#FFF; padding-left:45px; font-family: 'Open Sans', sans-serif; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.register-form .form-field.active span { color:#1d9d74;}
+
+.register-form input:hover, .register-form input:focus { border-color:#1d9d74;}
+
+.register-form button { width:100%; float:left; background:#ff5a5f; box-shadow:none; border:0; padding:10px 0; font-size:20px; text-transform:uppercase; color:#FFF; font-family: 'Open Sans', sans-serif; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.register-form button:hover { background:#ce2025;}
+
+.register-reset { width:100%; float:left; }
+
+.register-reset .right-sec { float:right;}
+
+.register-reset .right-sec a { text-transform:uppercase; text-decoration:none; color:#1d9d74; font-family:open Sans; font-weight:600; font-family: 'Open Sans', sans-serif; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.register-reset .right-sec a:hover { color:#12835f;}
+
+/*********** Sign Up Page CSS ENDS ***********/
+
+
+/******** Header **********/
+
+.header-top-container { background:#000; width:100%; float:left; padding:10px 0; }
+
+.header-top-container ul { margin:0 auto; float:right;}
+
+.header-top-container ul li { margin-left:5px; }
+
+.header-top-container ul li span { margin-right:5px; }
+
+.header-top-container ul li a { color:#666; text-decoration:none; font-family: 'Open Sans', sans-serif; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;  }
+
+.header-top-container ul li a:hover { color:#FFF;}
+
+header { background:#060606; }
+
+.logo { padding:15px 0; display:inline-block;}
+
+.head-nav { float:right; line-height:90px; vertical-align:middle; }
+
+.head-nav ul { display:inline-block; vertical-align:middle; margin:0; }
+
+.head-nav ul li { margin-left:15px;}
+
+.head-nav ul li a { position:relative; text-decoration:none; color:#FFF; font-size:16px; padding-bottom:10px; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;}
+
+.head-nav ul li a::before { content:' '; width:0%; height:2px; background:#1d9d74; position:absolute; bottom:0; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.head-nav ul li a:hover::before, .head-nav ul li a.active::before { width:100%; }
+
+/******** Header Ends **********/
+
+/******** General **********/
+
+.outer-main { position:relative; width:100%; min-height:100%; }
+
+.inner-container { width:100%; float:left; padding:17px 0; margin-bottom:100px; position:relative; }
+
+.main-heading { float:left; width:100%; }
+
+.main-heading h2 { color:#ff5a5f; font-size:28px; text-transform:uppercase; font-family: 'Open Sans', sans-serif; font-weight:600; display:inline-block; border-bottom:1px solid #2a2a2a; padding-bottom:10px; margin:0; }
+
+.main-heading h2 span { color:#888888; margin-right:10px; }
+
+.main-heading h2 strong { color:#000; font-weight:inherit; }
+
+.gen-btn { width:100%; flaot:left; text-align:right; }
+
+.gen-btn a{ float:right; background:#ff5a5f; font-family: 'Open Sans', sans-serif; color:#FFF; padding:5px 15px; text-decoration:none; border-bottom:3px solid #e93137; text-transform:uppercase; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.gen-btn a:hover { background:#e93137; }
+
+/******** General CSS ENds **********/
+
+
+/******** Outlet List Page **********/
+
+.outlet-wrapper { width:100%; text-align:center; border:1px solid #ccc; margin-bottom:30px; float:left; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;}
+
+.outlet-wrapper a { text-decoration:none; }
+
+.outlet-img { width:100%; float:left; overflow:hidden; }
+
+.outlet-img img { width:100%; transition:all 0.6s ease-in-out; -webkit-transition:all 0.6s ease-in-out; -moz-transition:all 0.6s ease-in-out;}
+
+.outlet-descp { padding:25px; width:100%; float:left; }
+
+.outlet-descp h2 { margin:0; margin-bottom:15px; color:#ff5a5f; font-size:28px; font-family: 'Open Sans', sans-serif; }
+
+.outlet-descp p { font-size:16px; font-family: 'Open Sans', sans-serif; color:#666; margin:0; }
+
+.outlet-descp p span { width:100%; float:left; margin-bottom:10px; font-style:italic; }
+
+.outlet-wrapper:hover { box-shadow:0 0 10px #878787; }
+
+.outlet-wrapper a:hover img { transform:scale(1.4,1.4) rotate(-5deg); }
+
+/******** Outlet List Page Ends **********/
+
+
+/******** Offer List Page **********/
+
+.offer-wrapper { width:100%; text-align:center; border:1px solid #ccc; margin-bottom:30px; float:left; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;}
+
+.offer-wrapper a { text-decoration:none; }
+
+.offer-img { width:100%; float:left; overflow:hidden; position:relative;}
+
+.offer-img::after { bottom: 7px; color: #fff; content: ""; font-family: "FontAwesome"; font-size: 40px; left: 0; line-height: 0; position: absolute; right: 0; }
+
+.offer-img img { width:100%; transition:all 0.6s ease-in-out; -webkit-transition:all 0.6s ease-in-out; -moz-transition:all 0.6s ease-in-out;}
+
+.overlay-descp { position:absolute; right:0; bottom:0; border-top-left-radius:100%; height:80px; width:90px; border-top:4px solid #FFF; border-left:4px solid #FFF; background:rgba(0, 0, 0, 0.5); vertical-align:middle; text-align:center; overflow:hidden }
+
+.overlay-descp h2 { color:#FFF; font-family: 'Open Sans', sans-serif; font-weight:700; font-size:22px; color:#cebf91; margin:0; margin-top:25px; margin-left:15px; }
+
+.overlay-descp h2 span { clear:both; display:block; font-weight:400; text-transform:uppercase; font-size:14px; }
+
+.offer-descp { padding:15px; width:100%; float:left; }
+
+.offer-descp h2 { margin:0; margin-bottom:15px; color:#ff5a5f; font-size:20px; text-transform:uppercase; display:inline-block; border-bottom:1px solid #ccc; padding-bottom:2px; font-family: 'Open Sans', sans-serif; font-weight:600; }
+
+.offer-descp p { font-size:16px; font-family: 'Open Sans', sans-serif; color:#666; margin:0; }
+
+.offer-descp p span { width:100%; float:left; margin-bottom:10px; font-style:italic; }
+
+.offer-wrapper:hover { box-shadow:0 0 10px #878787; }
+
+.offer-wrapper a:hover img { transform:scale(1.4,1.4) rotate(-5deg); }
+
+.offer-more { text-align:center; width:100%; float:left; margin-top:15px; }
+
+.offer-more a { text-transform:uppercase; font-family: 'Open Sans', sans-serif; font-weight:600; color:#ff5a5f; border-radius:2px;border:1px solid #ff5a5f; padding:7px 20px; text-decoration:none; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;}
+
+.offer-more a:hover { background:#ff5a5f; color:#FFF; }
+
+/******** Offer List Page Ends **********/
+
+
+
+/******** About Deal **********/
+
+.abt-container { width:100%;float:left; margin-top:50px; }
+
+.deal-box { width:100%; float:left; padding:15px; border:1px solid #ddd; }
+
+.deal-box h3 { font-family: 'Open Sans', sans-serif; position:relative; font-weight:600; color:#ff5a5f; text-transform:uppercase; font-size:20px; margin:0; width:100%; float:left; margin-top:25px; margin-bottom:25px; padding-bottom:10px; border-bottom:1px solid #ddd; }
+
+.deal-box h3 span { color:#c0c0c0; font-size:50px; font-weight:400; vertical-align:bottom; position:absolute; right:0; bottom:0; }
+
+.deal-box label { color:#777; font-family: 'Open Sans', sans-serif; margin-right:10px; font-weight:400; }
+
+.deal-box .deal-form .form-control  { border-radius:0; color:#777; font-family: 'Open Sans', sans-serif; font-weight:400;}
+
+.deal-box .deal-form .field-cont { margin-bottom:15px; width:100%; float:left; }
+
+.deal-box ul { width:100%; float:left; }
+
+.deal-box ul li { margin-bottom:10px; }
+
+.deal-box ul li a { color:#777; font-family: 'Open Sans', sans-serif; text-decoration:none; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.deal-box ul li a:hover { color:#ff5a5f; }
+
+
+/******** About Deal Page Ends **********/
+
+
+/******** Order List Page **********/
+
+.order-table { float:left; width:100%; }
+
+.order-table table tr th { color:#111; font-family: 'Open Sans', sans-serif; font-weight:700; font-size:18px; text-transform:uppercase;}
+
+.order-table table tr th, .order-table table tr td { border:0; text-align:center; vertical-align:middle; white-space:nowrap; }
+
+.order-table table tr td { font-size:16px; padding:10px 8px; color:#777;  }
+
+.order-table table tr td a { color:#ff5a5f; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;}
+
+.order-table table tr td a:hover { color:#c71e23; }
+
+.order-table > .table-hover > tbody > tr { transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.order-table > .table-hover > tbody > tr:hover { background:rgba(255, 90, 95, 0.2); }
+
+
+
+.order_sorting { display:block; vertical-align:middle; margin:25px 0; }
+
+.order-filter-inner {  display:inline-block; vertical-align:middle; margin-right:10px; }
+
+.order_sorting h5 { font-size:14px; font-family: 'Open Sans', sans-serif; font-weight:700; color:#111; text-transform:uppercase; display:inline-block; vertical-align:middle; margin:0; margin-right:5px; }
+
+.order_sorting .dropdown { display:inline-block; vertical-align:middle; }
+
+.order_sorting .dropdown button { background:none; border:0; box-shadow:none; }
+
+.order_sorting .dropdown ul li a { transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;  }
+
+.order_sorting .dropdown ul li a:hover { background:rgba(255, 90, 95, 0.2); }
+
+
+.table-search { display:block; vertical-align:middle; margin:20px 0; font-family: 'Open Sans', sans-serif;; }
+
+.table-search input { border:0; background:#ddd;  padding: 6px 15px; display:inline-block; width:82%; vertical-align:middle; }
+
+.table-search a { background: #ff5a5f; border-bottom: 3px solid #e93137; color: #fff; display:inline-block; vertical-align:middle; font-family: "Open Sans",sans-serif; padding: 5px 15px; text-decoration: none; text-transform: uppercase; transition: all 0.3s ease-in-out 0s; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s;}
+
+.table-search a:hover { background: #e93137;}
+
+/******** Order List Page Ends **********/
+
+
+/******** Project Page **********/
+
+.profile-banner { background-image:url(../images/banner.jpg); background-repeat:no-repeat; background-size:100%; min-height:250px; }
+
+.profile-wrapper {
+    background: rgb(0,0,0); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(195,195,195,0.5) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.5)), color-stop(100%,rgba(0,0,0,0.5))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(195,195,195,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(195,195,195,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(195,195,195,0.5) 0%,rgba(0,0,0,0.5) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(195,195,195,0.5) 0%,rgba(0,0,0,0.5) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3c3c3', endColorstr='#000000',GradientType=0 ); /* IE6-9 */ min-height:100px; position:relative; top:80px; box-shadow:0 0 1px #000;
+
+}
+
+
+.profile-inner { position:relative; width:100%; padding-left:250px; float:left; }
+
+.profile-pic { background:#FFF; width:200px; height:200px; position:absolute; margin-top:-5%; left:0; border:4px solid #FFF; overflow:hidden; border-radius:50%; text-align:center; box-shadow:0 0 4px #656565; }
+
+.profile-pic img { width:100%; transition: all 0.5s ease-in-out 0.1s; -webkit-transition: all 0.5s ease-in-out 0.1s; -moz-transition: all 0.5s ease-in-out 0.1s; }
+
+.profile-pic img:hover { opacity:0.5; transform:scale(1.2, 1.2) rotate(-5deg); }
+
+.pro-counters { float:left; width:100%; padding:15px 0; }
+
+.pro-counters ul { margin:0; }
+
+.pro-counters ul li { padding:0; margin:0; vertical-align:top;}
+
+.pro-counters h2 { width:100%; float:left; text-transform:uppercase; font-family: 'Open Sans', sans-serif; font-weight:600; font-size:26px; color:#000; margin:0; }
+
+.pro-counters h2 span { font-size:32px; color:#FFF; width:100%; float:left; }
+
+.pro-counters h2 i { font-size:24px; color:#ffcc00; }
+
+.profile-form-container { max-width:450px; width:100%; margin:0 auto; float:none;}
+
+.profile-form { width:100%; float:left; margin-top:50px;}
+
+.profile-row { margin-bottom:20px; width:100%; display:block;}
+
+.profile-row label { display:inline-block; font-family: 'Open Sans', sans-serif; width:16%; color:#777; vertical-align:middle; margin:0; }
+
+.profile-row input { width:80%; margin-left:3%; display:inline-block; font-family:'Open Sans', sans-serif; color:#777; vertical-align:middle; border:1px solid #ccc; min-height:35px; padding:0 10px; transition: all 0.3s ease-in-out 0s; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s; }
+
+.profile-row select { width:80%; outline:0; margin-left:3%; display:inline-block; font-family:'Open Sans', sans-serif; color:#777; vertical-align:middle; border:1px solid #ccc; min-height:35px; padding: 5px 10px; transition: all 0.3s ease-in-out 0s; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s; }
+
+.profile-row select option { padding:0 10px; outline:0; }
+
+.profile-row input:focus, .profile-row select:focus { border-color:#ff5a5f; }
+
+/******** Project Page Ends **********/
+
+
+/******** Reviews Page **********/
+
+.reviews-banner, .customer-reviews, .reviews-inner { width:100%; float:left; }
+
+.reviews-inner { margin-bottom: 15px }
+
+.reviews-banner img { width:100%; }
+
+.reviews-container { float: left; margin: 50px 0; width: 100%;}
+
+.pro-pic { display:inline-block; float:left; width:auto; margin-right:10px; }
+
+.pro-pic img { border:1px solid #ddd; }
+
+.pro-pic ul { margin:0; background:#ff5a5f; width:100%; text-align:center; }
+
+.pro-pic ul li { font-size:11px; margin:0; padding:0; color:#FFF; }
+
+.pro-descp { float:left; width:91%; border-bottom:1px solid #ff5a5f; padding:10px 0; margin-bottom:10px; }
+
+.pro-descp h4 { float:left; margin:0;}
+
+.pro-descp ul { float:right; margin:0;}
+
+.pro-descp ul li { font-style:italic; font-family: 'Open Sans', sans-serif; color:#888; }
+
+.pro-descp ul li i { color:#ff5a5f; }
+
+.reviews-inner p { color:#888; font-family: 'Open Sans', sans-serif; line-height:24px; }
+
+.customer-reviews .pro-descp { border-color:#1d9d74; }
+
+.customer-reviews .pro-descp ul li i { color:#1d9d74; }
+
+
+/******** Reviews Page Ends **********/
+
+
+/******** Outlet Detail Page **********/
+
+.video-container {
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 15%;
+    padding-top: 240px;
+    position: relative;
+    margin-bottom:25px;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/******** Outlet Detail Page Ends **********/
+
+
+/******** Order Detail Page **********/
+
+.order-box { width:100%; float:left; padding:15px; min-height:200px; border:1px solid #ddd; margin-bottom:30px; }
+
+.order-box h3 { font-family: 'Open Sans', sans-serif; position:relative; font-weight:600; color:#ff5a5f; text-transform:uppercase; font-size:20px; margin:0; width:100%; float:left; margin-top:15px; margin-bottom:25px; padding-bottom:10px; border-bottom:1px solid #ddd; }
+
+.order-box ul.cust-det-list { width:100%; float:left; }
+
+.order-box ul.cust-det-list li { margin-bottom:10px; color:#111; font-family: 'Open Sans', sans-serif; }
+
+.order-box ul.cust-det-list li:last-child { margin:0; }
+
+.order-box ul.cust-det-list li i { margin-right:10px; }
+
+.order-box ul.cust-det-list li a { text-decoration:none; color:#111; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;  }
+
+.order-box ul.cust-det-list li a:hover { color:#ff5a5f; }
+
+
+
+.order-box ul.deal-det-list li { margin-bottom:10px; float:left; width:100%; font-family: 'Open Sans', sans-serif;}
+
+.order-box ul.deal-det-list li:last-child { margin-bottom:0; }
+
+.order-box ul.deal-det-list li span.left { width:120px; float:left; font-weight:700; }
+
+.order-box ul.deal-det-list li span.right { float:left; }
+
+
+
+.offer-left { width:49%; float:left; margin-right:2%; }
+
+.offer-left h4, .offer-right h4 { font-size:16px; font-family: 'Open Sans', sans-serif; margin:0; margin-bottom:10px; font-weight:600; }
+
+.offer-left span, .offer-right span { font-size:14px; font-family: 'Open Sans', sans-serif; margin-bottom:10px; float:left; width:100%; }
+
+.offer-left ol, .offer-right ol { padding-left:40px; }
+
+.offer-left ol li, .offer-right ol li { margin-bottom:5px; }
+
+.offer-right { width:49%; float:left; font-family: 'Open Sans', sans-serif; }
+
+/******** Order Detail Page Ends **********/
+
+
+/******** Location Page **********/
+
+.loc-outer { width:100%; float:left; border-left:1px solid #000; padding:0 15px; box-shadow:1px 2px 4px #ccc; padding-bottom:10px; position:relative;}
+
+.loc-outer h2 { border-bottom:1px solid #ccc; float:left; width:100%; font-family: 'Open Sans', sans-serif; margin:0; padding:0 0 20px 85px; color:#ff5a5f;}
+
+.loc-outer h2 span { width:60px; height:60px; position:absolute; border-radius:50px; float:left; border:3px solid #ff5a5f; margin:0 auto; text-align:center; padding:5px; box-shadow:0 1px 3px #4b4b4b inset; top:-25px; left:20px; }
+
+.loc-outer h2 i { margin:0 auto; float:none; width:100%; text-align:center; display:inline-block; vertical-align:middle; font-size:34px; color:#ff5a5f;  }
+
+.out-det-form { width:100%; float:left; margin-top:25px; }
+
+.out-det-form label { width:25%; float:left; font-family: 'Open Sans', sans-serif; font-weight:400; color:#111; line-height:28px; }
+
+.out-det-form input { width:70%; display:inline-block; font-family:'Open Sans', sans-serif; color:#777; vertical-align:middle; border:1px solid #ccc; min-height:35px; padding:0 10px; transition: all 0.3s ease-in-out 0s; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s; }
+
+.out-det-form input:focus { border-color:#ff5a5f; }
+
+.out-loca.gen-btn { width:auto; margin-top:25px; float:right; }
+
+.out-loca.gen-btn a { float:left; margin-right:10px; }
+
+.out-loca.gen-btn a:last-child { margin:0; }
+
+.map-cont { width:100%; float:left; margin-top:35px; margin-bottom:35px; }
+
+.pin-me-map { width:100%; text-align:center; float:left; }
+
+.pin-me-map a { border-top-left-radius:5px; border-top-right-radius:5px; background:#252525; text-decoration:none; text-transform:uppercase; float:left; padding:3px 7px; color:#FFF; font-family: 'Open Sans', sans-serif; transition: all 0.3s ease-in-out 0s; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s; }
+
+.pin-me-map a:hover { background:#ff5a5f; }
+
+.pin-me-map span { padding:0 10px; font-size:12px; }
+
+.map-cont img { width:100%; }
+
+
+/******** Location Page Ends **********/
+
+
+.deal-create-form { position:relative; margin:0 auto; max-width:770px; width:100%;}
+
+.deal-create-form-cont { float:left; width:100%; box-shadow:0 1px 10px #ccc; padding:15px;  }
+
+.deal-no { position:absolute; width:70px; padding:10px; border-bottom:5px solid #ff5a5f; right:15px; top:0; background:#2a2a2a;}
+
+.deal-no h2 { font-family: 'Open Sans', sans-serif; text-align:center; margin:0; text-transform:uppercase; font-size:36px; font-weight:600; color:#ff5a5f; }
+
+.deal-no span { width:100%; float:left; font-size:17px; color:#FFF; }
+
+.deal-form-inner { margin-top:50px; float:left; width:80%; }
+
+.deal-form-inner label { width:29%; display:inline-block; vertical-align:middle; font-weight:400; font-family: 'Open Sans', sans-serif; font-size:14px; color:#111; }
+
+.deal-form-inner input, .deal-form-inner textarea { width:70%; display:inline-block; font-family:'Open Sans', sans-serif; color:#777; vertical-align:middle; border:1px solid #ccc; min-height:35px; padding:0 10px; transition: all 0.3s ease-in-out 0s; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s; }
+
+.deal-form-inner select { width:70%; display:inline-block; font-family:'Open Sans', sans-serif; color:#777; padding:5px 0; vertical-align:middle; border:1px solid #ccc; min-height:35px; transition: all 0.3s ease-in-out 0s; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s; }
+
+.deal-form-inner input:focus, .deal-form-inner textarea:focus, .deal-form-inner select:focus { border-color:#ff5a5f; }
+
+
+/************** Footer ***************/
+
+footer { background:#000; width:100%; margin-bottom:25px; position: absolute; bottom: 0; z-index:10;}
+
+.footer-container {width:100%; float:left; padding:25px 0; font-family: 'Open Sans', sans-serif;}
+
+.footer-container span { float:left; color:#FFF; }
+
+.footer-container ul { float:right; margin:0; }
+
+.footer-container ul li { padding:0;}
+
+.footer-container ul li a { color:#FFF; text-decoration:none; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+
+.footer-container ul li:first-child::after { content:'|'; color:#FFF; }
+
+.footer-container ul li a:hover { color:#ff5a5f; text-decoration:none; }
+
+
+/************** Footer Ends ***************/
+
+
+
+/************** Responsive CSS ***************/
+
+
+@media (min-width:992px) and (max-width:1199px) {
+
+    .outer-container { max-width:400px; }
+
+    .inner-wrapper h1 i { font-size:30px; }
+
+    .inner-wrapper h1 span { font-size:20px; line-height:30px;}
+
+    .profile-banner { min-height:180px; }
+
+    .profile-wrapper { top:50px; min-height:50px;  }
+
+    .profile-inner { padding-left:200px; }
+
+    .profile-pic { width:150px; height:150px; margin-top:-4%; }
+
+    .pro-counters h2, .pro-counters h2 i { font-size:20px; }
+
+    .pro-counters h2 span { font-size:24px; }
+
+
+}
+
+@media (min-width:768px) and (max-width:991px) {
+
+    .outer-container { max-width:400px;}
+
+    .inner-container { padding:15px 0;  }
+
+    .inner-wrapper h1 i { font-size:30px; }
+
+    .inner-wrapper h1 span { font-size:20px; line-height:30px;}
+
+    .outlet-detail-cont { padding:50px 0; }
+
+    .outlet-descp h2 { font-size:24px; }
+
+    .offer-descp p { font-size:14px; }
+
+    .deal-box h3 { font-size:16px; }
+
+    .deal-box h3 span { font-size:40px; }
+
+    .table-search input { width:40%; }
+
+    .order-table table tr th, .order-table table tr td { font-size:14px; }
+
+    .order_sorting, .table-search { margin:10px 0; }
+
+    .profile-banner { min-height:180px; background-size:cover; }
+
+    .profile-wrapper { top:50px; min-height:50px;  }
+
+    .profile-inner { padding-left: 160px;}
+
+    .profile-pic { width:150px; height:150px; margin-top:-5%; }
+
+    .pro-counters h2, .pro-counters h2 i { font-size:20px; }
+
+    .pro-counters h2 span { font-size:24px; }
+
+    .pro-descp { width:87%; }
+
+    .out-det-form label { width:30%; }
+
+    .pin-me-map span { float: left; margin-bottom: 10px; padding: 0; text-align: left;}
+
+}
+
+@media (max-width:767px) {
+
+    .logo { width:6%; float:left;}
+
+    .logo a, .logo a img { float:left; width:100%;}
+
+    .outer-container { max-width:290px; top:25%;}
+
+    .inner-wrapper h1 i { font-size:24px; }
+
+    .inner-wrapper h1 span { font-size:16px; line-height:24px;}
+
+    .main-heading h2 { font-size:24px; }
+
+    .login-form, .register-form { padding:20px;}
+
+    .login-form .form-field, .register-form .form-field{ margin-bottom:20px;}
+
+    .login-form .form-field span, .register-form .form-field span { font-size:16px; top:10px; left:15px;}
+
+    .login-form input, .register-form input { min-height:40px; font-size:14px; padding-left:40px;}
+
+    .login-form button, .register-form button { font-size:16px;}
+
+    .inner-container { padding:15px 0 0; margin-bottom:120px; }
+
+    .head-nav { line-height:65px;}
+
+    .head-nav ul li a, .offer-descp p { font-size:14px; }
+
+    .abt-container, .order-table { margin-top:30px; }
+
+    .deal-box { margin-bottom:25px; }
+
+    .order-table table tr th { font-size:16px; }
+
+    .order-table table tr td { font-size:14px; }
+
+    .order_sorting, .table-search { margin:0; }
+
+    .order-filter-inner { display: block; margin-bottom: 10px; margin-top: 10px;}
+
+    .table-search input { width:50%; }
+
+    .profile-banner { background-size:cover; position:relative; }
+
+    .profile-wrapper { top:0; left:0; right:0; bottom:0; position:absolute; }
+
+    .profile-inner { padding:0; }
+
+    .profile-pic { height: 150px; left: 0; position:static; margin: 0 auto; text-align: center; width: 150px; margin-top:10px;}
+
+    .pro-counters { text-align:center; }
+
+    .pro-counters h2, .pro-counters h2 i { font-size:20px; }
+
+    .pro-counters h2 span { font-size:24px; }
+
+    .pro-counters ul li { width:24%; }
+
+    .reviews-banner { display:none; }
+
+    .pro-descp { width:87%;}
+
+    .offer-left, .offer-right { width:100%; margin:0; margin-bottom:10px; }
+
+    .loc-outer { margin-bottom:50px; }
+
+    .mr-btm-null{ margin-bottom:0;}
+
+    .pin-me-map span { float: left; margin-bottom: 10px; padding: 0; text-align: left;}
+
+    .deal-form-inner { width:100%; }
+
+}
+
+@media (max-width:669px) {
+
+    .pro-descp { width:85%;}
+
+}
+
+@media (max-width:585px) {
+
+    .pro-descp { width:80%;}
+
+}
+
+@media (max-width:480px) {
+
+    .logo { width:10%; float:left;}
+
+    .outlet-descp { padding:15px; }
+
+    .outlet-descp h2 { font-size:20px; }
+
+    .outlet-descp p { font-size:14px; }
+
+    .footer-container { text-align:center; }
+
+    .footer-container span { float:none; display:block; margin-bottom:5px; }
+
+    .footer-container ul { float:none; display:block; }
+
+    .head-nav { line-height:60px;}
+
+    .head-nav ul li a { font-size:14px; }
+
+    .table-search input { width:68%; }
+
+    .profile-pic { width:100px; height:100px; }
+
+    .pro-counters { text-align: center;}
+
+    .pro-counters h2, .pro-counters h2 i { font-size:18px; }
+
+    .pro-counters h2 span { font-size:22px; }
+
+    .pro-counters ul li { margin-bottom: 10px; width: 49%;}
+
+    .profile-form { margin:20px 0; }
+
+    .pro-descp { width:77%; }
+
+    .pro-descp h4 { font-size:16px; margin-bottom:10px; width:100%; }
+
+    .pro-descp ul { float:left; width:100%; }
+
+    .pro-descp ul li { font-size:12px; }
+
+}
+
+@media (max-width:360px) {
+
+    .inner-wrapper { margin:61% 0;}
+
+    .pro-counters h2, .pro-counters h2 i { font-size:16px; }
+
+    .pro-counters h2 span { font-size:18px; }
+
+    .profile-row label { width:25%; }
+
+    .profile-row select, .profile-row input { width:70%; }
+
+    .reviews-inner p { float:left; }
+
+    .pro-descp { width: 68%; }
+
+    .pro-descp h4 { font-size:16px; margin-bottom:10px; }
+
+    .pro-descp ul li { font-size:12px; }
+
+    .pro-descp ul { floaT:left; }
+
+    .out-det-form label, .out-det-form input { width:100%; }
+
+    .deal-form-inner label, .deal-form-inner input, .deal-form-inner select, .deal-form-inner textarea { width:100%; }
+
+}
+
+@media (max-width:359px) {
+
+    .inner-wrapper { margin:20% 0; }
+
+    .header-top-container ul li a { font-size:12px; }
+
+}
+/************** Responsive CSS Ends ***************/
+
+/* Piyush */
 .angular-google-map-container { height: 400px; }
 .checkbox {
     margin-left: 20px;
@@ -16,4 +790,11 @@ a {
 .ng-submitted .valdr-message.ng-invalid {
     display: inline;
     color: red;
+}
+
+datetimepicker {
+    display: inline-table;
+}
+.datetimepicker-wrapper table td input {
+    width: 85%;
 }

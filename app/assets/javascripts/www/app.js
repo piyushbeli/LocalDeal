@@ -25,7 +25,8 @@ appUser.config(['$routeProvider', '$stateProvider', '$urlRouterProvider', '$auth
             github:   '/auth/github',
             facebook: '/auth/facebook',
             google:   '/auth/google_oauth2'
-        }
+        },
+        omniauthWindowType: 'newWindow'
     });
 
     uiGmapGoogleMapApiProvider.configure({

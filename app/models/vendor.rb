@@ -37,6 +37,14 @@ class Vendor < ActiveRecord::Base
           ))
   end
 
+  def active_for_authentication?
+    true
+  end
+
+  def set_verified (bool)
+    self.is_verified = true
+  end
+
   def dealCountLimitReached?
     deals.length >= 4
   end

@@ -1,6 +1,33 @@
-<h3>Outlets</h3>
+<!--<h3>Outlets</h3>
 
 <div class="row" ng-repeat="outlet in vendor.outlets">
   <a ui-sref="app.outletDetail({id: outlet.id})" href="javascript:void(0)">{{outlet.name}}</a>
 </div>
-<button class="btn btn-primary" ui-sref="app.newOutlet">Add Outlet</button>
+<button class="btn btn-primary" ui-sref="app.newOutlet">Add Outlet</button>-->
+
+
+<article>
+  <div class="container">
+    <button class="btn btn-danger" ui-sref="app.newOutlet" style="margin-top:3%">Add Outlet</button>
+    <div class="row">
+      <section class="inner-container">
+        <div class="col-lg-6 col-sm-6" ng-repeat="outlet in vendor.outlets">
+          <div class="outlet-wrapper">
+            <a ui-sref="app.outletDetail({id: outlet.id})" href="javascript:void(0)">
+              <div class="outlet-img">
+                <img src="images/outlet-1.jpg" class="img-responsive" alt="outlet">
+              </div>
+              <div class="outlet-descp">
+                <h2>{{outlet.name}}</h2>
+                <p>
+                  <span>{{outlet.mobile}} | {{outlet.contactNo}}</span>
+                  {{outlet.address}} <br> {{outlet.streetAddress}}
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>

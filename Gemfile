@@ -57,6 +57,10 @@ gem 'will_paginate', '~> 3.0.6' #For pagination, we can use specific gem for boo
 gem 'friendly_id', '~> 5.1.0'
 gem 'markable', :git => 'https://github.com/effektz/markable.git', :branch => :master
 gem 'ratyrate' #For rating outlets
+#Below 3 are Plivo rating
+gem "rest-client", "~> 1.6.7"
+gem "htmlentities", "~> 4.3.1"
+gem 'plivo'
 
 group :production do
   gem 'passenger' #will be used as a webserver in production

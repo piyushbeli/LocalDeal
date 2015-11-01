@@ -1,4 +1,4 @@
-<div class="row">
+<!--<div class="row">
   <div class="col col-md-6 col-md-offset-3">
     <form role="form">
       <div class="form-group">
@@ -53,4 +53,68 @@
       <h5 ng-show="deal.offers.length == 0">No offer added for this deal</h5>
     </form>
   </div>
-</div>
+</div>-->
+
+
+<article>
+  <div class="container">
+    <div class="row">
+      <section class="inner-container">
+        <div class="col-lg-12">
+          <div class="main-heading">
+            <h2><span class="fa fa-edit"></span>About Deal</h2>
+          </div>
+        </div>
+        <div class="abt-container">
+          <div class="col-lg-4 col-sm-4">
+            <div class="deal-box">
+              <h3>Deal Information<span>1</span></h3>
+              <div class="deal-form">
+                <div class="field-cont">
+                  <label>Title</label>
+                  <input type="text" class="form-control" ng-model="deal.title">
+                </div>
+                <div class="field-cont">
+                  <label>Description</label>
+                  <textarea rows="5" class="form-control" ng-model="deal.description"></textarea>
+                </div>
+              </div>
+              <div class="gen-btn">
+                <a href="javascript:void(0)" ng-click="saveDeal()">Update</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-sm-4">
+            <div class="deal-box">
+              <h3>Add Outlet<span>2</span></h3>
+              <ul class="list-unstyled">
+                <li ng-repeat="outlet in vendor.outlets">
+                  <a href="javascript:void(0)">{{outlet.name}}</a>
+                </li>
+              </ul>
+              <div class="gen-btn">
+                <a ng-disabled="deal.isNew()" href="javascript:void(0)" ng-click="openOutletSelectionModal()">Add</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-sm-4">
+            <div class="deal-box">
+              <h3>Create Offer<span>3</span></h3>
+              <ul class="list-unstyled">
+                <li ng-repeat="offer in deal.offers">
+                  <a href="javascript:void(0)" ng-click="editOffer(offer)">{{offer.whatYouGet}}</a>
+                </li>
+              </ul>
+              <div class="gen-btn">
+                <a href="javascript:void(0)" ui-sref="app.dealDetail.newOffer">Add</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+</article>

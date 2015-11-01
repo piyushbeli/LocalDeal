@@ -8,7 +8,9 @@ appCommon
     .constant("CommonHttpRoutes", {
         Categories: '/categories',
         SubCategories: '/subcategories/',
-        OfferTypes: '/offertypes'
+        OfferTypes: '/offertypes',
+        sendOTP: 'send_otp',
+        verifyMe: '/verify_me',
     })
     .constant("CommonConstants", {
         appName: 'LocalDeals',

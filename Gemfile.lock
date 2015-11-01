@@ -88,6 +88,7 @@ GEM
       activesupport (>= 4.1.0)
     hashie (3.4.2)
     hike (1.2.3)
+    htmlentities (4.3.4)
     httpauth (0.2.1)
     i18n (0.7.0)
     jbuilder (2.3.1)
@@ -100,7 +101,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.6.2)
+    mime-types (1.25.1)
     mini_portile (0.6.2)
     minitest (5.8.1)
     multi_json (1.11.2)
@@ -133,6 +134,11 @@ GEM
     passenger (5.0.20)
       rack
       rake (>= 0.8.1)
+    plivo (0.3.17)
+      builder (>= 2.1.2)
+      htmlentities (~> 4.3, >= 4.3.1)
+      json (~> 1.6, >= 1.6.6)
+      rest-client (~> 1.6, >= 1.6.7)
     rabl (0.11.6)
       activesupport (>= 2.3.14)
     rack (1.6.4)
@@ -172,6 +178,8 @@ GEM
     rdoc (4.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rest-client (1.6.9)
+      mime-types (~> 1.16)
     sass (3.4.18)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -228,6 +236,7 @@ DEPENDENCIES
   figaro
   friendly_id (~> 5.1.0)
   geokit-rails
+  htmlentities (~> 4.3.1)
   jbuilder (~> 2.0)
   json
   markable!
@@ -237,11 +246,13 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   passenger
+  plivo
   rabl
   rails (= 4.2.0)
   rails_12factor
   ratyrate
   responders (~> 2.0)
+  rest-client (~> 1.6.7)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   seed_dump

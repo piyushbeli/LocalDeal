@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!--<div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
 
@@ -10,12 +10,31 @@
       <div class="form-group" ng-show="showLoginForm">
         New to LocalDeal ? <a ng-click="showLoginForm = false" href="javascript:void(0)">Sign up</a>
       </div>
-     <div ng-show="showLoginForm">
-        <sign-in></sign-in>
-     </div>
-     <div ng-show="!showLoginForm">
-        <sign-up></sign-up>
-     </div>
+
     </div>
   </div>
+</div>-->
+
+<div class="log_register">
+  <header>
+    <div class="container">
+      <div class="logo"> <a href="#"> <img src="images/logo.png" alt="logo"> </a> </div>
+    </div>
+  </header>
+  <article>
+    <div class="login_bg">
+      <div class="container">
+        <div class="outer-container">
+          <div class="inner-wrapper">
+            <div ng-show="showLoginForm">
+              <sign-in></sign-in>
+            </div>
+            <div ng-show="!showLoginForm">
+              <sign-up></sign-up>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
 </div>

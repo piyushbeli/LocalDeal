@@ -23,4 +23,5 @@ class Vendor::RegistrationsController < DeviseTokenAuth::RegistrationsController
              }, status: 404
     end
   end
+
 end

@@ -8,6 +8,15 @@ appVendor.constant("Routes", {
             }
         }
     },
+    verifyMe: {
+        url: '/vendor/verifyMe',
+        views: {
+            'navContent': {
+                templateUrl: 'vendor/login/verifyMe.html',
+                controller: 'LoginController'
+            }
+        }
+    },
     root: {
         url: '/vendor/app',
         abstract: true,

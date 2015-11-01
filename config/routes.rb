@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
   mount_devise_token_auth_for 'Vendor', at: 'auth_vendor',
-                              skip: [:omniauth_callbacks, :confirmations],
                               controllers: {
                                           registrations: 'vendor/registrations'
                               }
@@ -36,13 +35,15 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
   end
 
-  devise_scope :member => [:user, :vendor] do
+  devise_scope :member  => [:user, :vendor] do
     resources :outlets, only: [] do
       resources :comments, only: [:index, :show, :create, :update, :destroy]
     end
     resources :comments, only: [] do
       resources :comments, only: [:index, :create, :update, :destroy]
     end
+    post 'send_otp' => 'verify_otp#send_otp'
+    post 'verify_me' => 'verify_otp#verify_me'
   end
 
   devise_scope :vendor do

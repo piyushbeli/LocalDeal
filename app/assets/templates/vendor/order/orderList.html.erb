@@ -1,3 +1,4 @@
+<!--
 <order-filter-criteria></order-filter-criteria>
 <div ng-repeat="order in orders">
   <div class="row">
@@ -22,3 +23,48 @@
 </div>
 <pagination ng-show="totalItems>0" total-items="totalItems" items-per-page="itemsPerPage" ng-model="filter.page" ng-change="onChangePageNo()"></pagination>
 <span ng-show="totalItems==0"><b>No item found</b></span>
+-->
+
+
+
+<article>
+  <div class="container">
+    <section class="inner-container">
+      <div class="main-heading">
+        <h2><span class="fa fa-file-text-o"></span>Order Listing</h2>
+        <div class="order-list-container">
+          <order-filter-criteria></order-filter-criteria>
+          <div class="order-table table-responsive">
+            <table class="table table-hover" border="0">
+              <thead>
+              <tr>
+                <th>S.No.</th>
+                <th>Order No.</th>
+                <th>Customer Name</th>
+                <th>Order Type</th>
+                <th>Expire Date</th>
+                <th>State</th>
+                <th>View</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="order in orders">
+                <td>1</td>
+                <td>{{order.orderNo}}</td>
+                <td>{{order.user.name}}</td>
+                <td>{{order.whatYouGet}}</td>
+                <td ng-if="order.isExpired()">Expired {{order.expiresIn()}}</td>
+                <td ng-if="!order.isExpired()">Expires {{order.expiresIn()}}</td>
+                <td>{{order.state}}</td>
+                <td><a href="javascript:void(0)" ng-click="showOrderDetail(order)"><span class="fa fa-eye"></span></a></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div ng-show="totalItems==0"><b>No item found</b></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</article>
+<pagination ng-show="totalItems>0" total-items="totalItems" items-per-page="itemsPerPage" ng-model="filter.page" ng-change="onChangePageNo()"></pagination>

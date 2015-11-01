@@ -1,4 +1,4 @@
-<div class="row">
+<!--<div class="row">
   <div class="col col-md-6 col-md-offset-3">
     <button class="btn btn-primary" ui-sref="app.newDeal">Create deal</button>
     <div ng-repeat="deal in data.deals">
@@ -9,4 +9,34 @@
       <hr>
     </div>
   </div>
-</div>
+</div>-->
+
+
+<article>
+  <div class="container">
+    <button class="btn btn-danger" ui-sref="app.newDeal" style="margin-top:3%">New deal</button>
+    <hr>
+    <div class="row">
+      <section class="inner-container">
+        <div class="col-lg-3 col-sm-4" ng-repeat="deal in data.deals">
+          <div class="offer-wrapper">
+            <a ng-click="openDealDetail(deal)" href="javascript:void(0)">
+              <div class="offer-img">
+                <img src="images/offer-1.jpg" class="img-responsive" alt="outlet">
+                <div class="overlay-descp">
+                  <h2>{{deal.noOfOutlets || 0}}<span>outlets</span></h2>
+                </div>
+              </div>
+              <div class="offer-descp">
+                <h2>{{deal.title}}</h2>
+                <p>
+                  {{deal.description}}
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>

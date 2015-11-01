@@ -3,6 +3,16 @@ appUser.controller("LoginController", ['$scope', '$rootScope', '$modalInstance',
         $scope.showLoginForm = true;
         $scope.user = {};
 
+        /*
+        We will sent this opts in the authenticate method because ng-token-auth 0.1.28 is not working, and setting this config is not working with 0.1.24 version.
+        This is a workaround which is working for now.
+        */
+        var opts = {
+            params: {
+                omniauth_window_type: 'newWindow'
+            }
+        };
+
         $scope.close = function () {
             $modalInstance.dismiss('cancel');
         };
@@ -47,7 +57,7 @@ appUser.controller("LoginController", ['$scope', '$rootScope', '$modalInstance',
         };
 
         $scope.loginWithFB = function () {
-            $auth.authenticate('facebook')
+            $auth.authenticate('facebook', opts)
                 .then(function (response) {
                     $log.log(JSON.stringify(response));
                     window.location.reload();
@@ -58,7 +68,7 @@ appUser.controller("LoginController", ['$scope', '$rootScope', '$modalInstance',
         };
 
         $scope.loginWithGoogle = function () {
-            $auth.authenticate('google')
+            $auth.authenticate('google', opts)
                 .then(function (response) {
                     $log.log(JSON.stringify(response));
                     window.location.reload();

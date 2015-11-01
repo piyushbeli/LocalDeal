@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <h1>Verify Login</h1>
+  <span>Please enter the OTP you received.</span>
+  <button class="btn btn-info" ng-click="sendOTP()">Send OTP</button>
+  <div class="row">
+    <div class="col-lg-6">
+      <form role="form" name="verifyMeForm" ng-submit="verifyMe()">
+        <div class="form-group">
+          <input class="form-control" type="text" ng-model="otp">
+        </div>
+        <button class="btn btn-danger" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <button class="btn btn-warning" ng-click="skipVerification()">Skip Verification</button>
+</div>
+
+

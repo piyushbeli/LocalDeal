@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Local Deal</title>
   <%= yield :head %>
   <meta name="google-site-verification" content="CW3yUE2a_2p-4-ommXEkRIKnohbNdTSVeNzEtYvZhKg" />
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag  'https://maps.googleapis.com/maps/api/js?libraries=places' %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
-<!--<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>-->
+    <%= yield %>
 
-<%= yield %>
-
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#menu').slicknav();
+        });
+    </script>
+    <script>
+        wow = new WOW(
+                {
+                    animateClass: 'animated',
+                    offset: 100,
+                    callback: function (box) {
+                        console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+                    }
+                }
+        );
+        wow.init();
+        /*document.getElementById('moar').onclick = function () {
+            var section = document.createElement('section');
+            section.className = 'section--purple wow fadeInDown';
+            this.parentNode.insertBefore(section, this);
+        };*/
+    </script>
 </body>
 </html>
