@@ -9,7 +9,7 @@
 
 //= require ng-token-auth
 //= require angular-cookie
-//= require angular-cookies
+
 //= require angular-file-upload
 //= require angular-loading-bar
 //= require valdr
