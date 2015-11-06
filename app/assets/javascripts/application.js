@@ -21,14 +21,15 @@
 //= require lodash
 
 //= require angular-simple-logger
+//= require angular-google-maps
 
 //= require ngInfiniteScroll
 //= require ngScrollTo
 //= require ngstorage
-//=require  angular-loading-bar
-//=require isteven-angular-multiselect
+//= require  angular-loading-bar
+//= require isteven-angular-multiselect
 
-//=require valdr/valdr-message.js
+//= require valdr/valdr-message.js
 //= require ./www_common/app.js
 //= require ./www/app.js
 //= require ./www_vendor/app.js

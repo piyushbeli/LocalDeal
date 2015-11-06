@@ -34,7 +34,7 @@
     "angular-cache": "~4.2.0",
     "angular-bootstrap-datetimepicker": "~0.3.12",
     "angular-ui-bootstrap-datetimepicker": "~0.11.2",
-    "angular-google-maps": "2.1.6",
+    "angular-google-maps": "2.0.X",
     "ngInfiniteScroll": "~1.2.1",
     "ngScrollTo": "*",
     "ngstorage": "~0.3.4",
@@ -43,6 +43,7 @@
     "lodash": "~3.10.1"
   },
   "resolutions": {
-    "angular": "1.4.7"
+    "angular": "1.4.7",
+    "angular-simple-logger": "~0.1.3"
   }
 }
