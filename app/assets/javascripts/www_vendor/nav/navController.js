@@ -40,4 +40,17 @@ appVendor.controller("NavController", ['$scope', '$auth', '$rootScope', '$modal'
             }, 100);
         };
 
+        /*Toggle navigation on mobile*/
+        $('.menuBtn').on('click', function(){
+            $('#navigation').toggleClass('selected');
+            $('#overlay').toggleClass('overlay');
+            $('html').toggleClass('scroll-no');
+        });
+
+        $('#overlay').on('click', function(){
+            $('#navigation').toggleClass('selected');
+            $('#overlay').toggleClass('overlay');
+            $('html').toggleClass('scroll-no');
+        });
+
     }])

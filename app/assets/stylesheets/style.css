@@ -1,4 +1,5 @@
 
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
 
 * { outline:0 !important; }
@@ -91,7 +92,7 @@ html, body { height: 100%; margin: 0; padding: 0;}
 
 /******** Header **********/
 
-.header-top-container { background:#000; width:100%; float:left; padding:10px 0; }
+.header-top-container { background:#000; width:100%; float:left; padding:10px 0; display:none; }
 
 .header-top-container ul { margin:0 auto; float:right;}
 
@@ -113,19 +114,25 @@ header { background:#060606; }
 
 .head-nav ul li { margin-left:15px;}
 
-.head-nav ul li a { position:relative; text-decoration:none; color:#FFF; font-size:16px; padding-bottom:10px; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;}
+.head-nav ul li a { position:relative; line-height:normal; text-decoration:none; color:#FFF; font-size:16px; padding-bottom:10px; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out;}
+
+.head-nav ul li a span { margin-right:5px; }
 
 .head-nav ul li a::before { content:' '; width:0%; height:2px; background:#1d9d74; position:absolute; bottom:0; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
 
 .head-nav ul li a:hover::before, .head-nav ul li a.active::before { width:100%; }
 
+#navigation ul { list-style: none; margin: 0; padding: 0; }
+#navigation a { color:#FFF; text-align: center; text-decoration:none; text-transform:uppercase; }
+.menuBtn { display: none;  padding:5px 10px; float:right; background:#FF5A5F; margin-top:4%; }
+.menuBtn span.btn { color:#FFF; padding:0; }
 /******** Header Ends **********/
 
 /******** General **********/
 
 .outer-main { position:relative; width:100%; min-height:100%; }
 
-.inner-container { width:100%; float:left; padding:17px 0; margin-bottom:100px; position:relative; }
+.inner-container { width:100%; float:left; padding:100px 0; margin-bottom:100px; position:relative; }
 
 .main-heading { float:left; width:100%; }
 
@@ -558,9 +565,13 @@ footer { background:#000; width:100%; margin-bottom:25px; position: absolute; bo
 
 @media (min-width:768px) and (max-width:991px) {
 
+    .head-nav ul li { margin:0; }
+
+    .head-nav ul li a { font-size:14px; }
+
     .outer-container { max-width:400px;}
 
-    .inner-container { padding:15px 0;  }
+    .inner-container { padding:30px 0;  }
 
     .inner-wrapper h1 i { font-size:30px; }
 
@@ -604,6 +615,33 @@ footer { background:#000; width:100%; margin-bottom:25px; position: absolute; bo
 
 @media (max-width:767px) {
 
+    .scroll-no { overflow:hidden; }
+
+    .contactUs, .findCentre { display: none; }
+
+    #navigation { background: rgba(255, 90, 95, 0.8); bottom: 0; left:-200%; width:0; max-width:280px;  padding:25px 0; position: fixed; right: auto; top: 0; transition: all 1s ease; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; z-index: 999; box-shadow:3px 0 10px #000; min-height:600px; height:100%; overflow-y:scroll; }
+
+    #navigation.selected { left: 0; width:100%  }
+
+    #navigation.selected .container { padding:0;  }
+
+    #navigation li { width: 100%; float:left; margin:0; padding:10px; transition:background 0.3s ease-in 50ms; -webkit-transition:background 0.3s ease-in 50ms; -moz-transition:background 0.3s ease-in 50ms; }
+
+    #navigation li:hover { background: #A43535; }
+
+    #navigation li a span { width:15px; text-align:center; }
+
+    .head-nav ul li a::before { display:none; }
+
+    #navigation a { text-align:left; width:100%;}
+
+    .menuBtn { display: block; }
+
+    .menuBtn.btn.close-btn { background:none; color: rgba(255, 255, 255, 0.5); font-size: 18px; margin: 0; padding: 0 10px; position: absolute; right: 0; top: 0;}
+
+    .overlay { cursor:pointer; background: rgba(0, 0, 0, 0.8); height: 100%; position: absolute; width: 100%; z-index: 999; transition: all 1s ease; -webkit-transition: all 1s ease; -moz-transition: all 1s ease;}
+
+
     .logo { width:6%; float:left;}
 
     .logo a, .logo a img { float:left; width:100%;}
@@ -626,9 +664,9 @@ footer { background:#000; width:100%; margin-bottom:25px; position: absolute; bo
 
     .login-form button, .register-form button { font-size:16px;}
 
-    .inner-container { padding:15px 0 0; margin-bottom:120px; }
+    .inner-container { padding:30px 0 0; margin-bottom:120px; }
 
-    .head-nav { line-height:65px;}
+    .head-nav { line-height:normal;}
 
     .head-nav ul li a, .offer-descp p { font-size:14px; }
 
@@ -692,6 +730,8 @@ footer { background:#000; width:100%; margin-bottom:25px; position: absolute; bo
 
 @media (max-width:480px) {
 
+    .menuBtn { margin-top:5%; }
+
     .logo { width:10%; float:left;}
 
     .outlet-descp { padding:15px; }
@@ -705,8 +745,6 @@ footer { background:#000; width:100%; margin-bottom:25px; position: absolute; bo
     .footer-container span { float:none; display:block; margin-bottom:5px; }
 
     .footer-container ul { float:none; display:block; }
-
-    .head-nav { line-height:60px;}
 
     .head-nav ul li a { font-size:14px; }
 
@@ -769,10 +807,11 @@ footer { background:#000; width:100%; margin-bottom:25px; position: absolute; bo
     .header-top-container ul li a { font-size:12px; }
 
 }
+
 /************** Responsive CSS Ends ***************/
 
 /* Piyush */
-.angular-google-map-container { height: 400px; }
+
 .checkbox {
     margin-left: 20px;
 }
@@ -797,4 +836,20 @@ datetimepicker {
 }
 .datetimepicker-wrapper table td input {
     width: 85%;
+}
+
+.map-inner {
+    height: 400px;
+    width: 100%;
+}
+
+.map-inner {
+    position: relative;
+}
+.angular-google-map-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }

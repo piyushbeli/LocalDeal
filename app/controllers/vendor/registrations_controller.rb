@@ -1,5 +1,5 @@
 class Vendor::RegistrationsController < DeviseTokenAuth::RegistrationsController
-  before_action :authenticate_user!, only: [:update]
+  before_action :authenticate_vendor!, only: [:update]
 
   def update
     if @resource

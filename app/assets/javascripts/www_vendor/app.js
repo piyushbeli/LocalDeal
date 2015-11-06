@@ -42,7 +42,7 @@ appVendor.config(['$routeProvider', '$locationProvider', '$stateProvider', '$url
 
         uiGmapGoogleMapApiProvider.configure({
             //key: 'your api key',
-            v: '3.19.18',
+            v: '3.20',
             libraries: 'weather,geometry,visualization'
         });
 

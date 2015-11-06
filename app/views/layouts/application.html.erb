@@ -8,7 +8,8 @@
   <%= yield :head %>
   <meta name="google-site-verification" content="CW3yUE2a_2p-4-ommXEkRIKnohbNdTSVeNzEtYvZhKg" />
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag  'https://maps.googleapis.com/maps/api/js?libraries=places' %>
+  <%= javascript_include_tag  'https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false' %>
+
   <%= csrf_meta_tags %>
 </head>
 
@@ -38,5 +39,6 @@
             this.parentNode.insertBefore(section, this);
         };*/
     </script>
+    <script src="http://rawgit.com/angular-ui/angular-google-maps/2.0.X/dist/angular-google-maps.js"></script>
 </body>
 </html>

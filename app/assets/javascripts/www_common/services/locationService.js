@@ -4,8 +4,7 @@ appCommon.service("LocationService", ['$q', function ($q) {
 
     self.getCurrentLocation = function () {
         var deferred = $q.defer();
-        deferred.resolve(null);
-        /*navigator.geolocation.getCurrentPosition(function (position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
                 self.isLocationServiceOn = true;
                 deferred.resolve([position.coords.latitude, position.coords.longitude]);
             },
@@ -14,10 +13,10 @@ appCommon.service("LocationService", ['$q', function ($q) {
                 if( self.isLocationServiceOn != false) {
                     console.log("Please turn on the location service by going Setting->Advance->Content Setting->Location->Manage Exception " +
                     "and then delete the block entry");
-                    self.indexisLocationServiceOn = false;
+                    self.isLocationServiceOn = false;
                 }
                 deferred.resolve(null);
-            });*/
+            });
         return deferred.promise;
     };
 
