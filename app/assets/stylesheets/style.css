@@ -17,7 +17,7 @@ html, body { height: 100%; margin: 0; padding: 0;}
 
 .outer-container { max-width:380px; width:100%; position:relative; margin:0 auto; }
 
-.inner-wrapper { width:100%; margin:60% 0; float:left; background:rgba(0, 0, 0, 0.8);}
+.inner-wrapper { width:100%; margin-top:40%; float:left; background:rgba(0, 0, 0, 0.8);}
 
 .inner-container1 { width:100%; float:left; margin-bottom:60%; }
 
