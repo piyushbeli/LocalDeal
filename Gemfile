@@ -62,6 +62,7 @@ gem 'ratyrate' #For rating outlets
 gem "rest-client", "~> 1.6.7"
 gem "htmlentities", "~> 4.3.1"
 gem 'plivo'
+gem "koala", "~> 2.2"
 
 group :production do
   gem 'passenger' #will be used as a webserver in production

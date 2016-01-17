@@ -96,6 +96,8 @@
                 <div class="profile-row">
                   <label>Mobile</label>
                   <input class="form-control" type="text" ng-model="vendor.mobile" disabled placeholder="Mobile #">
+                  <span ng-if="vendor.isVerified" class="bg-success">Verified</span>
+                  <a ng-if="!vendor.isVerified" ui-sref="app.verifyMe">Verify Now</a>
                 </div>
                 <div class="profile-row">
                   <label>Website</label>

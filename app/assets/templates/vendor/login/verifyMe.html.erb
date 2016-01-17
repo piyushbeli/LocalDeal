@@ -1,7 +1,11 @@
 <div class="container-fluid">
-  <h1>Verify Login</h1>
-  <span>Please enter the OTP you received.</span>
+  <h3>Verify Mobile No</h3>
+  <br>
+  <h4>Mobile no where otp will be sent:</h4>
+  <input disabled name="mobileNo" placeholder="Mobile No" ng-model="vendor.mobile">
   <button class="btn btn-info" ng-click="sendOTP()">Send OTP</button>
+  <br>
+  <span>Please enter the OTP you received.</span>
   <div class="row">
     <div class="col-lg-6">
       <form role="form" name="verifyMeForm" ng-submit="verifyMe()">

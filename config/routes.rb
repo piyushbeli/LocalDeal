@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth'
+  mount_devise_token_auth_for 'User', at: 'auth',
+                              controllers: {
+                                  :omniauth_callbacks => 'user/omniauth_callbacks'
+                              }
 
   mount_devise_token_auth_for 'Vendor', at: 'auth_vendor',
                               controllers: {
@@ -7,6 +10,10 @@ Rails.application.routes.draw do
                               }
 
   mount_devise_token_auth_for 'God', at: 'auth_god'
+
+  devise_scope :user do
+    post '/mobile/auth/:provider' => 'user/omniauth_callbacks#mobile_signin'
+  end
 
   devise_scope :user do
     post 'outlets/:outlet_id/favorite' => 'user/users#add_favortite_outlet'
@@ -75,7 +82,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'application#index'
-  #Below lines are important for using htmp5 mode of angularjs. For any resource after /app and /vendor/app we are
+  #Below lines are important for using html5 mode of angularjs. For any resource after /app and /vendor/app we are
   # actually moving to some angular state (no REST url should have this format) so return the application layout.
   get "/vendor/app/*path" => "application#vendor"
   get "/vendor/*path" => "application#vendor"

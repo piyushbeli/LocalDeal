@@ -19,12 +19,12 @@ class VerifyOtpController < ApplicationController
       return
     end
     if actual_otp.nil?
-      render :json => {'success': false, 'message': 'OTP has been expired'}
+      render :json => {'success': false, 'message': 'Invalid or expired OTP'}
       return
     end
 
     if otp == actual_otp.to_s
-      @current_member.setVerified(true)
+      current_member.set_verified(true)
       render :json => {'success': true}
     else
       render :json => {'success': false, 'message': 'OTP does not match'}
@@ -38,7 +38,7 @@ class VerifyOtpController < ApplicationController
     number = current_member.mobile
     params = {'src' => 'My-app',
               'dst' => '+91' + number.to_s,  #Hardcode for Indian number currently.
-              'text' => 'Thanks for registering with us. Your OTP is ' + otp.to_s + '. Use this OTP within 3 minutes.',
+              'text' => otp.to_s + ' is your OTP for verification. Team \n Paylow',
               'type' => 'sms',
     }
     response = p.send_message(params)

@@ -35,26 +35,6 @@ appVendor.controller("LoginController", ['$scope', '$rootScope', '$state', 'Cons
                 })
         };
 
-        $scope.verifyMe = function() {
-            VerifyMeService.verifyMe($scope.otp)
-                .then(function() {
-                    $state.go(Constants.landingState);
-                })
-                .catch(function(errorMessage) {
-                    alert(errorMessage)
-                })
-        };
-
-        $scope.sendOTP = function() {
-            VerifyMeService.sendOTP($scope.user.mobile)
-                .then(function() {
-
-                })
-                .catch(function(errorMessage) {
-                    alert(errorMessage)
-                })
-        };
-
         $scope.skipVerification = function() {
             $state.go(Constants.landingState);
         };

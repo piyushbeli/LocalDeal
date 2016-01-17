@@ -8,7 +8,7 @@ appVendor.config(['$routeProvider', '$locationProvider', '$stateProvider', '$url
                                                                                     uiGmapGoogleMapApiProvider, Routes, Constants, $httpProvider) {
         $stateProvider
             .state('login', Routes.login)
-            .state('verifyMe', Routes.verifyMe)
+            .state('app.verifyMe', Routes.verifyMe)
             .state('app', Routes.root)
             .state('app.deals', Routes.deals)
             .state('app.dealDetail', Routes.dealDetail)

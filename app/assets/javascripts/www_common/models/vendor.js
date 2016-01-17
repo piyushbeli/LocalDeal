@@ -4,6 +4,7 @@ appCommon.factory("Vendor", ['Outlet', function (Outlet) {
             return;
         }
         this.id = data.id;
+        this.isVerified = data.is_verified;
         this.name = data.name;
         this.email = data.email;
         this.website = data.website;
@@ -14,7 +15,7 @@ appCommon.factory("Vendor", ['Outlet', function (Outlet) {
         this.category = {
             id: data.category_id
         };
-        this.facebook = data.facebook_page;
+        this.facebook = data.fb_page;
         this.instagram = data.instagram_page;
         this.googlePlus = this.google_plus_page;
         this.twitter = data.twitter_page;
