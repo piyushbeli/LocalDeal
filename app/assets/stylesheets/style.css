@@ -467,9 +467,9 @@ header { background:#060606; }
 
 .out-det-form label { width:25%; float:left; font-family: 'Open Sans', sans-serif; font-weight:400; color:#111; line-height:28px; }
 
-.out-det-form input { width:70%; display:inline-block; font-family:'Open Sans', sans-serif; color:#777; vertical-align:middle; border:1px solid #ccc; min-height:35px; padding:0 10px; transition: all 0.3s ease-in-out 0s; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s; }
+.out-det-form input, .out-det-form textarea { width:70%; display:inline-block; font-family:'Open Sans', sans-serif; color:#777; vertical-align:middle; border:1px solid #ccc; min-height:35px; padding:0 10px; transition: all 0.3s ease-in-out 0s; -webkit-transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s; }
 
-.out-det-form input:focus { border-color:#ff5a5f; }
+.out-det-form input:focus, .out-det-form textarea:focus { border-color:#ff5a5f; }
 
 .out-loca.gen-btn { width:auto; margin-top:25px; float:right; }
 
@@ -841,10 +841,8 @@ datetimepicker {
 .map-inner {
     height: 400px;
     width: 100%;
-}
-
-.map-inner {
     position: relative;
+    margin-top: 100px;
 }
 .angular-google-map-container {
     position: absolute;
@@ -852,4 +850,17 @@ datetimepicker {
     bottom: 0;
     right: 0;
     left: 0;
+}
+
+.map-inner:after {
+    width: 22px;
+    height: 40px;
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 50%; left: 50%;
+    margin: -40px 0 0 -11px;
+    background: url('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi_hdpi.png');
+    background-size: 22px 40px; /* Since I used the HiDPI marker version this compensates for the 2x size */
+    pointer-events: none; /* This disables clicks on the marker. Not fully supported by all major browsers, though */
 }

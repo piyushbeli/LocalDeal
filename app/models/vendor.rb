@@ -8,7 +8,6 @@ class Vendor < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   include Spammable
 
-  has_one_time_password  length: 6
   has_many :outlets, dependent: :destroy
   belongs_to :category
   has_many :vendor_images, dependent:  :destroy
