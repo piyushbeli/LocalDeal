@@ -12,7 +12,7 @@ appCommon.constant("Utils", {
     },
     googlePlaceAutoCompleteOptionsStreet: function(){
        return {
-           types: '(regions)',
+           //types: '(regions)',
            country: 'in',
            watchEnter: true
        }

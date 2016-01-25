@@ -28,6 +28,9 @@ class Outlet < ActiveRecord::Base
   scope :by_street, ->(id = nil) { where("street_id = ?", "#{id}") }
   scope :by_sub_categories, ->(subcategory_ids) { joins(:vendor => :subcategories).where("subcategories.id IN (?)", subcategory_ids) }
 
+  def attributes
+    super.merge({average_rating: average_rating, no_of_raters: no_of_raters})
+  end
 
   #Slug candidate in sequence of priority
   def slug_candidates
@@ -47,8 +50,8 @@ class Outlet < ActiveRecord::Base
   end
 
   def average_rating
-    average_rating = self.average("service")
-    return average_rating.avg unless average_rating.nil?
+    rating = self.average("service")
+    return rating.avg unless rating.nil?
   end
 
   def no_of_raters

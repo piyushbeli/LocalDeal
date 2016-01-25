@@ -160,21 +160,21 @@ ActiveRecord::Schema.define(version: 20150630161050) do
   add_index "orders", ["vendor_id"], name: "index_orders_on_vendor_id", using: :btree
 
   create_table "outlets", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.integer  "vendor_id",  limit: 4
-    t.decimal  "longitude",              precision: 9, scale: 5
-    t.decimal  "latitude",               precision: 9, scale: 5
-    t.string   "city",       limit: 255,                         null: false
-    t.string   "city_id",    limit: 255,                         null: false
-    t.string   "street",     limit: 255,                         null: false
-    t.string   "street_id",  limit: 255,                         null: false
-    t.string   "address",    limit: 255
-    t.string   "email",      limit: 255
-    t.string   "slug",       limit: 255,                         null: false
-    t.string   "mobile",     limit: 10,                          null: false
-    t.string   "contact_no", limit: 11
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.string   "name",            limit: 255
+    t.integer  "vendor_id",       limit: 4
+    t.decimal  "longitude",                   precision: 9, scale: 5
+    t.decimal  "latitude",                    precision: 9, scale: 5
+    t.string   "city",            limit: 255,                         null: false
+    t.string   "city_id",         limit: 255,                         null: false
+    t.string   "street",          limit: 255,                         null: false
+    t.string   "street_id",       limit: 255,                         null: false
+    t.string   "address",         limit: 255
+    t.string   "email",           limit: 255
+    t.string   "slug",            limit: 255,                         null: false
+    t.string   "mobile",          limit: 10,                          null: false
+    t.integer  "no_of_followers", limit: 4
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
   end
 
   add_index "outlets", ["latitude", "longitude"], name: "index_outlets_on_latitude_and_longitude", using: :btree

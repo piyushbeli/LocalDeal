@@ -20,7 +20,7 @@ appVendor
     })
     .constant("States", {
         login: 'login',
-        verifyMe: 'verifyMe',
+        verifyMe: 'app.verifyMe',
         deals: 'app.deals',
         outlets: 'app.outlets',
         orders: 'app.orders',

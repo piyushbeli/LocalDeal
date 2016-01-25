@@ -319,7 +319,7 @@ header { background:#060606; }
 
 .pro-counters ul { margin:0; }
 
-.pro-counters ul li { padding:0; margin:0; vertical-align:top;}
+.pro-counters ul li { padding:0; margin:0 60px 0 0; vertical-align:top;}
 
 .pro-counters h2 { width:100%; float:left; text-transform:uppercase; font-family: 'Open Sans', sans-serif; font-weight:600; font-size:26px; color:#000; margin:0; }
 
@@ -864,3 +864,18 @@ datetimepicker {
     background-size: 22px 40px; /* Since I used the HiDPI marker version this compensates for the 2x size */
     pointer-events: none; /* This disables clicks on the marker. Not fully supported by all major browsers, though */
 }
+
+.valdr-message {
+    display: none;
+    margin-right: 26px;
+    float: right;
+}
+.valdr-message.ng-invalid.ng-touched.ng-dirty {
+    display: inline;
+    color: red;
+}
+.ng-submitted .valdr-message.ng-invalid {
+    display: inline;
+    color: red;
+}
+

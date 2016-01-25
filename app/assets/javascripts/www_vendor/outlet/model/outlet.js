@@ -9,7 +9,7 @@ appVendor.factory("Outlet", ['Utils', function(Utils) {
         this.email = data.email;
         this.latitude = Utils.formatDecimal(data.latitude, 6);
         this.longitude = Utils.formatDecimal(data.longitude, 6);
-        this.contactNo = Number.parseFloat(data.contact_no);
+        this.contactNo = data.contact_no;
         this.city = data.city;
         this.street = data.street;
         this.address = data.address;
@@ -19,6 +19,10 @@ appVendor.factory("Outlet", ['Utils', function(Utils) {
         this.streetDetail = {
             place_id: data.street_id
         };
+        this.averageRating = data.average_rating;
+        this.noOfRaters = data.no_of_raters;
+        this.noOfFollowers = data.no_of_followers;
+        this.noOfReviews = data.total_reviews;
     }
 
     Outlet.build = function(data) {

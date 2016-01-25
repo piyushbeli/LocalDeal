@@ -20,7 +20,7 @@
               <div class="outlet-descp">
                 <h2>{{outlet.name}}</h2>
                 <p>
-                  <span>{{outlet.mobile}} | {{outlet.contactNo}}</span>
+                  <span>{{outlet.mobile}} {{outlet.contactNo ? '| ' + outlet.contactNo : ''}}</span>
                   {{outlet.address}} <br> {{outlet.streetAddress}}
                 </p>
               </div>

@@ -36,6 +36,9 @@ appCommon.constant("ValdrConfig", {
             },
             required: {
                 message: 'Mobile can not be blank'
+            },
+            number: {
+                message: 'Mobile no can contain only digits'
             }
         },
         email: {
@@ -112,11 +115,19 @@ appCommon.constant("ValdrConfig", {
                 min: 10,
                 max: 10,
                 message: 'Mobile should have exactly 10 digits'
+            },
+            number: {
+                message: 'Mobile no can contain only digits'
             }
         },
         email: {
             email: {
                 message: 'Email is not in valid email format'
+            }
+        },
+        contactNo: {
+            number: {
+                message: 'Contact no can contain only digit'
             }
         }
     },
