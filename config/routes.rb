@@ -38,17 +38,23 @@ Rails.application.routes.draw do
 
   end
 
+=begin
   devise_scope :member => [:user, :vendor] do
     resources :orders, only: [:index, :show]
   end
+=end
 
   devise_scope :member  => [:user, :vendor] do
+    resources :orders, only: [:index, :show]
+
     resources :outlets, only: [] do
       resources :comments, only: [:index, :show, :create, :update, :destroy]
     end
+
     resources :comments, only: [] do
       resources :comments, only: [:index, :create, :update, :destroy]
     end
+
     post 'send_otp' => 'verify_otp#send_otp'
     post 'verify_me' => 'verify_otp#verify_me'
   end

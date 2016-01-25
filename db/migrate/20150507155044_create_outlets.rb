@@ -14,6 +14,7 @@ class CreateOutlets < ActiveRecord::Migration
       t.string :mobile, limit:10, null:false
       t.string :contact_no, limit:11
       t.integer :no_of_followers
+      t.integer :no_of_comments
       t.timestamps null: false
     end
     add_index :outlets, [:latitude, :longitude]

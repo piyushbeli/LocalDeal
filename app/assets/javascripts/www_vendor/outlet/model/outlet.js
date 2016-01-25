@@ -22,7 +22,7 @@ appVendor.factory("Outlet", ['Utils', function(Utils) {
         this.averageRating = data.average_rating;
         this.noOfRaters = data.no_of_raters;
         this.noOfFollowers = data.no_of_followers;
-        this.noOfReviews = data.total_reviews;
+        this.noOfReviews = data.no_of_comments;
     }
 
     Outlet.build = function(data) {

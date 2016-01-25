@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  include CommonResourceController
 
   before_action :authenticate_member!, only:[:create]
   before_action :find_commentable

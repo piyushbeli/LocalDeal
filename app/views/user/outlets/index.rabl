@@ -19,7 +19,7 @@ child @outlets => :items do
   end
   node(:review_count) do
   |outlet|
-    outlet.comments.count
+    outlet.no_of_comments
   end
 end
 node :total_items do
