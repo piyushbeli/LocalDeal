@@ -7,7 +7,9 @@ class Vendor < ActiveRecord::Base
 
   include DeviseTokenAuth::Concerns::User
   include Spammable
+  include FriendlyId
 
+  friendly_id :slug_candidates, use: [:slugged, :history]
   has_many :outlets, dependent: :destroy
   belongs_to :category
   has_many :vendor_images, dependent:  :destroy
@@ -50,5 +52,12 @@ class Vendor < ActiveRecord::Base
 
   def spammed_by_user? (user_id)
     return spams.where(spammer_id: user_id).count > 0
+  end
+
+  #Slug candidate in sequence of priority
+  def slug_candidates
+    [
+        "#{name}"
+    ]
   end
 end

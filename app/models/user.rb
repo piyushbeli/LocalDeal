@@ -6,12 +6,16 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   include Spammable
   include Spammer
+  include FriendlyId
   acts_as_marker
   ratyrate_rater
+  friendly_id :slug_candidates, use: [:slugged, :history]
 
   devise :timeoutable, :timeout_in => 30.days
   validates :name, presence: true, allow_blank: false
   validates :mobile, length: {is: 10}, numericality: {only_integer: true}, uniqueness: true, allow_nil: true
+
+  after_create :generate_slug
 
   has_many :comments, as: :commentator
   has_many :orders
@@ -36,4 +40,29 @@ class User < ActiveRecord::Base
   def isProfileComplete?
     !(email.blank? || mobile.blank? || name.blank?)
   end
+
+  #In case of omniauth signup it won't generate the slug id
+  def generate_slug
+    self.save
+  end
+
+  #Slug candidate in sequence of priority
+  def slug_candidates
+    [
+        "#{name}"
+    ]
+  end
+
+  def user_comments
+    self.comments.select do |comment|
+      comment.commentable_type == 'Outlet'
+    end
+  end
+
+  def user_replies
+    self.comments.filter do |comment|
+      comment.commentable_type == 'Comment'
+    end
+  end
+
 end

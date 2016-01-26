@@ -85,8 +85,13 @@ Rails.application.routes.draw do
   get 'offertypes' => 'reference_data#offer_types'
   get 'companysetting' => 'company_setting#show'
 
+  #************APIs which does not require the login*************
   #Free text search for outlets, deals and offers
   get '/search' => 'user/search#search'
+
+  #Show user's public profile
+  get 'public//user/:slug' => 'public#user'
+  get 'public/vendor/:slug' => 'public#vendor'
 
 
   # You can have the root of your site routed with "root"

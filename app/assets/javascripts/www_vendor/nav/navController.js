@@ -53,4 +53,8 @@ appVendor.controller("NavController", ['$scope', '$auth', '$rootScope', '$modal'
             $('html').toggleClass('scroll-no');
         });
 
+        $('.head-nav a').on('click', function() {
+            $('#overlay').click();
+        });
+
     }])
