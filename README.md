@@ -44,12 +44,33 @@ https://gorails.com/setup/ubuntu/14.10
 sudo npm install bower -g
 bower install
 
-8) Clone the repo from git
+8) Install elastic search server, follow the instruction given here
+1) https://gist.github.com/ricardo-rossi/8265589463915837429d
+2) https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-ubuntu-14-04
+PREFERRED 3
+3) you can run the install_elastic_search.sh file, it will ask for the elastic search version. Check the latest version
+at http://www.elasticsearch.org/download/  and provide the same. Currently it is 2.1.1.
+
+Change the cluster name to "paylow" and nodename to "paylow-node-1" in elastissearch.yml file once elastic
+search server is installed.
+
+In case you see that server is not starting, try running it from here.
+cd /usr/share/elasticsearch/bin
+./elasticsearch
+It should show erroron console. In case it is something with logging file then create a softlink for config file.
+In this folder execute the command sudo ln -s /etc/elasticsearch config
+
+
+9) Clone the repo from git
 git clone git@github.com:piyushbeli/LocalDeal.git
 cd LocalDeal
 bundle install
 rake db:create
 rake db:setup
+
+10) To build the elastic search index, run this rake task
+rake paylow_custom:warmup_elastic_search_index
+
 
 
 Run Rails server in production mode

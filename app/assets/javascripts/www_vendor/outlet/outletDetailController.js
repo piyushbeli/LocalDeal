@@ -103,11 +103,19 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
                 $scope.streetDetail = null;
                 $scope.outlet.latitude = newVal.geometry.location.lat();
                 $scope.outlet.longitude = newVal.geometry.location.lng();
+                if ($scope.outlet.cityDetail.name) {
+                    $scope.outlet.city = $scope.outlet.cityDetail.name;
+                    $scope.outlet.cityDetail.formatted_address = $scope.outlet.cityDetail.name;
+                }
+                $scope.outlet.cityDetail.latitude = $scope.outlet.cityDetail.geometry.location.lat();
+                $scope.outlet.cityDetail.longitude = $scope.outlet.cityDetail.geometry.location.lng();
             }
         });
         $scope.$watch('outlet.city', function (newVal, oldVal) {
             if (newVal == null || newVal.trim() == "") {
                 $scope.cityDetail = null;
+            } else if ($scope.outlet.cityDetail && $scope.outlet.cityDetail.name) {
+                $scope.outlet.cityDetail.formatted_address = $scope.outlet.cityDetail.name;
             }
             createAddress()
         });
@@ -117,18 +125,20 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
                 self.setMapOnThisCenter(newVal.geometry.location.lat(), newVal.geometry.location.lng(), 16);
                 $scope.outlet.latitude = newVal.geometry.location.lat();
                 $scope.outlet.longitude = newVal.geometry.location.lng();
-                $scope.outlet.street = $scope.outlet.streetDetail && $scope.outlet.streetDetail.name;
-                $scope.outlet.streetDetail.formatted_address = $scope.outlet.streetDetail.name;
+                if ($scope.outlet.streetDetail.name) {
+                    $scope.outlet.street = $scope.outlet.streetDetail.name;
+                    $scope.outlet.streetDetail.formatted_address = $scope.outlet.streetDetail.name;
+                }
+                $scope.outlet.streetDetail.latitude = $scope.outlet.streetDetail.geometry.location.lat();
+                $scope.outlet.streetDetail.longitude = $scope.outlet.streetDetail.geometry.location.lng();
                 createAddress();
             }
         });
         $scope.$watch('outlet.street', function (newVal, oldVal) {
             if (newVal == null || newVal.trim() == "") {
                 $scope.streetDetail = null;
-            } else {
-                if ($scope.outlet.streetDetail && $scope.outlet.streetDetail.name) {
+            } else if ($scope.outlet.streetDetail && $scope.outlet.streetDetail.name) {
                     $scope.outlet.street = $scope.outlet.streetDetail.name;
-                }
             }
         });
 

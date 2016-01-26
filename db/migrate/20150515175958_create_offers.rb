@@ -4,6 +4,7 @@ class CreateOffers < ActiveRecord::Migration
       t.references :deal, index: true
       t.references :offer_type, index: true
       t.integer :discount
+      t.integer :actual_price
       t.string :what_you_get, null:false
       t.text :fine_print
       t.string :instruction

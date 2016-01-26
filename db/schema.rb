@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125112917) do
+ActiveRecord::Schema.define(version: 20150630161050) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id",      limit: 4
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20160125112917) do
     t.integer  "deal_id",       limit: 4
     t.integer  "offer_type_id", limit: 4
     t.integer  "discount",      limit: 4
+    t.integer  "actual_price",  limit: 4
     t.string   "what_you_get",  limit: 255,   null: false
     t.text     "fine_print",    limit: 65535
     t.string   "instruction",   limit: 255
@@ -160,22 +161,27 @@ ActiveRecord::Schema.define(version: 20160125112917) do
   add_index "orders", ["vendor_id"], name: "index_orders_on_vendor_id", using: :btree
 
   create_table "outlets", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.integer  "vendor_id",       limit: 4
-    t.decimal  "longitude",                   precision: 9, scale: 5
-    t.decimal  "latitude",                    precision: 9, scale: 5
-    t.string   "city",            limit: 255,                         null: false
-    t.string   "city_id",         limit: 255,                         null: false
-    t.string   "street",          limit: 255,                         null: false
-    t.string   "street_id",       limit: 255,                         null: false
-    t.string   "address",         limit: 255
-    t.string   "email",           limit: 255
-    t.string   "slug",            limit: 255,                         null: false
-    t.string   "mobile",          limit: 10,                          null: false
-    t.integer  "no_of_followers", limit: 4
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
-    t.string   "contact_no",      limit: 45
+    t.string   "name",             limit: 255
+    t.integer  "vendor_id",        limit: 4
+    t.decimal  "longitude",                    precision: 9, scale: 5
+    t.decimal  "latitude",                     precision: 9, scale: 5
+    t.string   "city",             limit: 255,                         null: false
+    t.decimal  "city_latitude",                precision: 9, scale: 5
+    t.decimal  "city_longitude",               precision: 9, scale: 5
+    t.string   "city_id",          limit: 255,                         null: false
+    t.string   "street",           limit: 255,                         null: false
+    t.string   "street_id",        limit: 255,                         null: false
+    t.decimal  "street_latitude",              precision: 9, scale: 5
+    t.decimal  "street_longitude",             precision: 9, scale: 5
+    t.string   "address",          limit: 255
+    t.string   "email",            limit: 255
+    t.string   "slug",             limit: 255,                         null: false
+    t.string   "mobile",           limit: 10,                          null: false
+    t.string   "contact_no",       limit: 11
+    t.integer  "no_of_followers",  limit: 4
+    t.integer  "no_of_comments",   limit: 4
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
   end
 
   add_index "outlets", ["latitude", "longitude"], name: "index_outlets_on_latitude_and_longitude", using: :btree
@@ -311,6 +317,7 @@ ActiveRecord::Schema.define(version: 20160125112917) do
     t.string   "nickname",               limit: 255
     t.string   "image",                  limit: 255
     t.string   "email",                  limit: 255
+    t.text     "about_me",               limit: 65535
     t.text     "tokens",                 limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"

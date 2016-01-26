@@ -1,3 +1,5 @@
+'use strict';
+
 appVendor.factory("Outlet", ['Utils', function(Utils) {
     function Outlet(data) {
         if (!data) {
@@ -14,10 +16,14 @@ appVendor.factory("Outlet", ['Utils', function(Utils) {
         this.street = data.street;
         this.address = data.address;
         this.cityDetail = {
-            place_id: data.city_id
+            place_id: data.city_id,
+            latitude: data.city_latitude,
+            longitude: data.city_longitude
         };
         this.streetDetail = {
-            place_id: data.street_id
+            place_id: data.street_id,
+            latitude: data.street_latitude,
+            longitude: data.street_longitude
         };
         this.averageRating = data.average_rating;
         this.noOfRaters = data.no_of_raters;

@@ -72,8 +72,3 @@ module OfferImport
                                          })
   end
 end
-
-# Index all article records from the DB to Elasticsearch
-Outlet.import force: true
-Deal.import force: true
-Offer.import force: true
