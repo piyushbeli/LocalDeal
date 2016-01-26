@@ -7,9 +7,6 @@
     <data-source name="Rails RoR: test" uuid="74f54690-d1fa-4a4c-8e06-e56af91c00b1">
       <user-name>root</user-name>
     </data-source>
-    <data-source name="Rails RoR: production" uuid="8b9fd1e9-918a-43f0-ba7b-df4f546c6724">
-      <user-name>root</user-name>
-      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddff8dfe5dff8dff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
-    </data-source>
+    <data-source name="Rails RoR: production" uuid="8b9fd1e9-918a-43f0-ba7b-df4f546c6724" />
   </component>
 </project>

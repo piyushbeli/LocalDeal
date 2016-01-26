@@ -85,6 +85,9 @@ Rails.application.routes.draw do
   get 'offertypes' => 'reference_data#offer_types'
   get 'companysetting' => 'company_setting#show'
 
+  #Free text search for outlets, deals and offers
+  get '/search' => 'user/search#search'
+
 
   # You can have the root of your site routed with "root"
   root 'application#index'

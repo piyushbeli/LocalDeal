@@ -7,23 +7,19 @@ class Deal < ActiveRecord::Base
     has_many :outlets, through: :deals_outlet
     belongs_to :vendor
 
+    #For Elastic search
+    include Elasticsearch::Model
+    include Elasticsearch::Model::Callbacks
+
     validates_presence_of :title, :vendor_id
     validates_associated :offers
 
     friendly_id :slug_candidates, use: [:slugged, :history]
 
-    def as_json(options={})
-      super(options.merge(
-                       except: [:created_at, :updated_at],
-                       include: {
-                           outlets: {
-                               except: [:created_at, :updated_at]
-                           },
-                           offers: {
-                               except: [:created_at, :updated_at, :deal_id]
-                           }
-                       }
-            ))
+    def as_indexed_json(options={})
+      self.as_json({
+                       only: [:title, :id]
+                   })
     end
 
     def outletsCount
@@ -42,4 +38,18 @@ class Deal < ActiveRecord::Base
       ]
     end
 
+    def self.search(query)
+      __elasticsearch__.search(
+          {
+              query: {
+                  multi_match: {
+                      query: query,
+                      fields: ['title^10', 'text']
+                  }
+              }
+          }
+      )
+    end
+
 end
+

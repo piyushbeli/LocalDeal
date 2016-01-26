@@ -1,8 +1,15 @@
+require 'elasticsearch/model'
+
 class Outlet < ActiveRecord::Base
   include Vendor::VendorResource
   include Commentable
   include FriendlyId
   markable_as :favorite
+
+  #For Elastic search
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   ratyrate_rateable "service"
 
   friendly_id :slug_candidates, use: [:slugged, :history]
@@ -58,4 +65,24 @@ class Outlet < ActiveRecord::Base
     self.raters("service").count
   end
 
+  def self.search(query)
+    __elasticsearch__.search(
+        {
+            query: {
+                multi_match: {
+                    query: query,
+                    fields: ['name^10', 'text']
+                }
+            }
+        }
+    )
+  end
+
+  def as_indexed_json(options={})
+    self.as_json({
+                     only: [:name, :id]
+                 })
+  end
+
 end
+

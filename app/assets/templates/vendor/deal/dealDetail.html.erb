@@ -89,8 +89,8 @@
             <div class="deal-box">
               <h3>Add Outlet<span>2</span></h3>
               <ul class="list-unstyled">
-                <li ng-repeat="outlet in vendor.outlets">
-                  <a href="javascript:void(0)">{{outlet.name}}</a>
+                <li ng-repeat="outlet in deal.outlets">
+                  <a ui-sref="app.outletDetail({id: outlet.slug || outlet.id})">{{outlet.name}}</a>
                 </li>
               </ul>
               <div class="gen-btn">

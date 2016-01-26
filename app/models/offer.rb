@@ -6,6 +6,17 @@ class Offer < ActiveRecord::Base
   validates_datetime :start_at #, :on_or_after => :today
   validates_datetime :expire_at, :after => :start_time
 
+  #For Elastic search
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+
+  def as_indexed_json(options={})
+    self.as_json({
+                     only: [:what_you_get, :id]
+                 })
+  end
+
   def flat_discount?
     offer_type.upcase == 'FLAT'
   end
