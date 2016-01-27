@@ -1,7 +1,7 @@
 object @vendor
 attribute :name, :slug, :about_me, :image
 child :outlets do
-    attribute :name, :slug, :city, :street, :address, :no_of_comments, :latitude, :longitude
+    attribute :name, :slug, :city, :street, :address, :no_of_comments
     node(:rating) do |outlet|
       outlet.average_rating
     end

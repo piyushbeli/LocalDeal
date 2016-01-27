@@ -1,5 +1,5 @@
 object @outlet
-attributes :name, :city, :street, :slug, :address, :no_of_comments
+attributes :name, :city, :street, :slug, :address, :no_of_comments, :latitude, :longitude
 child(:vendor) do
     attributes :name, :id
     node :spammed do
@@ -20,8 +20,8 @@ node :distance do |outlet|
     outlet.distance_from_current_loc
 end
 
-child :comments => :reviews do
-  extends 'reviews/show'
+child @outlet.comments.paginate(:page => 1, :per_page => 10) => :comments do
+  extends 'comments/show'
 end
 
 node(:marked_as_favorite) do |outlet|

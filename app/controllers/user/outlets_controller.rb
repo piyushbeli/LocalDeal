@@ -50,6 +50,8 @@ class User::OutletsController < ApplicationController
     #Can not use distance name because that is internally used by order_by_distance query.
     @outlet.distance_from_current_loc = @outlet.distance_from(current_location, :units => :kms) unless current_location.nil?
     render 'user/outlets/show'
+    rescue ActiveRecord::RecordNotFound => e
+      render :json=> {errors: ["outlet not found"], status: 404}
   end
 
 
