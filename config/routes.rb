@@ -48,11 +48,15 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
 
     resources :outlets, only: [] do
-      resources :comments, only: [:index, :show, :create, :update, :destroy]
+      resources :comments, only: [:index, :show, :create, :update, :destroy, :like, :spam]
     end
 
     resources :comments, only: [] do
       resources :comments, only: [:index, :create, :update, :destroy]
+      post 'like' => 'comments#like'
+      delete 'clear_like' => 'comments#clear_like'
+      post 'spam' => 'comments#spam'
+      delete 'clear_spam' => 'comments#clear_spam'
     end
 
     post 'send_otp' => 'verify_otp#send_otp'

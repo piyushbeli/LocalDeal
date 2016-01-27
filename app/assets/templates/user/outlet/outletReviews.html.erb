@@ -9,7 +9,7 @@
       <span>{{comment.body}}</span>
     </div>
     <a ng-if="isLoggedIn()" ng-click="review.showCommentBox = !review.showCommentBox">comment</a>
-
+    <a ng-click="likeComment(review)">Like</a>
     <form role="form" ng-submit="postComment(review)" ng-show="review.showCommentBox">
       <div class="form-group" style="padding-left:10px">
         <textarea ng-enter="postComment(review, comment)" ng-model="review.newComment.body" placeholder="Write a comment"></textarea>

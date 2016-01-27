@@ -2,7 +2,8 @@ class CommentsController < ApplicationController
   include CommonResourceController
 
   before_action :authenticate_member!, only:[:create]
-  before_action :find_commentable
+  before_action :find_commentable, only: [:create]
+  before_action :find_comment, only: [:show, :destroy, :like, :spam, :clear_like, :clear_spam]
 
   respond_to :json
 
@@ -16,21 +17,28 @@ class CommentsController < ApplicationController
           @commentable = $1.classify.constantize.friendly.find(value)
         end
         if @commentable.nil?
-          render json: {errors: ["Could not find the outlet with this id"]}, status: 422
+          render json: {errors: ['Could not find the outlet with this id']}, status: 422
         end
       end
+    end
+  end
+
+  def find_comment
+    @comment = Comment.find_by_id(params[:comment_id])
+    if @comment.nil?
+      render :json => {errors: ['Some error has occured'], status: 422}
     end
   end
 
   def index
     per_page = params[:per_page] || Rails.configuration.x.per_page
     page = params[:page] || 1
-    @reviews = @commentable.comments.paginate(:page => page, :per_page => per_page).order("created_at DESC")
-    render 'reviews/index'
+    @comments = @commentable.comments.paginate(:page => page, :per_page => per_page).order("created_at DESC")
+    render 'comments/index'
   end
 
   def show
-    render json: @commentable.comments.find(params[:id])
+    render 'comments/show'
   end
 
   def create
@@ -43,7 +51,47 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    if @comment.commentator != !current_member
+      render :json => {errors: ['You are not the owner of this comment'], status: 401}
+    else
+      if @comment.delete
+        render json: {success: true}
+      else
+        render :json => {errors: ['Some error has occured'], status: 422}
+      end
+    end
+  end
 
+  def like
+    if current_member.mark_as_liked  @comment
+      render json: {success: true}
+    else
+      render json:{errors: ['Some error occurred']}, status: 422
+    end
+  end
+
+  def clear_like
+    if current_member.remove_mark :like,  @comment
+      render json: {success: true}
+    else
+      render json:{errors: ['Some error occurred']}, status: 422
+    end
+  end
+
+  def spam
+    if current_member.mark_as_spam  @comment
+      render json: {success: true}
+    else
+      render json:{errors: ['Some error occurred']}, status: 422
+    end
+  end
+
+  def clear_spam
+    if current_member.remove_mark :spam,  @comment
+      render json: {success: true}
+    else
+      render json:{errors: ['Some error occurred']}, status: 422
+    end
   end
 
   def comment_params

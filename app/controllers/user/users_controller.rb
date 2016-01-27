@@ -17,6 +17,8 @@ class User::UsersController < ApplicationController
     else
       render json:{errors: ["Some error occurred"]}, status: 422
     end
+    rescue ActiveRecord::RecordNotFound => e
+      render :json=> {errors: ["outlet not found"], status: 404}
   end
 
   def remove_favorite_outlet
@@ -24,6 +26,8 @@ class User::UsersController < ApplicationController
     outlet.unmark :favorite, :by => current_user
     #TODO Check if we can handle the error here.
     render json: {success: true}
+    rescue ActiveRecord::RecordNotFound => e
+      render :json=> {errors: ["outlet not found"], status: 404}
   end
 
   def update_favorite_categories
@@ -54,6 +58,8 @@ class User::UsersController < ApplicationController
   def update_outlet_rating
     dimension = "service" #this is constant for now because we are rating on overall basis
     outlet = Outlet.friendly.find(params[:outlet_id])
+    rescue ActiveRecord::RecordNotFound => e
+      render :json=> {errors: ["outlet not found"], status: 404}
     stars = params[:stars]
     if outlet.nil?
       render json: {errors: ["Outlet not found"]}, status: 422

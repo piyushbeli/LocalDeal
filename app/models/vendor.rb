@@ -8,6 +8,7 @@ class Vendor < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   include Spammable
   include FriendlyId
+  acts_as_marker
 
   friendly_id :slug_candidates, use: [:slugged, :history]
   has_many :outlets, dependent: :destroy

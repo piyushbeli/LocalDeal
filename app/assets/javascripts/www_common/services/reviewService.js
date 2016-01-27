@@ -44,4 +44,19 @@ appCommon.service("ReviewService", ['$q', 'HttpRoutes', '$http', 'Review', funct
         return deferred.promise;
     };
 
+    self.likeComment = function(review) {
+        var deferred = $q.defer(),
+            url = HttpRoutes.likeComment.format({comment_id: review.id});
+
+        $http.post(url)
+            .then(function(response) {
+                deferred.resolve(Review.build(response.data));
+            })
+            .catch(function(response) {
+                var errorMessage = response.message || response.data.errors.join("\n");
+                deferred.reject(errorMessage);
+            });
+        return deferred.promise;
+    };
+
 }])

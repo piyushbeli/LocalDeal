@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   #A comment is also commentable
   include Commentable
+  markable_as :liked, :spam
 
   belongs_to :commentable, polymorphic: true
   belongs_to :commentator, polymorphic: true

@@ -8,6 +8,7 @@ appUser.constant('Constants', {
         outlets: '/outlets',
         outletReviews: '/outlets/{outlet_id}/comments',
         postComment: '/comments/{comment_id}/comments',
+        likeComment: '/comments/{comment_id}/like',
         buyOffer: '/offers/{id}/buy',
         orders: '/orders',
         spamVendor: 'vendors/{vendor_id}/spam',

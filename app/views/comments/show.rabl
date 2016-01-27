@@ -1,4 +1,4 @@
-object @review
+object @comment
 attributes :id, :title, :body, :created_at
 child :commentator => :reviewer do
     attributes :slug, :name, :image

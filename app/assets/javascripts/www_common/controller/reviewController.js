@@ -48,5 +48,15 @@ appCommon.controller("ReviewController", ['$scope', '$window', 'ReviewService', 
                     alert(errorMessage);
                 })
         };
+        
+        $scope.likeComment = function (review) {
+            ReviewService.likeComment(review)
+                .then(function (comment) {
+
+                })
+                .catch(function (errorMessage) {
+                    alert(errorMessage);
+                })
+        }
 
     }])
