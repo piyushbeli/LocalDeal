@@ -1,5 +1,5 @@
 object @outlet
-attributes :name, :city, :street, :slug
+attributes :name, :city, :street, :slug, :address, :no_of_comments
 child(:vendor) do
     attributes :name, :id
     node :spammed do
@@ -18,11 +18,6 @@ end
 
 node :distance do |outlet|
     outlet.distance_from_current_loc
-end
-
-node :review_count do
-  |outlet|
-  outlet.comments.count
 end
 
 child :comments => :reviews do

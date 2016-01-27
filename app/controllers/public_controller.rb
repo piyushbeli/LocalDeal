@@ -8,7 +8,7 @@ class PublicController < ApplicationController
   end
 
   def vendor
-    vendor_id = params[:vendor_id]
+    vendor_id = params[:slug]
     @vendor = Vendor.friendly.find(vendor_id)
     render 'public/vendor/show'
   end

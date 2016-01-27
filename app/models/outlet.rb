@@ -23,6 +23,7 @@ class Outlet < ActiveRecord::Base
 
   has_many :deals_outlets
   has_many :deals, through: :deals_outlets ,dependent: :destroy
+  belongs_to :vendor
 
   validates_presence_of :city_id, :vendor_id, :latitude, :longitude, :name, :mobile, :city, :street, :street_id, :slug, :city_latitude, :city_longitude, :street_latitude, :street_longitude
   validates_format_of :latitude, :longitude, :city_latitude, :city_longitude, :street_latitude, :street_longitude, with: /\A\d{1,9}\.?\d{0,6}\z/
