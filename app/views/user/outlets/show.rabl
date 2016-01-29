@@ -1,7 +1,7 @@
 object @outlet
 attributes :name, :city, :street, :slug, :address, :no_of_comments, :latitude, :longitude
 child(:vendor) do
-    attributes :name, :id
+    attributes :name, :slug
     node :spammed do
       |vendor| vendor.spammed_by_user?(@current_user) unless @current_user.nil?
     end
@@ -10,9 +10,6 @@ child(:deals) do
     attributes :title, :slug
     child :offers do
         attributes :id, :what_you_get, :fine_print, :instruction, :start_at, :expire_at
-    end
-    child :outlets do
-        attributes :name, :id, :street_address
     end
 end
 

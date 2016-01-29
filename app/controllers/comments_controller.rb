@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
   include CommonResourceController
 
-  before_action :authenticate_member!, only:[:create]
-  before_action :find_commentable, only: [:create]
+  before_action :authenticate_member!, only:[:create, :like, :spam, :clear_like, :clear_spam]
+  before_action :find_commentable, only: [:create, :index]
   before_action :find_comment, only: [:show, :destroy, :like, :spam, :clear_like, :clear_spam]
 
   respond_to :json

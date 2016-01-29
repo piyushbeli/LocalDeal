@@ -69,7 +69,7 @@ appVendor.service("DealService", ['Deal', 'Offer', '$q', '$http', 'HttpRoutes', 
 
             $http.put(url, postData)
                 .then(function (response) {
-                    deferred.resolve(Deal.build(response.data));
+                    deferred.resolve(deal);
                 })
                 .catch(function (response) {
                     var errorMessage = response.data.errors.join("\n");

@@ -52,11 +52,14 @@ Rails.application.routes.draw do
     end
 
     resources :comments, only: [] do
-      resources :comments, only: [:index, :create, :update, :destroy]
+      resources :comments, only: [:index]
+
+      resources :comments, only: [:create, :update, :destroy]
       post 'like' => 'comments#like'
-      delete 'clear_like' => 'comments#clear_like'
+      delete 'like' => 'comments#clear_like'
       post 'spam' => 'comments#spam'
-      delete 'clear_spam' => 'comments#clear_spam'
+      delete 'spam' => 'comments#clear_spam'
+
     end
 
     post 'send_otp' => 'verify_otp#send_otp'

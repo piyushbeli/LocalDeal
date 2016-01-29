@@ -19,4 +19,7 @@ DeviseTokenAuth.setup do |config|
   # example, using the default '/omniauth', the github oauth2 provider will
   # redirect successful authentications to '/omniauth/github/callback'
   #config.omniauth_prefix = "/omniauth"
+
+  config.change_headers_on_each_request = false
+  config.token_lifespan = 2.weeks
 end

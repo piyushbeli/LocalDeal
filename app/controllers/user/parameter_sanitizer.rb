@@ -7,7 +7,11 @@ class User::ParameterSanitizer < Devise::ParameterSanitizer
       when :sign_up
         auth_keys + [:password, :password_confirmation, :name, :role, :slug]
       when :account_update
-        auth_keys + [:password, :password_confirmation, :current_password, :email, :mobile, :city_id, :city, :slug]
+        auth_keys + [:city_id, :city]
+      when :update_mobile
+        auth_keys + [:mobile]
+      when :verify_mobile_no
+        auth_keys + [:is_verified]
     end
   end
 

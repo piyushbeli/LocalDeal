@@ -85,8 +85,8 @@ class OrdersController < ApplicationController
     if current_user.alreadyBoughtTheOffer? (offer)
       return "You have already availed this offer"
     end
-    if !current_user.isProfileComplete?
-      return "Please complete your profile before buying any deal"
+    if !current_user.is_verified
+      return "You can not buy the any deal before verifying your number."
     end
   end
 
