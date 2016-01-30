@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   after_create :generate_slug
 
   has_many :comments, as: :commentator
+  has_many :outlet_images, as: :uploader
   has_many :orders
 
   def as_json(options={})

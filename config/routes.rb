@@ -44,12 +44,13 @@ Rails.application.routes.draw do
   end
 =end
 
-  devise_scope :member  => [:user, :vendor] do
+  devise_scope :member => [:user, :vendor] do
     resources :orders, only: [:index, :show]
-
     resources :outlets, only: [] do
       resources :comments, only: [:index, :show, :create, :update, :destroy, :like, :spam]
+      post 'upload/image' => 'upload_image#upload'
     end
+    delete 'images/:image_id' => 'upload_image#delete'
 
     resources :comments, only: [] do
       resources :comments, only: [:index]
@@ -59,7 +60,6 @@ Rails.application.routes.draw do
       delete 'like' => 'comments#clear_like'
       post 'spam' => 'comments#spam'
       delete 'spam' => 'comments#clear_spam'
-
     end
 
     post 'send_otp' => 'verify_otp#send_otp'

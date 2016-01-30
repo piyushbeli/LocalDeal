@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630161050) do
+ActiveRecord::Schema.define(version: 20160130053605) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id",      limit: 4
@@ -36,8 +36,11 @@ ActiveRecord::Schema.define(version: 20150630161050) do
     t.string   "commentator_type", limit: 255
     t.string   "body",             limit: 255
     t.string   "title",            limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "no_of_comments",   limit: 4,   default: 0
+    t.integer  "no_of_likes",      limit: 4,   default: 0
+    t.integer  "no_of_spams",      limit: 4,   default: 0
   end
 
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
@@ -159,6 +162,19 @@ ActiveRecord::Schema.define(version: 20150630161050) do
   add_index "orders", ["outlet_id"], name: "index_orders_on_outlet_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
   add_index "orders", ["vendor_id"], name: "index_orders_on_vendor_id", using: :btree
+
+  create_table "outlet_images", force: :cascade do |t|
+    t.string  "url",           limit: 255, null: false
+    t.integer "outlet_id",     limit: 4,   null: false
+    t.integer "uploader_id",   limit: 4,   null: false
+    t.string  "uploader_type", limit: 255, null: false
+    t.integer "comment_id",    limit: 4
+    t.string  "caption",       limit: 255
+  end
+
+  add_index "outlet_images", ["comment_id"], name: "index_outlet_images_on_comment_id", using: :btree
+  add_index "outlet_images", ["outlet_id"], name: "index_outlet_images_on_outlet_id", using: :btree
+  add_index "outlet_images", ["uploader_type", "uploader_id"], name: "index_outlet_images_on_uploader_type_and_uploader_id", using: :btree
 
   create_table "outlets", force: :cascade do |t|
     t.string   "name",             limit: 255
@@ -283,10 +299,13 @@ ActiveRecord::Schema.define(version: 20150630161050) do
     t.string   "city_id",                limit: 255
     t.string   "city",                   limit: 255
     t.boolean  "is_verified",            limit: 1,     default: false, null: false
+    t.string   "slug",                   limit: 250
+    t.integer  "no_of_comments",         limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["slug"], name: "slug_UNIQUE", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
   create_table "vendor_images", force: :cascade do |t|
@@ -329,6 +348,7 @@ ActiveRecord::Schema.define(version: 20150630161050) do
     t.string   "google_plus_page",       limit: 255
     t.string   "twitter_page",           limit: 255
     t.string   "instagram_page",         limit: 255
+    t.string   "slug",                   limit: 250,                   null: false
   end
 
   add_index "vendors", ["category_id"], name: "index_vendors_on_category_id", using: :btree

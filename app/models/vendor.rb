@@ -13,7 +13,7 @@ class Vendor < ActiveRecord::Base
   friendly_id :slug_candidates, use: [:slugged, :history]
   has_many :outlets, dependent: :destroy
   belongs_to :category
-  has_many :vendor_images, dependent:  :destroy
+  has_many :outlet_images, as: :uploader
   has_many :deals
   has_many :orders
 
