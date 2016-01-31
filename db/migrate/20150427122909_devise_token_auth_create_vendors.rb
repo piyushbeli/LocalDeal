@@ -39,9 +39,6 @@ class DeviseTokenAuthCreateVendors < ActiveRecord::Migration
       t.string :image
       t.string :email
 
-      t.text :about_me
-      t.string :slug, null:false
-
       ## Tokens
       t.text :tokens
 

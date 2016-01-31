@@ -17,17 +17,19 @@ class User::UsersController < ApplicationController
     else
       render json:{errors: ["Some error occurred"]}, status: 422
     end
-    rescue ActiveRecord::RecordNotFound => e
-      render :json=> {errors: ["outlet not found"], status: 404}
   end
 
   def remove_favorite_outlet
     outlet = Outlet.friendly.find(params[:outlet_id])
-    outlet.unmark :favorite, :by => current_user
+    #Call unmark only if this guy has marked the outlet as favorite
+    if outlet.marked_as? :favorite, :by => current_user
+      outlet.unmark :favorite, :by => current_user
+      render json: {success: true}
+    else
+      render json: {errors: ['this is already not a your favorite outlet'], status: 422}
+    end
     #TODO Check if we can handle the error here.
-    render json: {success: true}
-    rescue ActiveRecord::RecordNotFound => e
-      render :json=> {errors: ["outlet not found"], status: 404}
+
   end
 
   def update_favorite_categories
@@ -58,8 +60,6 @@ class User::UsersController < ApplicationController
   def update_outlet_rating
     dimension = "service" #this is constant for now because we are rating on overall basis
     outlet = Outlet.friendly.find(params[:outlet_id])
-    rescue ActiveRecord::RecordNotFound => e
-      render :json=> {errors: ["outlet not found"], status: 404}
     stars = params[:stars]
     if outlet.nil?
       render json: {errors: ["Outlet not found"]}, status: 422
@@ -74,6 +74,31 @@ class User::UsersController < ApplicationController
     else
       render json: {errors: ["Error occurred while rating"]}, status: 422
     end
+  end
+
+  def follow_user
+    user = User.friendly.find(params[:user_id])
+    if user == current_user
+      render json: {erros: ['you can not follow yourself'], status: 422}
+      return
+    end
+    if current_user.mark_as_following user
+      render json: {success: true}
+      return
+    else
+      render json: {errors: ['some error has occurred'], status: 422}
+    end
+  end
+
+  def unfollow_user
+    user = User.friendly.find(params[:user_id])
+    if user.marked_as? :following, :by => current_user
+      user.unmark :following, :by => current_user
+      render json: {success: true}
+    else
+      render json: {errors: ['You are not following this user anyways'], status: 422}
+    end
+
   end
 
 end

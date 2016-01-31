@@ -65,6 +65,7 @@ gem 'plivo'
 gem "koala", "~> 2.2"
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'whenever', :require => false
 
 group :production do
   gem 'passenger' #will be used as a webserver in production

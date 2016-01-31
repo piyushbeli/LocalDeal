@@ -39,10 +39,6 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration
       t.string :image
       t.string :email
 
-      #Extra field
-      t.integer :no_of_comments
-      t.string :slug, null:false
-
       ## Tokens
       t.text :tokens
 

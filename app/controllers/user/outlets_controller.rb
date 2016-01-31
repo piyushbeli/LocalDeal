@@ -42,7 +42,7 @@ class User::OutletsController < ApplicationController
 
   def show
     #It's a hack over devise, can not make this route authenticated because it can be accessed by unauthenticated guys
-    #also, calling authenticate_user! will render an error message so hacked thos from authenticate_user! method
+    #also, calling authenticate_user! will render an error message so hacked those from authenticate_user! method
     set_user_by_token(:user)
     @current_user = current_user
     @outlet = Outlet.friendly.find(params[:id])

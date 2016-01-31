@@ -7,8 +7,9 @@ class User < ActiveRecord::Base
   include Spammable
   include Spammer
   include FriendlyId
-  acts_as_marker
   ratyrate_rater
+  acts_as_marker
+  markable_as :following
   friendly_id :slug_candidates, use: [:slugged, :history]
 
   devise :timeoutable, :timeout_in => 30.days

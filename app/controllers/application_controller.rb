@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
   respond_to :json
 
@@ -22,6 +23,10 @@ class ApplicationController < ActionController::Base
     else resource_class == Vendor
       Vendor::ParameterSanitizer.new(Vendor, :vendor, params)
     end
+  end
+
+  def record_not_found (e)
+    render json: {errors: e.message, status: 404}
   end
 
 end
