@@ -65,7 +65,7 @@ Rails.application.routes.draw do
     end
 
     post 'send_otp' => 'verify_otp#send_otp'
-    post 'verify_me' => 'verify_otp#verify_me'
+    post 'verify_mobile_no' => 'verify_otp#verify_mobile_no'
   end
 
   devise_scope :vendor do
