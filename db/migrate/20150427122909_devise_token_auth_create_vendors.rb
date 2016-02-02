@@ -46,7 +46,7 @@ class DeviseTokenAuthCreateVendors < ActiveRecord::Migration
     end
 
     add_index :vendors, :email
-    add_index :vendors, [:uid, :provider, :slug],     :unique => true
+    add_index :vendors, [:uid, :provider],     :unique => true
     add_index :vendors, :reset_password_token, :unique => true
     # add_index :vendors, :confirmation_token,   :unique => true
     # add_index :vendors, :unlock_token,         :unique => true

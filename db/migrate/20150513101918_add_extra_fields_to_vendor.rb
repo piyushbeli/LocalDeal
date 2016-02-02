@@ -12,4 +12,6 @@ class AddExtraFieldsToVendor < ActiveRecord::Migration
     add_column :vendors, :instagram_page, :string
     add_foreign_key :vendors, :categories
   end
+
+  add_index :vendors, [:slug],     :unique => true
 end

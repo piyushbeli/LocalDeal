@@ -12,4 +12,5 @@ class AddExtraFieldsToUser < ActiveRecord::Migration
     add_column :users, :slug, :string, null: false
     add_column :users, :badge, :string, default: :beginner
   end
+  add_index :users, [:slug], :unique => true
 end
