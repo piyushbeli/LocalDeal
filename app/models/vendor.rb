@@ -29,9 +29,6 @@ class Vendor < ActiveRecord::Base
                          outlets: {
                              except: [:created_at, :updated_at, :vendor_id]
                          },
-                         vendor_images: {
-                             except: [:created_at, :updated_at, :vendor_id]
-                         },
                          subcategories: {
                              except: [:created_at, :updated_at, :category_id, :name]
                          }
@@ -58,7 +55,12 @@ class Vendor < ActiveRecord::Base
   #Slug candidate in sequence of priority
   def slug_candidates
     [
-        "#{name}"
+        "#{name}",
+        "#{name} #{random_no}"
     ]
+  end
+
+  def random_no
+    return rand(10000..99999)
   end
 end

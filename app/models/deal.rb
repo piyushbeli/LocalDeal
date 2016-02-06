@@ -33,8 +33,8 @@ class Deal < ActiveRecord::Base
     #Slug candidate in sequence of priority
     def slug_candidates
       [
-          "#{vendor.name} #{title}",
-          "#{title}"
+          "#{title}",
+          "#{vendor.name} #{title}"
       ]
     end
 

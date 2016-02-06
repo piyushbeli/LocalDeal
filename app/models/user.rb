@@ -52,7 +52,8 @@ class User < ActiveRecord::Base
   #Slug candidate in sequence of priority
   def slug_candidates
     [
-        "#{name}"
+        "#{name}",
+        "#{name} #{random_no}"
     ]
   end
 
@@ -66,6 +67,10 @@ class User < ActiveRecord::Base
     self.comments.filter do |comment|
       comment.commentable_type == 'Comment'
     end
+  end
+
+  def random_no
+    return rand(10000..99999)
   end
 
 end
