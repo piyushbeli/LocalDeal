@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130053605) do
+ActiveRecord::Schema.define(version: 20160206092707) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id",      limit: 4
@@ -123,6 +123,15 @@ ActiveRecord::Schema.define(version: 20160130053605) do
 
   add_index "marks", ["markable_id", "markable_type", "mark"], name: "index_marks_on_markable_id_and_markable_type_and_mark", using: :btree
   add_index "marks", ["marker_id", "marker_type", "mark"], name: "index_marks_on_marker_id_and_marker_type_and_mark", using: :btree
+
+  create_table "myfilters", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.text     "criteria",   limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "myfilters", ["user_id"], name: "index_myfilters_on_user_id", using: :btree
 
   create_table "offer_types", force: :cascade do |t|
     t.string "name",        limit: 255, null: false
@@ -301,6 +310,10 @@ ActiveRecord::Schema.define(version: 20160130053605) do
     t.boolean  "is_verified",            limit: 1,     default: false, null: false
     t.string   "slug",                   limit: 250
     t.integer  "no_of_comments",         limit: 4
+    t.integer  "no_of_followers",        limit: 4,     default: 0
+    t.integer  "no_of_followings",       limit: 4,     default: 0
+    t.integer  "no_of_favorite_outlets", limit: 4,     default: 0
+    t.string   "badge",                  limit: 45
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

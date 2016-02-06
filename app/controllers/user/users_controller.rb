@@ -15,7 +15,7 @@ class User::UsersController < ApplicationController
     if current_user.mark_as_favorite  outlet
       render json: {success: true}
     else
-      render json:{errors: ["Some error occurred"]}, status: 422
+      render json:{errors: ['Some error occurred']}, status: 422
     end
   end
 
@@ -26,7 +26,7 @@ class User::UsersController < ApplicationController
       outlet.unmark :favorite, :by => current_user
       render json: {success: true}
     else
-      render json: {errors: ['this is already not a your favorite outlet'], status: 422}
+      render json: {errors: ['This is already not a your favorite outlet'], status: 422}
     end
     #TODO Check if we can handle the error here.
 
@@ -98,7 +98,11 @@ class User::UsersController < ApplicationController
     else
       render json: {errors: ['You are not following this user anyways'], status: 422}
     end
+  end
 
+  def filters
+    @filters = current_user.myfilters
+    render 'user/filters/index'
   end
 
 end

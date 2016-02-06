@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :comments, as: :commentator
   has_many :outlet_images, as: :uploader
   has_many :orders
+  has_many :myfilters
 
   def as_json(options={})
     super(options.merge(

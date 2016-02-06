@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     post 'outlets/:outlet_id/rate' => 'user/users#update_outlet_rating'
     post 'follow/:user_id' => 'user/users#follow_user'
     delete 'unfollow/:user_id' => 'user/users#unfollow_user'
+    get 'filters' => 'user/users#filters'
+    get 'search_by_filter/:filter_id' => 'user/outlets#search_by_filter'
   end
 
   devise_scope member: [:user, :god] do
