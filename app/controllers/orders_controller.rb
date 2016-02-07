@@ -82,11 +82,14 @@ class OrdersController < ApplicationController
     if offer.isExpired?
       return "This deal has been expired"
     end
+    if offer.reached_limit?
+      return 'Sold out'
+    end
     if current_user.alreadyBoughtTheOffer? (offer)
-      return "You have already availed this offer"
+      return 'You have already availed this offer'
     end
     if !current_user.is_verified
-      return "You can not buy the any deal before verifying your number."
+      return  'You can not buy the any deal before verifying your number.'
     end
   end
 

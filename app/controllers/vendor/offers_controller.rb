@@ -44,4 +44,8 @@ class Vendor::OffersController < ApplicationController
   def offer_params
     params.require(:offer).permit!
   end
+
+  def offer_update_params
+    params.require(:offer).permit(:offer_type_id, :discount, :what_you_get, :fine_print, :max_no_of_coupons)
+  end
 end

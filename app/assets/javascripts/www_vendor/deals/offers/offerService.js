@@ -24,7 +24,9 @@ appVendor.service("OfferService", ['Offer', '$q', '$http', 'HttpRoutes', functio
                 what_you_get: offer.whatYouGet,
                 fine_print: offer.finePrint.split("\n"),
                 instruction: offer.instruction,
+                max_no_of_coupons: offer.maxCoupons,
                 start_at: offer.startAt,
+                end_at: offer.endAt,
                 expire_at: offer.expireAt
             };
 
@@ -51,7 +53,9 @@ appVendor.service("OfferService", ['Offer', '$q', '$http', 'HttpRoutes', functio
                 what_you_get: offer.whatYouGet,
                 fine_print: offer.finePrint.split("\n"),
                 instruction: offer.instruction,
+                max_no_of_coupons: offer.maxCoupons,
                 start_at: offer.startAt,
+                end_at: offer.endAt,
                 expire_at: offer.expireAt
             };
 

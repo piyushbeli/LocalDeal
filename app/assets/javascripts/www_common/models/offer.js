@@ -13,8 +13,10 @@ appCommon.factory("Offer", ['Utils', function(Utils) {
         //for user we will need fine print as an array.
         this.finePrints = data.fine_print ? JSON.parse(data.fine_print) : ["Not mentioned"];
         this.discount = data.discount ? Number.parseInt(data.discount) : null;
+        this.maxCoupons = Number.parseInt(data.max_no_of_coupons);
         this.offerType = data.offer_type;
         this.startAt = data.start_at ? new Date(data.start_at) : new Date();
+        this.endAt = data.end_at ? new Date(data.end_at) : new Date();
         this.expireAt = data.expire_at ? new Date(data.expire_at) : new Date();
     }
 

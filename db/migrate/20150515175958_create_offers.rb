@@ -8,8 +8,10 @@ class CreateOffers < ActiveRecord::Migration
       t.string :what_you_get, null:false
       t.text :fine_print
       t.string :instruction
-      t.datetime :start_at
-      t.datetime :expire_at
+      t.integer :max_no_of_coupons, null:false
+      t.datetime :start_at, null: false
+      t.datetime :end_at, null: false, index: true
+      t.datetime :expire_at, null: false
     end
     add_foreign_key :offers, :deals
     add_foreign_key :offers, :offer_types

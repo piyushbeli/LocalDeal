@@ -8,8 +8,8 @@ child(:vendor) do
 end
 child(:deals) do
     attributes :title, :slug
-    child :offers do
-        attributes :id, :what_you_get, :fine_print, :instruction, :start_at, :expire_at
+    child :offers do |offer|
+        attributes :id, :what_you_get, :fine_print, :instruction, :start_at, :expire_at, :limit_reached?, :total_no_of_orders, :is_expired?, :coupons_remaining
     end
 end
 
@@ -26,7 +26,7 @@ node(:marked_as_favorite) do |outlet|
 end
 
 node(:user_rating) do |outlet|
-  outlet.user_rating (@current_user)
+  outlet.user_rating(@current_user)
 end
 
 node(:rating) do |outlet|
