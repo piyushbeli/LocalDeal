@@ -52,9 +52,10 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
     resources :outlets, only: [] do
       resources :comments, only: [:index, :show, :create, :update, :destroy, :like, :spam]
-      post 'upload/image' => 'upload_image#upload'
+      post 'upload/image' => 'images#upload'
+      get 'images' => 'images#outlet_images'
     end
-    delete 'images/:image_id' => 'upload_image#delete'
+    delete 'images/:image_id' => 'images#delete'
 
     resources :comments, only: [] do
       resources :comments, only: [:index]

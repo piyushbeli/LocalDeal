@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
           @commentable = $1.classify.constantize.friendly.find(value)
         end
         if @commentable.nil?
-          render json: {errors: ['Could not find the outlet with this id']}, status: 422
+          render json: {errors: ['Could not find the '+ $1.classify.constantize+ 'with this id']}, status: 422
         end
       end
     end
@@ -33,7 +33,8 @@ class CommentsController < ApplicationController
   def index
     per_page = params[:per_page] || Rails.configuration.x.per_page
     page = params[:page] || 1
-    @comments = @commentable.comments.paginate(:page => page, :per_page => per_page).order("created_at DESC")
+    offer_id = params[:offer]
+    @comments = @commentable.comments.where(offer_id: offer_id).paginate(:page => page, :per_page => per_page).order("created_at DESC")
     render 'comments/index'
   end
 
@@ -43,6 +44,12 @@ class CommentsController < ApplicationController
 
   def create
     comment = Comment.new(comment_params.merge(:commentator => current_member, :commentable => @commentable))
+    #Can not keep the params name offer_id otherwise commentable method will get confused
+    offer_id = params[:offer]
+    if offer_id
+      offer = Offer.find(offer_id)
+      comment.offer = offer
+    end
     if comment.save
       render json: comment
     else

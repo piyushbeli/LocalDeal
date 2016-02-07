@@ -5,7 +5,9 @@ class CreateOutletImage < ActiveRecord::Migration
       t.references :outlet, index: true, null:false
       t.references :uploader, polymorphic: true, index: true, null: false
       t.references :comment, index: true
+      t.references :offer, index: true
       t.string :caption
+      t.timestamps
     end
   end
 end

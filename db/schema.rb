@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206092707) do
+ActiveRecord::Schema.define(version: 20160206092708) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id",      limit: 4
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20160206092707) do
     t.integer  "no_of_comments",   limit: 4,   default: 0
     t.integer  "no_of_likes",      limit: 4,   default: 0
     t.integer  "no_of_spams",      limit: 4,   default: 0
+    t.string   "offer_id",         limit: 45
   end
 
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
@@ -139,15 +140,17 @@ ActiveRecord::Schema.define(version: 20160206092707) do
   end
 
   create_table "offers", force: :cascade do |t|
-    t.integer  "deal_id",       limit: 4
-    t.integer  "offer_type_id", limit: 4
-    t.integer  "discount",      limit: 4
-    t.integer  "actual_price",  limit: 4
-    t.string   "what_you_get",  limit: 255,   null: false
-    t.text     "fine_print",    limit: 65535
-    t.string   "instruction",   limit: 255
+    t.integer  "deal_id",           limit: 4
+    t.integer  "offer_type_id",     limit: 4
+    t.integer  "discount",          limit: 4
+    t.integer  "actual_price",      limit: 4
+    t.string   "what_you_get",      limit: 255,   null: false
+    t.text     "fine_print",        limit: 65535
+    t.string   "instruction",       limit: 255
     t.datetime "start_at"
     t.datetime "expire_at"
+    t.integer  "max_no_of_coupons", limit: 4,     null: false
+    t.datetime "end_at",                          null: false
   end
 
   add_index "offers", ["deal_id"], name: "index_offers_on_deal_id", using: :btree
@@ -173,15 +176,19 @@ ActiveRecord::Schema.define(version: 20160206092707) do
   add_index "orders", ["vendor_id"], name: "index_orders_on_vendor_id", using: :btree
 
   create_table "outlet_images", force: :cascade do |t|
-    t.string  "url",           limit: 255, null: false
-    t.integer "outlet_id",     limit: 4,   null: false
-    t.integer "uploader_id",   limit: 4,   null: false
-    t.string  "uploader_type", limit: 255, null: false
-    t.integer "comment_id",    limit: 4
-    t.string  "caption",       limit: 255
+    t.string   "url",           limit: 255, null: false
+    t.integer  "outlet_id",     limit: 4,   null: false
+    t.integer  "uploader_id",   limit: 4,   null: false
+    t.string   "uploader_type", limit: 255, null: false
+    t.integer  "comment_id",    limit: 4
+    t.integer  "offer_id",      limit: 4
+    t.string   "caption",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "outlet_images", ["comment_id"], name: "index_outlet_images_on_comment_id", using: :btree
+  add_index "outlet_images", ["offer_id"], name: "index_outlet_images_on_offer_id", using: :btree
   add_index "outlet_images", ["outlet_id"], name: "index_outlet_images_on_outlet_id", using: :btree
   add_index "outlet_images", ["uploader_type", "uploader_id"], name: "index_outlet_images_on_uploader_type_and_uploader_id", using: :btree
 

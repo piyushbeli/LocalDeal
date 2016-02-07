@@ -12,6 +12,8 @@ class Offer < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   has_many :orders
+  has_many :comments
+  has_many :outlet_images
 
   def as_indexed_json(options={})
     self.as_json({
@@ -41,6 +43,10 @@ class Offer < ActiveRecord::Base
 
   def coupons_remaining
     return max_no_of_coupons - no_of_active_orders
+  end
+
+  def total_comments
+
   end
 
 end

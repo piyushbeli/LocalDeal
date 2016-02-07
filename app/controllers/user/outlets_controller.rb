@@ -106,10 +106,11 @@ class User::OutletsController < ApplicationController
 
   def validateCriteria
     if params[:street_location].nil? && params[:street].blank?
-      render json:{errors: ["Invalid criteria"]}, status: 422
+      render json:{errors: ['Invalid criteria: Either street name or lat/lng is required']}, status: 422
     end
     if params[:subcategory_ids] && params[:category_id].nil?
-      render json: {errors: ["Please select a category before filtering on subcategory"]}, status: 422
+      render json: {errors: ['Please select a category before filtering on subcategory']}, status: 422
     end
   end
+
 end

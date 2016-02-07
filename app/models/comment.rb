@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
 
   belongs_to :commentable, polymorphic: true
   belongs_to :commentator, polymorphic: true
+  belongs_to :offer
 
   after_save :increment_review_count
   after_destroy :decrement_review_count
