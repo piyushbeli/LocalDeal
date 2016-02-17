@@ -15,6 +15,8 @@ class Offer < ActiveRecord::Base
   has_many :comments
   has_many :outlet_images
 
+  after_save :update_outlet
+
   def as_indexed_json(options={})
     self.as_json({
                      only: [:what_you_get, :id]
@@ -47,6 +49,10 @@ class Offer < ActiveRecord::Base
 
   def total_comments
 
+  end
+
+  def update_outlet
+    CacheService.update_entity(self.deal.outlet, true)
   end
 
 end

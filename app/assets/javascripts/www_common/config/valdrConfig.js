@@ -100,16 +100,6 @@ appCommon.constant("ValdrConfig", {
                 message: 'Street can not be blank'
             }
         },
-        latitude: {
-            required: {
-                message: 'Please move the marker on the map to set the location of outlet'
-            }
-        },
-        longitude: {
-            required: {
-                message: 'Please move the marker on the map to set the location of outlet'
-            }
-        },
         mobile: {
             size: {
                 min: 10,

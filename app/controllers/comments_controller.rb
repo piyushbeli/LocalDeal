@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  include CommonResourceController
+
+  devise_token_auth_group :member, contains: [:user, :vendor, :god]
 
   before_action :authenticate_member!, only:[:create, :like, :spam, :clear_like, :clear_spam]
   before_action :find_commentable, only: [:create, :index]
@@ -7,7 +8,7 @@ class CommentsController < ApplicationController
 
   respond_to :json
 
-  #For example it will give you the deal object for which we are searching the reviews.
+  #For example it will give you the outlet object for which we are searching the reviews.
   def find_commentable
     params.each do |name, value|
       if name =~ /(.+)_id$/
@@ -34,7 +35,30 @@ class CommentsController < ApplicationController
     per_page = params[:per_page] || Rails.configuration.x.per_page
     page = params[:page] || 1
     offer_id = params[:offer]
-    @comments = @commentable.comments.where(offer_id: offer_id).paginate(:page => page, :per_page => per_page).order("created_at DESC")
+    if @commentable.slug
+      key = 'Outlet-' + @commentable.slug + '-reviews-page-' + page.to_s
+    else
+      key = 'Outlet-' + @commentable.id.to_s + '-reviews-page-' + page.to_s
+    end
+    if offer_id
+      key = key + '-offer-' + offer_id
+    end
+
+    @comments = CacheService.fetch_key(key)
+    if @comments.nil?
+      if offer_id
+        @comments = @commentable.comments.where(:offer_id => offer_id).includes(:comments, :commentator).paginate(:page => page, :per_page => per_page).order("created_at DESC")
+      else
+        @comments = @commentable.comments.includes(:comments, :commentator).paginate(:page => page, :per_page => per_page).order("created_at DESC")
+      end
+      @total_comments = @comments.length
+      output = Rabl::Renderer.new('comments/index', @comments, :locals => { :total_comments => @comments.length}).render
+      CacheService.update_key(key, output)
+    else
+      render json: @comments
+      return
+    end
+
     render 'comments/index'
   end
 
@@ -51,6 +75,7 @@ class CommentsController < ApplicationController
       comment.offer = offer
     end
     if comment.save
+      invalidate_all_outlet_comments
       render json: comment
     else
       render json: {errors: comment.errors.full_messages}, status: 422
@@ -62,11 +87,22 @@ class CommentsController < ApplicationController
       render :json => {errors: ['You are not the owner of this comment'], status: 401}
     else
       if @comment.delete
+        invalidate_all_outlet_comments
         render json: {success: true}
       else
         render :json => {errors: ['Some error has occured'], status: 422}
       end
     end
+  end
+
+  def invalidate_all_outlet_comments
+    #invalidate all the comments key in redis
+    if @commentable.slug
+      key = '*Outlet-' + @commentable.slug + '-reviews*'
+    else
+      key = '*Outlet-' + @commentable.id.to_s + '-reviews*'
+    end
+    CacheService.delete_matched(key)
   end
 
   def like

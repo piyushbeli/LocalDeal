@@ -19,7 +19,7 @@ class Outlet < ActiveRecord::Base
                    :lat_column_name => :latitude,
                    :lng_column_name => :longitude
 
-  attr_accessor :distance_from_current_loc
+  attr_accessor :distance_from_current_loc, :average_rating, :no_of_raters
 
   has_many :deals_outlets
   has_many :deals, through: :deals_outlets ,dependent: :destroy
@@ -36,6 +36,8 @@ class Outlet < ActiveRecord::Base
   scope :by_category, ->(id = nil) { joins(:vendor).where("vendors.category_id = ?", id) }
   scope :by_street, ->(id = nil) { where("street_id = ?", "#{id}") }
   scope :by_sub_categories, ->(subcategory_ids) { joins(:vendor => :subcategories).where("subcategories.id IN (?)", subcategory_ids) }
+
+  after_save :update_outlet
 
   def attributes
     super.merge({average_rating: average_rating, no_of_raters: no_of_raters})
@@ -73,7 +75,7 @@ class Outlet < ActiveRecord::Base
             query: {
                 multi_match: {
                     query: query,
-                    fields: ['name^10', 'text']
+                    fields: ['name^10']
                 }
             }
         }
@@ -84,6 +86,10 @@ class Outlet < ActiveRecord::Base
     self.as_json({
                      only: [:name, :id]
                  })
+  end
+
+  def update_outlet
+    CacheService.update_entity(self.includes(:deals, :vendor), true)
   end
 
 end

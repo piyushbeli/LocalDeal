@@ -1,20 +1,20 @@
 module OutletImport
   def self.import
-    Outlet.includes().find_in_batches do |outlets|
+    # Delete the previous articles index in Elasticsearch
+    Outlet.__elasticsearch__.client.indices.delete index: Outlet.__elasticsearch__.index_name rescue nil
+    Outlet.all.find_in_batches do |outlets|
       bulk_index(outlets)
     end
   end
 
   def self.prepare_records(outlets)
-    outlets.map do |outlet|
+    return outlets.map do |outlet|
       {index: {data: outlet.as_indexed_json}}
     end
   end
 
   def self.bulk_index(outlets)
-    # Delete the previous articles index in Elasticsearch
-    Outlet.__elasticsearch__.client.indices.delete index: Outlet.index_name rescue nil
-
+    puts outlets
     Outlet.__elasticsearch__.client.bulk({
                                              index: ::Outlet.__elasticsearch__.index_name,
                                              type: ::Outlet.__elasticsearch__.document_type,
@@ -25,20 +25,20 @@ end
 
 module DealImport
   def self.import
-    Deal.includes().find_in_batches do |deals|
+    Deal.all.find_in_batches do |deals|
       bulk_index(deals)
     end
   end
 
   def self.prepare_records(deals)
-    deals.map do |deal|
+    return deals.map do |deal|
       {index: {data: deal.as_indexed_json}}
     end
   end
 
   def self.bulk_index(deals)
     # Delete the previous articles index in Elasticsearch
-    Deal.__elasticsearch__.client.indices.delete index: Deal.index_name rescue nil
+    Deal.__elasticsearch__.client.indices.delete index: Deal.__elasticsearch__.index_name rescue nil
 
     Deal.__elasticsearch__.client.bulk({
                                              index: ::Deal.__elasticsearch__.index_name,
@@ -50,20 +50,20 @@ end
 
 module OfferImport
   def self.import
-    Offer.includes().find_in_batches do |offers|
+    Offer.all.find_in_batches do |offers|
       bulk_index(offers)
     end
   end
 
   def self.prepare_records(offers)
-    offers.map do |offer|
+    return offers.map do |offer|
       {index: {data: offer.as_indexed_json}}
     end
   end
 
   def self.bulk_index(offers)
     # Delete the previous articles index in Elasticsearch
-    Offer.__elasticsearch__.client.indices.delete index: Offer.index_name rescue nil
+    Offer.__elasticsearch__.client.indices.delete index: Offer.__elasticsearch__.index_name rescue nil
 
     Offer.__elasticsearch__.client.bulk({
                                              index: ::Offer.__elasticsearch__.index_name,

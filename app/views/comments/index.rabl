@@ -1,8 +1,7 @@
 object false
+collection @comments
 
-child  @comments => :items do
-  extends 'comments/show'
-end
+extends 'comments/show'
 node :total_items do
-  @comments.count
+  @total_comments
 end

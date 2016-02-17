@@ -17,10 +17,6 @@ node :distance do |outlet|
     outlet.distance_from_current_loc
 end
 
-child @outlet.comments.paginate(:page => 1, :per_page => 10) => :comments do
-  extends 'comments/show'
-end
-
 node(:marked_as_favorite) do |outlet|
   outlet.marked_as? :favorite, :by => @current_user unless @current_user.nil?
 end

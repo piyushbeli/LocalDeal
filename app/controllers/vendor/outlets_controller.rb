@@ -21,8 +21,9 @@ class Vendor::OutletsController < ApplicationController
 
   def create
     outlet = Outlet.new(outlet_params.merge(vendor_id: current_vendor.id))
-    if outlet.save()
+    if outlet.save
       render json: outlet
+      CacheService.add_entity(outlet, true)
     else
       render json: {errors: outlet.errors.full_messages}, status: 422
     end

@@ -66,6 +66,10 @@ gem "koala", "~> 2.2"
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'whenever', :require => false
+gem 'redis'
+gem 'redis-namespace'
+gem 'redis-rails'
+gem 'redis-rack-cache'
 
 group :production do
   gem 'passenger' #will be used as a webserver in production

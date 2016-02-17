@@ -7,8 +7,8 @@ class Comment < ActiveRecord::Base
   belongs_to :commentator, polymorphic: true
   belongs_to :offer
 
-  after_save :increment_review_count
-  after_destroy :decrement_review_count
+  after_save :increment_review_count, :update_outlet_reviews
+  after_destroy :decrement_review_count, :update_outlet_reviews
 
   private
   def increment_review_count
@@ -17,6 +17,16 @@ class Comment < ActiveRecord::Base
 
   def decrement_review_count
     commentable_type.constantize.decrement_counter(:no_of_comments, commentable_id)
+  end
+
+  def update_outlet_reviews
+    if commentable_type == 'Comment'
+      outlet = self.commentable.commentable(:include => :comments)
+    else
+      outlet = self.commentable
+    end
+    key = 'Outlet-' + outlet.slug + '-' + 'reviews'
+    CacheService.update_key(key, outlet.comments)
   end
 
 

@@ -7,7 +7,7 @@ appVendor.factory("Outlet", ['Utils', function(Utils) {
         }
         this.id = data.slug;
         this.name = data.name;
-        this.mobile = Number.parseFloat(data.mobile);
+        this.mobile = data.mobile;
         this.email = data.email;
         this.latitude = Utils.formatDecimal(data.latitude, 6);
         this.longitude = Utils.formatDecimal(data.longitude, 6);

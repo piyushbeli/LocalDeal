@@ -58,8 +58,10 @@ Rails.application.configure do
   }
   #Caching
   #config.action_controller.perform_caching = true
-  config.cache_store = :memory_store, { size: 32.megabytes }
-  config.session_store = :memory_store
+  #config.cache_store = :memory_store, { size: 32.megabytes }
+  #config.session_store = :memory_store
+  config.cache_store = :redis_store, 'redis://localhost:6379/0/cache'
+  config.session_store = :redis_store, 'redis://localhost:6379/0/session'
 
   #geokit-rails
   config.geokit.geocoders.ssl_verify_mode = OpenSSL::SSL::VERIFY_NONE
