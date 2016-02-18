@@ -29,8 +29,8 @@ test:
   encoding: utf8
   pool: 20
   username: root
-  password:
-  host: localdeal.cyrc4h3obnuq.us-west-2.rds.amazonaws.com:3306
+  password: 12345678
+  host: localdeal.cyrc4h3obnuq.us-west-2.rds.amazonaws.com
   database: LocalDeal
 
 # As with config/secrets.yml, you never want to store sensitive information,
