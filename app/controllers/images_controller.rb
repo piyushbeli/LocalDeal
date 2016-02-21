@@ -61,13 +61,23 @@ class ImagesController < ApplicationController
     outlet = Outlet.friendly.find(outlet_id)
     comment_id = params[:comment_id]
     offer_id = params[:offer_id]
-    per_page = params[:per_page] || Rails.configuration.x.per_page
-    page = params[:page] || 1
-    @images = OutletImage.where(:outlet => outlet)
-    @images = @images.where(:comment_id => comment_id) unless comment_id.nil?
-    @images = @images.where(:offer_id => offer_id) unless offer_id.nil?
-    @images = @images.paginate(:per_page => per_page, :page => page)
-    render 'user/images/index'
+    key = 'Outlet-' + outlet.slug + '-images'
+    key = (key + '-offer-' + offer_id.to_s) unless offer_id.nil?
+    key = (key + '-comment-' + comment_id.to_s) unless comment_id.nil?
+    output = CacheService.fetch_key(key)
+    #per_page = params[:per_page] || Rails.configuration.x.per_page
+    #page = params[:page] || 1
+    if output.nil?
+      @images = OutletImage.where(:outlet => outlet)
+      @images = @images.where(:comment_id => comment_id) unless comment_id.nil?
+      @images = @images.where(:offer_id => offer_id) unless offer_id.nil?
+      output = Rabl::Renderer.new('user/images/index', @images).render
+      CacheService.update_key(key, output)
+    end
+
+    #Lets not paginate the images, we can fetch all image urls in once.
+    #@images = @images.paginate(:per_page => per_page, :page => page)
+    render json:output
   end
 
 end

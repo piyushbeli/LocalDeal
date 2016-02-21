@@ -44,22 +44,19 @@ class CommentsController < ApplicationController
       key = key + '-offer-' + offer_id
     end
 
-    @comments = CacheService.fetch_key(key)
-    if @comments.nil?
+    output = CacheService.fetch_key(key)
+    if output.nil?
       if offer_id
-        @comments = @commentable.comments.where(:offer_id => offer_id).includes(:comments, :commentator).paginate(:page => page, :per_page => per_page).order("created_at DESC")
+        comments = @commentable.comments.where(:offer_id => offer_id).includes(:comments, :commentator).paginate(:page => page, :per_page => per_page).order("created_at DESC")
       else
-        @comments = @commentable.comments.includes(:comments, :commentator).paginate(:page => page, :per_page => per_page).order("created_at DESC")
+        comments = @commentable.comments.includes(:comments, :commentator).paginate(:page => page, :per_page => per_page).order("created_at DESC")
       end
-      @total_comments = @comments.length
-      output = Rabl::Renderer.new('comments/index', @comments, :locals => { :total_comments => @comments.length}).render
+      total_comments = comments.length
+      output = Rabl::Renderer.new('comments/index', comments, :locals => {:comments => comments, :total_comments => total_comments}).render
       CacheService.update_key(key, output)
-    else
-      render json: @comments
-      return
     end
 
-    render 'comments/index'
+    render json: output
   end
 
   def show

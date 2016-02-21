@@ -27,6 +27,10 @@ class Comment < ActiveRecord::Base
     end
     key = 'Outlet-' + outlet.slug + '-' + 'reviews'
     CacheService.update_key(key, outlet.comments)
+    if offer_id
+      key = key + '-offer-' + offer_id
+      CacheService.update_key(key, outlet.comments.where(offer_id: offer_id))
+    end
   end
 
 
