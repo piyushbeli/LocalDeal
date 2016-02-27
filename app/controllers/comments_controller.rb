@@ -4,7 +4,8 @@ class CommentsController < ApplicationController
 
   before_action :authenticate_member!, only:[:create, :like, :spam, :clear_like, :clear_spam]
   before_action :find_commentable, only: [:create, :index]
-  before_action :find_comment, only: [:show, :destroy, :like, :spam, :clear_like, :clear_spam]
+  before_action :find_comment, only: [:show, :destroy, :update, :like, :spam, :clear_like, :clear_spam]
+  before_action :verify_ownership, only: [:update, :destroy]
 
   respond_to :json
 
@@ -25,7 +26,7 @@ class CommentsController < ApplicationController
   end
 
   def find_comment
-    @comment = Comment.find_by_id(params[:comment_id])
+    @comment = Comment.find_by_id(params[:id])
     if @comment.nil?
       render :json => {errors: ['Some error has occured'], status: 422}
     end
@@ -79,16 +80,31 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    offer_id = params[:offer]
+    if offer_id
+      offer = Offer.find(offer_id)
+      comment.offer = offer
+    end
+    @comment.title = params[:title]
+    @comment.body = params[:body]
+    if @comment.save
+      render json: {success: true}
+    end
+  end
+
   def destroy
-    if @comment.commentator != !current_member
-      render :json => {errors: ['You are not the owner of this comment'], status: 401}
+    if @comment.delete
+      invalidate_all_outlet_comments
+      render json: {success: true}
     else
-      if @comment.delete
-        invalidate_all_outlet_comments
-        render json: {success: true}
-      else
-        render :json => {errors: ['Some error has occured'], status: 422}
-      end
+      render :json => {errors: ['Some error has occured'], status: 422}
+    end
+  end
+
+  def verify_ownership
+    if @comment.commentator != current_member
+      render json: {errors: ['You are not the owner of this comment'], status: 401}
     end
   end
 

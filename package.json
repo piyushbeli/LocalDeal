@@ -1,9 +1,9 @@
 {
   "repository": {
     "type": "git",
-    "url": "git@github.com:piyushbeli/LocalDeal.git"
+    "url": "git+ssh://git@github.com/piyushbeli/LocalDeal.git"
   },
-  "name": "LocalDeal",
+  "name": "localdeal",
   "version": "0.0.1",
   "dependencies": {
     "bower": "1.3.8"
@@ -13,6 +13,14 @@
     "npm": "2.10.1"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install"
-  }
+    "postinstall": "bower install --allow-root"
+  },
+  "description": "For creating a deal site for future",
+  "bugs": {
+    "url": "https://github.com/piyushbeli/LocalDeal/issues"
+  },
+  "homepage": "https://github.com/piyushbeli/LocalDeal#readme",
+  "devDependencies": {},
+  "author": "Piyush Beli",
+  "license": "UNLICENSED"
 }

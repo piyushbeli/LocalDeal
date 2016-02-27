@@ -96,7 +96,8 @@ class User::OutletsController < ApplicationController
     @current_user = current_user
     outlet = CacheService.fetch_entity('Outlet', params[:id])
     if outlet.nil?
-      @outlet = Outlet.friendly.find(params[:id])
+      @outlet = Outlet.includes(:deals, :vendor).friendly.find(params[:id])
+      CacheService.add_entity(@outlet, true)
     else
       puts 'outlet from cache: ' + outlet.slug
       @outlet = outlet

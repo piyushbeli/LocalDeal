@@ -58,9 +58,7 @@ Rails.application.routes.draw do
     delete 'images/:image_id' => 'images#delete'
 
     resources :comments, only: [] do
-      resources :comments, only: [:index]
-
-      resources :comments, only: [:create, :update, :destroy]
+      resources :comments, only: [:index, :create, :update, :destroy]
       post 'like' => 'comments#like'
       delete 'like' => 'comments#clear_like'
       post 'spam' => 'comments#spam'

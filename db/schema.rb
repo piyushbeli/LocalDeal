@@ -34,18 +34,19 @@ ActiveRecord::Schema.define(version: 20160206092708) do
     t.string   "commentable_type", limit: 255
     t.integer  "commentator_id",   limit: 4
     t.string   "commentator_type", limit: 255
+    t.integer  "offer_id",         limit: 4
     t.string   "body",             limit: 255
     t.string   "title",            limit: 255
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
     t.integer  "no_of_comments",   limit: 4,   default: 0
     t.integer  "no_of_likes",      limit: 4,   default: 0
     t.integer  "no_of_spams",      limit: 4,   default: 0
-    t.string   "offer_id",         limit: 45
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
   add_index "comments", ["commentator_type", "commentator_id"], name: "index_comments_on_commentator_type_and_commentator_id", using: :btree
+  add_index "comments", ["offer_id"], name: "index_comments_on_offer_id", using: :btree
 
   create_table "company_settings", force: :cascade do |t|
     t.string "terms_and_conditions_vendor", limit: 255
@@ -147,13 +148,14 @@ ActiveRecord::Schema.define(version: 20160206092708) do
     t.string   "what_you_get",      limit: 255,   null: false
     t.text     "fine_print",        limit: 65535
     t.string   "instruction",       limit: 255
-    t.datetime "start_at"
-    t.datetime "expire_at"
     t.integer  "max_no_of_coupons", limit: 4,     null: false
+    t.datetime "start_at",                        null: false
     t.datetime "end_at",                          null: false
+    t.datetime "expire_at",                       null: false
   end
 
   add_index "offers", ["deal_id"], name: "index_offers_on_deal_id", using: :btree
+  add_index "offers", ["end_at"], name: "index_offers_on_end_at", using: :btree
   add_index "offers", ["offer_type_id"], name: "index_offers_on_offer_type_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
@@ -289,13 +291,13 @@ ActiveRecord::Schema.define(version: 20160206092708) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",               limit: 255,                   null: false
-    t.string   "uid",                    limit: 255,   default: "",    null: false
-    t.string   "encrypted_password",     limit: 255,   default: "",    null: false
+    t.string   "provider",               limit: 255,                        null: false
+    t.string   "uid",                    limit: 255,   default: "",         null: false
+    t.string   "encrypted_password",     limit: 255,   default: "",         null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,     default: 0,     null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0,          null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -314,27 +316,18 @@ ActiveRecord::Schema.define(version: 20160206092708) do
     t.string   "mobile",                 limit: 10
     t.string   "city_id",                limit: 255
     t.string   "city",                   limit: 255
-    t.boolean  "is_verified",            limit: 1,     default: false, null: false
-    t.string   "slug",                   limit: 250
+    t.boolean  "is_verified",            limit: 1,     default: false,      null: false
     t.integer  "no_of_comments",         limit: 4
-    t.integer  "no_of_followers",        limit: 4,     default: 0
-    t.integer  "no_of_followings",       limit: 4,     default: 0
-    t.integer  "no_of_favorite_outlets", limit: 4,     default: 0
-    t.string   "badge",                  limit: 45
+    t.integer  "no_of_followings",       limit: 4
+    t.integer  "no_of_followers",        limit: 4
+    t.integer  "no_of_favorite_outlets", limit: 4
+    t.string   "slug",                   limit: 255
+    t.string   "badge",                  limit: 255,   default: "beginner"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["slug"], name: "slug_UNIQUE", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
-
-  create_table "vendor_images", force: :cascade do |t|
-    t.string  "url",       limit: 255, null: false
-    t.integer "vendor_id", limit: 4,   null: false
-    t.string  "caption",   limit: 255
-  end
-
-  add_index "vendor_images", ["vendor_id"], name: "index_vendor_images_on_vendor_id", using: :btree
 
   create_table "vendors", force: :cascade do |t|
     t.string   "provider",               limit: 255,                   null: false
@@ -356,19 +349,19 @@ ActiveRecord::Schema.define(version: 20160206092708) do
     t.string   "nickname",               limit: 255
     t.string   "image",                  limit: 255
     t.string   "email",                  limit: 255
-    t.text     "about_me",               limit: 65535
     t.text     "tokens",                 limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "mobile",                 limit: 10
     t.string   "website",                limit: 255
     t.boolean  "is_verified",            limit: 1,     default: false, null: false
+    t.string   "about_me",               limit: 255
+    t.string   "slug",                   limit: 255
     t.integer  "category_id",            limit: 4
     t.string   "fb_page",                limit: 255
     t.string   "google_plus_page",       limit: 255
     t.string   "twitter_page",           limit: 255
     t.string   "instagram_page",         limit: 255
-    t.string   "slug",                   limit: 250,                   null: false
   end
 
   add_index "vendors", ["category_id"], name: "index_vendors_on_category_id", using: :btree
@@ -384,6 +377,5 @@ ActiveRecord::Schema.define(version: 20160206092708) do
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "vendors"
   add_foreign_key "subcategories", "categories"
-  add_foreign_key "vendor_images", "vendors"
   add_foreign_key "vendors", "categories"
 end

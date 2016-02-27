@@ -19,10 +19,11 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, :at => '12:00 am' do
+set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
+env :PATH, ENV['PATH']
+env :GEM_PATH, ENV['GEM_PATH']
+
+every 1.day, :at => '12:23 am' do
   rake "paylow_scheduled_task:define_user_tags"
 end
 
-every 1.minute do
-  rake "paylow_scheduled_task:define_user_tags"
-end

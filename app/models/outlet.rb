@@ -89,7 +89,7 @@ class Outlet < ActiveRecord::Base
   end
 
   def update_outlet
-    CacheService.update_entity(self.includes(:deals, :vendor), true)
+    CacheService.update_entity(self, true)
   end
 
 end

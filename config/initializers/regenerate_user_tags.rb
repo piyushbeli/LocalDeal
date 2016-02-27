@@ -19,9 +19,9 @@ module RegenerateUserTags
     end
     total_comments_posted = comments.count
     # how many people are following the user
-    followers = user.no_of_followers#user.users_have_marked_as_following
+    followers = user.no_of_followers || 0#user.users_have_marked_as_following
     #how many pecople this user is following
-    following = user.no_of_followings#User.marked_as :following, :by => user
+    following = user.no_of_followings || 0#User.marked_as :following, :by => user || 0
 
     puts 'User: ' + user.id.to_s + '####### total deals: ' + deal_purchased.to_s + ' total comments: ' + total_comments_posted.to_s +
              ' total followers: ' + followers.to_s + ' following: ' + following.to_s + ' no_of_likes: ' + no_of_likes.to_s
@@ -33,7 +33,7 @@ module RegenerateUserTags
     #now add the no of comments
     weight += total_comments_posted*1.5
     #ratio of comments and likes
-    weight +=  (no_of_likes*no_of_likes/total_comments_posted)
+    weight +=  (no_of_likes*no_of_likes/total_comments_posted) unless total_comments_posted == 0
     weight +=  no_of_likes
     weight -=  no_of_spams*3
     weight += followers*1.5

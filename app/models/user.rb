@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   validates :mobile, length: {is: 10}, numericality: {only_integer: true}, uniqueness: true, allow_nil: true
 
   after_create :generate_slug
+  #before_create :generate_slug
 
   has_many :comments, as: :commentator
   has_many :outlet_images, as: :uploader
@@ -46,7 +47,10 @@ class User < ActiveRecord::Base
 
   #In case of omniauth signup it won't generate the slug id
   def generate_slug
-    self.save
+    #Put this condition to avoid loop
+    if self.slug.nil?
+      self.save
+    end
   end
 
   #Slug candidate in sequence of priority

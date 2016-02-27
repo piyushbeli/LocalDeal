@@ -5,10 +5,10 @@ class AddExtraFieldsToUser < ActiveRecord::Migration
     add_column :users, :city, :string
     add_column :users, :is_verified, :boolean, null: false, default: false
     add_column :users, :no_of_comments, :integer
-    add_column :users, :no_of_followings, :integer
-    add_column :users, :no_of_followers, :integer
-    add_column :users, :no_of_favorite_outlets, :integer
-    add_column :users, :slug, :string, null: false, index: true, unique: true
+    add_column :users, :no_of_followings, :integer, default: 0
+    add_column :users, :no_of_followers, :integer, default: 0
+    add_column :users, :no_of_favorite_outlets, :integer, default: 0
+    add_column :users, :slug, :string, index: true, unique: true
     add_column :users, :badge, :string, default: :beginner
   end
 end
