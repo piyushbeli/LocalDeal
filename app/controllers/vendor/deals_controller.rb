@@ -25,7 +25,7 @@ class Vendor::DealsController < ApplicationController
   end
 
   def create
-    if current_vendor.dealCountLimitReached?
+    if current_vendor.max_deal_reached?
       render json: {errors: ["You have reached limit of creating deal under your account, but you can still update some older deal"]}, status: 422
       return
     end

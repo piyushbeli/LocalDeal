@@ -11,9 +11,8 @@ FriendlyId::Slug.create!([
   {slug: "grocery", sluggable_id: 4, sluggable_type: "Category", scope: nil}
 ])
 OfferType.create!([
-  {name: "PERCENT", description: "Flat percentage doscount on total bill"},
-  {name: "FLAT_OFF", description: "Flat rupee doscount like 300 off on min bill of 600"},
-  {name: "FLAT", description: "Fixed price for a fixed menu"}
+  {name: "FIXED_PERCENT", description: "Flat percentage doscount on total bill"},
+  {name: "SPECIAL_DISCOUNTED_PRICE", description: "Special customized price instead of actual cost"}
 ])
 Subcategory.create!([
   {name: "Indian", category_id: 1, slug: "indian"},

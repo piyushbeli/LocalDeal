@@ -44,8 +44,8 @@ class Vendor < ActiveRecord::Base
     self.update_attribute('is_verified', true)
   end
 
-  def dealCountLimitReached?
-    deals.length >= 4
+  def max_deal_reached?
+    deals.length >= 1
   end
 
   def spammed_by_user? (user_id)

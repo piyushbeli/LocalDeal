@@ -3,6 +3,7 @@ appCommon.factory("Offer", ['Utils', function(Utils) {
         if (!data) {
             this.startAt =  new Date();
             this.expireAt = new Date();
+            this.endAt =  new Date();
             return;
         }
         this.id = data.id;
@@ -18,6 +19,8 @@ appCommon.factory("Offer", ['Utils', function(Utils) {
         this.startAt = data.start_at ? new Date(data.start_at) : new Date();
         this.endAt = data.end_at ? new Date(data.end_at) : new Date();
         this.expireAt = data.expire_at ? new Date(data.expire_at) : new Date();
+        this.actualPrice = data.actual_price;
+        this.offeredPrice = data.offered_price;
     }
 
     Offer.build = function(data) {

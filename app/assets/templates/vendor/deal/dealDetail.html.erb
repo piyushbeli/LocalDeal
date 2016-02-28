@@ -94,7 +94,7 @@
                 </li>
               </ul>
               <div class="gen-btn">
-                <a ng-disabled="deal.isNew()" href="javascript:void(0)" ng-click="openOutletSelectionModal()">Add</a>
+                <a ng-disabled="deal.isNew()" href="javascript:void(0)" ng-click="openOutletSelectionModal()" ng-hide="deal.isNew()">Add</a>
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@
                 </li>
               </ul>
               <div class="gen-btn">
-                <a href="javascript:void(0)" ui-sref="app.dealDetail.newOffer">Add</a>
+                <a href="javascript:void(0)" ui-sref="app.dealDetail.newOffer" ng-hide="deal.isNew()">Add</a>
               </div>
             </div>
           </div>

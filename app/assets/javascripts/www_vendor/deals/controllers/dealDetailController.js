@@ -6,8 +6,12 @@ appVendor.controller("DealDetailController", ['$scope', '$state', '$rootScope', 
         $scope.saveDeal = function () {
             DealService.saveDeal($scope.deal)
                 .then(function (deal) {
+                    var isNew = $scope.deal.isNew();
                     $scope.deal = deal;
                     $rootScope.vendor.deals.push(deal);
+                    if (isNew) {
+                        $state.go('app.dealDetail', {id: deal.id});
+                    }
                 })
                 .catch(function (errorMessage) {
                     alert(errorMessage);

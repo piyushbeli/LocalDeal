@@ -27,7 +27,9 @@ appVendor.service("OfferService", ['Offer', '$q', '$http', 'HttpRoutes', functio
                 max_no_of_coupons: offer.maxCoupons,
                 start_at: offer.startAt,
                 end_at: offer.endAt,
-                expire_at: offer.expireAt
+                expire_at: offer.expireAt,
+                actual_price: offer.actualPrice,
+                offered_price: offer.offeredPrice
             };
 
         $http.post(url, postData)
@@ -56,7 +58,9 @@ appVendor.service("OfferService", ['Offer', '$q', '$http', 'HttpRoutes', functio
                 max_no_of_coupons: offer.maxCoupons,
                 start_at: offer.startAt,
                 end_at: offer.endAt,
-                expire_at: offer.expireAt
+                expire_at: offer.expireAt,
+                actual_price: offer.actualPrice,
+                offered_price: offer.offeredPrice
             };
 
         $http.put(url, postData)

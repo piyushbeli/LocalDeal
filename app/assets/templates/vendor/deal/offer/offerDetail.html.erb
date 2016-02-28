@@ -82,9 +82,17 @@
                           ng-options="offerType.name for offerType in data.offerTypes">
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" ng-if="offer.offerType.name == 'FIXED_PERCENT'">
                   <label>Amount</label>
                   <input type="number" ng-model="offer.discount">
+                </div>
+                <div class="form-group" ng-if="offer.offerType.name == 'SPECIAL_DISCOUNTED_PRICE'">
+                  <label>Actual Price</label>
+                  <input type="number" ng-model="offer.actualPrice">
+                </div>
+                <div class="form-group" ng-if="offer.offerType.name == 'SPECIAL_DISCOUNTED_PRICE'">
+                  <label>Offered Price</label>
+                  <input type="number" ng-model="offer.offeredPrice">
                 </div>
                 <div class="form-group">
                   <label>Max Coupons</label>

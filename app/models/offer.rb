@@ -2,7 +2,11 @@ class Offer < ActiveRecord::Base
   belongs_to :deal
   belongs_to :offer_type
   validates_presence_of :deal_id, :offer_type_id, :discount, :what_you_get, :fine_print, :start_at, :expire_at, :max_no_of_coupons
-  validates :discount, numericality: {less_than_or_equal_to: 100}  unless :flat_discount?
+  validates_presence_of :discount, if: :fixed_percent?
+  validates :discount, numericality: {less_than_or_equal_to: 100}, if: :fixed_percent?
+  validates_presence_of :actual_price, :offered_price, if: :special_offer?
+  validates :actual_price, :offered_price, numericality:  {greater_than: 0}, if: :special_offer?
+  validate :offered_price_not_greater_than_actual_price, if: :special_offer?
   validates_datetime :start_at #, :on_or_after => :today
   validates_datetime :end_at, :after => :start_at
   validates_datetime :expire_at, :after => :end_at
@@ -16,6 +20,7 @@ class Offer < ActiveRecord::Base
   has_many :outlet_images
 
   after_save :update_outlets
+  before_save :calculate_percent
 
   def as_indexed_json(options={})
     self.as_json({
@@ -23,8 +28,12 @@ class Offer < ActiveRecord::Base
                  })
   end
 
-  def flat_discount?
-    offer_type.upcase == 'FLAT'
+  def fixed_percent?
+    return offer_type.name.upcase == 'FIXED_PERCENT'
+  end
+
+  def special_offer?
+    return offer_type.name.upcase == 'SPECIAL_DISCOUNTED_PRICE'
   end
 
   def is_expired?
@@ -57,6 +66,18 @@ class Offer < ActiveRecord::Base
 
   def update_outlets
     self.deal.update_outlets
+  end
+
+  def offered_price_not_greater_than_actual_price
+    if offered_price && actual_price && offered_price > actual_price
+      errors.add(:offered_price, 'can not be greater than actual price')
+    end
+  end
+
+  def calculate_percent
+    if offer_type.name == 'SPECIAL_DISCOUNTED_PRICE' && offered_price != 0
+        self.discount = (offered_price.to_f/actual_price)*100
+    end
   end
 
 end

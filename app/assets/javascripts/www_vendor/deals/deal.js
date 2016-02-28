@@ -7,7 +7,7 @@ appVendor.factory("Deal", ['Utils', 'Offer', '$injector', function(Utils, Offer,
         this.title = data.title;
         this.description = data.description;
         var Outlet = $injector.get("Outlet");
-        this.outlets = Outlet.build(data.outlets);
+        this.outlets = data.outlets ? Outlet.build(data.outlets) : [];
         this.offers = Offer.build(data.offers);
 
         //List specific
