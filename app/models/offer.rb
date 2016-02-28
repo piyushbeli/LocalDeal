@@ -15,7 +15,7 @@ class Offer < ActiveRecord::Base
   has_many :comments
   has_many :outlet_images
 
-  after_save :update_outlet
+  after_save :update_outlets
 
   def as_indexed_json(options={})
     self.as_json({
@@ -29,6 +29,10 @@ class Offer < ActiveRecord::Base
 
   def is_expired?
     return expire_at < Date.today
+  end
+
+  def has_ended?
+    return end_at < Date.today
   end
 
   def limit_reached?
@@ -51,8 +55,8 @@ class Offer < ActiveRecord::Base
 
   end
 
-  def update_outlet
-    CacheService.update_entity(self.deal.outlet, true)
+  def update_outlets
+    self.deal.update_outlets
   end
 
 end

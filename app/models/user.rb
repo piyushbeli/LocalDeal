@@ -36,13 +36,9 @@ class User < ActiveRecord::Base
   end
 
 
-  def alreadyBoughtTheOffer? (offer)
-    user_offer = orders.select { |order| order.offer_id == offer.id}
-    !user_offer.blank?
-  end
-
-  def isProfileComplete?
-    !(email.blank? || mobile.blank? || name.blank?)
+  def has_active_order? (category)
+    active_order = orders.select { |order| order.vendor.category == category && order.is_active}
+    !active_order.blank?
   end
 
   #In case of omniauth signup it won't generate the slug id

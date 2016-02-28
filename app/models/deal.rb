@@ -16,7 +16,7 @@ class Deal < ActiveRecord::Base
 
     friendly_id :slug_candidates, use: [:slugged, :history]
 
-    after_save :update_outlet
+    after_save :update_outlets
 
     def as_indexed_json(options={})
       self.as_json({
@@ -53,8 +53,10 @@ class Deal < ActiveRecord::Base
       )
     end
 
-    def update_outlet
-      CacheService.update_entity(self.outlet, true)
+    def update_outlets
+      for outlet in outlets
+        CacheService.update_entity(outlet, true)
+      end
     end
 
 end

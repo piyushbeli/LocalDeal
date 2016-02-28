@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   devise_scope member: [:user, :god] do
     #Create an order
     post '/offers/:id/buy' => 'orders#create'
+    delete '/orders/:id' => 'orders#destroy'
 
     #Fetch deals with different criteria which also does not need any authentication
     get "/outlets" => "user/outlets#index"

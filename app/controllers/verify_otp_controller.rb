@@ -26,11 +26,11 @@ class VerifyOtpController < ApplicationController
     end
 
     if otp.nil?
-      render :json => {'success': false, 'message': 'OTP can not be empty'}
+      render :json => {errors: ['OTP can not be empty'], status: 401}
       return
     end
     if actual_otp_data[:otp].nil?
-      render :json => {'success': false, 'message': 'Invalid or expired OTP'}
+      render :json => {errors: ['Invalid or expired OTP'], status: 401}
       return
     end
 

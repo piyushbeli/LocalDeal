@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
 
   #before_action :authenticate_user!, only: [:create]
   before_action :authenticate_member!, only: [:create, :show, :index]
+  before_action :find_order, only: [:show, :destroy]
 
   def index
     #Filter and order criteria
@@ -42,9 +43,16 @@ class OrdersController < ApplicationController
 
   end
 
-  def show
+  def find_order
     #We are actually sending order_no from the client request in the id parameter.
     @order = Order.find_by_order_no(params[:id])
+    if @order.nil?
+      render json: {errors: ['Order not found'], status: 422}
+    end
+  end
+
+  def show
+
     if current_user && current_user.id == @order.user_id
       render 'user/orders/show'
     elsif current_vendor && current_vendor.id == @order.vendor_id
@@ -79,14 +87,14 @@ class OrdersController < ApplicationController
     if offer.nil?
       return "Offer does not exist"
     end
-    if offer.isExpired?
-      return "This deal has been expired"
+    if offer.has_ended?
+      return "Time finished to avail this deal"
     end
-    if offer.reached_limit?
+    if offer.limit_reached?
       return 'Sold out'
     end
-    if current_user.alreadyBoughtTheOffer? (offer)
-      return 'You have already availed this offer'
+    if current_user.has_active_order? (offer.deal.vendor.category)
+      return 'You already have an active coupon'
     end
     if !current_user.is_verified
       return  'You can not buy the any deal before verifying your number.'
@@ -96,6 +104,19 @@ class OrdersController < ApplicationController
   def generateOrderNo
     length = Rails.configuration.x.order_no_length || 7
     rand(36**length).to_s(36).upcase
+  end
+
+  def destroy
+    if !@order.is_active
+      render json: {errors: ['Only active order can be cancelled'], status: 401}
+      return
+    end
+    if current_user && current_user.id == @order.user_id
+      @order.delete
+      render json: {success: true}
+    else
+      render json: {errors: ['You are not the owner of this order'], status: 401}
+    end
   end
 
 end
