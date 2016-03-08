@@ -23,6 +23,11 @@ appCommon
             Redeemed: 'redeemed',
             Expired: 'expired'
         },
+        OrderStatusList: [
+            {text: 'Active', value: 'active'},
+            {text: 'Redeemed', value: 'redeemed'},
+            {text: 'Expired', value: 'expired'}
+        ],
         awsConfig: {
             accessKey: 'AKIAJTJYUSVTAVCYJIIQ',
             secret: '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',
@@ -33,23 +38,23 @@ appCommon
         },
         OrderSortCriteria: [
             {
-                column: 'created_at',
-                sortOrder: 'ASC',
-                value: 'Created Date (Ascending)'
-            },
-            {
-                column: 'created_at',
-                sortOrder: 'DESC',
-                value: 'Created Date (Descending)'
-            },
-            {
                 column: 'expire_at',
                 sortOrder: 'ASC',
-                value: 'Expiry Date (Ascending)'
+                text: 'Expiry Date (Ascending)'
             },
             {
                 column: 'expire_at',
                 sortOrder: 'DESC',
-                value: 'Expiry Date (Descending)'
+                text: 'Expiry Date (Descending)'
+            },
+            {
+                column: 'created_at',
+                sortOrder: 'ASC',
+                text: 'Created Date (Ascending)'
+            },
+            {
+                column: 'created_at',
+                sortOrder: 'DESC',
+                text: 'Created Date (Descending)'
             }]
     })

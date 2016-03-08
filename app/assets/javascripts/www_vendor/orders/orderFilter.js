@@ -31,7 +31,7 @@ appVendor.factory("OrderFilter", [function() {
             queryString.push("end_date=" + this.endDate);
         }
         if (this.orderStatus) {
-            queryString.push("order_status=" + this.orderStatus);
+            queryString.push("order_status=" + this.orderStatus.value);
         }
         if (this.page) {
             queryString.push("page=" + this.page);

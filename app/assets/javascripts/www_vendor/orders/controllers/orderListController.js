@@ -3,8 +3,9 @@ appVendor.controller("OrderListController", ['$rootScope', '$scope', '$state', '
     function ($rootScope, $scope, $state, States, OrderFilter, OrderService, CommonConstants) {
         $scope.filter = new OrderFilter();
         $scope.sortOptions = CommonConstants.OrderSortCriteria;
-        $scope.OrderStatus = CommonConstants.OrderStatus;
-        $scope.filter.orderStatus = CommonConstants.OrderStatus.Active;
+        $scope.OrderStatus = CommonConstants.OrderStatusList;
+        $scope.filter.orderStatus = CommonConstants.OrderStatusList[0];
+        $scope.filter.sortBy = CommonConstants.OrderSortCriteria[0];
         $scope.filter.page = $scope.filter.page || 1;
         $scope.itemsPerPage = CommonConstants.ItemsPerPage;
 
@@ -36,6 +37,12 @@ appVendor.controller("OrderListController", ['$rootScope', '$scope', '$state', '
         };
 
         $scope.$watch('filter.orderStatus', function(newVal, oldVal) {
+            if (newVal != oldVal) {
+                self.refreshItems();
+            }
+        });
+
+        $scope.$watch('filter.sortBy', function(newVal, oldVal) {
             if (newVal != oldVal) {
                 self.refreshItems();
             }

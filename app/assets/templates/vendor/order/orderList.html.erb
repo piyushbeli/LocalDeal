@@ -35,14 +35,13 @@
         <div class="order-list-container">
           <order-filter-criteria></order-filter-criteria>
           <div class="order-table table-responsive">
-            <table class="table table-hover" border="0">
+            <table st-table="orders"  class="table table-striped table-hover" border="0">
               <thead>
               <tr>
                 <th>S.No.</th>
                 <th>Order No.</th>
-                <th>Customer Name</th>
-                <th>Order Type</th>
-                <th>Expire Date</th>
+                <th st-sort="order.user.name">Customer Name</th>
+                <th st-sort="order.expireAt">Expire Date</th>
                 <th>State</th>
                 <th>View</th>
               </tr>

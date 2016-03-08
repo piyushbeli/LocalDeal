@@ -264,7 +264,7 @@ header { background:#060606; }
 
 
 
-.order_sorting { display:block; vertical-align:middle; margin:25px 0; }
+.order_sorting { display:block; vertical-align:middle; margin:15px 0 5px 0; }
 
 .order-filter-inner {  display:inline-block; vertical-align:middle; margin-right:10px; }
 
@@ -879,7 +879,36 @@ datetimepicker {
     color: red;
 }
 
-.loading-icon {
-    background: url('../images/loading.gif');
+.wrap-dd-select {
+    border-radius: 0px;
+    padding: 7px;
+    width: 222px;
+}
+.wrap-dd-select:after {
+    border-color: #ff5a5f transparent;
+}
+
+.wrap-dd-select .dropdown li a {
+    color: #ff5a5f;
+}
+
+.wrap-dd-select {
+    color: #ff5a5f;
+}
+
+.st-sort-ascent:before {
+    content: '\25B2';
+}
+
+.st-sort-descent:before {
+    content: '\25BC';
+}
+
+.lr-drop-target-before{
+    border-left: 2px solid orange;
+}
+
+.lr-drop-target-after{
+    border-right: 2px solid orange;
 }
 

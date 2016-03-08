@@ -19,6 +19,8 @@
 //= require angular-ui-bootstrap-datetimepicker
 //= require moment
 //= require lodash
+//= require angular-dropdowns
+//= require angular-smart-table
 
 //= require angular-simple-logger
 //= require angular-google-maps
