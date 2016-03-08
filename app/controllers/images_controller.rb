@@ -32,7 +32,7 @@ class ImagesController < ApplicationController
 
     outlet_image = OutletImage.new(url: url, outlet: outlet, uploader: current_member, comment: comment, offer: offer, caption: caption)
     if outlet_image.save
-      render json: {success: true}
+      render json: outlet_image
     else
       render json: {errors: outlet_image.errors.full_messages, status: 422}
     end
@@ -71,13 +71,24 @@ class ImagesController < ApplicationController
       @images = OutletImage.where(:outlet => outlet)
       @images = @images.where(:comment_id => comment_id) unless comment_id.nil?
       @images = @images.where(:offer_id => offer_id) unless offer_id.nil?
-      output = Rabl::Renderer.new('user/images/index', @images).render
+      output = Rabl::Renderer.new('user/outlets/images', @images).render
       CacheService.update_key(key, output)
     end
 
     #Lets not paginate the images, we can fetch all image urls in once.
     #@images = @images.paginate(:per_page => per_page, :page => page)
     render json:output
+  end
+
+  def member_images
+    @images = current_member.outlet_images
+    outlet_id = params[:outlet_id]
+    #In case of vendor outlet id will also come.
+    if outlet_id
+      outlet = Outlet.friendly.find(params[:outlet_id])
+      @images = @images.where(outlet: outlet) unless outlet.nil?
+    end
+    render 'images/index.rabl'
   end
 
 end

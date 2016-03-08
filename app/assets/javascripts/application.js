@@ -28,6 +28,7 @@
 //= require ngstorage
 //= require  angular-loading-bar
 //= require isteven-angular-multiselect
+//= require ng-file-upload
 
 //= require valdr/valdr-message.js
 //= require_tree ./libs

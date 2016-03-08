@@ -40,10 +40,11 @@
     "ngstorage": "~0.3.4",
     "isteven-angular-multiselect": "~4.0.0",
     "angular-simple-logger": "~0.1.5",
-    "lodash": "~3.10.1"
+    "lodash": "~3.10.1",
+    "ng-file-upload": "^12.0.1"
   },
   "resolutions": {
-    "angular": "1.4.7",
+    "angular": ">1.4.7",
     "angular-simple-logger": "~0.1.5"
   }
 }

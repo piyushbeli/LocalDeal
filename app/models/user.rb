@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   #before_create :generate_slug
 
   has_many :comments, as: :commentator
-  has_many :outlet_images, as: :uploader
+  has_many :outlet_images, as: :images
   has_many :orders
   has_many :myfilters
 

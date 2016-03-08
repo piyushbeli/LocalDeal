@@ -9,7 +9,7 @@ appVendor.service("LoginService", ['$auth', '$q', function($auth, $q) {
             })
             .catch(function (response) {
                 deferred.reject(response.errors.join("\n"));
-            })
+            });
         return deferred.promise;
     };
 
@@ -21,7 +21,8 @@ appVendor.service("LoginService", ['$auth', '$q', function($auth, $q) {
             })
             .catch(function (response) {
                 deferred.reject(response.data.errors.full_messages.join("\n"));
-            })
+            });
         return deferred.promise;
-    }
-}])
+    };
+
+}]);

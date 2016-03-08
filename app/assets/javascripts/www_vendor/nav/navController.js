@@ -1,5 +1,5 @@
-appVendor.controller("NavController", ['$scope', '$auth', '$rootScope', '$modal', '$state', '$location', '$window', 'Vendor',
-    function ($scope, $auth, $rootScope, $modal, $state, $location, $window, Vendor) {
+appVendor.controller("NavController", ['$scope', '$auth', '$rootScope', '$modal', '$state', '$location', '$window', 'Vendor', 'NavService',
+    function ($scope, $auth, $rootScope, $modal, $state, $location, $window, Vendor, NavService) {
 
         $rootScope.$on('auth:logout-success', function (e) {
             $rootScope.vendor = null;
@@ -14,6 +14,7 @@ appVendor.controller("NavController", ['$scope', '$auth', '$rootScope', '$modal'
             $state.go('login');
         });
         $rootScope.$on('auth:validation-success', function (e) {
+            $scope.fetchS3Policy();
             $rootScope.vendor = Vendor.build(e.currentScope.user);
         });
         $rootScope.$on('auth:session-expired', function (ev) {

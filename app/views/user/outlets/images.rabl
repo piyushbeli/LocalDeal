@@ -1,5 +1,5 @@
 object @images
-attributes :id, :url, :created_at
+attributes :id, :url, :caption, :created_at
 child :uploader do
     attributes :slug, :name, :image
 end

@@ -1,4 +1,5 @@
-appVendor.service("OutletService", ['$http', '$q', 'Outlet', 'Utils', 'HttpRoutes', function($http, $q, Outlet, Utils, HttpRoutes) {
+appVendor.service("OutletService", ['$http', '$q', 'Outlet', 'Utils', 'HttpRoutes', 'Image', 'CommonHttpRoutes',
+    function($http, $q, Outlet, Utils, HttpRoutes, Image, CommonHttpRoutes) {
     var self = this;
 
     self.saveOutlet = function(outlet) {
@@ -36,6 +37,19 @@ appVendor.service("OutletService", ['$http', '$q', 'Outlet', 'Utils', 'HttpRoute
             })
         return deferred.promise;
 
+    };
+
+    self.fetchOutletImages = function(outlet) {
+        var deferred = $q.defer();
+        $http.get(CommonHttpRoutes.images.format({outlet_id: outlet.id}), {params: {outlet_id: outlet.id}})
+            .then(function (response) {
+                deferred.resolve(Image.build(response.data));
+            })
+            .catch(function(response) {
+                var errorMessage  = (response.data.errors && response.data.errors.join('\n')) || "Error occurred while creating outlet";
+                deferred.reject(errorMessage);
+            });
+        return deferred.promise;
     };
 
     self.newOutlet = function() {

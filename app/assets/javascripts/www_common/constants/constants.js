@@ -11,6 +11,8 @@ appCommon
         OfferTypes: '/offertypes',
         sendOTP: 'send_otp',
         verifyMe: '/verify_me',
+        uploadImage: 'outlets/{outlet_id}/upload/image',
+        images: '/images'
     })
     .constant("CommonConstants", {
         appName: 'LocalDeals',
@@ -20,6 +22,14 @@ appCommon
             Active: 'active',
             Redeemed: 'redeemed',
             Expired: 'expired'
+        },
+        awsConfig: {
+            accessKey: 'AKIAJTJYUSVTAVCYJIIQ',
+            secret: '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',
+            bucketName: 'paylo-images',
+            region: 'us-west-2',
+            imageFolder: 'images',
+            menuFolder: 'menus'
         },
         OrderSortCriteria: [
             {

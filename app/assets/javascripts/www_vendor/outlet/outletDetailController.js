@@ -1,7 +1,7 @@
 appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletService', '$log', 'uiGmapGoogleMapApi',
-    'uiGmapIsReady', 'Utils', 'LocationService', 'outlet', 'States', 'Geocoder', '$state', '$timeout',
+    'uiGmapIsReady', 'Utils', 'LocationService', 'outlet', 'States', 'Geocoder', '$state', '$timeout', 'AwsService', 'UploadImageService',
     function ($scope, $rootScope, OutletService, $log, uiGmapGoogleMapApi, uiGmapIsReady, Utils, LocationService,
-              outlet, States, Geocoder, $state, $timeout) {
+              outlet, States, Geocoder, $state, $timeout, AwsService, UploadImageService) {
         var self = this;
         $scope.outlet = outlet;
         $scope.shouldUseCurrentLocation = false;
@@ -147,6 +147,41 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
                 //self.setMapOnThisCenter(newVal.latitude, newVal.longitude, 6);
             }
         });
+
+        $scope.uploadFiles = function (files) {
+            for (var i=0; i< files.length; i++) {
+                $scope.uploadFile(files[i]);
+            }
+        };
+
+        $scope.uploadFile = function(file) {
+            var entity = {type: 'Outlet', id: $scope.outlet.id};
+            var uploadedBy = {type: 'Vendor', id: $rootScope.vendor.id}
+            AwsService
+                .uploadImagesToS3(file, entity, uploadedBy, 'image')
+                .then(function (url) {
+                    console.log("Uploaded successfully on aws: " + JSON.stringify(url));
+                    return UploadImageService.uploadImage(url, outlet.id);
+                })
+                .then(function(image) {
+                    $scope.outlet.images.push(image);
+                })
+                .catch(function (error) {
+                    console.log("Error while uploading the file: " + error);
+                });
+        };
+
+        $scope.isLoadingImages = true;
+        OutletService.fetchOutletImages($scope.outlet)
+            .then(function (images) {
+                $scope.outlet.images = images;
+            })
+            .catch(function (error) {
+
+            })
+            .finally(function () {
+                $scope.isLoadingImages = false;
+            })
 
         function createAddress() {
             if ($scope.outlet.address) {

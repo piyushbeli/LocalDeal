@@ -879,3 +879,7 @@ datetimepicker {
     color: red;
 }
 
+.loading-icon {
+    background: url('../images/loading.gif');
+}
+

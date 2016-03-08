@@ -57,6 +57,9 @@ Rails.application.routes.draw do
       get 'images' => 'images#outlet_images'
     end
     delete 'images/:image_id' => 'images#delete'
+    get 's3_policy' => 'aws#get_s3_upload_key'
+    #Below route is different then above, it gives you images uploaded by a member
+    get 'images' => 'images#member_images'
 
     resources :comments, only: [] do
       resources :comments, only: [:index, :create, :update, :destroy]
