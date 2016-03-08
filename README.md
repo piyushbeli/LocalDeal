@@ -102,5 +102,60 @@ https://www.digitalocean.com/community/tutorials/how-to-install-rails-and-nginx-
 12) To Run the scheduled job
 run this command from project root 'whenever --set environment=development --write-crontab'
 
+13) Setup s3 buclet for image upload
+Login to ec2 account.
+Create a new s3 bucket with name 'paylo-images'
+Add below cors configuration for this
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+    <CORSRule>
+        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedMethod>GET</AllowedMethod>
+        <AllowedMethod>PUT</AllowedMethod>
+        <AllowedMethod>POST</AllowedMethod>
+        <MaxAgeSeconds>3000</MaxAgeSeconds>
+        <AllowedHeader>*</AllowedHeader>
+    </CORSRule>
+</CORSConfiguration>
+
+For production specify the domain name correctly instead of *
+
+Now create 2 IAM users. 
+a) FileUpload
+b) FileDelete
+
+Create 2 policies
+a) FileUploadPolicy
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1457251635774",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:s3:::paylo-images/*"
+        }
+    ]
+}
+b) FileDeletePolicy
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1457251635774",
+            "Action": [
+                "s3:DeleteObject"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:s3:::paylo-images/*"
+        }
+    ]
+}
+
+Assign the policy to corresponding IAM user permission.
+
 
 

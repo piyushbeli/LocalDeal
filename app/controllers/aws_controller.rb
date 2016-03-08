@@ -3,8 +3,8 @@ class AwsController < ApplicationController
 
   def get_s3_upload_key()
     bucket = ENV['S3_BUCKET_NAME']
-    access_key = ENV['S3_ACCESS_KEY']
-    secret = ENV['S3_SECRET_ACCESS_KEY']
+    access_key = ENV['S3_UPLOAD_ACCESS_KEY']
+    secret = ENV['S3_UPLOAD_SECRET_ACCESS_KEY']
     expiration = 5.minutes.from_now.utc.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     max_filesize = 10.megabytes
     acl = 'public-read'
