@@ -17,7 +17,7 @@ appCommon.service('AwsService', ['CommonConstants', '$q', function (CommonConsta
             ServerSideEncryption: 'AES256'
         };
         deferred.resolve(createS3ResourceUrl(key));
-        /*s3BucketImages
+        s3BucketImages
             .putObject(params, function (err, data) {
                 if (err) {
                     // There Was An Error With Your S3 Config
@@ -31,7 +31,7 @@ appCommon.service('AwsService', ['CommonConstants', '$q', function (CommonConsta
             .on('httpUploadProgress', function (progress) {
                 // Log Progress Information
                 console.log(Math.round(progress.loaded / progress.total * 100) + '% done');
-            });*/
+            });
 
         return deferred.promise;
     };
