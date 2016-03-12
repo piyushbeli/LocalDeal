@@ -5,7 +5,6 @@ appVendor.controller("LoginController", ['$scope', '$rootScope', '$state', 'Cons
         $scope.isRegistrationSuccessful = false;
 
         if ($auth.userIsAuthenticated()) {
-            $scope.fetchS3Policy();
             $state.go(Constants.landingState);
         }
 
@@ -43,7 +42,6 @@ appVendor.controller("LoginController", ['$scope', '$rootScope', '$state', 'Cons
         //Register for events
         $rootScope.$on('auth:login-success', function (e) {
             $rootScope.vendor = e.currentScope.user;
-            $scope.fetchS3Policy();
             $state.go(Constants.landingState);
         });
         $rootScope.$on('auth:logout-success', function (e) {

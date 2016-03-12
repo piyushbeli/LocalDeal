@@ -119,4 +119,14 @@ class User::OutletsController < ApplicationController
     end
   end
 
+  def offer_count_by_categories
+    offer_deal_join = Offer.joins(deal: {vendor: {category: {}}})
+    data = offer_deal_join.select('categories.id, categories.name, count(offers.id) as no_of_offers ').group('categories.id')
+    result = {}
+    data.each do |key, values|
+      result[key] = values
+    end
+    render json: {data: count, success: true}
+  end
+
 end

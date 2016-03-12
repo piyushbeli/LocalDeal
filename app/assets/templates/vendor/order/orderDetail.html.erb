@@ -1,4 +1,4 @@
-<div class="row">
+<!--<div class="row">
   <div class="col col-md-4">
     <div><label>{{order.user.name}}</label></div>
     <div>{{order.user.email}} | {{order.user.mobile}}</div>
@@ -22,4 +22,86 @@
   </ul>
   <label>Instructions</label>
   <span>{{order.instruction}}</span>
-</div>
+</div>-->
+
+<article>
+  <div class="container">
+    <div class="row">
+      <section class="inner-container">
+        <div class="col-lg-12">
+          <div class="main-heading">
+            <h2><span class="fa fa-file-text-o"></span> Order No <strong>{{order.orderNo}}</strong></h2>
+          </div>
+        </div>
+
+        <!-- customer info -->
+        <div class="abt-container">
+          <div class="col-lg-6 col-sm-6">
+            <div class="order-box">
+              <h3>Customer Detals</h3>
+              <ul class="list-unstyled cust-det-list">
+                <li><i class="fa fa-user"></i>{{order.user.name}}</li>
+                <li><i class="fa fa-phone"2></i>{{order.user.mobile}}</li>
+                <li><i class="fa fa-envelope-o"></i><a href="mailto:piyush.beli@gmail.com">{{order.user.email}}</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Deal date info -->
+          <div class="col-lg-6 col-sm-6">
+            <div class="order-box">
+              <h3>Deal Details</h3>
+
+              <ul class="list-unstyled deal-det-list">
+                <li>
+                  <span class="left">Bought On:</span>
+                  <span class="right">{{order.createdAt | datetime}}</span>
+                </li>
+                <li>
+                  <span class="left">Redeemed On:</span>
+                  <span class="right" ng-if="order.isRedeemed()">{{order.redeemedAt | datetime}}</span>
+                  <span class="right">Not Redeemed</span>
+                </li>
+                <li>
+                  <span class="left" ng-if="order.isExpired()">Expired:</span>
+                  <span class="left" ng-if="!order.isExpired()">Expires:</span>
+                  <span class="right">{{order.expiresIn()}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <!-- Offer fineprints -->
+          <div class="col-lg-12 col-sm-12">
+            <div class="order-box">
+              <h3>Offer Details</h3>
+              <div class="offer-left">
+                <h4>{{order.whatYouGet}}</h4>
+                <span>Fine prints:</span>
+                <ul class="offer-det-list">
+                  <li ng-repeat="finePrint in order.finePrints">
+                    {{finePrint}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+          <!-- Instructions -->
+          <div class="col-lg-12 col-sm-12">
+            <div class="order-box">
+              <h3>Instructions</h3>
+              <div class="offer-left">
+                <span>{{order.instruction || 'Nothing Mentioned'}} </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+</article>

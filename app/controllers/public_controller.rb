@@ -17,4 +17,8 @@ class PublicController < ApplicationController
       render :json=> {errors: ["vendor not found"], status: 404}
   end
 
+  def heartbeat
+    render json: {success: true}
+  end
+
 end

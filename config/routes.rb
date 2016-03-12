@@ -95,9 +95,10 @@ Rails.application.routes.draw do
 
   #Reference data which does not require any authentication and common for all roles
   get '/categories' => 'reference_data#categories'
-  get 'subcategories/:category_id' => 'reference_data#sub_categories'
-  get 'offertypes' => 'reference_data#offer_types'
-  get 'companysetting' => 'company_setting#show'
+  get '/subcategories/:category_id' => 'reference_data#sub_categories'
+  get '/offertypes' => 'reference_data#offer_types'
+  get '/companysetting' => 'company_setting#show'
+  get '/offer_count_by_categories' => 'user/outlets#offer_count_by_categories'
 
   #************APIs which does not require the login*************
   #Free text search for outlets, deals and offers
@@ -106,6 +107,7 @@ Rails.application.routes.draw do
   #Show user's public profile
   get 'public//user/:slug' => 'public#user'
   get 'public/vendor/:slug' => 'public#vendor'
+  get '/heartbeat' => 'public#heartbeat'
 
 
   # You can have the root of your site routed with "root"

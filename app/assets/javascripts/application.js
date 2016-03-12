@@ -33,5 +33,4 @@
 //= require ng-file-upload
 
 //= require valdr/valdr-message.js
-//= require_tree ./libs
 //= require_tree ./www_common

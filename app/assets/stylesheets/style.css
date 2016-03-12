@@ -442,7 +442,7 @@ header { background:#060606; }
 
 .offer-left h4, .offer-right h4 { font-size:16px; font-family: 'Open Sans', sans-serif; margin:0; margin-bottom:10px; font-weight:600; }
 
-.offer-left span, .offer-right span { font-size:14px; font-family: 'Open Sans', sans-serif; margin-bottom:10px; float:left; width:100%; }
+.offer-left span, .offer-right span { font-size:14px; font-family: 'Open Sans', sans-serif; margin-bottom:10px; width:100%; }
 
 .offer-left ol, .offer-right ol { padding-left:40px; }
 

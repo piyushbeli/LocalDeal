@@ -134,7 +134,7 @@
         </div>
         <h3>Photos:</h3>
         <hr>
-        <button ngf-select="uploadFiles($files)" multiple accept="image/*">Add photo</button>
+        <button ngf-select="uploadFiles($files)" multiple accept="image/*" ngf-max-size="7MB" ngf-resize="{width: 200, height: 200}">Add photo</button>
 
         <div class="col-lg-12">
           <div ng-repeat="image in outlet.images">

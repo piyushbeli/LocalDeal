@@ -164,7 +164,9 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
                     return UploadImageService.uploadImage(url, outlet.id);
                 })
                 .then(function(image) {
-                    $scope.outlet.images.push(image);
+                    $timeout(function() {
+                        $scope.outlet.images.push(image);
+                    }, 500);
                 })
                 .catch(function (error) {
                     console.log("Error while uploading the file: " + error);
