@@ -1,4 +1,5 @@
 class User::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
+  rescue_from Koala::Facebook::AuthenticationError, :with => :facebook_exception_handler
 
   def mobile_signin
     provider = request.params[:provider]
@@ -30,6 +31,15 @@ class User::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCont
 
   def google_login
     access_token = ''
+  end
+
+
+  def facebook_exception_handler exception
+    if exception.fb_error_type.eql? 'OAuthException'
+      render json: {success: false, status: 401, errors: ['Access token is expired']}
+    else
+      render json: {success: false, status: 401, errors: ['Unexpected error has occurred']}
+    end
   end
 
   def render_data_or_redirect(message, data)
