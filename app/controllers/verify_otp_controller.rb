@@ -3,8 +3,8 @@ include Plivo
 
 class VerifyOtpController < ApplicationController
 
-  devise_token_auth_group :member, contains: [:user, :vendor]
-  before_action :authenticate_member!, :set_otp_key
+  include CommonResourceController
+  before_action :set_otp_key, except: []
 
   def set_otp_key
     @OTP_KEY = 'otp-' + current_member.class.name + '-' + current_member.id.to_s
@@ -71,8 +71,8 @@ class VerifyOtpController < ApplicationController
               'text' => otp.to_s + ' is your OTP for verification. Team \n Paylow',
               'type' => 'sms',
     }
-    #response = p.send_message(params)
-    response = [202]
+    response = p.send_message(params)
+    #response = [202]
     if response[0] != 202
       render :json => {'success': false, message: response[1]['error'].to_s}
       return
