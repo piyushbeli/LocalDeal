@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     post 'categories/favorite' => 'user/users#update_favorite_categories'
     delete 'categories/:category_id/favorite' => 'user/users#remove_favorite_category'
     post 'outlets/:outlet_id/rate' => 'user/users#update_outlet_rating'
+    delete 'outlets/:outlet_id/clear_rating' => 'user/users#clear_outlet_rating'
     post 'follow/:user_id' => 'user/users#follow_user'
     delete 'unfollow/:user_id' => 'user/users#unfollow_user'
     get 'filters' => 'user/users#filters'

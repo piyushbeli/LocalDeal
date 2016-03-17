@@ -46,7 +46,7 @@ class User::OutletsController < ApplicationController
       street_location = street
     end
     @outlets = Outlet.verified_vendors
-    @outlets = @outlets.within(distance, :origin => street_location)
+    @outlets = @outlets.within(distance, :origin => street_location) unless street_location.nil?
     @outlets = @outlets.by_category(category_id) unless category_id.nil?
     @outlets = @outlets.by_sub_categories(subcategory_ids) unless subcategory_ids.nil?
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
@@ -111,9 +111,6 @@ class User::OutletsController < ApplicationController
 
 
   def validateCriteria
-    if params[:street_location].nil? && params[:street].blank?
-      render json:{errors: ['Invalid criteria: Either street name or lat/lng is required']}, status: 422
-    end
     if params[:subcategory_ids] && params[:category_id].nil?
       render json: {errors: ['Please select a category before filtering on subcategory']}, status: 422
     end
@@ -126,7 +123,7 @@ class User::OutletsController < ApplicationController
     data.each do |key, values|
       result[key] = values
     end
-    render json: {data: count, success: true}
+    render json: {data: result, success: true}
   end
 
 end

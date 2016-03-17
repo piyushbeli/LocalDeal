@@ -1,3 +1,6 @@
+
+
+
 class User::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   rescue_from Koala::Facebook::AuthenticationError, :with => :facebook_exception_handler
 
@@ -9,8 +12,8 @@ class User::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCont
       google_login
     end
     omniauth_success
-    set_user_by_token
-    update_auth_header
+    #set_user_by_token
+    #update_auth_header
   end
 
   def facebook_login
@@ -30,7 +33,22 @@ class User::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCont
   end
 
   def google_login
-    access_token = ''
+    client_id = ENV['GOOGLE_KEY']
+    client_secret = ENV['GOOGLE_SECRET']
+    options = {}
+    options['client_id'] = client_id
+    options['client_secret'] = client_secret
+    #option :client_id, client_id
+    #option :client_secret, client_secret
+
+    google_oauth_s = OmniAuth::Strategies::CustomGoogleOauth2.new({})
+    verifier = request.params['code']
+    #google_oauth_s.client.auth_code.get_token(verifier, { :redirect_uri => 'postmessage'}.merge(google_oauth_s.token_params.to_hash(:symbolize_keys => true)),
+    #                                          google_oauth_s.deep_symbolize(google_oauth_s.options.auth_token_params || {}))
+    google_oauth_s.custom_build_access_token(verifier)
+    session['dta.omniauth.auth'] = request.env['omniauth.auth'].except('extra')
+    session['dta.omniauth.params'] = request.env['omniauth.params']
+    params['resource_class'] = 'User'
   end
 
 
@@ -42,7 +60,7 @@ class User::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCont
     end
   end
 
-  def render_data_or_redirect(message, data)
+  def render_data_or_redirect(message, data, user_data = {})
     # We handle inAppBrowser and newWindow the same, but it is nice
     # to support values in case people need custom implementations for each case
     # (For example, nbrustein does not allow new users to be created if logging in with
@@ -52,9 +70,9 @@ class User::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCont
     # why we can handle these both the same.  The view is setup to handle both cases
     # at the same time.
     if request.params['app_req']
-      render :json => data
+      render :json => user_data.merge(data)
     elsif ['inAppBrowser', 'newWindow'].include?(omniauth_window_type)
-      render_data(message, data)
+      render_data(message, user_data.merge(data))
 
     elsif auth_origin_url # default to same-window implementation, which forwards back to auth_origin_url
 

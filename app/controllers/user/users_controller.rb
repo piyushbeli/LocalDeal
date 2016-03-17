@@ -76,6 +76,13 @@ class User::UsersController < ApplicationController
     end
   end
 
+  def clear_outlet_rating
+    dimension = 'service'
+    outlet = Outlet.friendly.find(params[:outlet_id])
+    outlet.clear_rating current_user, dimension
+    render json: {success: true}
+  end
+
   def follow_user
     user = User.friendly.find(params[:user_id])
     if user == current_user

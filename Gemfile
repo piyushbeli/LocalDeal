@@ -70,6 +70,7 @@ gem 'redis'
 gem 'redis-namespace'
 gem 'redis-rails'
 gem 'redis-rack-cache'
+gem 'google-api-client', '0.9'
 
 group :production do
   gem 'passenger' #will be used as a webserver in production
