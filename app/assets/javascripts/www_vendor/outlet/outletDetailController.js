@@ -173,6 +173,10 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
                 });
         };
 
+        $scope.uploadProfilePic = function(file) {
+
+        };
+
         $scope.isLoadingImages = true;
         OutletService.fetchOutletImages($scope.outlet)
             .then(function (images) {

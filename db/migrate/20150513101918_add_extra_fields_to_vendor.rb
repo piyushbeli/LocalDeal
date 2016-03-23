@@ -10,6 +10,7 @@ class AddExtraFieldsToVendor < ActiveRecord::Migration
     add_column :vendors, :google_plus_page, :string
     add_column :vendors, :twitter_page, :string
     add_column :vendors, :instagram_page, :string
+    add_column :vendors, :profile_pic, :string
     add_foreign_key :vendors, :categories
   end
 end

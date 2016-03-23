@@ -14,7 +14,7 @@ appCommon.factory('customValidator', function () {
         validate: function (value, arguments) {
             // value: the value to validate
             // arguments: the validator arguments
-            return !isNaN(value);
+            return value && !isNaN(value);
         }
     };
 });

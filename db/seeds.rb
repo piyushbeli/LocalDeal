@@ -1,14 +1,12 @@
 Category.create!([
-  {name: "Food", slug: "food"},
-  {name: "Beauty and Wellness", slug: "beauty-and-wellness"},
-  {name: "Travel", slug: "travel"},
-  {name: "Grocery", slug: "grocery"}
+  {name: "Food", slug: "food" , 'image-url': 'https://s3-us-west-2.amazonaws.com/paylo-images/images/categories/food.jpg'},
+  {name: "Beauty and Wellness", slug: "beauty-and-wellness", 'image-url': 'https://s3-us-west-2.amazonaws.com/paylo-images/images/categories/spa+and+saloon.jpg'},
+  {name: "Travel", slug: "travel", 'image-url': 'https://s3-us-west-2.amazonaws.com/paylo-images/images/categories/outdoor.jpg'},
 ])
 FriendlyId::Slug.create!([
   {slug: "food", sluggable_id: 1, sluggable_type: "Category", scope: nil},
   {slug: "beauty-and-wellness", sluggable_id: 2, sluggable_type: "Category", scope: nil},
   {slug: "travel", sluggable_id: 3, sluggable_type: "Category", scope: nil},
-  {slug: "grocery", sluggable_id: 4, sluggable_type: "Category", scope: nil}
 ])
 OfferType.create!([
   {name: "FIXED_PERCENT", description: "Flat percentage doscount on total bill"},

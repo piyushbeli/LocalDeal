@@ -17,6 +17,7 @@ class CreateOutlets < ActiveRecord::Migration
       t.string :slug, null:false
       t.string :mobile, limit:10, null:false
       t.string :contact_no, limit:11
+      t.string :profile_pic
       t.integer :no_of_followers
       t.integer :no_of_comments
       t.timestamps null: false

@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     resources :outlets, only: [] do
       resources :comments, only: [:index, :show, :create, :update, :destroy, :like, :spam]
       post 'upload/image' => 'images#upload'
-      get 'images' => 'images#outlet_images'
+      get 'images' => 'user/outlets#outlet_images'
     end
     delete 'images/:image_id' => 'images#delete'
     get 's3_policy' => 'aws#get_s3_upload_key'

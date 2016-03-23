@@ -42,8 +42,12 @@ class User::OutletsController < ApplicationController
     per_page = per_page  || Rails.configuration.x.per_page
 
     #Check if street location which has lat/lng is nil then street (text) is available, in this case there will an additional step to geocode the address
-    if street_location.nil? && !street.blank?
-      street_location = street
+    if street_location.nil?
+      if !street.blank?
+        street_location = street
+      else
+        street_location = current_location
+      end
     end
     @outlets = Outlet.verified_vendors
     @outlets = @outlets.within(distance, :origin => street_location) unless street_location.nil?
@@ -119,11 +123,31 @@ class User::OutletsController < ApplicationController
   def offer_count_by_categories
     offer_deal_join = Offer.joins(deal: {vendor: {category: {}}})
     data = offer_deal_join.select('categories.id, categories.name, count(offers.id) as no_of_offers ').group('categories.id')
-    result = {}
-    data.each do |key, values|
-      result[key] = values
+    render json: {data: data, success: true}
+  end
+
+  def outlet_images
+    outlet_id = params[:outlet_id]
+    outlet = Outlet.friendly.find(outlet_id)
+    comment_id = params[:comment_id]
+    offer_id = params[:offer_id]
+    key = 'Outlet-' + outlet.slug + '-images'
+    key = (key + '-offer-' + offer_id.to_s) unless offer_id.nil?
+    key = (key + '-comment-' + comment_id.to_s) unless comment_id.nil?
+    output = CacheService.fetch_key(key)
+    #per_page = params[:per_page] || Rails.configuration.x.per_page
+    #page = params[:page] || 1
+    if output.nil?
+      @images = OutletImage.where(:outlet => outlet)
+      @images = @images.where(:comment_id => comment_id) unless comment_id.nil?
+      @images = @images.where(:offer_id => offer_id) unless offer_id.nil?
+      output = Rabl::Renderer.new('user/outlets/images', @images).render
+      CacheService.update_key(key, output)
     end
-    render json: {data: result, success: true}
+
+    #Lets not paginate the images, we can fetch all image urls in once.
+    #@images = @images.paginate(:per_page => per_page, :page => page)
+    render json:output
   end
 
 end
