@@ -1,5 +1,5 @@
 object @outlet
-attributes :name, :city, :street, :slug, :address, :no_of_comments, :latitude, :longitude
+attributes :id, :name, :city, :street, :slug, :address, :no_of_comments, :latitude, :longitude
 child(:vendor) do
     attributes :name, :slug
     node :spammed do
@@ -9,7 +9,10 @@ end
 child(:deals) do
     attributes :title, :slug
     child :offers do |offer|
-        attributes :id, :what_you_get, :fine_print, :instruction, :start_at, :expire_at, :limit_reached?, :total_no_of_orders, :is_expired?, :coupons_remaining
+        attributes :id, :what_you_get, :fine_print, :instruction, :start_at, :expire_at, :limit_reached?, :total_no_of_orders, :coupons_remaining
+        node :is_expired do
+            |offer| offer.is_expired?
+        end
     end
 end
 

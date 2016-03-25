@@ -88,6 +88,10 @@ class Outlet < ActiveRecord::Base
                  })
   end
 
+  def detail_json
+    outlet_json = Rabl::Renderer.new('user/outlets/show', self).render
+  end
+
   def update_outlet
     CacheService.update_entity(self, true)
   end

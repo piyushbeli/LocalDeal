@@ -8,7 +8,9 @@ class CacheService
 
   def self.add_entity(entity, is_friendly)
     key = create_entity_key(entity, is_friendly)
-    Rails.cache.write(key, MultiJson.dump(entity))
+    val = entity.detail_json
+    Rails.cache.write(key,val)
+    return val
   end
 
   def self.delete_entity(entity, is_friendly)
@@ -19,19 +21,15 @@ class CacheService
   def self.update_entity(entity, is_friendly)
     key = create_entity_key(entity, is_friendly)
     Rails.cache.delete(key)
-    Rails.cache.write(key, MultiJson.dump(entity))
+    val = entity.detail_json
+    Rails.cache.write(key, val)
   end
 
   def self.fetch_entity(class_name, id)
     key = class_name + '-' + id
     key = key.upcase
     val = Rails.cache.fetch(key)
-    if val
-      #return MultiJson.load(val)
-      return class_name.constantize.new.from_json(val)
-    else
-      return nil
-    end
+    return val
   end
 
   def self.update_key(key, newVal)

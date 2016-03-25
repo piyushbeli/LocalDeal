@@ -66,6 +66,9 @@ class Vendor::DealsController < ApplicationController
     begin
       @deal.outlets << outlets
       @deal.save
+      outlets.each do |outlet|
+        outlet.update_outlet
+      end
     rescue ActiveRecord::RecordInvalid
       render json: {errors: ["Error occurred while adding the outlet"]}, status: 422
       return

@@ -1,5 +1,6 @@
 require 'json'
 class User::OutletsController < ApplicationController
+  devise_token_auth_group :member, contains: [:user, :god]
   before_action :validateCriteria, only: [:index]
   respond_to :json
 
@@ -97,20 +98,25 @@ class User::OutletsController < ApplicationController
     #It's a hack over devise, can not make this route authenticated because it can be accessed by unauthenticated guys
     #also, calling authenticate_user! will render an error message so hacked those from authenticate_user! method
     set_user_by_token(:user)
-    @current_user = current_user
     outlet = CacheService.fetch_entity('Outlet', params[:id])
     if outlet.nil?
-      @outlet = Outlet.includes(:deals, :vendor).friendly.find(params[:id])
-      CacheService.add_entity(@outlet, true)
+      outlet = Outlet.includes(:deals, :vendor).friendly.find(params[:id])
+      outlet = CacheService.add_entity(outlet, true)
     else
-      puts 'outlet from cache: ' + outlet.slug
-      @outlet = outlet
+      puts 'outlet from cache: ' + params[:id]
     end
+    outlet = JSON.parse(outlet)
 
     current_location =  params[:current_location]
-    #Can not use distance name because that is internally used by order_by_distance query.
-    @outlet.distance_from_current_loc = @outlet.distance_from(current_location, :units => :kms) unless current_location.nil?
-    render 'user/outlets/show'
+    current_geo_code = Geokit::Geocoders::GoogleGeocoder.geocode(current_location)
+    outlet_geo_code = Geokit::Geocoders::GoogleGeocoder.geocode([outlet['latitude'], outlet['longitude']].join(','))
+    distance_from_current_loc = current_geo_code.distance_to(outlet_geo_code)
+    outlet_instance = Outlet.new({id: outlet['id']})
+    current_user_rating = outlet_instance.user_rating(current_user) unless current_user.nil?
+    outlet['distance'] = distance_from_current_loc
+    outlet['user_rating'] = current_user_rating
+    outlet['marked_as_favorite'] = outlet_instance.marked_as? :favorite, :by => current_user unless current_user.nil?
+    render json: outlet
   end
 
 
