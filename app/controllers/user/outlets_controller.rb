@@ -128,8 +128,20 @@ class User::OutletsController < ApplicationController
 
   def offer_count_by_categories
     offer_deal_join = Offer.joins(deal: {vendor: {category: {}}})
-    data = offer_deal_join.select('categories.id, categories.name, count(offers.id) as no_of_offers ').group('categories.id')
-    render json: {data: data, success: true}
+    offer_count_by_category = offer_deal_join.select('categories.id, categories.name, count(offers.id) as no_of_offers ').group('categories.id')
+    all_categories = Category.all.as_json
+    offer_count_by_category = offer_count_by_category.as_json
+    offer_count_by_category_map = {}
+    offer_count_by_category.each do |offer_count|
+      offer_count_by_category_map[offer_count['name']] = offer_count['no_of_offers']
+    end
+    result = []
+    all_categories.each do |category|
+      category = category.except('id', 'subcategories')
+      category['offer_count'] = offer_count_by_category_map[category['name']] || 0
+      result.push(category)
+    end
+    render json: {data: result, success: true}
   end
 
   def outlet_images
