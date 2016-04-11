@@ -69,6 +69,29 @@ class Outlet < ActiveRecord::Base
     self.raters("service").count
   end
 
+  def offers_summary
+    all_deals = self.deals.includes('offers')
+    total_bought_offers = 0
+    total_offers_remaining = 0
+    best_discounted_offer = {}
+
+    all_deals.each do |deal|
+      offers = deal.offers.includes('orders')
+      best_discounted_offer = offers[0]
+      offers.each do |offer|
+        best_discounted_offer = offer unless best_discounted_offer.discount > offer.discount
+        total_bought_offers += offer.orders.count
+        total_offers_remaining += offer.max_no_of_coupons
+      end
+    end
+    summary = {
+        total_bought_offers: total_bought_offers,
+        total_offers_remaining: total_offers_remaining,
+        best_offer: best_discounted_offer.as_json.extract!('discount', 'actual_price', 'offered_price')
+    }
+    return summary
+  end
+
   def self.search(query)
     __elasticsearch__.search(
         {

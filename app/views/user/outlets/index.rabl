@@ -17,6 +17,12 @@ child @outlets => :items do
   node :profile_pic do |outlet|
       outlet.vendor.image
   end
+  node :no_of_images do |outlet|
+    outlet.outlet_images.count
+  end
+  node :offers_summary do |outlet|
+    outlet.offers_summary
+  end
 end
 
 node :total_items do

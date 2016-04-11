@@ -19,7 +19,7 @@ class CreateOutlets < ActiveRecord::Migration
       t.string :contact_no, limit:11
       t.string :profile_pic
       t.integer :no_of_followers
-      t.integer :no_of_comments
+      t.integer :no_of_comments, default: 0
       t.timestamps null: false
     end
     add_index :outlets, [:latitude, :longitude]
