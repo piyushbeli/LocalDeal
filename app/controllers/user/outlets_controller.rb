@@ -57,6 +57,7 @@ class User::OutletsController < ApplicationController
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
     @total_items = @outlets.count('*')
     @outlets = @outlets.paginate(:page => page, :per_page => per_page)
+    @current_user = current_user
     render 'user/outlets/index'
   end
 
