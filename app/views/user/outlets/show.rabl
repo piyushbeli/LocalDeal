@@ -38,3 +38,7 @@ end
 node(:no_of_raters) do |outlet|
   outlet.no_of_raters
 end
+
+node(:images) do |outlet|
+    outlet.outlet_images.select(:id, :url).limit(3)
+end

@@ -7,6 +7,9 @@ class User::OutletsController < ApplicationController
   def index
     do_save = params[:save]
     category_id = params[:category_id]
+    if params[:category]
+      category_id = Category.friendly.find(params[:category])['id']
+    end
     subcategory_ids = params[:subcategory_ids]
 
     #For distance query
@@ -101,7 +104,7 @@ class User::OutletsController < ApplicationController
     set_user_by_token(:user)
     outlet = CacheService.fetch_entity('Outlet', params[:id])
     if outlet.nil?
-      outlet = Outlet.includes(:deals, :vendor).friendly.find(params[:id])
+      outlet = Outlet.includes(:deals, :vendor, :outlet_images).friendly.find(params[:id])
       outlet = CacheService.add_entity(outlet, true)
     else
       puts 'outlet from cache: ' + params[:id]

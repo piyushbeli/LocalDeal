@@ -92,6 +92,7 @@ class Outlet < ActiveRecord::Base
     return summary
   end
 
+
   def self.search(query)
     __elasticsearch__.search(
         {
