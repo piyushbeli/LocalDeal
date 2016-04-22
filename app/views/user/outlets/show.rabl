@@ -40,5 +40,9 @@ node(:no_of_raters) do |outlet|
 end
 
 node(:images) do |outlet|
-    outlet.outlet_images.select(:id, :url).limit(3)
+    outlet.outlet_images.select(:id, :url).limit(5)
+end
+
+node(:total_images) do |outlet|
+    outlet.outlet_images.count
 end
