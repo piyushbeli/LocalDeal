@@ -9,7 +9,7 @@ class User::SearchController < ApplicationController
 
       outlets = outlets.map do |outlet|
         outlet = outlet['_source']
-        {id: outlet['id'], type: 'Outlet', name: outlet['name']}
+        {slug: outlet['slug'], type: 'Outlet', name: outlet['name']}
       end
       deals = deals.map do |deal|
         deal = deal['_source']
