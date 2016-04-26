@@ -108,7 +108,7 @@ class Outlet < ActiveRecord::Base
 
   def as_indexed_json(options={})
     self.as_json({
-                     only: [:name, :id]
+                     only: [:name, :id, :slug]
                  })
   end
 
