@@ -1,5 +1,5 @@
 object @outlet
-attributes :id, :name, :city, :street, :slug, :address, :no_of_comments, :latitude, :longitude
+attributes :id, :name, :city, :street, :slug, :address, :no_of_comments, :latitude, :longitude, :mobile, :contact_no, :email
 child(:vendor) do
     attributes :name, :slug
     node :spammed do
