@@ -54,7 +54,7 @@ class User::OutletsController < ApplicationController
       end
     end
     @outlets = Outlet.verified_vendors
-    @outlets = @outlets.within(distance, :origin => street_location) unless street_location.nil? && distance.nil?
+    @outlets = @outlets.within(distance, :origin => street_location) unless (street_location.nil? || distance.nil?)
     @outlets = @outlets.by_category(category_id) unless category_id.nil?
     @outlets = @outlets.by_sub_categories(subcategory_ids) unless subcategory_ids.nil?
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
