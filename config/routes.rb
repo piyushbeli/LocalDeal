@@ -56,11 +56,14 @@ Rails.application.routes.draw do
       resources :comments, only: [:index, :show, :create, :update, :destroy, :like, :spam]
       post 'upload/image' => 'images#upload'
       get 'images' => 'user/outlets#outlet_images'
+      get 'menus' => 'user/outlets#outlet_menus'
+      post 'upload/menu' => 'images#upload_menu'
     end
     delete 'images/:image_id' => 'images#delete'
     get 's3_policy' => 'aws#get_s3_upload_key'
     #Below route is different then above, it gives you images uploaded by a member
     get 'images' => 'images#member_images'
+    get 'menus' => 'images#member_menus'
 
     resources :comments, only: [] do
       resources :comments, only: [:index, :create, :update, :destroy]
@@ -77,7 +80,9 @@ Rails.application.routes.draw do
   devise_scope :vendor do
     get '/vendor' => 'application#vendor'
     namespace :vendor do
-      resources :outlets, only: [:create, :update, :destroy, :index, :show]
+      resources :outlets, only: [:create, :update, :destroy, :index, :show] do
+        post 'upload/menu' => 'images#upload_menu'
+      end
       resources :deals, only: [:create, :update, :destroy, :index, :show] do
         resources :offers, only: [:create, :update, :destroy]
         resources :comments, only: [:create, :update, :destroy, :index]

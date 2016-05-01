@@ -142,9 +142,9 @@ header { background:#060606; }
 
 .main-heading h2 strong { color:#000; font-weight:inherit; }
 
-.gen-btn { width:100%; flaot:left; text-align:right; }
+.gen-btn, { width:100%; flaot:left; text-align:right; }
 
-.gen-btn a{ float:right; background:#ff5a5f; font-family: 'Open Sans', sans-serif; color:#FFF; padding:5px 15px; text-decoration:none; border-bottom:3px solid #e93137; text-transform:uppercase; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+.gen-btn a { float:right; background:#ff5a5f; font-family: 'Open Sans', sans-serif; color:#FFF; padding:5px 15px; text-decoration:none; border-bottom:3px solid #e93137; text-transform:uppercase; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
 
 .gen-btn a:hover { background:#e93137; }
 
@@ -403,6 +403,15 @@ header { background:#060606; }
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.add-photo {
+    margin-bottom: 20px;
+    float: left;
+}
+
+.photos {
+    margin-bottom: 50px;
 }
 
 /******** Outlet Detail Page Ends **********/

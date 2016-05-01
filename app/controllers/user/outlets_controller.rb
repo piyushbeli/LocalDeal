@@ -15,7 +15,7 @@ class User::OutletsController < ApplicationController
     #For distance query
     current_location = params[:current_location]
     show_only_near_by = params[:show_only_near_by]
-    near_by_distance = params[:near_by_distance] || 2
+    near_by_distance = params[:near_by_distance]
     #If user is searching by some particular locality
     street_location = params[:street_location]
     street = params[:street]
@@ -54,7 +54,7 @@ class User::OutletsController < ApplicationController
       end
     end
     @outlets = Outlet.verified_vendors
-    @outlets = @outlets.within(distance, :origin => street_location) unless street_location.nil?
+    @outlets = @outlets.within(distance, :origin => street_location) unless street_location.nil? && distance.nil?
     @outlets = @outlets.by_category(category_id) unless category_id.nil?
     @outlets = @outlets.by_sub_categories(subcategory_ids) unless subcategory_ids.nil?
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
@@ -156,7 +156,9 @@ class User::OutletsController < ApplicationController
     key = 'Outlet-' + outlet.slug + '-images'
     key = (key + '-offer-' + offer_id.to_s) unless offer_id.nil?
     key = (key + '-comment-' + comment_id.to_s) unless comment_id.nil?
-    output = CacheService.fetch_key(key)
+    #TODO: For now lets not cache the outlet images
+    output = nil
+    #output = CacheService.fetch_key(key)
     #per_page = params[:per_page] || Rails.configuration.x.per_page
     #page = params[:page] || 1
     if output.nil?
@@ -169,6 +171,21 @@ class User::OutletsController < ApplicationController
 
     #Lets not paginate the images, we can fetch all image urls in once.
     #@images = @images.paginate(:per_page => per_page, :page => page)
+    render json:output
+  end
+
+  def outlet_menus
+    outlet_id = params[:outlet_id]
+    outlet = Outlet.friendly.find(outlet_id)
+    key = 'Outlet-' + outlet.slug + '-menus'
+    #TODO: For now lets not cache the outlet menus
+    output = nil
+    #output = CacheService.fetch_key(key)
+    if output.nil?
+      @menus = OutletMenu.where(:outlet => outlet)
+      output = Rabl::Renderer.new('user/outlets/menus', @menus).render
+      CacheService.update_key(key, output)
+    end
     render json:output
   end
 

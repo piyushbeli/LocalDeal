@@ -148,17 +148,15 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
             }
         });
 
-        $scope.uploadFiles = function (files) {
+        $scope.uploadImages = function (files) {
             for (var i=0; i< files.length; i++) {
-                $scope.uploadFile(files[i]);
+                $scope.uploadImage(files[i]);
             }
         };
 
-        $scope.uploadFile = function(file) {
-            var entity = {type: 'Outlet', id: $scope.outlet.id};
-            var uploadedBy = {type: 'Vendor', id: $rootScope.vendor.id}
-            AwsService
-                .uploadImagesToS3(file, entity, uploadedBy, 'image')
+        $scope.uploadImage = function(file) {
+            $scope
+                .uploadFile(file, 'image')
                 .then(function (url) {
                     console.log("Uploaded successfully on aws: " + JSON.stringify(url));
                     return UploadImageService.uploadImage(url, outlet.id);
@@ -173,11 +171,56 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
                 });
         };
 
-        $scope.uploadProfilePic = function(file) {
+        $scope.uploadFile = function(file, type) {
+            var entity = {type: 'Outlet', id: $scope.outlet.id};
+            var uploadedBy = {type: 'Vendor', id: $rootScope.vendor.id};
+            return AwsService
+                .uploadImagesToS3(file, entity, uploadedBy, type);
+        };
 
+        $scope.uploadProfilePic = function(file) {
+            $scope
+                .uploadFile(file, 'profile-pic')
+                .then(function (url) {
+                    console.log("Uploaded successfully on aws: " + JSON.stringify(url));
+                    return UploadImageService.uploadProfilePic(url, outlet.id);
+                })
+                .then(function(image) {
+                    $timeout(function() {
+                        $rootScope.vendor.profile_pic = image;
+                    }, 500);
+                })
+                .catch(function (error) {
+                    console.log("Error while uploading the profile pic: " + error);
+                });
+        };
+
+        $scope.uploadMenus = function (files) {
+            for (var i=0; i< files.length; i++) {
+                $scope.uploadMenu(files[i]);
+            }
+        };
+
+        $scope.uploadMenu = function(file) {
+            $scope
+                .uploadFile(file, 'menu')
+                .then(function (url) {
+                    console.log("Uploaded successfully on aws: " + JSON.stringify(url));
+                    return UploadImageService.uploadMenu(url, outlet.id);
+                })
+                .then(function(menu) {
+                    $timeout(function() {
+                        $scope.outlet.menus.push(menu);
+                    }, 500);
+                })
+                .catch(function (error) {
+                    console.log("Error while uploading the file: " + error);
+                });
         };
 
         $scope.isLoadingImages = true;
+        $scope.isLoadingMenus = true;
+
         OutletService.fetchOutletImages($scope.outlet)
             .then(function (images) {
                 $scope.outlet.images = images;
@@ -187,7 +230,18 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
             })
             .finally(function () {
                 $scope.isLoadingImages = false;
+            });
+
+        OutletService.fetchOutletMenus($scope.outlet)
+            .then(function (menus) {
+                $scope.outlet.menus = menus;
             })
+            .catch(function (error) {
+                $scope.outlet.menus = [];
+            })
+            .finally(function () {
+                $scope.isLoadingMenus = false;
+            });
 
         function createAddress() {
             if ($scope.outlet.address) {

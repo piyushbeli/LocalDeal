@@ -12,7 +12,9 @@ appCommon
         sendOTP: 'send_otp',
         verifyMe: '/verify_me',
         uploadImage: 'outlets/{outlet_id}/upload/image',
-        images: '/images'
+        uploadMenu: 'outlets/{outlet_id}/upload/menu',
+        images: '/images',
+        menus: '/outlets/{outlet_id}/menus'
     })
     .constant("CommonConstants", {
         appName: 'LocalDeals',

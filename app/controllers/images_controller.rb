@@ -51,8 +51,21 @@ class ImagesController < ApplicationController
       if outlet_image.delete
         render json: {success: true}
       else
-        render json: {errors: outlet_image.erros.full_messages, status: 422}
+        render json: {errors: outlet_image.errors.full_messages, status: 422}
       end
+    end
+  end
+
+  def upload_menu
+    url = params[:url]
+    outlet_id = params[:outlet_id]
+    caption = params[:caption]
+    outlet = Outlet.friendly.find(outlet_id)
+    outlet_menu = OutletMenu.new(outlet: outlet, url: url, caption: caption)
+    if outlet_menu.save
+      render json: outlet_menu
+    else
+      render json: {errors: outlet_menu.errors.full_messages, status: 422}
     end
   end
 

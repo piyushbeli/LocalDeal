@@ -9,7 +9,12 @@ appCommon.service('AwsService', ['CommonConstants', '$q', function (CommonConsta
 
         var deferred = $q.defer();
         var folderType = type + 'Folder';
-        var key = [CommonConstants.awsConfig[folderType], entity.type + '-' + entity.id, uploadedBy.type + '-' + uploadedBy.id, file.name ].join('/');
+        var key = [CommonConstants.awsConfig[folderType], entity.type + '-' + entity.id];
+        if (uploadedBy) {
+            key.push(uploadedBy.type + '-' + uploadedBy.id)
+        }
+        key.push( file.name);
+        key = key.join('/');
         var params = {
             Key: key,
             ContentType: file.type,
