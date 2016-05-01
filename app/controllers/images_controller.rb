@@ -33,6 +33,7 @@ class ImagesController < ApplicationController
     outlet_image = OutletImage.new(url: url, outlet: outlet, uploader: current_member, comment: comment, offer: offer, caption: caption)
     if outlet_image.save
       render json: outlet_image
+      outlet.update_outlet
     else
       render json: {errors: outlet_image.errors.full_messages, status: 422}
     end
@@ -64,6 +65,7 @@ class ImagesController < ApplicationController
     outlet_menu = OutletMenu.new(outlet: outlet, url: url, caption: caption)
     if outlet_menu.save
       render json: outlet_menu
+      outlet.update_outlet
     else
       render json: {errors: outlet_menu.errors.full_messages, status: 422}
     end
