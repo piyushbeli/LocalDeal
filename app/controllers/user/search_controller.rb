@@ -1,26 +1,19 @@
 class User::SearchController < ApplicationController
   def search
     if params[:q].nil?
-      @articles = []
+      render :json => x[]
     else
-      outlets = Outlet.search(params[:q]).results.as_json
-      deals = Deal.search(params[:q]).results.as_json
-      offers = Offer.search(params[:q]).results.as_json
-
+      outlets = Outlet.search params[:q], limit: 10, fields: [{name: :text_middle}]
       outlets = outlets.map do |outlet|
-        outlet = outlet['_source']
-        {slug: outlet['slug'], type: 'Outlet', name: outlet['name']}
-      end
-      deals = deals.map do |deal|
-        deal = deal['_source']
-        {id: deal['id'], type: 'Deal', name: deal['title']}
-      end
-      offers = offers.map do |offer|
-        offer = offer['_source']
-        {id: offer['id'], type: 'Offer', name: offer['what_you_get']}
+        {slug: outlet['slug'], type: 'Outlet', name: outlet['name'], location: (outlet['street'] + ', ' + outlet['city'])}
       end
 
-      render :json=>(outlets + deals + offers)
+      offers = Offer.search params[:q], limit: 10, fields: [{what_you_get: :text_middle}]
+      offers = offers.map do |offer|
+        {slug: offer['slug'], id: offer['id'], offered_price: offer['offered_price'],actual_price: offer['actual_price'], discount: offer['discount'],
+         type: 'Offer', name: offer['what_you_get']}
+      end
+      render :json=>(outlets + offers)
     end
   end
 end

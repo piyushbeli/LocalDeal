@@ -1,5 +1,3 @@
-require 'elasticsearch/model'
-
 class Outlet < ActiveRecord::Base
   include Vendor::VendorResource
   include Commentable
@@ -7,8 +5,7 @@ class Outlet < ActiveRecord::Base
   markable_as :favorite
 
   #For Elastic search
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  searchkick text_middle: [:name]
 
   ratyrate_rateable "service"
 
@@ -92,24 +89,8 @@ class Outlet < ActiveRecord::Base
     return summary
   end
 
-
-  def self.search(query)
-    __elasticsearch__.search(
-        {
-            query: {
-                multi_match: {
-                    query: query,
-                    fields: ['name^10']
-                }
-            }
-        }
-    )
-  end
-
-  def as_indexed_json(options={})
-    self.as_json({
-                     only: [:name, :id, :slug]
-                 })
+  def search_data
+    as_json only: [:name, :slug, :street, :city]
   end
 
   def detail_json

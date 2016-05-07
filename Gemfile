@@ -63,8 +63,7 @@ gem "rest-client", "~> 1.6.7"
 gem "htmlentities", "~> 4.3.1"
 gem 'plivo'
 gem "koala", "~> 2.2"
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+gem 'searchkick'
 gem 'whenever', :require => false
 gem 'redis'
 gem 'redis-namespace'

@@ -12,8 +12,7 @@ class Offer < ActiveRecord::Base
   validates_datetime :expire_at, :after => :end_at
 
   #For Elastic search
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  searchkick text_middle: [:what_you_get]
 
   has_many :orders
   has_many :comments
@@ -22,9 +21,9 @@ class Offer < ActiveRecord::Base
   after_save :update_outlets
   before_save :calculate_percent
 
-  def as_indexed_json(options={})
-    self.as_json({
-                     only: [:what_you_get, :id]
+  def search_data(options={})
+    as_json({
+                     only: [:what_you_get, :id, :slug, :offered_price, :actual_price, :discount]
                  })
   end
 
@@ -78,6 +77,10 @@ class Offer < ActiveRecord::Base
     if offer_type.name == 'SPECIAL_DISCOUNTED_PRICE' && offered_price != 0
         self.discount = (offered_price.to_f/actual_price)*100
     end
+  end
+
+  def should_index?
+    !is_expired?
   end
 
 end

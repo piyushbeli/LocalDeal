@@ -10,9 +10,9 @@ appCommon.service('AwsService', ['CommonConstants', '$q', function (CommonConsta
         var deferred = $q.defer();
         var folderType = type + 'Folder';
         var key = [CommonConstants.awsConfig[folderType], entity.type + '-' + entity.id];
-        if (uploadedBy) {
+        /*if (uploadedBy) {
             key.push(uploadedBy.type + '-' + uploadedBy.id)
-        }
+        }*/
         key.push( file.name);
         key = key.join('/');
         var params = {
@@ -21,7 +21,6 @@ appCommon.service('AwsService', ['CommonConstants', '$q', function (CommonConsta
             Body: file,
             ServerSideEncryption: 'AES256'
         };
-        deferred.resolve(createS3ResourceUrl(key));
         s3BucketImages
             .putObject(params, function (err, data) {
                 if (err) {
