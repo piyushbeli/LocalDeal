@@ -64,6 +64,7 @@ Rails.application.routes.draw do
     #Below route is different then above, it gives you images uploaded by a member
     get 'images' => 'images#member_images'
     get 'menus' => 'images#member_menus'
+    post 'profile_pic' => 'images#upload_profile_pic'
 
     resources :comments, only: [] do
       resources :comments, only: [:index, :create, :update, :destroy]

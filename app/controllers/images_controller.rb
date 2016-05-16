@@ -71,6 +71,16 @@ class ImagesController < ApplicationController
     end
   end
 
+  def upload_profile_pic
+    url = params[:url]
+    if current_member
+      current_member.image  = url
+      if current_user.save
+        render json: {status: 200, message: 'Successfully updated the profile pic'}
+      end
+    end
+  end
+
 
   def member_images
     @images = current_member.outlet_images

@@ -12,7 +12,7 @@ class Offer < ActiveRecord::Base
   validates_datetime :expire_at, :after => :end_at
 
   #For Elastic search
-  searchkick text_middle: [:what_you_get]
+  searchkick text_start: [:what_you_get]
 
   has_many :orders
   has_many :comments
