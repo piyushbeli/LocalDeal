@@ -56,7 +56,7 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
         };
 
         $scope.save = function () {
-            if ($scope.outLetContactDetailForm.$invalid || $scope.outLetLocationDetailForm.$invalid) {
+            if ($scope.outletContactDetailForm.$invalid || $scope.outletLocationDetailForm.$invalid) {
                 return;
             }
             OutletService.saveOutlet($scope.outlet)
@@ -136,9 +136,11 @@ appVendor.controller('OutletDetailController', ['$scope', '$rootScope', 'OutletS
         });
         $scope.$watch('outlet.street', function (newVal, oldVal) {
             if (newVal == null || newVal.trim() == "") {
-                $scope.streetDetail = null;
+                $scope.outlet.streetDetail = null;
+            } else if (newVal) {
+                //Don't do anything if user is updating the value but still have not selected something from dropdown
             } else if ($scope.outlet.streetDetail && $scope.outlet.streetDetail.name) {
-                    $scope.outlet.street = $scope.outlet.streetDetail.name;
+                $scope.outlet.street = $scope.outlet.streetDetail.name;
             }
         });
 

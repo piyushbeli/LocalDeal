@@ -14,6 +14,7 @@ class Vendor::OffersController < ApplicationController
 
   def create
     @offer = Offer.new(offer_params.merge(:deal_id => @deal.id))
+    @offer.calculate_percent
     if @offer.save
       render 'vendor/offers/show'
     else
