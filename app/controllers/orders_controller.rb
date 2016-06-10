@@ -70,9 +70,10 @@ class OrdersController < ApplicationController
     end
 
     vendor_id = offer.deal.vendor.id
+    outlet_id = offer.outlet.id
     order_no = generate_order_no
     coupon_code = generate_coupon_code
-    order = Order.new(offer_id: offer.id, user_id: current_user.id, vendor_id: vendor_id, what_you_get: offer.what_you_get,
+    order = Order.new(offer_id: offer.id, user_id: current_user.id, vendor_id: vendor_id, outlet_id: outlet_id, what_you_get: offer.what_you_get,
                       fine_print: offer.fine_print, instruction: offer.instruction, redeemed: false,
                                          expire_at: offer.expire_at,order_no: order_no, coupon_code: coupon_code, created_at: DateTime.now)
     if order.save

@@ -8,6 +8,6 @@ class Order < ActiveRecord::Base
   validates_presence_of :what_you_get, :expire_at, :user, :vendor
 
   def is_active
-    return expire_at > Date.today
+    return expire_at > Date.today && !redeemed
   end
 end
