@@ -76,7 +76,7 @@ class OrdersController < ApplicationController
                       fine_print: offer.fine_print, instruction: offer.instruction, redeemed: false,
                                          expire_at: offer.expire_at,order_no: order_no, coupon_code: coupon_code, created_at: DateTime.now)
     if order.save
-      render json: {success: true}
+      render json: {success: true, order_no: order_no}
     else
       render json: {errors: order.errors.full_messages, status: 422}
     end
