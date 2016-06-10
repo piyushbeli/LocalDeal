@@ -104,7 +104,7 @@ class User::OutletsController < ApplicationController
     set_user_by_token(:user)
     #Disable the outlet caching for now. It's creating inconsistency.
     #outlet = CacheService.fetch_entity('Outlet', params[:id])
-    outlet = Outlet.includes(:deals, :vendor, :outlet_images).friendly.find(params[:id])
+    @outlet = Outlet.includes(:deals, :vendor, :outlet_images).friendly.find(params[:id])
 =begin
     if outlet.nil?
       outlet = Outlet.includes(:deals, :vendor, :outlet_images).friendly.find(params[:id])
@@ -117,16 +117,16 @@ class User::OutletsController < ApplicationController
 
     current_location =  params[:current_location]
     current_geo_code = Geokit::Geocoders::GoogleGeocoder.geocode(current_location)
-    outlet_geo_code = Geokit::Geocoders::GoogleGeocoder.geocode([outlet['latitude'], outlet['longitude']].join(','))
-    distance_from_current_loc = current_geo_code.distance_to(outlet_geo_code)
+    outlet_geo_code = Geokit::Geocoders::GoogleGeocoder.geocode([@outlet['latitude'], @outlet['longitude']].join(','))
+    @distance_from_current_loc = current_geo_code.distance_to(outlet_geo_code)
     #outlet_instance = Outlet.new({id: outlet['id']})
     #current_user_rating = outlet_instance.user_rating(current_user) unless current_user.nil?
-    outlet['distance'] = distance_from_current_loc
-    current_user_rating = outlet.user_rating(current_user) unless current_user.nil?
-    outlet['user_rating'] = current_user_rating
+    #outlet['distance'] = distance_from_current_loc
+    #current_user_rating = outlet.user_rating(current_user) unless current_user.nil?
+    #outlet['user_rating'] = current_user_rating
     #outlet['marked_as_favorite'] = outlet_instance.marked_as? :favorite, :by => current_user unless current_user.nil?
-    outlet['marked_as_favorite'] = outlet.marked_as? :favorite, :by => current_user unless current_user.nil?
-    render json: outlet
+    #outlet['marked_as_favorite'] = outlet.marked_as? :favorite, :by => current_user unless current_user.nil?
+    render 'user/outlets/show'
   end
 
 

@@ -2,9 +2,6 @@ object @outlet
 attributes :id, :name, :city, :street, :slug, :address, :no_of_comments, :latitude, :longitude, :mobile, :contact_no, :email
 child(:vendor) do
     attributes :name, :slug
-    node :spammed do
-      |vendor| vendor.spammed_by_user?(@current_user) unless @current_user.nil?
-    end
 end
 child(:deals) do
     attributes :title, :slug
@@ -20,7 +17,7 @@ child(:deals) do
 end
 
 node :distance do |outlet|
-    outlet.distance_from_current_loc
+    @distance_from_current_loc
 end
 
 node(:marked_as_favorite) do |outlet|
@@ -45,4 +42,12 @@ end
 
 node(:total_images) do |outlet|
     outlet.outlet_images.count
+end
+
+node(:menus) do |outlet|
+    outlet.outlet_menus.select(:id, :url).limit(5)
+end
+
+node(:total_menus) do |outlet|
+    outlet.outlet_menus.count
 end
