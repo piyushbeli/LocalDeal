@@ -3,3 +3,7 @@ attributes :discount, :what_you_get, :fine_print, :instruction, :start_at, :expi
 child :type do
     attributes :name, :id
 end
+
+node :no_of_active_orders do
+    @offer.no_of_active_orders
+end

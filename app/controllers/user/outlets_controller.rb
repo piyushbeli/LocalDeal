@@ -77,11 +77,11 @@ class User::OutletsController < ApplicationController
         distance: distance
     }
     criteria = MultiJson.dump(criteria)
-    myfiler = Myfilter.create(user: current_user, criteria: criteria)
-    if myfiler.save
+    my_filter = Myfilter.create(user: current_user, criteria: criteria)
+    if my_filter.save
       return true
     else
-      render json: {errors: myfiler.errors.full_messages}, status: 422
+      render json: {errors: my_filter.errors.full_messages}, status: 422
       return false
     end
   end
@@ -102,7 +102,10 @@ class User::OutletsController < ApplicationController
     #It's a hack over devise, can not make this route authenticated because it can be accessed by unauthenticated guys
     #also, calling authenticate_user! will render an error message so hacked those from authenticate_user! method
     set_user_by_token(:user)
-    outlet = CacheService.fetch_entity('Outlet', params[:id])
+    #Disable the outlet caching for now. It's creating inconsistency.
+    #outlet = CacheService.fetch_entity('Outlet', params[:id])
+    outlet = Outlet.includes(:deals, :vendor, :outlet_images).friendly.find(params[:id])
+=begin
     if outlet.nil?
       outlet = Outlet.includes(:deals, :vendor, :outlet_images).friendly.find(params[:id])
       outlet = CacheService.add_entity(outlet, true)
@@ -110,16 +113,19 @@ class User::OutletsController < ApplicationController
       puts 'outlet from cache: ' + params[:id]
     end
     outlet = JSON.parse(outlet)
+=end
 
     current_location =  params[:current_location]
     current_geo_code = Geokit::Geocoders::GoogleGeocoder.geocode(current_location)
     outlet_geo_code = Geokit::Geocoders::GoogleGeocoder.geocode([outlet['latitude'], outlet['longitude']].join(','))
     distance_from_current_loc = current_geo_code.distance_to(outlet_geo_code)
-    outlet_instance = Outlet.new({id: outlet['id']})
-    current_user_rating = outlet_instance.user_rating(current_user) unless current_user.nil?
+    #outlet_instance = Outlet.new({id: outlet['id']})
+    #current_user_rating = outlet_instance.user_rating(current_user) unless current_user.nil?
     outlet['distance'] = distance_from_current_loc
+    current_user_rating = outlet.user_rating(current_user) unless current_user.nil?
     outlet['user_rating'] = current_user_rating
-    outlet['marked_as_favorite'] = outlet_instance.marked_as? :favorite, :by => current_user unless current_user.nil?
+    #outlet['marked_as_favorite'] = outlet_instance.marked_as? :favorite, :by => current_user unless current_user.nil?
+    outlet['marked_as_favorite'] = outlet.marked_as? :favorite, :by => current_user unless current_user.nil?
     render json: outlet
   end
 

@@ -74,7 +74,7 @@ class Offer < ActiveRecord::Base
   end
 
   def calculate_percent
-    if offer_type.name == 'SPECIAL_DISCOUNTED_PRICE' && offered_price != 0
+    if special_offer? && offered_price != 0 && actual_price != 0
         self.discount = (offered_price.to_f/actual_price)*100
     end
   end

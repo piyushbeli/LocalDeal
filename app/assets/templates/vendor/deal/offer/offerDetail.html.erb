@@ -98,6 +98,10 @@
                   <label>Max Coupons</label>
                   <input type="number" ng-model="offer.maxCoupons">
                 </div>
+                <div class="form-group" ng-if="!offer.isNew()">
+                  <label>Active Orders</label>
+                  <input type="number" disabled ng-model="offer.noOfActiveOrders">
+                </div>
                 <div class="gen-btn">
                   <a href="javascript:void(0)" ng-click="saveOffer()">Update</a>
                 </div>

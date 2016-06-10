@@ -33,14 +33,15 @@ Rails.application.routes.draw do
     #Create an order
     post '/offers/:id/buy' => 'orders#create'
     delete '/orders/:id' => 'orders#destroy'
+    post  '/orders/:id/redeem' => 'orders#redeem'
 
     #Fetch deals with different criteria which also does not need any authentication
-    get "/outlets" => "user/outlets#index"
-    get "/outlets/:id" => "user/outlets#show"
+    get '/outlets' => 'user/outlets#index'
+    get '/outlets/:id' => 'user/outlets#show'
 
     #spam/unspam a vendor
-    post  "/vendors/:vendor_id/spam"  => "spams#create"
-    delete  "/vendors/:vendor_id/spam"  => "spams#destroy"
+    post  '/vendors/:vendor_id/spam'  => 'spams#create'
+    delete  '/vendors/:vendor_id/spam'  => 'spams#destroy'
 
   end
 
@@ -117,12 +118,12 @@ Rails.application.routes.draw do
   get '/heartbeat' => 'public#heartbeat'
 
 
-  # You can have the root of your site routed with "root"
+  # You can have the root of your site routed with 'root'
   root 'application#index'
   #Below lines are important for using html5 mode of angularjs. For any resource after /app and /vendor/app we are
   # actually moving to some angular state (no REST url should have this format) so return the application layout.
-  get "/vendor/app/*path" => "application#vendor"
-  get "/vendor/*path" => "application#vendor"
-  get "/app/*path" => "application#index"
+  get '/vendor/app/*path' => 'application#vendor'
+  get '/vendor/*path' => 'application#vendor'
+  get '/app/*path' => 'application#index'
 
 end
