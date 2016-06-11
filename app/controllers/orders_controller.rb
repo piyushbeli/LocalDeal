@@ -94,9 +94,11 @@ class OrdersController < ApplicationController
     if offer.limit_reached?
       return 'Sold out'
     end
+=begin
     if current_user.has_active_order? (offer.deal.vendor.category)
       return 'You already have an active coupon'
     end
+=end
     if !current_user.is_verified
       return  'You can not buy any deal before verifying your number.'
     end
