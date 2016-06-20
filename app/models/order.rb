@@ -7,6 +7,8 @@ class Order < ActiveRecord::Base
   validates_datetime :expire_at
   validates_presence_of :what_you_get, :expire_at, :user, :vendor
 
+  scope :by_order_key, ->(key = nil) { where("order_no LIKE ?", "%#{key}%") }
+
   def is_active
     return expire_at > Date.today && !redeemed
   end

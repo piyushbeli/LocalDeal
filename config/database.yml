@@ -32,6 +32,9 @@ production:
   password: 12345678
   host: localdeal.cyrc4h3obnuq.us-west-2.rds.amazonaws.com
   database: LocalDeal
+  #new ec2 RDS
+  # paylow-db.clpkrbeop84j.us-west-2.rds.amazonaws.com:3306
+  # password: 12345678
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

@@ -81,6 +81,7 @@ Rails.application.routes.draw do
 
   devise_scope :vendor do
     get '/vendor' => 'application#vendor'
+    get 'orders_by_order_no' => 'orders#find_orders_by_order_no'
     namespace :vendor do
       resources :outlets, only: [:create, :update, :destroy, :index, :show] do
         post 'upload/menu' => 'images#upload_menu'

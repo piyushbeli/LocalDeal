@@ -36,20 +36,31 @@ appVendor.controller("OrderListController", ['$rootScope', '$scope', '$state', '
             self.refreshItems();
         };
 
-        $scope.$watch('filter.orderStatus', function(newVal, oldVal) {
+        $scope.$watch('filter.orderStatus', function (newVal, oldVal) {
             if (newVal != oldVal) {
                 self.refreshItems();
             }
         });
 
-        $scope.$watch('filter.sortBy', function(newVal, oldVal) {
+        $scope.$watch('filter.sortBy', function (newVal, oldVal) {
             if (newVal != oldVal) {
                 self.refreshItems();
             }
         });
 
-        $scope.onChangePageNo = function(data) {
+        $scope.onChangePageNo = function (data) {
             self.refreshItems();
+        };
+
+        $scope.findOrdersByOrderNo = function (key) {
+            OrderService.findOrdersByOrderNo(key)
+                .then(function (response) {
+                    $scope.orders = response.items;
+                    $scope.totalItems = response.totalItems;
+                })
+                .catch(function (errorMessage) {
+                    alert(errorMessage);
+                });
         }
 
     }])

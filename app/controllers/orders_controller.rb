@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
       @orders = @orders.order('created_at DESC')
     end
     per_page = Rails.configuration.x.per_page
+    @total_items = @orders.count('*')
     @orders = @orders.paginate(:page => page, :per_page => per_page)
 
     if current_user
@@ -148,6 +149,21 @@ class OrdersController < ApplicationController
         render json: {errors: ['This order does not belog to you'], status: 401}
       end
     end
+  end
+
+  def find_orders_by_order_no
+    if !current_vendor
+      render json: {success: false, errors: ['You are not authorized'], status: 422}
+      return
+    end
+    key = params[:q]
+    page = params[:page]
+    per_page = Rails.configuration.x.per_page
+    @orders = current_vendor.orders
+    @orders = @orders.by_order_key(key)
+    @total_items = @orders.count('*')
+    @orders = @orders.paginate(:page => page, :per_page => per_page)
+    render 'vendor/orders/index'
   end
 
 end

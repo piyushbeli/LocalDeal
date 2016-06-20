@@ -34,4 +34,19 @@ appVendor.service("OrderService", ['$http', '$q', 'HttpRoutes', 'Order',  functi
         return deferred.promise;
     };
 
+    self.findOrdersByOrderNo = function (key) {
+        var deferred = $q.defer();
+        var url = HttpRoutes.ordersByOrderNo.format({order_no: key});
+        
+        $http.get(url)
+            .then(function (response) {
+                deferred.resolve({items: Order.build(response.data.items), totalItems: response.data.total_items});
+            })
+            .catch(function(response) {
+                var errorMessage = response.data.errors && response.data.errors.join("\n");
+                deferred.reject(errorMessage);
+            });
+        return deferred.promise;
+    }
+
 }])

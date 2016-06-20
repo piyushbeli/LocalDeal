@@ -33,6 +33,9 @@ appCommon
         awsConfig: {
             accessKey: 'AKIAJTJYUSVTAVCYJIIQ',
             secret: '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',
+            //New EC2 instance
+            /*accessKey: 'AKIAJYADBSJFRWNHZG4Q',
+            secret: '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',*/
             bucketName: 'paylo-images',
             region: 'us-west-2',
             imageFolder: 'images',

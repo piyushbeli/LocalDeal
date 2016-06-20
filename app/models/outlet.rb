@@ -34,6 +34,7 @@ class Outlet < ActiveRecord::Base
   scope :by_category, ->(id = nil) { joins(:vendor).where("vendors.category_id = ?", id) }
   scope :by_street, ->(id = nil) { where("street_id = ?", "#{id}") }
   scope :by_sub_categories, ->(subcategory_ids) { joins(:vendor => :subcategories).where("subcategories.id IN (?)", subcategory_ids) }
+  scope :with_active_offer, -> () { joins(:deals => :offers).where("offers.end_at > now()")}
 
   after_save :update_outlet
 

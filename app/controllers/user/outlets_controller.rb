@@ -58,7 +58,9 @@ class User::OutletsController < ApplicationController
     @outlets = @outlets.by_category(category_id) unless category_id.nil?
     @outlets = @outlets.by_sub_categories(subcategory_ids) unless subcategory_ids.nil?
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
-    @total_items = @outlets.count('*')
+    @outlets = @outlets.with_active_offer
+    @outlets = @outlets.uniq
+    @total_items = @outlets.count('id')
     @outlets = @outlets.paginate(:page => page, :per_page => per_page)
     @current_user = current_user
     render 'user/outlets/index'
