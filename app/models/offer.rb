@@ -51,6 +51,10 @@ class Offer < ActiveRecord::Base
     return orders.where(['redeemed = 0 and expire_at >= ?', Date.today]).count
   end
 
+  def is_closed
+    return closed
+  end
+
   def total_no_of_orders
     return orders.count
   end

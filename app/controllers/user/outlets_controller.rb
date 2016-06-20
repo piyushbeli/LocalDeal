@@ -21,6 +21,7 @@ class User::OutletsController < ApplicationController
     street = params[:street]
     page = params[:page] || 1
     per_page = params[:per_page]  || Rails.configuration.x.per_page
+    only_with_active_offer = params[:only_with_active_offer]
 
     if !subcategory_ids.nil?
       subcategory_ids = subcategory_ids.split(",")
@@ -37,10 +38,10 @@ class User::OutletsController < ApplicationController
     if show_only_near_by == true
       street_location = current_location
     end
-    search(street, street_location, current_location, category_id, subcategory_ids, near_by_distance, page, per_page)
+    search(street, street_location, current_location, category_id, subcategory_ids, near_by_distance, only_with_active_offer, page, per_page)
   end
 
-  def search (street, street_location, current_location, category_id, subcategory_ids, distance, page, per_page)
+  def search (street, street_location, current_location, category_id, subcategory_ids, distance, only_with_active_offer, page, per_page)
     #In cas of search by filters page no won't be available
     page = page || 1
     per_page = per_page  || Rails.configuration.x.per_page
@@ -58,7 +59,7 @@ class User::OutletsController < ApplicationController
     @outlets = @outlets.by_category(category_id) unless category_id.nil?
     @outlets = @outlets.by_sub_categories(subcategory_ids) unless subcategory_ids.nil?
     @outlets = @outlets.by_distance(:origin => current_location, :units => :kms) unless current_location.nil?
-    @outlets = @outlets.with_active_offer
+    @outlets = @outlets.with_active_offer if only_with_active_offer
     @outlets = @outlets.uniq
     @total_items = @outlets.count('id')
     @outlets = @outlets.paginate(:page => page, :per_page => per_page)
@@ -97,7 +98,7 @@ class User::OutletsController < ApplicationController
     end
     criteria = filter.criteria
     criteria = MultiJson.load(criteria.to_s)
-    search(criteria['street_name'], criteria['street_location'], current_location, criteria['category_id'], criteria['subcategory_ids'], criteria['distance'], 1, nil)
+    search(criteria['street_name'], criteria['street_location'], current_location, criteria['category_id'], criteria['subcategory_ids'], criteria['distance'], criteria['only_with_active_offer'], 1, nil)
   end
 
   def show
@@ -106,7 +107,7 @@ class User::OutletsController < ApplicationController
     set_user_by_token(:user)
     #Disable the outlet caching for now. It's creating inconsistency.
     #outlet = CacheService.fetch_entity('Outlet', params[:id])
-    @outlet = Outlet.includes(:deals, :vendor, :outlet_images).friendly.find(params[:id])
+    @outlet = Outlet.includes(:deals , :vendor, :outlet_images).friendly.find(params[:id])
 =begin
     if outlet.nil?
       outlet = Outlet.includes(:deals, :vendor, :outlet_images).friendly.find(params[:id])

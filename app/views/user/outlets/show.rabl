@@ -5,7 +5,7 @@ child(:vendor) do
 end
 child(:deals) do
     attributes :title, :slug
-    child :offers do |offer|
+    child :open_offers do |offer|
         attributes :id, :slug, :what_you_get, :discount, :fine_print, :instruction, :start_at, :expire_at, :end_at, :max_no_of_coupons, :actual_price, :offered_price, :total_no_of_orders, :coupons_remaining
         node :is_expired do
             |offer| offer.is_expired?

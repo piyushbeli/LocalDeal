@@ -36,5 +36,11 @@ class Deal < ActiveRecord::Base
       end
     end
 
+    def open_offers
+      self.offers.select {
+          |o| o.is_closed != 1
+      }
+    end
+
 end
 

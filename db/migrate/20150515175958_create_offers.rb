@@ -10,6 +10,7 @@ class CreateOffers < ActiveRecord::Migration
       t.text :fine_print
       t.string :instruction
       t.integer :max_no_of_coupons, null:false
+      t.boolean :closed, null: false, defaut: false
       t.datetime :start_at, null: false
       t.datetime :end_at, null: false, index: true
       t.datetime :expire_at, null: false
