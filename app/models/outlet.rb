@@ -91,6 +91,17 @@ class Outlet < ActiveRecord::Base
     return summary
   end
 
+  def update_rating (stars, user, dimension)
+    if stars.nil?
+      return clear_outlet_rating(user, dimension)
+    end
+    return self.rate stars.to_f, user, dimension
+  end
+
+  def clear_outlet_rating (user, dimension)
+    self.clear_rating user, dimension
+  end
+
   def search_data
     as_json only: [:name, :slug, :street, :city]
   end

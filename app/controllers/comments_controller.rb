@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   devise_token_auth_group :member, contains: [:user, :vendor, :god]
 
   before_action :authenticate_member!, only:[:create, :like, :spam, :clear_like, :clear_spam]
-  before_action :find_commentable, only: [:create, :index]
+  before_action :find_commentable, only: [:create, :index, :rate_and_review]
   before_action :find_comment, only: [:show, :destroy, :update, :like, :spam, :clear_like, :clear_spam]
   before_action :verify_ownership, only: [:update, :destroy]
 
@@ -70,14 +70,28 @@ class CommentsController < ApplicationController
     offer_id = params[:offer]
     if offer_id
       offer = Offer.find(offer_id)
-      comment.offer = offer
     end
     if comment.save
       invalidate_all_outlet_comments
       render json: comment
     else
-      render json: {errors: comment.errors.full_messages}, status: 422
+      render json: {errors: comment.errors.full_messages, status: 422 }
     end
+  end
+
+  def rate_and_review
+    comment = Comment.new(comment_params.merge(:commentator => current_member, :commentable => @commentable))
+    if comment.save
+      stars = params[:stars]
+      if @commentable.update_rating(stars, current_user, 'service')
+        render json: {success: true, message: 'Successfully posted the review'}
+        return
+      end
+    else
+      render json: {errors: comment.errors.full_messages, status: 422 }
+      return
+    end
+    render json: {errors: ['Some error has occurred'], status: 422 }
   end
 
   def update

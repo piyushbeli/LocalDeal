@@ -24,7 +24,9 @@ module Ratyrate
 
     def clear_rating (user, dimension=nil)
         user_rating = user.ratings_given.where(dimension: dimension, rateable_id: id, rateable_type: self.class.name)
-        Rate.delete(user_rating.first.id) unless user_rating.nil?
-        update_rate_average(0, dimension)
+        if user_rating.first
+            Rate.delete(user_rating.first.id) unless user_rating.nil?
+            update_rate_average(0, dimension)
+        end
     end
 end
