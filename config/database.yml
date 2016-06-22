@@ -29,12 +29,14 @@ production:
   encoding: utf8
   pool: 20
   username: root
-  password: 12345678
-  host: localdeal.cyrc4h3obnuq.us-west-2.rds.amazonaws.com
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: url: <%= ENV['DATABASE_URL'] %>
   database: LocalDeal
+  #old ec2 RDS
+  #localdeal.cyrc4h3obnuq.us-west-2.rds.amazonaws.com
   #new ec2 RDS
-  # paylow-db.clpkrbeop84j.us-west-2.rds.amazonaws.com:3306
-  # password: 12345678
+  # paylow-db.clpkrbeop84j.us-west-2.rds.amazonaws.com
+  # password: PB#aug12
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
