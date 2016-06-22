@@ -11,6 +11,7 @@ appVendor
         removeOutlet: '/vendor/deals/{deal_id}/outlets/{outlet_id}',
         addOutlets: 'vendor/deals/{deal_id}/outlets',
         offer: 'vendor/deals/{deal_id}/offers',
+        toggleOfferState: 'vendor/deals/{deal_id}/offers/{id}/cancel',
         orders: '/orders',
         ordersByOrderNo: '/orders_by_order_no?q={order_no}'
     })

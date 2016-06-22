@@ -22,6 +22,7 @@ appCommon.factory("Offer", ['Utils', function(Utils) {
         this.expireAt = data.expire_at ? new Date(data.expire_at) : new Date();
         this.actualPrice = data.actual_price;
         this.offeredPrice = data.offered_price;
+        this.isClosed = data.is_closed || false;
     }
 
     Offer.build = function(data) {

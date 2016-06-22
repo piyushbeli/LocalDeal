@@ -73,4 +73,26 @@ appVendor.service("OfferService", ['Offer', '$q', '$http', 'HttpRoutes', functio
             });
         return deferred.promise;
     };
+
+    self.toggleOfferState = function(dealId, offer) {
+        var deferred = $q.defer(),
+            url = HttpRoutes.toggleOfferState.format({
+                deal_id: dealId,
+                id: offer.id
+            }),
+            postData = {
+                is_closed: !offer.isClosed
+            };
+        $http.put(url, postData)
+            .then(function(response) {
+                offer.isClosed = !offer.isClosed;
+                deferred.resolve();
+            })
+            .catch(function (response) {
+                var errorMessage = response.data.errors.join("\n");
+                deferred.reject(errorMessage);
+            });
+        return deferred.promise;
+    };
+
 }])

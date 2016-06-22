@@ -1,8 +1,8 @@
 class Vendor::OffersController < ApplicationController
   include Vendor::VendorResourceController
 
-  before_action :find_offer, only: [:show, :update]
-  before_action :verify_ownership, only: [:update, :destroy, :create]
+  before_action :find_offer, only: [:show, :update, :toggle_offer_state]
+  before_action :verify_ownership, only: [:update, :destroy, :create, :toggle_offer_state]
 
   def find_offer
     @offer = Offer.find_by_id(params[:id])
@@ -27,6 +27,15 @@ class Vendor::OffersController < ApplicationController
       render json: {success: true}
     else
       render json: {errors: @offer.errors.full_messages}, status: 422
+    end
+  end
+
+  def toggle_offer_state
+    @offer.closed = params[:is_closed]
+    if @offer.save
+      render json: {success: true, message: 'Successfully updated the offer'}
+    else
+      render json: {errors: @offer.errors.full_messages, status: 422 }
     end
   end
 

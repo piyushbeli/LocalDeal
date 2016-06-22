@@ -89,6 +89,7 @@ Rails.application.routes.draw do
       end
       resources :deals, only: [:create, :update, :destroy, :index, :show] do
         resources :offers, only: [:create, :update, :destroy]
+        put 'offers/:id/cancel' => 'offers#toggle_offer_state'
         resources :comments, only: [:create, :update, :destroy, :index]
       end
 

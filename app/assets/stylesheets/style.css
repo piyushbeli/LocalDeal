@@ -10,6 +10,9 @@ html, body { height: 100%; margin: 0; padding: 0;}
 
 .log_register header .logo { padding:5px 0;}
 
+/***********Common CSS ************************/
+.strike-out { text-decoration: line-through !important;}
+
 
 /*********** Login Page CSS STARTS ***********/
 
@@ -142,11 +145,14 @@ header { background:#060606; }
 
 .main-heading h2 strong { color:#000; font-weight:inherit; }
 
-.gen-btn, { width:100%; flaot:left; text-align:right; }
+.gen-btn { flaot:left; text-align:right; }
 
-.gen-btn a { float:right; background:#ff5a5f; font-family: 'Open Sans', sans-serif; color:#FFF; padding:5px 15px; text-decoration:none; border-bottom:3px solid #e93137; text-transform:uppercase; transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; }
+.gen-btn a { float:right; background:#ff5a5f; font-family: 'Open Sans', sans-serif; color:#FFF; padding:5px 15px; text-decoration:none; border-bottom:3px solid #e93137; text-transform:uppercase;
+    transition:all 0.3s ease-in-out; -webkit-transition:all 0.3s ease-in-out; -moz-transition:all 0.3s ease-in-out; width: 100%; text-align: center; margin: 10px 0;}
 
 .gen-btn a:hover { background:#e93137; }
+
+.gen-btn.toggle-offer a{background: gray; border-bottom:3px solid gray}
 
 /******** General CSS ENds **********/
 
@@ -722,6 +728,12 @@ footer { background:#000; width:100%; margin-bottom:25px; position: absolute; bo
     .pin-me-map span { float: left; margin-bottom: 10px; padding: 0; text-align: left;}
 
     .deal-form-inner { width:100%; }
+
+    .deal-form-inner label {width: 100%;}
+
+    .deal-form-inner input, .deal-form-inner textarea, .deal-form-inner select { width: 100%;}
+
+    datetimepicker { display: block !important; }
 
 }
 

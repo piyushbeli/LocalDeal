@@ -30,10 +30,20 @@ appVendor.controller("OfferDetailController", ['$scope', 'deal', 'offer', 'Offer
                 })
                 .catch(function (errorMessage) {
                     alert(errorMessage);
-                })
+                });
         };
 
         $scope.cancel = function () {
             $state.go('app.dealDetail', {id: $scope.deal.id});
+        };
+
+        $scope.toggleOffer = function () {
+            OfferService.toggleOfferState($scope.deal.id, offer)
+                .then(function() {
+                    $state.go('app.dealDetail', {id: $scope.deal.id});
+                })
+                .catch(function (errorMessage) {
+                    alert(errorMessage);
+                });
         };
     }])

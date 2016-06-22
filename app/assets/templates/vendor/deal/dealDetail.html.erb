@@ -104,7 +104,7 @@
               <h3>Create Offer<span>3</span></h3>
               <ul class="list-unstyled">
                 <li ng-repeat="offer in deal.offers">
-                  <a href="javascript:void(0)" ng-click="editOffer(offer)">{{offer.whatYouGet}}</a>
+                  <a href="javascript:void(0)" ng-click="editOffer(offer)" ng-class="offer.isClosed ? 'strike-out' : '' ">{{offer.whatYouGet}}</a>
                 </li>
               </ul>
               <div class="gen-btn">

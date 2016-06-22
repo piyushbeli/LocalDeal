@@ -102,10 +102,22 @@
                   <label>Active Orders</label>
                   <input type="number" disabled ng-model="offer.noOfActiveOrders">
                 </div>
-                <div class="gen-btn">
-                  <a href="javascript:void(0)" ng-click="saveOffer()">Update</a>
+                <div class="row">
+                  <div class="gen-btn col-md-4 col-xs-12">
+                    <a href="javascript:void(0)" ng-click="saveOffer()">Update</a>
+                  </div>
+                  <div class="gen-btn col-md-4 col-xs-12">
+                    <a href="javascript:void(0)" ng-click="cancel()">Cancel</a>
+                  </div>
+                  <div class="gen-btn col-md-4 col-xs-12 toggle-offer" ng-if="offer.isClosed">
+                    <a href="javascript:void(0)" ng-click="toggleOffer()">Reopen Offer</a>
+                  </div>
+                  <div class="gen-btn col-md-4 col-xs-12 toggle-offer" ng-if="!offer.isClosed">
+                    <a href="javascript:void(0)" ng-click="toggleOffer()">Close Offer</a>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
